@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="API/API.csproj" />
+  <Project Path="DAL/DAL.csproj" />
+  <Project Path="Domain/Domain.csproj" />
+  <Project Path="WEB/WEB.csproj" />
+</Solution>
