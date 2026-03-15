@@ -59,5 +59,105 @@ namespace DAL {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT CASE
+        ///WHEN EXISTS (SELECT 1 FROM Users WHERE Email = @Email)
+        ///THEN CAST(1 AS BIT)
+        ///ELSE CAST(0 AS BIT)
+        ///END.
+        /// </summary>
+        internal static string EmailExists {
+            get {
+                return ResourceManager.GetString("EmailExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO Users
+        ///(
+        ///    Id,
+        ///    Email,
+        ///    FirstName,
+        ///    LastName,
+        ///    PasswordHash,
+        ///    RoleId,
+        ///    Status,
+        ///    IsVerified,
+        ///    CreatedAt
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @Email,
+        ///    @FirstName,
+        ///    @LastName,
+        ///    @PasswordHash,
+        ///    @RoleId,
+        ///    @Status,
+        ///    @IsVerified,
+        ///    @CreatedAt
+        ///).
+        /// </summary>
+        internal static string InsertUser {
+            get {
+                return ResourceManager.GetString("InsertUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT 
+        ///    u.Id,
+        ///    u.Email,
+        ///    u.PasswordHash,
+        ///    u.FirstName,
+        ///    u.LastName,
+        ///    r.Name AS RoleName
+        ///FROM Users u
+        ///JOIN Roles r ON r.Id = u.RoleId
+        ///WHERE u.Email = @Email.
+        /// </summary>
+        internal static string SelectUserByEmail {
+            get {
+                return ResourceManager.GetString("SelectUserByEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Email,
+        ///    FirstName,
+        ///    LastName,
+        ///    LoyaltyPoints,
+        ///    AvatarURL,
+        ///    PasswordHash,
+        ///    MFAType,
+        ///    TFASecret,
+        ///    IsVerified,
+        ///    Status,
+        ///    RoleId,
+        ///    LastLoginAt,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM Users
+        ///WHERE Id = @UserId.
+        /// </summary>
+        internal static string SelectUserById {
+            get {
+                return ResourceManager.GetString("SelectUserById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE Users
+        ///SET LastLoginAt = @LastLoginAt
+        ///WHERE Id = @UserId.
+        /// </summary>
+        internal static string UpdateLastLogin {
+            get {
+                return ResourceManager.GetString("UpdateLastLogin", resourceCulture);
+            }
+        }
     }
 }

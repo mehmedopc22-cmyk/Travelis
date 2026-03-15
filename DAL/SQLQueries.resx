@@ -117,4 +117,74 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="EmailExists" xml:space="preserve">
+    <value>SELECT CASE
+WHEN EXISTS (SELECT 1 FROM Users WHERE Email = @Email)
+THEN CAST(1 AS BIT)
+ELSE CAST(0 AS BIT)
+END</value>
+  </data>
+  <data name="InsertUser" xml:space="preserve">
+    <value>INSERT INTO Users
+(
+    Id,
+    Email,
+    FirstName,
+    LastName,
+    PasswordHash,
+    RoleId,
+    Status,
+    IsVerified,
+    CreatedAt
+)
+VALUES
+(
+    @Id,
+    @Email,
+    @FirstName,
+    @LastName,
+    @PasswordHash,
+    @RoleId,
+    @Status,
+    @IsVerified,
+    @CreatedAt
+)</value>
+  </data>
+  <data name="SelectUserByEmail" xml:space="preserve">
+    <value>SELECT 
+    u.Id,
+    u.Email,
+    u.PasswordHash,
+    u.FirstName,
+    u.LastName,
+    r.Name AS RoleName
+FROM Users u
+JOIN Roles r ON r.Id = u.RoleId
+WHERE u.Email = @Email</value>
+  </data>
+  <data name="SelectUserById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Email,
+    FirstName,
+    LastName,
+    LoyaltyPoints,
+    AvatarURL,
+    PasswordHash,
+    MFAType,
+    TFASecret,
+    IsVerified,
+    Status,
+    RoleId,
+    LastLoginAt,
+    CreatedAt,
+    UpdatedAt
+FROM Users
+WHERE Id = @UserId</value>
+  </data>
+  <data name="UpdateLastLogin" xml:space="preserve">
+    <value>UPDATE Users
+SET LastLoginAt = @LastLoginAt
+WHERE Id = @UserId</value>
+  </data>
 </root>
