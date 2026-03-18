@@ -1,10 +1,7 @@
-﻿
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
     public class AttractionEntity
     {
-        // Primary Key
         public Guid ID { get; set; }
         public required string Name { get; set; }
         public required string Country { get; set; }
