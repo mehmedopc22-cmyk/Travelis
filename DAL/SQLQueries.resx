@@ -117,52 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EmailExists" xml:space="preserve">
-    <value>SELECT CASE
-WHEN EXISTS (SELECT 1 FROM Users WHERE Email = @Email)
-THEN CAST(1 AS BIT)
-ELSE CAST(0 AS BIT)
-END</value>
-  </data>
-  <data name="InsertUser" xml:space="preserve">
-    <value>INSERT INTO Users
-(
+  <!-- ========================= -->
+  <!-- USERS -->
+  <!-- ========================= -->
+
+  <data name="Users_SelectAll" xml:space="preserve">
+    <value>SELECT
     Id,
     Email,
     FirstName,
     LastName,
+    LoyaltyPoints,
+    AvatarURL,
     PasswordHash,
-    RoleId,
-    Status,
+    MFAType,
+    TFASecret,
     IsVerified,
-    CreatedAt
-)
-VALUES
-(
-    @Id,
-    @Email,
-    @FirstName,
-    @LastName,
-    @PasswordHash,
-    @RoleId,
-    @Status,
-    @IsVerified,
-    @CreatedAt
-)</value>
+    Status,
+    RoleId,
+    LastLoginAt,
+    CreatedAt,
+    UpdatedAt
+FROM Users</value>
   </data>
-  <data name="SelectUserByEmail" xml:space="preserve">
-    <value>SELECT 
-    u.Id,
-    u.Email,
-    u.PasswordHash,
-    u.FirstName,
-    u.LastName,
-    r.Name AS RoleName
-FROM Users u
-JOIN Roles r ON r.Id = u.RoleId
-WHERE u.Email = @Email</value>
-  </data>
-  <data name="SelectUserById" xml:space="preserve">
+
+  <data name="Users_SelectById" xml:space="preserve">
     <value>SELECT
     Id,
     Email,
@@ -180,11 +159,1455 @@ WHERE u.Email = @Email</value>
     CreatedAt,
     UpdatedAt
 FROM Users
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="Users_SelectByEmail" xml:space="preserve">
+    <value>SELECT 
+    u.Id,
+    u.Email,
+    u.PasswordHash,
+    u.FirstName,
+    u.LastName,
+    u.IsVerified,
+    u.Status,
+    u.RoleId,
+    r.Name AS RoleName
+FROM Users u
+INNER JOIN Roles r ON r.Id = u.RoleId
+WHERE u.Email = @Email</value>
+  </data>
+
+  <data name="Users_EmailExists" xml:space="preserve">
+    <value>SELECT CAST(CASE
+WHEN EXISTS (
+    SELECT 1
+    FROM Users
+    WHERE Email = @Email
+)
+THEN 1
+ELSE 0
+END AS BIT)</value>
+  </data>
+
+  <data name="Users_Insert" xml:space="preserve">
+    <value>INSERT INTO Users
+(
+    Id,
+    Email,
+    FirstName,
+    LastName,
+    LoyaltyPoints,
+    AvatarURL,
+    PasswordHash,
+    MFAType,
+    TFASecret,
+    IsVerified,
+    Status,
+    RoleId,
+    LastLoginAt,
+    CreatedAt,
+    UpdatedAt
+)
+VALUES
+(
+    @Id,
+    @Email,
+    @FirstName,
+    @LastName,
+    @LoyaltyPoints,
+    @AvatarURL,
+    @PasswordHash,
+    @MFAType,
+    @TFASecret,
+    @IsVerified,
+    @Status,
+    @RoleId,
+    @LastLoginAt,
+    @CreatedAt,
+    @UpdatedAt
+)</value>
+  </data>
+
+  <data name="Users_Update" xml:space="preserve">
+    <value>UPDATE Users
+SET
+    Email = @Email,
+    FirstName = @FirstName,
+    LastName = @LastName,
+    LoyaltyPoints = @LoyaltyPoints,
+    AvatarURL = @AvatarURL,
+    PasswordHash = @PasswordHash,
+    MFAType = @MFAType,
+    TFASecret = @TFASecret,
+    IsVerified = @IsVerified,
+    Status = @Status,
+    RoleId = @RoleId,
+    LastLoginAt = @LastLoginAt,
+    UpdatedAt = @UpdatedAt
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="Users_Delete" xml:space="preserve">
+    <value>DELETE FROM Users
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="Users_UpdateLastLogin" xml:space="preserve">
+    <value>UPDATE Users
+SET
+    LastLoginAt = @LastLoginAt,
+    UpdatedAt = @UpdatedAt
 WHERE Id = @UserId</value>
   </data>
-  <data name="UpdateLastLogin" xml:space="preserve">
-    <value>UPDATE Users
-SET LastLoginAt = @LastLoginAt
-WHERE Id = @UserId</value>
+
+  <!-- ========================= -->
+  <!-- HOTELS -->
+  <!-- ========================= -->
+
+  <data name="Hotels_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Name,
+    Country,
+    City,
+    Street,
+    PostalCode,
+    PhoneNumber,
+    Email,
+    Status,
+    Approved,
+    CreatedAt,
+    UpdatedAt
+FROM Hotels</value>
+  </data>
+
+  <data name="Hotels_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Name,
+    Country,
+    City,
+    Street,
+    PostalCode,
+    PhoneNumber,
+    Email,
+    Status,
+    Approved,
+    CreatedAt,
+    UpdatedAt
+FROM Hotels
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="Hotels_Insert" xml:space="preserve">
+    <value>INSERT INTO Hotels
+(
+    Id,
+    Name,
+    Country,
+    City,
+    Street,
+    PostalCode,
+    PhoneNumber,
+    Email,
+    Status,
+    Approved,
+    CreatedAt,
+    UpdatedAt
+)
+VALUES
+(
+    @Id,
+    @Name,
+    @Country,
+    @City,
+    @Street,
+    @PostalCode,
+    @PhoneNumber,
+    @Email,
+    @Status,
+    @Approved,
+    @CreatedAt,
+    @UpdatedAt
+)</value>
+  </data>
+
+  <data name="Hotels_Update" xml:space="preserve">
+    <value>UPDATE Hotels
+SET
+    Name = @Name,
+    Country = @Country,
+    City = @City,
+    Street = @Street,
+    PostalCode = @PostalCode,
+    PhoneNumber = @PhoneNumber,
+    Email = @Email,
+    Status = @Status,
+    Approved = @Approved,
+    UpdatedAt = @UpdatedAt
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="Hotels_Delete" xml:space="preserve">
+    <value>DELETE FROM Hotels
+WHERE Id = @Id</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- CONVENIENCES -->
+  <!-- ========================= -->
+
+  <data name="Conveniences_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Name
+FROM Conveniences</value>
+  </data>
+
+  <data name="Conveniences_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Name
+FROM Conveniences
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="Conveniences_Insert" xml:space="preserve">
+    <value>INSERT INTO Conveniences
+(
+    Id,
+    Name
+)
+VALUES
+(
+    @Id,
+    @Name
+)</value>
+  </data>
+
+  <data name="Conveniences_Update" xml:space="preserve">
+    <value>UPDATE Conveniences
+SET
+    Name = @Name
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="Conveniences_Delete" xml:space="preserve">
+    <value>DELETE FROM Conveniences
+WHERE Id = @Id</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- HOTEL CONVENIENCES -->
+  <!-- ========================= -->
+
+  <data name="HotelConveniences_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    ConvenienceId
+FROM HotelConveniences</value>
+  </data>
+
+  <data name="HotelConveniences_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    ConvenienceId
+FROM HotelConveniences
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelConveniences_SelectByHotelId" xml:space="preserve">
+    <value>SELECT
+    hc.Id,
+    hc.HotelId,
+    hc.ConvenienceId
+FROM HotelConveniences hc
+WHERE hc.HotelId = @HotelId</value>
+  </data>
+
+  <data name="HotelConveniences_Insert" xml:space="preserve">
+    <value>INSERT INTO HotelConveniences
+(
+    Id,
+    HotelId,
+    ConvenienceId
+)
+VALUES
+(
+    @Id,
+    @HotelId,
+    @ConvenienceId
+)</value>
+  </data>
+
+  <data name="HotelConveniences_Delete" xml:space="preserve">
+    <value>DELETE FROM HotelConveniences
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelConveniences_DeleteByHotelAndConvenience" xml:space="preserve">
+    <value>DELETE FROM HotelConveniences
+WHERE HotelId = @HotelId
+  AND ConvenienceId = @ConvenienceId</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- HOTEL ROOMS -->
+  <!-- ========================= -->
+
+  <data name="HotelRooms_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    Description,
+    Price,
+    RoomNo,
+    Floor,
+    BedCount,
+    Capacity,
+    CreatedAt,
+    UpdatedAt
+FROM HotelRooms</value>
+  </data>
+
+  <data name="HotelRooms_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    Description,
+    Price,
+    RoomNo,
+    Floor,
+    BedCount,
+    Capacity,
+    CreatedAt,
+    UpdatedAt
+FROM HotelRooms
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelRooms_SelectByHotelId" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    Description,
+    Price,
+    RoomNo,
+    Floor,
+    BedCount,
+    Capacity,
+    CreatedAt,
+    UpdatedAt
+FROM HotelRooms
+WHERE HotelId = @HotelId</value>
+  </data>
+
+  <data name="HotelRooms_Insert" xml:space="preserve">
+    <value>INSERT INTO HotelRooms
+(
+    Id,
+    HotelId,
+    Description,
+    Price,
+    RoomNo,
+    Floor,
+    BedCount,
+    Capacity,
+    CreatedAt,
+    UpdatedAt
+)
+VALUES
+(
+    @Id,
+    @HotelId,
+    @Description,
+    @Price,
+    @RoomNo,
+    @Floor,
+    @BedCount,
+    @Capacity,
+    @CreatedAt,
+    @UpdatedAt
+)</value>
+  </data>
+
+  <data name="HotelRooms_Update" xml:space="preserve">
+    <value>UPDATE HotelRooms
+SET
+    HotelId = @HotelId,
+    Description = @Description,
+    Price = @Price,
+    RoomNo = @RoomNo,
+    Floor = @Floor,
+    BedCount = @BedCount,
+    Capacity = @Capacity,
+    UpdatedAt = @UpdatedAt
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelRooms_Delete" xml:space="preserve">
+    <value>DELETE FROM HotelRooms
+WHERE Id = @Id</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- HOTEL ROOM CONVENIENCES -->
+  <!-- ========================= -->
+
+  <data name="HotelRoomConveniences_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelRoomId,
+    ConvenienceId
+FROM HotelRoomConveniences</value>
+  </data>
+
+  <data name="HotelRoomConveniences_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelRoomId,
+    ConvenienceId
+FROM HotelRoomConveniences
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelRoomConveniences_SelectByRoomId" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelRoomId,
+    ConvenienceId
+FROM HotelRoomConveniences
+WHERE HotelRoomId = @HotelRoomId</value>
+  </data>
+
+  <data name="HotelRoomConveniences_Insert" xml:space="preserve">
+    <value>INSERT INTO HotelRoomConveniences
+(
+    Id,
+    HotelRoomId,
+    ConvenienceId
+)
+VALUES
+(
+    @Id,
+    @HotelRoomId,
+    @ConvenienceId
+)</value>
+  </data>
+
+  <data name="HotelRoomConveniences_Delete" xml:space="preserve">
+    <value>DELETE FROM HotelRoomConveniences
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelRoomConveniences_DeleteByRoomAndConvenience" xml:space="preserve">
+    <value>DELETE FROM HotelRoomConveniences
+WHERE HotelRoomId = @HotelRoomId
+  AND ConvenienceId = @ConvenienceId</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- HOTEL RESERVATION -->
+  <!-- ========================= -->
+
+  <data name="HotelReservations_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    UserId,
+    RoomId,
+    CheckIn,
+    CheckOut,
+    CreatedAt,
+    UpdatedAt
+FROM HotelReservation</value>
+  </data>
+
+  <data name="HotelReservations_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    UserId,
+    RoomId,
+    CheckIn,
+    CheckOut,
+    CreatedAt,
+    UpdatedAt
+FROM HotelReservation
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelReservations_SelectByUserId" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    UserId,
+    RoomId,
+    CheckIn,
+    CheckOut,
+    CreatedAt,
+    UpdatedAt
+FROM HotelReservation
+WHERE UserId = @UserId</value>
+  </data>
+
+  <data name="HotelReservations_SelectByHotelId" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    UserId,
+    RoomId,
+    CheckIn,
+    CheckOut,
+    CreatedAt,
+    UpdatedAt
+FROM HotelReservation
+WHERE HotelId = @HotelId</value>
+  </data>
+
+  <data name="HotelReservations_Insert" xml:space="preserve">
+    <value>INSERT INTO HotelReservation
+(
+    Id,
+    HotelId,
+    UserId,
+    RoomId,
+    CheckIn,
+    CheckOut,
+    CreatedAt,
+    UpdatedAt
+)
+VALUES
+(
+    @Id,
+    @HotelId,
+    @UserId,
+    @RoomId,
+    @CheckIn,
+    @CheckOut,
+    @CreatedAt,
+    @UpdatedAt
+)</value>
+  </data>
+
+  <data name="HotelReservations_Update" xml:space="preserve">
+    <value>UPDATE HotelReservation
+SET
+    HotelId = @HotelId,
+    UserId = @UserId,
+    RoomId = @RoomId,
+    CheckIn = @CheckIn,
+    CheckOut = @CheckOut,
+    UpdatedAt = @UpdatedAt
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelReservations_Delete" xml:space="preserve">
+    <value>DELETE FROM HotelReservation
+WHERE Id = @Id</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- CURRENCIES -->
+  <!-- ========================= -->
+
+  <data name="Currencies_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Name,
+    Code
+FROM Currencies</value>
+  </data>
+
+  <data name="Currencies_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Name,
+    Code
+FROM Currencies
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="Currencies_Insert" xml:space="preserve">
+    <value>INSERT INTO Currencies
+(
+    Id,
+    Name,
+    Code
+)
+VALUES
+(
+    @Id,
+    @Name,
+    @Code
+)</value>
+  </data>
+
+  <data name="Currencies_Update" xml:space="preserve">
+    <value>UPDATE Currencies
+SET
+    Name = @Name,
+    Code = @Code
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="Currencies_Delete" xml:space="preserve">
+    <value>DELETE FROM Currencies
+WHERE Id = @Id</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- HOTEL PAYMENTS -->
+  <!-- ========================= -->
+
+  <data name="HotelPayments_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    UserId,
+    RoomId,
+    CurrencyId,
+    Amount,
+    CreatedAt
+FROM HotelPayments</value>
+  </data>
+
+  <data name="HotelPayments_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    UserId,
+    RoomId,
+    CurrencyId,
+    Amount,
+    CreatedAt
+FROM HotelPayments
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelPayments_SelectByUserId" xml:space="preserve">
+    <value>SELECT
+    Id,
+    UserId,
+    RoomId,
+    CurrencyId,
+    Amount,
+    CreatedAt
+FROM HotelPayments
+WHERE UserId = @UserId</value>
+  </data>
+
+  <data name="HotelPayments_Insert" xml:space="preserve">
+    <value>INSERT INTO HotelPayments
+(
+    Id,
+    UserId,
+    RoomId,
+    CurrencyId,
+    Amount,
+    CreatedAt
+)
+VALUES
+(
+    @Id,
+    @UserId,
+    @RoomId,
+    @CurrencyId,
+    @Amount,
+    @CreatedAt
+)</value>
+  </data>
+
+  <data name="HotelPayments_Delete" xml:space="preserve">
+    <value>DELETE FROM HotelPayments
+WHERE Id = @Id</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- RATINGS -->
+  <!-- ========================= -->
+
+  <data name="Ratings_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Disabled,
+    Rating,
+    CreatedAt
+FROM Ratings</value>
+  </data>
+
+  <data name="Ratings_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Disabled,
+    Rating,
+    CreatedAt
+FROM Ratings
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="Ratings_Insert" xml:space="preserve">
+    <value>INSERT INTO Ratings
+(
+    Id,
+    Disabled,
+    Rating,
+    CreatedAt
+)
+VALUES
+(
+    @Id,
+    @Disabled,
+    @Rating,
+    @CreatedAt
+)</value>
+  </data>
+
+  <data name="Ratings_Update" xml:space="preserve">
+    <value>UPDATE Ratings
+SET
+    Disabled = @Disabled,
+    Rating = @Rating
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="Ratings_Delete" xml:space="preserve">
+    <value>DELETE FROM Ratings
+WHERE Id = @Id</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- HOTEL RATINGS -->
+  <!-- ========================= -->
+
+  <data name="HotelRatings_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    RatingId
+FROM HotelRatings</value>
+  </data>
+
+  <data name="HotelRatings_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    RatingId
+FROM HotelRatings
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelRatings_SelectByHotelId" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    RatingId
+FROM HotelRatings
+WHERE HotelId = @HotelId</value>
+  </data>
+
+  <data name="HotelRatings_Insert" xml:space="preserve">
+    <value>INSERT INTO HotelRatings
+(
+    Id,
+    HotelId,
+    RatingId
+)
+VALUES
+(
+    @Id,
+    @HotelId,
+    @RatingId
+)</value>
+  </data>
+
+  <data name="HotelRatings_Delete" xml:space="preserve">
+    <value>DELETE FROM HotelRatings
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelRatings_DeleteByHotelAndRating" xml:space="preserve">
+    <value>DELETE FROM HotelRatings
+WHERE HotelId = @HotelId
+  AND RatingId = @RatingId</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- COMMENTS -->
+  <!-- ========================= -->
+
+  <data name="Comments_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Comment,
+    UserId,
+    Disabled,
+    CreatedAt,
+    UpdatedAt
+FROM Comments</value>
+  </data>
+
+  <data name="Comments_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Comment,
+    UserId,
+    Disabled,
+    CreatedAt,
+    UpdatedAt
+FROM Comments
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="Comments_SelectByUserId" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Comment,
+    UserId,
+    Disabled,
+    CreatedAt,
+    UpdatedAt
+FROM Comments
+WHERE UserId = @UserId</value>
+  </data>
+
+  <data name="Comments_Insert" xml:space="preserve">
+    <value>INSERT INTO Comments
+(
+    Id,
+    Comment,
+    UserId,
+    Disabled,
+    CreatedAt,
+    UpdatedAt
+)
+VALUES
+(
+    @Id,
+    @Comment,
+    @UserId,
+    @Disabled,
+    @CreatedAt,
+    @UpdatedAt
+)</value>
+  </data>
+
+  <data name="Comments_Update" xml:space="preserve">
+    <value>UPDATE Comments
+SET
+    Comment = @Comment,
+    UserId = @UserId,
+    Disabled = @Disabled,
+    UpdatedAt = @UpdatedAt
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="Comments_Delete" xml:space="preserve">
+    <value>DELETE FROM Comments
+WHERE Id = @Id</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- HOTEL COMMENTS -->
+  <!-- ========================= -->
+
+  <data name="HotelComments_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    CommentId
+FROM HotelComments</value>
+  </data>
+
+  <data name="HotelComments_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    CommentId
+FROM HotelComments
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelComments_SelectByHotelId" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    CommentId
+FROM HotelComments
+WHERE HotelId = @HotelId</value>
+  </data>
+
+  <data name="HotelComments_Insert" xml:space="preserve">
+    <value>INSERT INTO HotelComments
+(
+    Id,
+    HotelId,
+    CommentId
+)
+VALUES
+(
+    @Id,
+    @HotelId,
+    @CommentId
+)</value>
+  </data>
+
+  <data name="HotelComments_Delete" xml:space="preserve">
+    <value>DELETE FROM HotelComments
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelComments_DeleteByHotelAndComment" xml:space="preserve">
+    <value>DELETE FROM HotelComments
+WHERE HotelId = @HotelId
+  AND CommentId = @CommentId</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- RENTAL CARS -->
+  <!-- ========================= -->
+
+  <data name="RentalCars_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Brand,
+    Model,
+    Kilometers
+FROM RentalCars</value>
+  </data>
+
+  <data name="RentalCars_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Brand,
+    Model,
+    Kilometers
+FROM RentalCars
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="RentalCars_Insert" xml:space="preserve">
+    <value>INSERT INTO RentalCars
+(
+    Id,
+    Brand,
+    Model,
+    Kilometers
+)
+VALUES
+(
+    @Id,
+    @Brand,
+    @Model,
+    @Kilometers
+)</value>
+  </data>
+
+  <data name="RentalCars_Update" xml:space="preserve">
+    <value>UPDATE RentalCars
+SET
+    Brand = @Brand,
+    Model = @Model,
+    Kilometers = @Kilometers
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="RentalCars_Delete" xml:space="preserve">
+    <value>DELETE FROM RentalCars
+WHERE Id = @Id</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- HOTEL RENTAL CARS -->
+  <!-- ========================= -->
+
+  <data name="HotelRentalCars_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    RentalCarId
+FROM HotelRentalCars</value>
+  </data>
+
+  <data name="HotelRentalCars_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    RentalCarId
+FROM HotelRentalCars
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelRentalCars_SelectByHotelId" xml:space="preserve">
+    <value>SELECT
+    Id,
+    HotelId,
+    RentalCarId
+FROM HotelRentalCars
+WHERE HotelId = @HotelId</value>
+  </data>
+
+  <data name="HotelRentalCars_Insert" xml:space="preserve">
+    <value>INSERT INTO HotelRentalCars
+(
+    Id,
+    HotelId,
+    RentalCarId
+)
+VALUES
+(
+    @Id,
+    @HotelId,
+    @RentalCarId
+)</value>
+  </data>
+
+  <data name="HotelRentalCars_Delete" xml:space="preserve">
+    <value>DELETE FROM HotelRentalCars
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="HotelRentalCars_DeleteByHotelAndRentalCar" xml:space="preserve">
+    <value>DELETE FROM HotelRentalCars
+WHERE HotelId = @HotelId
+  AND RentalCarId = @RentalCarId</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- RENTAL CAR RESERVATION -->
+  <!-- ========================= -->
+
+  <data name="RentalCarReservations_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    UserId,
+    CarId,
+    UseFrom,
+    UseTo,
+    CreatedAt,
+    UpdatedAt
+FROM RentalCarReservation</value>
+  </data>
+
+  <data name="RentalCarReservations_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    UserId,
+    CarId,
+    UseFrom,
+    UseTo,
+    CreatedAt,
+    UpdatedAt
+FROM RentalCarReservation
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="RentalCarReservations_SelectByUserId" xml:space="preserve">
+    <value>SELECT
+    Id,
+    UserId,
+    CarId,
+    UseFrom,
+    UseTo,
+    CreatedAt,
+    UpdatedAt
+FROM RentalCarReservation
+WHERE UserId = @UserId</value>
+  </data>
+
+  <data name="RentalCarReservations_Insert" xml:space="preserve">
+    <value>INSERT INTO RentalCarReservation
+(
+    Id,
+    UserId,
+    CarId,
+    UseFrom,
+    UseTo,
+    CreatedAt,
+    UpdatedAt
+)
+VALUES
+(
+    @Id,
+    @UserId,
+    @CarId,
+    @UseFrom,
+    @UseTo,
+    @CreatedAt,
+    @UpdatedAt
+)</value>
+  </data>
+
+  <data name="RentalCarReservations_Update" xml:space="preserve">
+    <value>UPDATE RentalCarReservation
+SET
+    UserId = @UserId,
+    CarId = @CarId,
+    UseFrom = @UseFrom,
+    UseTo = @UseTo,
+    UpdatedAt = @UpdatedAt
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="RentalCarReservations_Delete" xml:space="preserve">
+    <value>DELETE FROM RentalCarReservation
+WHERE Id = @Id</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- TAXI COMPANY -->
+  <!-- ========================= -->
+
+  <data name="TaxiCompanies_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Name,
+    Country,
+    City,
+    Street,
+    PostalCode,
+    PhoneNumber,
+    Email,
+    Status,
+    Approved,
+    CreatedAt,
+    UpdatedAt
+FROM TaxiCompany</value>
+  </data>
+
+  <data name="TaxiCompanies_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Name,
+    Country,
+    City,
+    Street,
+    PostalCode,
+    PhoneNumber,
+    Email,
+    Status,
+    Approved,
+    CreatedAt,
+    UpdatedAt
+FROM TaxiCompany
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="TaxiCompanies_Insert" xml:space="preserve">
+    <value>INSERT INTO TaxiCompany
+(
+    Id,
+    Name,
+    Country,
+    City,
+    Street,
+    PostalCode,
+    PhoneNumber,
+    Email,
+    Status,
+    Approved,
+    CreatedAt,
+    UpdatedAt
+)
+VALUES
+(
+    @Id,
+    @Name,
+    @Country,
+    @City,
+    @Street,
+    @PostalCode,
+    @PhoneNumber,
+    @Email,
+    @Status,
+    @Approved,
+    @CreatedAt,
+    @UpdatedAt
+)</value>
+  </data>
+
+  <data name="TaxiCompanies_Update" xml:space="preserve">
+    <value>UPDATE TaxiCompany
+SET
+    Name = @Name,
+    Country = @Country,
+    City = @City,
+    Street = @Street,
+    PostalCode = @PostalCode,
+    PhoneNumber = @PhoneNumber,
+    Email = @Email,
+    Status = @Status,
+    Approved = @Approved,
+    UpdatedAt = @UpdatedAt
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="TaxiCompanies_Delete" xml:space="preserve">
+    <value>DELETE FROM TaxiCompany
+WHERE Id = @Id</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- TAXI RESERVATION -->
+  <!-- ========================= -->
+
+  <data name="TaxiReservations_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    TaxiCompanyId,
+    UserId,
+    PickupAddress,
+    DestinationAddress,
+    Time,
+    CreatedAt,
+    UpdatedAt
+FROM TaxiReservation</value>
+  </data>
+
+  <data name="TaxiReservations_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    TaxiCompanyId,
+    UserId,
+    PickupAddress,
+    DestinationAddress,
+    Time,
+    CreatedAt,
+    UpdatedAt
+FROM TaxiReservation
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="TaxiReservations_SelectByUserId" xml:space="preserve">
+    <value>SELECT
+    Id,
+    TaxiCompanyId,
+    UserId,
+    PickupAddress,
+    DestinationAddress,
+    Time,
+    CreatedAt,
+    UpdatedAt
+FROM TaxiReservation
+WHERE UserId = @UserId</value>
+  </data>
+
+  <data name="TaxiReservations_Insert" xml:space="preserve">
+    <value>INSERT INTO TaxiReservation
+(
+    Id,
+    TaxiCompanyId,
+    UserId,
+    PickupAddress,
+    DestinationAddress,
+    Time,
+    CreatedAt,
+    UpdatedAt
+)
+VALUES
+(
+    @Id,
+    @TaxiCompanyId,
+    @UserId,
+    @PickupAddress,
+    @DestinationAddress,
+    @Time,
+    @CreatedAt,
+    @UpdatedAt
+)</value>
+  </data>
+
+  <data name="TaxiReservations_Update" xml:space="preserve">
+    <value>UPDATE TaxiReservation
+SET
+    TaxiCompanyId = @TaxiCompanyId,
+    UserId = @UserId,
+    PickupAddress = @PickupAddress,
+    DestinationAddress = @DestinationAddress,
+    Time = @Time,
+    UpdatedAt = @UpdatedAt
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="TaxiReservations_Delete" xml:space="preserve">
+    <value>DELETE FROM TaxiReservation
+WHERE Id = @Id</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- TAXI COMPANY RATINGS -->
+  <!-- ========================= -->
+
+  <data name="TaxiCompanyRatings_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    TaxiCompanyId,
+    RatingId
+FROM TaxiCompanyRatings</value>
+  </data>
+
+  <data name="TaxiCompanyRatings_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    TaxiCompanyId,
+    RatingId
+FROM TaxiCompanyRatings
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="TaxiCompanyRatings_SelectByTaxiCompanyId" xml:space="preserve">
+    <value>SELECT
+    Id,
+    TaxiCompanyId,
+    RatingId
+FROM TaxiCompanyRatings
+WHERE TaxiCompanyId = @TaxiCompanyId</value>
+  </data>
+
+  <data name="TaxiCompanyRatings_Insert" xml:space="preserve">
+    <value>INSERT INTO TaxiCompanyRatings
+(
+    Id,
+    TaxiCompanyId,
+    RatingId
+)
+VALUES
+(
+    @Id,
+    @TaxiCompanyId,
+    @RatingId
+)</value>
+  </data>
+
+  <data name="TaxiCompanyRatings_Delete" xml:space="preserve">
+    <value>DELETE FROM TaxiCompanyRatings
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="TaxiCompanyRatings_DeleteByTaxiCompanyAndRating" xml:space="preserve">
+    <value>DELETE FROM TaxiCompanyRatings
+WHERE TaxiCompanyId = @TaxiCompanyId
+  AND RatingId = @RatingId</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- TAXI COMPANY COMMENTS -->
+  <!-- ========================= -->
+
+  <data name="TaxiCompanyComments_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    TaxiCompanyId,
+    CommentId
+FROM TaxiCompanyComments</value>
+  </data>
+
+  <data name="TaxiCompanyComments_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    TaxiCompanyId,
+    CommentId
+FROM TaxiCompanyComments
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="TaxiCompanyComments_SelectByTaxiCompanyId" xml:space="preserve">
+    <value>SELECT
+    Id,
+    TaxiCompanyId,
+    CommentId
+FROM TaxiCompanyComments
+WHERE TaxiCompanyId = @TaxiCompanyId</value>
+  </data>
+
+  <data name="TaxiCompanyComments_Insert" xml:space="preserve">
+    <value>INSERT INTO TaxiCompanyComments
+(
+    Id,
+    TaxiCompanyId,
+    CommentId
+)
+VALUES
+(
+    @Id,
+    @TaxiCompanyId,
+    @CommentId
+)</value>
+  </data>
+
+  <data name="TaxiCompanyComments_Delete" xml:space="preserve">
+    <value>DELETE FROM TaxiCompanyComments
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="TaxiCompanyComments_DeleteByTaxiCompanyAndComment" xml:space="preserve">
+    <value>DELETE FROM TaxiCompanyComments
+WHERE TaxiCompanyId = @TaxiCompanyId
+  AND CommentId = @CommentId</value>
+  </data>
+
+  <!-- ========================= -->
+  <!-- AI RECOMMENDATIONS -->
+  <!-- ========================= -->
+
+  <data name="AIRecommendations_SelectAll" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Prompt,
+    Reply,
+    PromptedUserId
+FROM AIRecommendations</value>
+  </data>
+
+  <data name="AIRecommendations_SelectById" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Prompt,
+    Reply,
+    PromptedUserId
+FROM AIRecommendations
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="AIRecommendations_SelectByUserId" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Prompt,
+    Reply,
+    PromptedUserId
+FROM AIRecommendations
+WHERE PromptedUserId = @PromptedUserId</value>
+  </data>
+
+  <data name="AIRecommendations_Insert" xml:space="preserve">
+    <value>INSERT INTO AIRecommendations
+(
+    Id,
+    Prompt,
+    Reply,
+    PromptedUserId
+)
+VALUES
+(
+    @Id,
+    @Prompt,
+    @Reply,
+    @PromptedUserId
+)</value>
+  </data>
+
+  <data name="AIRecommendations_Update" xml:space="preserve">
+    <value>UPDATE AIRecommendations
+SET
+    Prompt = @Prompt,
+    Reply = @Reply,
+    PromptedUserId = @PromptedUserId
+WHERE Id = @Id</value>
+  </data>
+
+  <data name="AIRecommendations_Delete" xml:space="preserve">
+    <value>DELETE FROM AIRecommendations
+WHERE Id = @Id</value>
   </data>
 </root>

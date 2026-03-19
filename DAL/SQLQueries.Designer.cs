@@ -61,15 +61,1869 @@ namespace DAL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT CASE
-        ///WHEN EXISTS (SELECT 1 FROM Users WHERE Email = @Email)
-        ///THEN CAST(1 AS BIT)
-        ///ELSE CAST(0 AS BIT)
-        ///END.
+        ///   Looks up a localized string similar to DELETE FROM AIRecommendations
+        ///WHERE Id = @Id.
         /// </summary>
-        internal static string EmailExists {
+        internal static string AIRecommendations_Delete {
             get {
-                return ResourceManager.GetString("EmailExists", resourceCulture);
+                return ResourceManager.GetString("AIRecommendations_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO AIRecommendations
+        ///(
+        ///    Id,
+        ///    Prompt,
+        ///    Reply,
+        ///    PromptedUserId
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @Prompt,
+        ///    @Reply,
+        ///    @PromptedUserId
+        ///).
+        /// </summary>
+        internal static string AIRecommendations_Insert {
+            get {
+                return ResourceManager.GetString("AIRecommendations_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Prompt,
+        ///    Reply,
+        ///    PromptedUserId
+        ///FROM AIRecommendations.
+        /// </summary>
+        internal static string AIRecommendations_SelectAll {
+            get {
+                return ResourceManager.GetString("AIRecommendations_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Prompt,
+        ///    Reply,
+        ///    PromptedUserId
+        ///FROM AIRecommendations
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string AIRecommendations_SelectById {
+            get {
+                return ResourceManager.GetString("AIRecommendations_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Prompt,
+        ///    Reply,
+        ///    PromptedUserId
+        ///FROM AIRecommendations
+        ///WHERE PromptedUserId = @PromptedUserId.
+        /// </summary>
+        internal static string AIRecommendations_SelectByUserId {
+            get {
+                return ResourceManager.GetString("AIRecommendations_SelectByUserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE AIRecommendations
+        ///SET
+        ///    Prompt = @Prompt,
+        ///    Reply = @Reply,
+        ///    PromptedUserId = @PromptedUserId
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string AIRecommendations_Update {
+            get {
+                return ResourceManager.GetString("AIRecommendations_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM Comments
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Comments_Delete {
+            get {
+                return ResourceManager.GetString("Comments_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO Comments
+        ///(
+        ///    Id,
+        ///    Comment,
+        ///    UserId,
+        ///    Disabled,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @Comment,
+        ///    @UserId,
+        ///    @Disabled,
+        ///    @CreatedAt,
+        ///    @UpdatedAt
+        ///).
+        /// </summary>
+        internal static string Comments_Insert {
+            get {
+                return ResourceManager.GetString("Comments_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Comment,
+        ///    UserId,
+        ///    Disabled,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM Comments.
+        /// </summary>
+        internal static string Comments_SelectAll {
+            get {
+                return ResourceManager.GetString("Comments_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Comment,
+        ///    UserId,
+        ///    Disabled,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM Comments
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Comments_SelectById {
+            get {
+                return ResourceManager.GetString("Comments_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Comment,
+        ///    UserId,
+        ///    Disabled,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM Comments
+        ///WHERE UserId = @UserId.
+        /// </summary>
+        internal static string Comments_SelectByUserId {
+            get {
+                return ResourceManager.GetString("Comments_SelectByUserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE Comments
+        ///SET
+        ///    Comment = @Comment,
+        ///    UserId = @UserId,
+        ///    Disabled = @Disabled,
+        ///    UpdatedAt = @UpdatedAt
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Comments_Update {
+            get {
+                return ResourceManager.GetString("Comments_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM Conveniences
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Conveniences_Delete {
+            get {
+                return ResourceManager.GetString("Conveniences_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO Conveniences
+        ///(
+        ///    Id,
+        ///    Name
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @Name
+        ///).
+        /// </summary>
+        internal static string Conveniences_Insert {
+            get {
+                return ResourceManager.GetString("Conveniences_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Name
+        ///FROM Conveniences.
+        /// </summary>
+        internal static string Conveniences_SelectAll {
+            get {
+                return ResourceManager.GetString("Conveniences_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Name
+        ///FROM Conveniences
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Conveniences_SelectById {
+            get {
+                return ResourceManager.GetString("Conveniences_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE Conveniences
+        ///SET
+        ///    Name = @Name
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Conveniences_Update {
+            get {
+                return ResourceManager.GetString("Conveniences_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM Currencies
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Currencies_Delete {
+            get {
+                return ResourceManager.GetString("Currencies_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO Currencies
+        ///(
+        ///    Id,
+        ///    Name,
+        ///    Code
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @Name,
+        ///    @Code
+        ///).
+        /// </summary>
+        internal static string Currencies_Insert {
+            get {
+                return ResourceManager.GetString("Currencies_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Name,
+        ///    Code
+        ///FROM Currencies.
+        /// </summary>
+        internal static string Currencies_SelectAll {
+            get {
+                return ResourceManager.GetString("Currencies_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Name,
+        ///    Code
+        ///FROM Currencies
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Currencies_SelectById {
+            get {
+                return ResourceManager.GetString("Currencies_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE Currencies
+        ///SET
+        ///    Name = @Name,
+        ///    Code = @Code
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Currencies_Update {
+            get {
+                return ResourceManager.GetString("Currencies_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM HotelComments
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelComments_Delete {
+            get {
+                return ResourceManager.GetString("HotelComments_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM HotelComments
+        ///WHERE HotelId = @HotelId
+        ///  AND CommentId = @CommentId.
+        /// </summary>
+        internal static string HotelComments_DeleteByHotelAndComment {
+            get {
+                return ResourceManager.GetString("HotelComments_DeleteByHotelAndComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO HotelComments
+        ///(
+        ///    Id,
+        ///    HotelId,
+        ///    CommentId
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @HotelId,
+        ///    @CommentId
+        ///).
+        /// </summary>
+        internal static string HotelComments_Insert {
+            get {
+                return ResourceManager.GetString("HotelComments_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    CommentId
+        ///FROM HotelComments.
+        /// </summary>
+        internal static string HotelComments_SelectAll {
+            get {
+                return ResourceManager.GetString("HotelComments_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    CommentId
+        ///FROM HotelComments
+        ///WHERE HotelId = @HotelId.
+        /// </summary>
+        internal static string HotelComments_SelectByHotelId {
+            get {
+                return ResourceManager.GetString("HotelComments_SelectByHotelId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    CommentId
+        ///FROM HotelComments
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelComments_SelectById {
+            get {
+                return ResourceManager.GetString("HotelComments_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM HotelConveniences
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelConveniences_Delete {
+            get {
+                return ResourceManager.GetString("HotelConveniences_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM HotelConveniences
+        ///WHERE HotelId = @HotelId
+        ///  AND ConvenienceId = @ConvenienceId.
+        /// </summary>
+        internal static string HotelConveniences_DeleteByHotelAndConvenience {
+            get {
+                return ResourceManager.GetString("HotelConveniences_DeleteByHotelAndConvenience", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO HotelConveniences
+        ///(
+        ///    Id,
+        ///    HotelId,
+        ///    ConvenienceId
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @HotelId,
+        ///    @ConvenienceId
+        ///).
+        /// </summary>
+        internal static string HotelConveniences_Insert {
+            get {
+                return ResourceManager.GetString("HotelConveniences_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    ConvenienceId
+        ///FROM HotelConveniences.
+        /// </summary>
+        internal static string HotelConveniences_SelectAll {
+            get {
+                return ResourceManager.GetString("HotelConveniences_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    hc.Id,
+        ///    hc.HotelId,
+        ///    hc.ConvenienceId
+        ///FROM HotelConveniences hc
+        ///WHERE hc.HotelId = @HotelId.
+        /// </summary>
+        internal static string HotelConveniences_SelectByHotelId {
+            get {
+                return ResourceManager.GetString("HotelConveniences_SelectByHotelId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    ConvenienceId
+        ///FROM HotelConveniences
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelConveniences_SelectById {
+            get {
+                return ResourceManager.GetString("HotelConveniences_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM HotelPayments
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelPayments_Delete {
+            get {
+                return ResourceManager.GetString("HotelPayments_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO HotelPayments
+        ///(
+        ///    Id,
+        ///    UserId,
+        ///    RoomId,
+        ///    CurrencyId,
+        ///    Amount,
+        ///    CreatedAt
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @UserId,
+        ///    @RoomId,
+        ///    @CurrencyId,
+        ///    @Amount,
+        ///    @CreatedAt
+        ///).
+        /// </summary>
+        internal static string HotelPayments_Insert {
+            get {
+                return ResourceManager.GetString("HotelPayments_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    UserId,
+        ///    RoomId,
+        ///    CurrencyId,
+        ///    Amount,
+        ///    CreatedAt
+        ///FROM HotelPayments.
+        /// </summary>
+        internal static string HotelPayments_SelectAll {
+            get {
+                return ResourceManager.GetString("HotelPayments_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    UserId,
+        ///    RoomId,
+        ///    CurrencyId,
+        ///    Amount,
+        ///    CreatedAt
+        ///FROM HotelPayments
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelPayments_SelectById {
+            get {
+                return ResourceManager.GetString("HotelPayments_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    UserId,
+        ///    RoomId,
+        ///    CurrencyId,
+        ///    Amount,
+        ///    CreatedAt
+        ///FROM HotelPayments
+        ///WHERE UserId = @UserId.
+        /// </summary>
+        internal static string HotelPayments_SelectByUserId {
+            get {
+                return ResourceManager.GetString("HotelPayments_SelectByUserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM HotelRatings
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelRatings_Delete {
+            get {
+                return ResourceManager.GetString("HotelRatings_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM HotelRatings
+        ///WHERE HotelId = @HotelId
+        ///  AND RatingId = @RatingId.
+        /// </summary>
+        internal static string HotelRatings_DeleteByHotelAndRating {
+            get {
+                return ResourceManager.GetString("HotelRatings_DeleteByHotelAndRating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO HotelRatings
+        ///(
+        ///    Id,
+        ///    HotelId,
+        ///    RatingId
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @HotelId,
+        ///    @RatingId
+        ///).
+        /// </summary>
+        internal static string HotelRatings_Insert {
+            get {
+                return ResourceManager.GetString("HotelRatings_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    RatingId
+        ///FROM HotelRatings.
+        /// </summary>
+        internal static string HotelRatings_SelectAll {
+            get {
+                return ResourceManager.GetString("HotelRatings_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    RatingId
+        ///FROM HotelRatings
+        ///WHERE HotelId = @HotelId.
+        /// </summary>
+        internal static string HotelRatings_SelectByHotelId {
+            get {
+                return ResourceManager.GetString("HotelRatings_SelectByHotelId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    RatingId
+        ///FROM HotelRatings
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelRatings_SelectById {
+            get {
+                return ResourceManager.GetString("HotelRatings_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM HotelRentalCars
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelRentalCars_Delete {
+            get {
+                return ResourceManager.GetString("HotelRentalCars_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM HotelRentalCars
+        ///WHERE HotelId = @HotelId
+        ///  AND RentalCarId = @RentalCarId.
+        /// </summary>
+        internal static string HotelRentalCars_DeleteByHotelAndRentalCar {
+            get {
+                return ResourceManager.GetString("HotelRentalCars_DeleteByHotelAndRentalCar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO HotelRentalCars
+        ///(
+        ///    Id,
+        ///    HotelId,
+        ///    RentalCarId
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @HotelId,
+        ///    @RentalCarId
+        ///).
+        /// </summary>
+        internal static string HotelRentalCars_Insert {
+            get {
+                return ResourceManager.GetString("HotelRentalCars_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    RentalCarId
+        ///FROM HotelRentalCars.
+        /// </summary>
+        internal static string HotelRentalCars_SelectAll {
+            get {
+                return ResourceManager.GetString("HotelRentalCars_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    RentalCarId
+        ///FROM HotelRentalCars
+        ///WHERE HotelId = @HotelId.
+        /// </summary>
+        internal static string HotelRentalCars_SelectByHotelId {
+            get {
+                return ResourceManager.GetString("HotelRentalCars_SelectByHotelId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    RentalCarId
+        ///FROM HotelRentalCars
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelRentalCars_SelectById {
+            get {
+                return ResourceManager.GetString("HotelRentalCars_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM HotelReservation
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelReservations_Delete {
+            get {
+                return ResourceManager.GetString("HotelReservations_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO HotelReservation
+        ///(
+        ///    Id,
+        ///    HotelId,
+        ///    UserId,
+        ///    RoomId,
+        ///    CheckIn,
+        ///    CheckOut,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @HotelId,
+        ///    @UserId,
+        ///    @RoomId,
+        ///    @CheckIn,
+        ///    @CheckOut,
+        ///    @CreatedAt,
+        ///    @UpdatedAt
+        ///).
+        /// </summary>
+        internal static string HotelReservations_Insert {
+            get {
+                return ResourceManager.GetString("HotelReservations_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    UserId,
+        ///    RoomId,
+        ///    CheckIn,
+        ///    CheckOut,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM HotelReservation.
+        /// </summary>
+        internal static string HotelReservations_SelectAll {
+            get {
+                return ResourceManager.GetString("HotelReservations_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    UserId,
+        ///    RoomId,
+        ///    CheckIn,
+        ///    CheckOut,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM HotelReservation
+        ///WHERE HotelId = @HotelId.
+        /// </summary>
+        internal static string HotelReservations_SelectByHotelId {
+            get {
+                return ResourceManager.GetString("HotelReservations_SelectByHotelId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    UserId,
+        ///    RoomId,
+        ///    CheckIn,
+        ///    CheckOut,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM HotelReservation
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelReservations_SelectById {
+            get {
+                return ResourceManager.GetString("HotelReservations_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    UserId,
+        ///    RoomId,
+        ///    CheckIn,
+        ///    CheckOut,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM HotelReservation
+        ///WHERE UserId = @UserId.
+        /// </summary>
+        internal static string HotelReservations_SelectByUserId {
+            get {
+                return ResourceManager.GetString("HotelReservations_SelectByUserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE HotelReservation
+        ///SET
+        ///    HotelId = @HotelId,
+        ///    UserId = @UserId,
+        ///    RoomId = @RoomId,
+        ///    CheckIn = @CheckIn,
+        ///    CheckOut = @CheckOut,
+        ///    UpdatedAt = @UpdatedAt
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelReservations_Update {
+            get {
+                return ResourceManager.GetString("HotelReservations_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM HotelRoomConveniences
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelRoomConveniences_Delete {
+            get {
+                return ResourceManager.GetString("HotelRoomConveniences_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM HotelRoomConveniences
+        ///WHERE HotelRoomId = @HotelRoomId
+        ///  AND ConvenienceId = @ConvenienceId.
+        /// </summary>
+        internal static string HotelRoomConveniences_DeleteByRoomAndConvenience {
+            get {
+                return ResourceManager.GetString("HotelRoomConveniences_DeleteByRoomAndConvenience", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO HotelRoomConveniences
+        ///(
+        ///    Id,
+        ///    HotelRoomId,
+        ///    ConvenienceId
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @HotelRoomId,
+        ///    @ConvenienceId
+        ///).
+        /// </summary>
+        internal static string HotelRoomConveniences_Insert {
+            get {
+                return ResourceManager.GetString("HotelRoomConveniences_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelRoomId,
+        ///    ConvenienceId
+        ///FROM HotelRoomConveniences.
+        /// </summary>
+        internal static string HotelRoomConveniences_SelectAll {
+            get {
+                return ResourceManager.GetString("HotelRoomConveniences_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelRoomId,
+        ///    ConvenienceId
+        ///FROM HotelRoomConveniences
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelRoomConveniences_SelectById {
+            get {
+                return ResourceManager.GetString("HotelRoomConveniences_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelRoomId,
+        ///    ConvenienceId
+        ///FROM HotelRoomConveniences
+        ///WHERE HotelRoomId = @HotelRoomId.
+        /// </summary>
+        internal static string HotelRoomConveniences_SelectByRoomId {
+            get {
+                return ResourceManager.GetString("HotelRoomConveniences_SelectByRoomId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM HotelRooms
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelRooms_Delete {
+            get {
+                return ResourceManager.GetString("HotelRooms_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO HotelRooms
+        ///(
+        ///    Id,
+        ///    HotelId,
+        ///    Description,
+        ///    Price,
+        ///    RoomNo,
+        ///    Floor,
+        ///    BedCount,
+        ///    Capacity,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @HotelId,
+        ///    @Description,
+        ///    @Price,
+        ///    @RoomNo,
+        ///    @Floor,
+        ///    @BedCount,
+        ///    @Capacity,
+        ///    @CreatedAt,
+        ///    @UpdatedAt
+        ///).
+        /// </summary>
+        internal static string HotelRooms_Insert {
+            get {
+                return ResourceManager.GetString("HotelRooms_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    Description,
+        ///    Price,
+        ///    RoomNo,
+        ///    Floor,
+        ///    BedCount,
+        ///    Capacity,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM HotelRooms.
+        /// </summary>
+        internal static string HotelRooms_SelectAll {
+            get {
+                return ResourceManager.GetString("HotelRooms_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    Description,
+        ///    Price,
+        ///    RoomNo,
+        ///    Floor,
+        ///    BedCount,
+        ///    Capacity,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM HotelRooms
+        ///WHERE HotelId = @HotelId.
+        /// </summary>
+        internal static string HotelRooms_SelectByHotelId {
+            get {
+                return ResourceManager.GetString("HotelRooms_SelectByHotelId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    HotelId,
+        ///    Description,
+        ///    Price,
+        ///    RoomNo,
+        ///    Floor,
+        ///    BedCount,
+        ///    Capacity,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM HotelRooms
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelRooms_SelectById {
+            get {
+                return ResourceManager.GetString("HotelRooms_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE HotelRooms
+        ///SET
+        ///    HotelId = @HotelId,
+        ///    Description = @Description,
+        ///    Price = @Price,
+        ///    RoomNo = @RoomNo,
+        ///    Floor = @Floor,
+        ///    BedCount = @BedCount,
+        ///    Capacity = @Capacity,
+        ///    UpdatedAt = @UpdatedAt
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string HotelRooms_Update {
+            get {
+                return ResourceManager.GetString("HotelRooms_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM Hotels
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Hotels_Delete {
+            get {
+                return ResourceManager.GetString("Hotels_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO Hotels
+        ///(
+        ///    Id,
+        ///    Name,
+        ///    Country,
+        ///    City,
+        ///    Street,
+        ///    PostalCode,
+        ///    PhoneNumber,
+        ///    Email,
+        ///    Status,
+        ///    Approved,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @Name,
+        ///    @Country,
+        ///    @City,
+        ///    @Street,
+        ///    @PostalCode,
+        ///    @PhoneNumber,
+        ///    @Email,
+        ///    @Status,
+        ///    @Approved,
+        ///    @CreatedAt,
+        ///    @UpdatedAt
+        ///).
+        /// </summary>
+        internal static string Hotels_Insert {
+            get {
+                return ResourceManager.GetString("Hotels_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Name,
+        ///    Country,
+        ///    City,
+        ///    Street,
+        ///    PostalCode,
+        ///    PhoneNumber,
+        ///    Email,
+        ///    Status,
+        ///    Approved,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM Hotels.
+        /// </summary>
+        internal static string Hotels_SelectAll {
+            get {
+                return ResourceManager.GetString("Hotels_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Name,
+        ///    Country,
+        ///    City,
+        ///    Street,
+        ///    PostalCode,
+        ///    PhoneNumber,
+        ///    Email,
+        ///    Status,
+        ///    Approved,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM Hotels
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Hotels_SelectById {
+            get {
+                return ResourceManager.GetString("Hotels_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE Hotels
+        ///SET
+        ///    Name = @Name,
+        ///    Country = @Country,
+        ///    City = @City,
+        ///    Street = @Street,
+        ///    PostalCode = @PostalCode,
+        ///    PhoneNumber = @PhoneNumber,
+        ///    Email = @Email,
+        ///    Status = @Status,
+        ///    Approved = @Approved,
+        ///    UpdatedAt = @UpdatedAt
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Hotels_Update {
+            get {
+                return ResourceManager.GetString("Hotels_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM Ratings
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Ratings_Delete {
+            get {
+                return ResourceManager.GetString("Ratings_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO Ratings
+        ///(
+        ///    Id,
+        ///    Disabled,
+        ///    Rating,
+        ///    CreatedAt
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @Disabled,
+        ///    @Rating,
+        ///    @CreatedAt
+        ///).
+        /// </summary>
+        internal static string Ratings_Insert {
+            get {
+                return ResourceManager.GetString("Ratings_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Disabled,
+        ///    Rating,
+        ///    CreatedAt
+        ///FROM Ratings.
+        /// </summary>
+        internal static string Ratings_SelectAll {
+            get {
+                return ResourceManager.GetString("Ratings_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Disabled,
+        ///    Rating,
+        ///    CreatedAt
+        ///FROM Ratings
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Ratings_SelectById {
+            get {
+                return ResourceManager.GetString("Ratings_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE Ratings
+        ///SET
+        ///    Disabled = @Disabled,
+        ///    Rating = @Rating
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Ratings_Update {
+            get {
+                return ResourceManager.GetString("Ratings_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM RentalCarReservation
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string RentalCarReservations_Delete {
+            get {
+                return ResourceManager.GetString("RentalCarReservations_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO RentalCarReservation
+        ///(
+        ///    Id,
+        ///    UserId,
+        ///    CarId,
+        ///    UseFrom,
+        ///    UseTo,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @UserId,
+        ///    @CarId,
+        ///    @UseFrom,
+        ///    @UseTo,
+        ///    @CreatedAt,
+        ///    @UpdatedAt
+        ///).
+        /// </summary>
+        internal static string RentalCarReservations_Insert {
+            get {
+                return ResourceManager.GetString("RentalCarReservations_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    UserId,
+        ///    CarId,
+        ///    UseFrom,
+        ///    UseTo,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM RentalCarReservation.
+        /// </summary>
+        internal static string RentalCarReservations_SelectAll {
+            get {
+                return ResourceManager.GetString("RentalCarReservations_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    UserId,
+        ///    CarId,
+        ///    UseFrom,
+        ///    UseTo,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM RentalCarReservation
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string RentalCarReservations_SelectById {
+            get {
+                return ResourceManager.GetString("RentalCarReservations_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    UserId,
+        ///    CarId,
+        ///    UseFrom,
+        ///    UseTo,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM RentalCarReservation
+        ///WHERE UserId = @UserId.
+        /// </summary>
+        internal static string RentalCarReservations_SelectByUserId {
+            get {
+                return ResourceManager.GetString("RentalCarReservations_SelectByUserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE RentalCarReservation
+        ///SET
+        ///    UserId = @UserId,
+        ///    CarId = @CarId,
+        ///    UseFrom = @UseFrom,
+        ///    UseTo = @UseTo,
+        ///    UpdatedAt = @UpdatedAt
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string RentalCarReservations_Update {
+            get {
+                return ResourceManager.GetString("RentalCarReservations_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM RentalCars
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string RentalCars_Delete {
+            get {
+                return ResourceManager.GetString("RentalCars_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO RentalCars
+        ///(
+        ///    Id,
+        ///    Brand,
+        ///    Model,
+        ///    Kilometers
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @Brand,
+        ///    @Model,
+        ///    @Kilometers
+        ///).
+        /// </summary>
+        internal static string RentalCars_Insert {
+            get {
+                return ResourceManager.GetString("RentalCars_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Brand,
+        ///    Model,
+        ///    Kilometers
+        ///FROM RentalCars.
+        /// </summary>
+        internal static string RentalCars_SelectAll {
+            get {
+                return ResourceManager.GetString("RentalCars_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Brand,
+        ///    Model,
+        ///    Kilometers
+        ///FROM RentalCars
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string RentalCars_SelectById {
+            get {
+                return ResourceManager.GetString("RentalCars_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE RentalCars
+        ///SET
+        ///    Brand = @Brand,
+        ///    Model = @Model,
+        ///    Kilometers = @Kilometers
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string RentalCars_Update {
+            get {
+                return ResourceManager.GetString("RentalCars_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM TaxiCompany
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string TaxiCompanies_Delete {
+            get {
+                return ResourceManager.GetString("TaxiCompanies_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO TaxiCompany
+        ///(
+        ///    Id,
+        ///    Name,
+        ///    Country,
+        ///    City,
+        ///    Street,
+        ///    PostalCode,
+        ///    PhoneNumber,
+        ///    Email,
+        ///    Status,
+        ///    Approved,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @Name,
+        ///    @Country,
+        ///    @City,
+        ///    @Street,
+        ///    @PostalCode,
+        ///    @PhoneNumber,
+        ///    @Email,
+        ///    @Status,
+        ///    @Approved,
+        ///    @CreatedAt,
+        ///    @UpdatedAt
+        ///).
+        /// </summary>
+        internal static string TaxiCompanies_Insert {
+            get {
+                return ResourceManager.GetString("TaxiCompanies_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Name,
+        ///    Country,
+        ///    City,
+        ///    Street,
+        ///    PostalCode,
+        ///    PhoneNumber,
+        ///    Email,
+        ///    Status,
+        ///    Approved,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM TaxiCompany.
+        /// </summary>
+        internal static string TaxiCompanies_SelectAll {
+            get {
+                return ResourceManager.GetString("TaxiCompanies_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Name,
+        ///    Country,
+        ///    City,
+        ///    Street,
+        ///    PostalCode,
+        ///    PhoneNumber,
+        ///    Email,
+        ///    Status,
+        ///    Approved,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM TaxiCompany
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string TaxiCompanies_SelectById {
+            get {
+                return ResourceManager.GetString("TaxiCompanies_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE TaxiCompany
+        ///SET
+        ///    Name = @Name,
+        ///    Country = @Country,
+        ///    City = @City,
+        ///    Street = @Street,
+        ///    PostalCode = @PostalCode,
+        ///    PhoneNumber = @PhoneNumber,
+        ///    Email = @Email,
+        ///    Status = @Status,
+        ///    Approved = @Approved,
+        ///    UpdatedAt = @UpdatedAt
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string TaxiCompanies_Update {
+            get {
+                return ResourceManager.GetString("TaxiCompanies_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM TaxiCompanyComments
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string TaxiCompanyComments_Delete {
+            get {
+                return ResourceManager.GetString("TaxiCompanyComments_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM TaxiCompanyComments
+        ///WHERE TaxiCompanyId = @TaxiCompanyId
+        ///  AND CommentId = @CommentId.
+        /// </summary>
+        internal static string TaxiCompanyComments_DeleteByTaxiCompanyAndComment {
+            get {
+                return ResourceManager.GetString("TaxiCompanyComments_DeleteByTaxiCompanyAndComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO TaxiCompanyComments
+        ///(
+        ///    Id,
+        ///    TaxiCompanyId,
+        ///    CommentId
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @TaxiCompanyId,
+        ///    @CommentId
+        ///).
+        /// </summary>
+        internal static string TaxiCompanyComments_Insert {
+            get {
+                return ResourceManager.GetString("TaxiCompanyComments_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    TaxiCompanyId,
+        ///    CommentId
+        ///FROM TaxiCompanyComments.
+        /// </summary>
+        internal static string TaxiCompanyComments_SelectAll {
+            get {
+                return ResourceManager.GetString("TaxiCompanyComments_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    TaxiCompanyId,
+        ///    CommentId
+        ///FROM TaxiCompanyComments
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string TaxiCompanyComments_SelectById {
+            get {
+                return ResourceManager.GetString("TaxiCompanyComments_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    TaxiCompanyId,
+        ///    CommentId
+        ///FROM TaxiCompanyComments
+        ///WHERE TaxiCompanyId = @TaxiCompanyId.
+        /// </summary>
+        internal static string TaxiCompanyComments_SelectByTaxiCompanyId {
+            get {
+                return ResourceManager.GetString("TaxiCompanyComments_SelectByTaxiCompanyId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM TaxiCompanyRatings
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string TaxiCompanyRatings_Delete {
+            get {
+                return ResourceManager.GetString("TaxiCompanyRatings_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM TaxiCompanyRatings
+        ///WHERE TaxiCompanyId = @TaxiCompanyId
+        ///  AND RatingId = @RatingId.
+        /// </summary>
+        internal static string TaxiCompanyRatings_DeleteByTaxiCompanyAndRating {
+            get {
+                return ResourceManager.GetString("TaxiCompanyRatings_DeleteByTaxiCompanyAndRating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO TaxiCompanyRatings
+        ///(
+        ///    Id,
+        ///    TaxiCompanyId,
+        ///    RatingId
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @TaxiCompanyId,
+        ///    @RatingId
+        ///).
+        /// </summary>
+        internal static string TaxiCompanyRatings_Insert {
+            get {
+                return ResourceManager.GetString("TaxiCompanyRatings_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    TaxiCompanyId,
+        ///    RatingId
+        ///FROM TaxiCompanyRatings.
+        /// </summary>
+        internal static string TaxiCompanyRatings_SelectAll {
+            get {
+                return ResourceManager.GetString("TaxiCompanyRatings_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    TaxiCompanyId,
+        ///    RatingId
+        ///FROM TaxiCompanyRatings
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string TaxiCompanyRatings_SelectById {
+            get {
+                return ResourceManager.GetString("TaxiCompanyRatings_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    TaxiCompanyId,
+        ///    RatingId
+        ///FROM TaxiCompanyRatings
+        ///WHERE TaxiCompanyId = @TaxiCompanyId.
+        /// </summary>
+        internal static string TaxiCompanyRatings_SelectByTaxiCompanyId {
+            get {
+                return ResourceManager.GetString("TaxiCompanyRatings_SelectByTaxiCompanyId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM TaxiReservation
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string TaxiReservations_Delete {
+            get {
+                return ResourceManager.GetString("TaxiReservations_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO TaxiReservation
+        ///(
+        ///    Id,
+        ///    TaxiCompanyId,
+        ///    UserId,
+        ///    PickupAddress,
+        ///    DestinationAddress,
+        ///    Time,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///)
+        ///VALUES
+        ///(
+        ///    @Id,
+        ///    @TaxiCompanyId,
+        ///    @UserId,
+        ///    @PickupAddress,
+        ///    @DestinationAddress,
+        ///    @Time,
+        ///    @CreatedAt,
+        ///    @UpdatedAt
+        ///).
+        /// </summary>
+        internal static string TaxiReservations_Insert {
+            get {
+                return ResourceManager.GetString("TaxiReservations_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    TaxiCompanyId,
+        ///    UserId,
+        ///    PickupAddress,
+        ///    DestinationAddress,
+        ///    Time,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM TaxiReservation.
+        /// </summary>
+        internal static string TaxiReservations_SelectAll {
+            get {
+                return ResourceManager.GetString("TaxiReservations_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    TaxiCompanyId,
+        ///    UserId,
+        ///    PickupAddress,
+        ///    DestinationAddress,
+        ///    Time,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM TaxiReservation
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string TaxiReservations_SelectById {
+            get {
+                return ResourceManager.GetString("TaxiReservations_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    TaxiCompanyId,
+        ///    UserId,
+        ///    PickupAddress,
+        ///    DestinationAddress,
+        ///    Time,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM TaxiReservation
+        ///WHERE UserId = @UserId.
+        /// </summary>
+        internal static string TaxiReservations_SelectByUserId {
+            get {
+                return ResourceManager.GetString("TaxiReservations_SelectByUserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE TaxiReservation
+        ///SET
+        ///    TaxiCompanyId = @TaxiCompanyId,
+        ///    UserId = @UserId,
+        ///    PickupAddress = @PickupAddress,
+        ///    DestinationAddress = @DestinationAddress,
+        ///    Time = @Time,
+        ///    UpdatedAt = @UpdatedAt
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string TaxiReservations_Update {
+            get {
+                return ResourceManager.GetString("TaxiReservations_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM Users
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Users_Delete {
+            get {
+                return ResourceManager.GetString("Users_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT CAST(CASE
+        ///WHEN EXISTS (
+        ///    SELECT 1
+        ///    FROM Users
+        ///    WHERE Email = @Email
+        ///)
+        ///THEN 1
+        ///ELSE 0
+        ///END AS BIT).
+        /// </summary>
+        internal static string Users_EmailExists {
+            get {
+                return ResourceManager.GetString("Users_EmailExists", resourceCulture);
             }
         }
         
@@ -80,11 +1934,17 @@ namespace DAL {
         ///    Email,
         ///    FirstName,
         ///    LastName,
+        ///    LoyaltyPoints,
+        ///    AvatarURL,
         ///    PasswordHash,
-        ///    RoleId,
-        ///    Status,
+        ///    MFAType,
+        ///    TFASecret,
         ///    IsVerified,
-        ///    CreatedAt
+        ///    Status,
+        ///    RoleId,
+        ///    LastLoginAt,
+        ///    CreatedAt,
+        ///    UpdatedAt
         ///)
         ///VALUES
         ///(
@@ -92,16 +1952,47 @@ namespace DAL {
         ///    @Email,
         ///    @FirstName,
         ///    @LastName,
+        ///    @LoyaltyPoints,
+        ///    @AvatarURL,
         ///    @PasswordHash,
-        ///    @RoleId,
-        ///    @Status,
+        ///    @MFAType,
+        ///    @TFASecret,
         ///    @IsVerified,
-        ///    @CreatedAt
+        ///    @Status,
+        ///    @RoleId,
+        ///    @LastLoginAt,
+        ///    @CreatedAt,
+        ///    @UpdatedAt
         ///).
         /// </summary>
-        internal static string InsertUser {
+        internal static string Users_Insert {
             get {
-                return ResourceManager.GetString("InsertUser", resourceCulture);
+                return ResourceManager.GetString("Users_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Email,
+        ///    FirstName,
+        ///    LastName,
+        ///    LoyaltyPoints,
+        ///    AvatarURL,
+        ///    PasswordHash,
+        ///    MFAType,
+        ///    TFASecret,
+        ///    IsVerified,
+        ///    Status,
+        ///    RoleId,
+        ///    LastLoginAt,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM Users.
+        /// </summary>
+        internal static string Users_SelectAll {
+            get {
+                return ResourceManager.GetString("Users_SelectAll", resourceCulture);
             }
         }
         
@@ -112,14 +2003,17 @@ namespace DAL {
         ///    u.PasswordHash,
         ///    u.FirstName,
         ///    u.LastName,
+        ///    u.IsVerified,
+        ///    u.Status,
+        ///    u.RoleId,
         ///    r.Name AS RoleName
         ///FROM Users u
-        ///JOIN Roles r ON r.Id = u.RoleId
+        ///INNER JOIN Roles r ON r.Id = u.RoleId
         ///WHERE u.Email = @Email.
         /// </summary>
-        internal static string SelectUserByEmail {
+        internal static string Users_SelectByEmail {
             get {
-                return ResourceManager.GetString("SelectUserByEmail", resourceCulture);
+                return ResourceManager.GetString("Users_SelectByEmail", resourceCulture);
             }
         }
         
@@ -141,22 +2035,48 @@ namespace DAL {
         ///    CreatedAt,
         ///    UpdatedAt
         ///FROM Users
-        ///WHERE Id = @UserId.
+        ///WHERE Id = @Id.
         /// </summary>
-        internal static string SelectUserById {
+        internal static string Users_SelectById {
             get {
-                return ResourceManager.GetString("SelectUserById", resourceCulture);
+                return ResourceManager.GetString("Users_SelectById", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to UPDATE Users
-        ///SET LastLoginAt = @LastLoginAt
+        ///SET
+        ///    Email = @Email,
+        ///    FirstName = @FirstName,
+        ///    LastName = @LastName,
+        ///    LoyaltyPoints = @LoyaltyPoints,
+        ///    AvatarURL = @AvatarURL,
+        ///    PasswordHash = @PasswordHash,
+        ///    MFAType = @MFAType,
+        ///    TFASecret = @TFASecret,
+        ///    IsVerified = @IsVerified,
+        ///    Status = @Status,
+        ///    RoleId = @RoleId,
+        ///    LastLoginAt = @LastLoginAt,
+        ///    UpdatedAt = @UpdatedAt
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Users_Update {
+            get {
+                return ResourceManager.GetString("Users_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE Users
+        ///SET
+        ///    LastLoginAt = @LastLoginAt,
+        ///    UpdatedAt = @UpdatedAt
         ///WHERE Id = @UserId.
         /// </summary>
-        internal static string UpdateLastLogin {
+        internal static string Users_UpdateLastLogin {
             get {
-                return ResourceManager.GetString("UpdateLastLogin", resourceCulture);
+                return ResourceManager.GetString("Users_UpdateLastLogin", resourceCulture);
             }
         }
     }

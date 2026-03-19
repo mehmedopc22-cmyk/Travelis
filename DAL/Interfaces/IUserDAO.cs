@@ -3,7 +3,7 @@ using Domain.Entities;
 
 namespace DAL.Interfaces
 {
-    public interface IUserDAO
+    public interface IUserDAO : IBaseDAO<UserEntity>
     {
         UserLoginDTO? SelectByEmail(string email);
         UserEntity? SelectById(Guid id);

@@ -1,5 +1,5 @@
 using API.Helpers;
-using DAL.DAO;
+using DAL.DAOs;
 using DAL.Factories;
 using DAL.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
