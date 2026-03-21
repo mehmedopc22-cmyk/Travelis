@@ -36,7 +36,7 @@ namespace API.Controllers
 
             try
             {
-                HotelEntity hotel = _hotelDAO.SelectById(HotelId);
+                HotelEntity? hotel = _hotelDAO.SelectById(HotelId);
 
                 if (hotel == null)
                 {
@@ -65,6 +65,25 @@ namespace API.Controllers
                 }
 
                 return Ok(hotel);
+            }
+
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPut("updateHotel")]
+        public ActionResult updateHotel([FromBody] HotelEntity hotel)
+        {
+            try
+            {
+                if (_hotelDAO.Update(hotel)) {
+
+                    return Ok();
+                }
+
+                return BadRequest();
             }
 
             catch (Exception)
