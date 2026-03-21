@@ -80,7 +80,7 @@ namespace DAL.DAOs
             }
         }
 
-        public Guid Insert(UserEntity user)
+        public UserEntity Insert(UserEntity user)
         {
             using SqlConnection sqlConnection = _databaseFactory.GetConnection();
 
@@ -107,11 +107,15 @@ namespace DAL.DAOs
                     UpdatedAt = DateTime.UtcNow
                 });
 
-                return userId;
+                return user;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                return Guid.Empty;
+                throw new Exception("Database error while inserting User", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unexpected error while inserting User", ex);
             }
         }
 

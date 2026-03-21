@@ -45,17 +45,20 @@ namespace DAL.DAOs
             }
         }
 
-        public Guid Insert(HotelEntity hotel)
+        public HotelEntity Insert(HotelEntity hotel)
         {
             using SqlConnection sqlConnection = _databaseFactory.GetConnection();
 
             try
             {
-                Guid hotelId = hotel.Id == Guid.Empty ? Guid.NewGuid() : hotel.Id;
+                hotel.Id = hotel.Id == Guid.Empty ? Guid.NewGuid() : hotel.Id;
+
+                hotel.CreatedAt = DateTime.Now;
+                hotel.UpdatedAt = DateTime.Now;
 
                 sqlConnection.Execute(SQLQueries.Hotels_Insert, new
                 {
-                    Id = hotelId,
+                    hotel.Id,
                     hotel.Name,
                     hotel.Country,
                     hotel.City,
@@ -65,15 +68,19 @@ namespace DAL.DAOs
                     hotel.Email,
                     hotel.Status,
                     hotel.Approved,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
+                    hotel.CreatedAt,
+                    hotel.UpdatedAt
                 });
 
-                return hotelId;
+                return hotel;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                return Guid.Empty;
+                throw new Exception("Database error while inserting Hotel", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unexpected error while inserting Hotel", ex);
             }
         }
 

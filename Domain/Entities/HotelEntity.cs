@@ -2,7 +2,7 @@
 {
     public class HotelEntity
     {
-        public required Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.Empty;
         public required string Name { get; set; }
         public required string Country { get; set; }
         public required string City { get; set; }
@@ -13,7 +13,7 @@
         public required int Status { get; set; }
         public required bool Approved { get; set; }
 
-        public DateTimeOffset? CreatedAt { get; set; } = null;
-        public DateTimeOffset? UpdatedAt { get; set; } = null;
+        public DateTime? CreatedAt { get; set; } = new DateTime();
+        public DateTime? UpdatedAt { get; set; } = null;
     }
 }

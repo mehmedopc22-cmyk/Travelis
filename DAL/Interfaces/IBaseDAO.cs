@@ -8,7 +8,7 @@ namespace DAL.Interfaces
     {
         TEntity? SelectById(Guid id);
         IEnumerable<TEntity> SelectAll();
-        Guid Insert(TEntity entity);
+        TEntity Insert(TEntity entity);
         bool Update(TEntity entity);
         bool Delete(Guid id);
     }

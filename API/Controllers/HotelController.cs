@@ -52,5 +52,25 @@ namespace API.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost("insertHotel")]
+        public ActionResult InsertHotel([FromBody] HotelEntity hotel)
+        {
+            try
+            {
+                HotelEntity insertedHotel = _hotelDAO.Insert(hotel);
+
+                if (insertedHotel == null) {
+                    return StatusCode(500, "Insertion failed");
+                }
+
+                return Ok(hotel);
+            }
+
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
