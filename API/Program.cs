@@ -16,13 +16,13 @@ namespace API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();
             builder.Services.AddTransient<IFactory<SqlConnection>, DatabaseFactory>();
             builder.Services.AddTransient<IUserDAO, UserDAO>();
             builder.Services.AddTransient<IHotelDAO, HotelDAO>();
             builder.Services.AddTransient<IHotelReservationDAO, HotelReservationDAO>();
+            builder.Services.AddTransient<IRentalCarReservationDAO, RentalCarReservationDAO>();
             builder.Services.AddSingleton<PasswordHasherService>();
             builder.Services.AddSingleton<JWTService>();
             builder.Services

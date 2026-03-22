@@ -1424,15 +1424,24 @@ namespace DAL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT
-        ///    Id,
-        ///    UserId,
-        ///    CarId,
-        ///    UseFrom,
-        ///    UseTo,
-        ///    CreatedAt,
-        ///    UpdatedAt
-        ///FROM RentalCarReservation.
+        ///   Looks up a localized string similar to SELECT 
+        ///    res.[Id],
+        ///    res.[UseFrom],
+        ///    res.[UseTo],
+        ///
+        ///    c.[Id] AS CarId,
+        ///    c.[Brand],
+        ///    c.[Model],
+        ///    c.[Kilometers],
+        ///
+        ///    u.[Id] AS UserId,
+        ///    u.[Email],
+        ///    u.[FirstName],
+        ///    u.[LastName]
+        ///
+        ///FROM [RentalCarReservation] res
+        ///INNER JOIN [RentalCars] c ON res.[CarID] = c.[Id]
+        ///INNER JOIN [Users] u ON res.[UserID] = u.[Id];.
         /// </summary>
         internal static string RentalCarReservations_SelectAll {
             get {
@@ -1441,16 +1450,26 @@ namespace DAL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT
-        ///    Id,
-        ///    UserId,
-        ///    CarId,
-        ///    UseFrom,
-        ///    UseTo,
-        ///    CreatedAt,
-        ///    UpdatedAt
-        ///FROM RentalCarReservation
-        ///WHERE Id = @Id.
+        ///   Looks up a localized string similar to SELECT 
+        ///    res.[Id],
+        ///    res.[UseFrom],
+        ///    res.[UseTo],
+        ///
+        ///    c.[Id] AS CarId,
+        ///    c.[Brand],
+        ///    c.[Model],
+        ///    c.[Kilometers],
+        ///
+        ///    u.[Id] AS UserId,
+        ///    u.[Email],
+        ///    u.[FirstName],
+        ///    u.[LastName]
+        ///
+        ///FROM [RentalCarReservation] res
+        ///INNER JOIN [RentalCars] c ON res.[CarID] = c.[Id]
+        ///INNER JOIN [Users] u ON res.[UserID] = u.[Id]
+        ///
+        ///WHERE res.[Id] = @Id.
         /// </summary>
         internal static string RentalCarReservations_SelectById {
             get {
@@ -1459,16 +1478,26 @@ namespace DAL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT
-        ///    Id,
-        ///    UserId,
-        ///    CarId,
-        ///    UseFrom,
-        ///    UseTo,
-        ///    CreatedAt,
-        ///    UpdatedAt
-        ///FROM RentalCarReservation
-        ///WHERE UserId = @UserId.
+        ///   Looks up a localized string similar to SELECT 
+        ///    res.[Id],
+        ///    res.[UseFrom],
+        ///    res.[UseTo],
+        ///
+        ///    c.[Id] AS CarId,
+        ///    c.[Brand],
+        ///    c.[Model],
+        ///    c.[Kilometers],
+        ///
+        ///    u.[Id] AS UserId,
+        ///    u.[Email],
+        ///    u.[FirstName],
+        ///    u.[LastName]
+        ///
+        ///FROM [RentalCarReservation] res
+        ///INNER JOIN [RentalCars] c ON res.[CarID] = c.[Id]
+        ///INNER JOIN [Users] u ON res.[UserID] = u.[Id]
+        ///
+        ///WHERE u.[Id] = @Id.
         /// </summary>
         internal static string RentalCarReservations_SelectByUserId {
             get {

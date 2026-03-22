@@ -58,7 +58,7 @@ namespace API.Controllers
                 if(createdHotelReservation == null)
                     return BadRequest("Failed to create hotel reservation. Please check the provided data.");
 
-                return CreatedAtAction(nameof(GetHotelReservationById), new { id = createdHotelReservation.Id }, createdHotelReservation);
+                return Ok(createdHotelReservation);
             }
             catch (Exception ex)
             {

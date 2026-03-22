@@ -581,7 +581,7 @@ FROM [HotelReservation] res
 INNER JOIN [Hotels] h ON res.[HotelID] = h.[Id]
 INNER JOIN [Users] u ON res.[UserID] = u.[Id]
 INNER JOIN [HotelRooms] rm ON res.[RoomID] = rm.[Id]
-WHERE res.[Id] = @Id; -- Filter by ID</value>
+WHERE res.[Id] = @Id;</value>
   </data>
   <data name="HotelReservations_SelectByUserId" xml:space="preserve">
     <value>SELECT 
@@ -1058,39 +1058,70 @@ WHERE HotelId = @HotelId
   AND RentalCarId = @RentalCarId</value>
   </data>
   <data name="RentalCarReservations_SelectAll" xml:space="preserve">
-    <value>SELECT
-    Id,
-    UserId,
-    CarId,
-    UseFrom,
-    UseTo,
-    CreatedAt,
-    UpdatedAt
-FROM RentalCarReservation</value>
+    <value>SELECT 
+    res.[Id],
+    res.[UseFrom],
+    res.[UseTo],
+
+    c.[Id] AS CarId,
+    c.[Brand],
+    c.[Model],
+    c.[Kilometers],
+
+    u.[Id] AS UserId,
+    u.[Email],
+    u.[FirstName],
+    u.[LastName]
+
+FROM [RentalCarReservation] res
+INNER JOIN [RentalCars] c ON res.[CarID] = c.[Id]
+INNER JOIN [Users] u ON res.[UserID] = u.[Id];</value>
+    <comment>Get all rental car reservations </comment>
   </data>
   <data name="RentalCarReservations_SelectById" xml:space="preserve">
-    <value>SELECT
-    Id,
-    UserId,
-    CarId,
-    UseFrom,
-    UseTo,
-    CreatedAt,
-    UpdatedAt
-FROM RentalCarReservation
-WHERE Id = @Id</value>
+    <value>SELECT 
+    res.[Id],
+    res.[UseFrom],
+    res.[UseTo],
+
+    c.[Id] AS CarId,
+    c.[Brand],
+    c.[Model],
+    c.[Kilometers],
+
+    u.[Id] AS UserId,
+    u.[Email],
+    u.[FirstName],
+    u.[LastName]
+
+FROM [RentalCarReservation] res
+INNER JOIN [RentalCars] c ON res.[CarID] = c.[Id]
+INNER JOIN [Users] u ON res.[UserID] = u.[Id]
+
+WHERE res.[Id] = @Id</value>
+    <comment>Get all rental car reservations by reservation ID</comment>
   </data>
   <data name="RentalCarReservations_SelectByUserId" xml:space="preserve">
-    <value>SELECT
-    Id,
-    UserId,
-    CarId,
-    UseFrom,
-    UseTo,
-    CreatedAt,
-    UpdatedAt
-FROM RentalCarReservation
-WHERE UserId = @UserId</value>
+    <value>SELECT 
+    res.[Id],
+    res.[UseFrom],
+    res.[UseTo],
+
+    c.[Id] AS CarId,
+    c.[Brand],
+    c.[Model],
+    c.[Kilometers],
+
+    u.[Id] AS UserId,
+    u.[Email],
+    u.[FirstName],
+    u.[LastName]
+
+FROM [RentalCarReservation] res
+INNER JOIN [RentalCars] c ON res.[CarID] = c.[Id]
+INNER JOIN [Users] u ON res.[UserID] = u.[Id]
+
+WHERE u.[Id] = @Id</value>
   </data>
   <data name="RentalCarReservations_Insert" xml:space="preserve">
     <value>INSERT INTO RentalCarReservation
