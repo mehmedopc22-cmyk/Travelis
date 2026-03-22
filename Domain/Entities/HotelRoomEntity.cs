@@ -2,7 +2,7 @@
 {
     public class HotelRoomEntity
     {
-        public Guid HotelRoomId { get; set; } = Guid.Empty;
+        public Guid Id { get; set; } = Guid.Empty;
         public Guid HotelID { get; set; } = Guid.Empty;
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; } = -1;

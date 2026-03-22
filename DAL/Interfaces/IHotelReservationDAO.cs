@@ -6,5 +6,6 @@ namespace DAL.Interfaces
     public interface IHotelReservationDAO : IBaseDAO<HotelReservationResponseDTO>
     {
         HotelReservationResponseDTO InsertHotelReservation(HotelReservationCreationDTO creationData);
+        IEnumerable<HotelReservationResponseDTO> SelectByUserId(Guid id);
     }
 }

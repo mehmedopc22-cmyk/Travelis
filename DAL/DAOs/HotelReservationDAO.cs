@@ -13,7 +13,17 @@ namespace DAL.DAOs
 
         public bool Delete(Guid id)
         {
-            return false;
+            try
+            {
+                using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+                var rowsAffected = sqlConnection.Execute(SQLQueries.HotelReservations_Delete, new { Id = id});
+
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public HotelReservationResponseDTO Insert(HotelReservationResponseDTO creationData)
@@ -70,6 +80,34 @@ namespace DAL.DAOs
                     },
                     splitOn: "HotelId,UserId,RoomId"
                 );
+
+                return reservations;
+            }
+            catch (Exception ex)
+            {
+                return Enumerable.Empty<HotelReservationResponseDTO>();
+            }
+        }
+
+        public IEnumerable<HotelReservationResponseDTO> SelectByUserId(Guid id)
+        {
+            try
+            {
+                using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+                var sql = SQLQueries.HotelReservations_SelectByUserId;
+                var reservations = sqlConnection.Query<HotelReservationResponseDTO, HotelResponseDTO, UserResponseDTO, HotelRoomResponseDTO, HotelReservationResponseDTO>(
+                     sql,
+                     (res, hotel, user, room) =>
+                     {
+                         res.Hotel = hotel;
+                         res.User = user;
+                         res.Room = room;
+                         return res;
+                     },
+                     new { UserId = id },
+                     splitOn: "HotelId,UserId,RoomId"
+                 );
 
                 return reservations;
             }

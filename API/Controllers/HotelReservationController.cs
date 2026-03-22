@@ -1,7 +1,6 @@
 ﻿using DAL.DAOs;
 using DAL.Interfaces;
 using Domain.DTOs;
-using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -44,6 +43,20 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet("/hotel/user/reservations")]
+        public ActionResult<IEnumerable<HotelReservationResponseDTO>> GetHotelReservationByUserId(Guid userId)
+        {
+            try
+            {
+                var hotelReservation = _hotelReservationDAO.SelectByUserId(id);
+                return hotelReservation != null ? Ok(hotelReservation) : NotFound();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("/hotel/reservations")]
         public ActionResult<HotelReservationResponseDTO> CreateHotelReservation([FromBody] HotelReservationCreationDTO creationData)
         {
@@ -51,6 +64,20 @@ namespace API.Controllers
             {
                 var createdHotelReservation = _hotelReservationDAO.InsertHotelReservation(creationData);
                 return createdHotelReservation != null ? Ok(createdHotelReservation) : BadRequest();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete("/hotel/reservations/{id}")]
+        public ActionResult DeleteHotelReservation(Guid id)
+        {
+            try
+            {
+                bool deleted = _hotelReservationDAO.Delete(id);
+                return deleted ? NoContent() : NotFound();
             }
             catch (Exception)
             {
