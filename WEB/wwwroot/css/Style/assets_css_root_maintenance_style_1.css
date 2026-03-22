@@ -1,0 +1,29 @@
+/* Extra polish for maintenance page */
+        .tv-maintenance-wrapper {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .tv-maintenance-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px auto;
+        }
+
+        .tv-maintenance-icon i {
+            font-size: 46px;
+            color: var(--tv-electric-sky);
+        }
+
+        .tv-countdown {
+            font-size: 1.35rem;
+            margin-top: 10px;
+            color: rgba(255,255,255,0.75);
+        }

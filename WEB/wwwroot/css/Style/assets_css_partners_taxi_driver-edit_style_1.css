@@ -1,0 +1,111 @@
+/* Shared variables from list/add pages */
+        :root {
+            --tv-bg-dark: #0f172a; --tv-bg-darker: #020617; --tv-card-bg: rgba(30, 41, 59, 0.75);
+            --tv-yellow: #fbbf24; --tv-text-main: #f8fafc; --tv-text-muted: #94a3b8;
+            --tv-border: 1px solid rgba(255, 255, 255, 0.08); --tv-radius: 20px;
+        }
+
+        body {
+            font-family: 'Comfortaa', sans-serif;
+            background-color: var(--tv-bg-darker);
+            background-image: radial-gradient(circle at top right, #1e293b 0%, var(--tv-bg-darker) 40%, #000 100%);
+            color: var(--tv-text-main);
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+
+        /* Sidebar & Layout */
+        .tv-sidebar {
+            width: 280px; height: 100vh; position: fixed; left: 0; top: 0;
+            background: rgba(15, 23, 42, 0.95); border-right: var(--tv-border);
+            padding: 2rem 1.5rem; z-index: 1030; display: flex; flex-direction: column;
+        }
+        .tv-main-content { margin-left: 280px; padding: 2rem; }
+        .tv-brand { font-size: 1.4rem; font-weight: 700; color: white; display: flex; align-items: center; gap: 12px; margin-bottom: 2.5rem; }
+        .tv-brand i { color: var(--tv-yellow); }
+        .tv-nav-item { display: flex; align-items: center; padding: 12px 16px; color: var(--tv-text-muted); border-radius: 12px; margin-bottom: 4px; text-decoration: none; transition: 0.2s; }
+        .tv-nav-item:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        .tv-nav-item.active { background: rgba(251, 191, 36, 0.1); color: var(--tv-yellow); }
+        .tv-submenu { padding-left: 1rem; margin-left: 1.2rem; border-left: 1px solid rgba(255,255,255,0.1); margin-top: 0.25rem; margin-bottom: 0.5rem; }
+        .tv-submenu .tv-nav-item { font-size: 0.9rem; padding: 8px 12px; }
+
+        /* Profile Header */
+        .profile-header-card {
+            background: var(--tv-card-bg);
+            border: var(--tv-border);
+            border-radius: var(--tv-radius);
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(16px);
+        }
+        
+        .profile-avatar-xl {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--tv-yellow);
+            object-fit: cover;
+        }
+
+        .profile-info h1 { font-size: 1.8rem; font-weight: 700; margin: 0; color: #fff; }
+        .profile-badges { display: flex; gap: 10px; margin-top: 8px; }
+        .badge-pill { padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.1); }
+        .bg-active { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border-color: rgba(16, 185, 129, 0.3); }
+
+        /* Tabs */
+        .tv-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+        .tv-tab-link {
+            background: transparent;
+            border: none;
+            color: var(--tv-text-muted);
+            padding: 8px 20px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+        .tv-tab-link:hover { color: #fff; background: rgba(255,255,255,0.05); }
+        .tv-tab-link.active { background: var(--tv-yellow); color: #000; }
+
+        /* Tab Content */
+        .tab-pane { display: none; }
+        .tab-pane.show { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .content-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tv-input {
+            width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 10px 15px; border-radius: 12px;
+        }
+        .tv-label { font-size: 0.8rem; text-transform: uppercase; color: var(--tv-text-muted); font-weight: 700; margin-bottom: 6px; }
+
+        /* Vehicle Card */
+        .vehicle-display {
+            display: flex; align-items: center; gap: 20px;
+            background: rgba(255,255,255,0.03); padding: 20px; border-radius: 16px; border: 1px dashed rgba(255,255,255,0.1);
+        }
+        .vehicle-img { width: 100px; height: auto; opacity: 0.8; }
+
+        /* Danger Zone */
+        .danger-zone { border: 1px solid rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.05); padding: 1.5rem; border-radius: 20px; }
+        .btn-danger { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); padding: 10px 24px; border-radius: 50px; font-weight: 600; }
+        .btn-danger:hover { background: rgba(239, 68, 68, 0.25); color: #fff; }
+
+        @media (max-width: 991px) {
+            .tv-sidebar { transform: translateX(-100%); }
+            .tv-main-content { margin-left: 0; }
+            .profile-header-card { flex-direction: column; text-align: center; }
+        }

@@ -1,0 +1,120 @@
+﻿@model WEB.Models.HotelCardViewModel
+
+<article class="tv-hotel-list-card tv-hotel-card">
+    <div class="row g-0">
+
+        <!-- LEFT: placeholder instead of image -->
+        <div class="col-md-5">
+            <div class="tv-hotel-media tv-hotel-card-media d-flex align-items-center justify-content-center"
+                 style="background: linear-gradient(135deg, #1e293b, #0f172a); min-height: 250px;">
+
+                <div class="text-center text-white-50">
+                    <i class="fa-solid fa-hotel fa-2x mb-2"></i>
+                    <div class="small">Няма изображение</div>
+                </div>
+
+                <span class="tv-hotel-badge-tag">
+                    <i class="fa-solid fa-location-dot"></i> @Model.City
+                </span>
+
+                @if (Model.Approved)
+                {
+                    <span class="tv-hotel-badge-top">
+                        <i class="fa-solid fa-circle-check me-1"></i> Одобрен
+                    </span>
+                }
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col-md-7">
+            <div class="tv-hotel-body tv-hotel-card-body">
+
+                <div class="tv-hotel-header-line">
+                    <div>
+                        <h2 class="tv-hotel-title">@Model.Name</h2>
+
+                        <div class="tv-hotel-location">
+                            <i class="fa-solid fa-location-dot me-1"></i>
+                            @Model.FullLocation
+                        </div>
+                    </div>
+
+                    <div class="tv-hotel-rating-chip">
+                        <i class="fa-solid fa-building"></i>
+                        <span>@Model.StatusText</span>
+                    </div>
+                </div>
+
+                <!-- CONTACT -->
+                <div class="tv-hotel-amenities">
+                    @if (!string.IsNullOrWhiteSpace(Model.PhoneNumber))
+                    {
+                        <span class="tv-hotel-amenity-pill">
+                            <i class="fa-solid fa-phone"></i> @Model.PhoneNumber
+                        </span>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Email))
+                    {
+                        <span class="tv-hotel-amenity-pill">
+                            <i class="fa-solid fa-envelope"></i> @Model.Email
+                        </span>
+                    }
+                </div>
+
+                <!-- STATUS -->
+                <div class="tv-hotel-perks">
+                    <span class="tv-hotel-perk tv-hotel-perk--success">
+                        <i class="fa-solid fa-check-circle"></i> @Model.ApprovalText
+                    </span>
+
+                    @if (Model.CreatedAt.HasValue)
+                    {
+                        <span class="tv-hotel-perk tv-hotel-perk--warning">
+                            <i class="fa-solid fa-calendar-plus"></i>
+                            Създаден: @Model.CreatedAt.Value.ToString("dd.MM.yyyy")
+                        </span>
+                    }
+                </div>
+
+                <p class="tv-hotel-description">
+                    Хотел в @Model.City, @Model.Country.
+                </p>
+
+                <!-- FOOTER -->
+                <div class="tv-hotel-footer-line tv-hotel-card-footer">
+                    <div class="tv-hotel-price-block">
+                        <span class="tv-hotel-price-label">Последна актуализация</span>
+
+                        @if (Model.UpdatedAt.HasValue)
+                        {
+                            <span class="tv-hotel-price-main">
+                                @Model.UpdatedAt.Value.ToString("dd.MM.yyyy HH:mm")
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="tv-hotel-price-main">Няма</span>
+                        }
+
+                        <span class="tv-hotel-price-sub">
+                            @Model.StatusText · @Model.ApprovalText
+                        </span>
+                    </div>
+
+                    <div class="tv-hotel-actions">
+                        <a asp-controller="Hotel"
+                               asp-action="Details"
+                               asp-route-id="@Model.Id"
+                               class="tv-btn-outline-glass">
+                            Детайли <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</article>

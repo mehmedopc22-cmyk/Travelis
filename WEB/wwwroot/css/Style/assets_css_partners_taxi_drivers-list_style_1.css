@@ -1,0 +1,332 @@
+/* =========================================
+           1. CORE VARIABLES & THEME
+        ========================================= */
+        :root {
+            /* Brand Colors */
+            --tv-bg-dark: #0f172a;
+            --tv-bg-darker: #020617;
+            --tv-card-bg: rgba(30, 41, 59, 0.75);
+            
+            /* Taxi Accents */
+            --tv-yellow: #fbbf24;
+            --tv-yellow-hover: #f59e0b;
+            --tv-yellow-glow: rgba(251, 191, 36, 0.2);
+            
+            /* Status Colors */
+            --tv-success: #10b981;
+            --tv-danger: #ef4444;
+            --tv-gray: #64748b;
+            --tv-info: #3b82f6;
+            
+            /* Text */
+            --tv-text-main: #f8fafc;
+            --tv-text-muted: #94a3b8;
+            
+            /* UI Elements */
+            --tv-border: 1px solid rgba(255, 255, 255, 0.08);
+            --tv-radius: 20px;
+            --tv-radius-pill: 9999px;
+        }
+
+        /* Base Reset */
+        body {
+            font-family: 'Comfortaa', sans-serif;
+            background-color: var(--tv-bg-darker);
+            background-image: radial-gradient(circle at top right, #1e293b 0%, var(--tv-bg-darker) 40%, #000 100%);
+            color: var(--tv-text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--tv-bg-darker); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        /* =========================================
+           2. SIDEBAR STRUCTURE
+        ========================================= */
+        .tv-sidebar {
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: rgba(15, 23, 42, 0.95);
+            border-right: var(--tv-border);
+            padding: 2rem 1.5rem;
+            z-index: 1030;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tv-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 2.5rem;
+        }
+        .tv-brand i { color: var(--tv-yellow); font-size: 1.6rem; filter: drop-shadow(0 0 5px rgba(251,191,36,0.5)); }
+
+        .tv-nav-header {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #64748b;
+            margin: 1.5rem 0 0.5rem 1rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .tv-nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: var(--tv-text-muted);
+            border-radius: 12px;
+            margin-bottom: 4px;
+            font-weight: 500;
+            border: 1px solid transparent;
+        }
+
+        .tv-nav-item:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
+
+        .tv-nav-item.active {
+            background: rgba(251, 191, 36, 0.1);
+            color: var(--tv-yellow);
+            border-color: rgba(251, 191, 36, 0.2);
+            font-weight: 700;
+        }
+
+        .tv-nav-item i { width: 24px; text-align: center; margin-right: 12px; font-size: 1.1rem; }
+
+        .tv-submenu {
+            padding-left: 1rem; margin-left: 1.2rem;
+            border-left: 1px solid rgba(255,255,255,0.1);
+            margin-top: 0.25rem; margin-bottom: 0.5rem;
+        }
+        .tv-submenu .tv-nav-item { font-size: 0.9rem; padding: 8px 12px; }
+
+        /* =========================================
+           3. MAIN CONTENT
+        ========================================= */
+        .tv-main-content {
+            margin-left: 280px;
+            padding: 2rem;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .header-title h1 { font-size: 1.8rem; font-weight: 700; margin: 0; color: #fff; }
+        .header-breadcrumbs { font-size: 0.85rem; color: var(--tv-text-muted); }
+        .header-breadcrumbs span { color: var(--tv-yellow); }
+
+        /* Buttons */
+        .btn-action {
+            background: var(--tv-yellow);
+            color: #000;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(251,191,36,0.3);
+            transition: 0.2s;
+        }
+        .btn-action:hover { background: var(--tv-yellow-hover); transform: translateY(-2px); }
+
+        .btn-glass {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--tv-text-muted);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .btn-glass:hover, .btn-glass.active { background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.3); }
+
+        /* =========================================
+           4. STATS ROW
+        ========================================= */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-box {
+            background: var(--tv-card-bg);
+            border: var(--tv-border);
+            border-radius: var(--tv-radius);
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.25rem;
+        }
+        .bg-yellow-soft { background: rgba(251, 191, 36, 0.1); color: var(--tv-yellow); }
+        .bg-green-soft { background: rgba(16, 185, 129, 0.1); color: var(--tv-success); }
+        .bg-red-soft { background: rgba(239, 68, 68, 0.1); color: var(--tv-danger); }
+        .bg-gray-soft { background: rgba(148, 163, 184, 0.1); color: var(--tv-text-muted); }
+
+        .stat-content h3 { font-size: 1.5rem; font-weight: 700; margin: 0; color: #fff; line-height: 1; }
+        .stat-content p { font-size: 0.8rem; color: var(--tv-text-muted); margin: 0; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* =========================================
+           5. FILTERS & TOOLBAR
+        ========================================= */
+        .toolbar-panel {
+            background: var(--tv-card-bg);
+            backdrop-filter: blur(16px);
+            border: var(--tv-border);
+            border-radius: var(--tv-radius);
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-wrapper { position: relative; flex-grow: 1; max-width: 400px; }
+        .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--tv-text-muted); }
+        
+        .tv-input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            padding: 10px 15px 10px 40px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+        .tv-input:focus { outline: none; border-color: var(--tv-yellow); }
+
+        .view-switcher { display: flex; background: rgba(15, 23, 42, 0.6); border-radius: 50px; padding: 4px; border: 1px solid rgba(255,255,255,0.1); }
+        .view-btn { border: none; background: transparent; color: var(--tv-text-muted); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .view-btn.active { background: rgba(255,255,255,0.1); color: #fff; }
+
+        /* =========================================
+           6. GRID VIEW (CARDS)
+        ========================================= */
+        .drivers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .driver-card {
+            background: var(--tv-card-bg);
+            border: var(--tv-border);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        .driver-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            border-color: rgba(251, 191, 36, 0.3);
+        }
+
+        .card-header-bg {
+            height: 80px;
+            background: linear-gradient(135deg, rgba(30,41,59,1), rgba(15,23,42,1));
+            position: relative;
+        }
+        
+        .status-dot-large {
+            position: absolute; top: 16px; right: 16px;
+            padding: 4px 12px; border-radius: 50px;
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+            backdrop-filter: blur(4px);
+        }
+        .status-online { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .status-busy { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); }
+        .status-offline { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.4); }
+
+        .driver-avatar-lg {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            border: 4px solid #1e293b;
+            object-fit: cover;
+            position: absolute;
+            left: 20px;
+            bottom: -40px;
+            background: #0f172a;
+        }
+
+        .card-body { padding: 3rem 1.5rem 1.5rem; }
+
+        .driver-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 2px; color: #fff; }
+        .driver-meta { font-size: 0.85rem; color: var(--tv-text-muted); margin-bottom: 1rem; }
+
+        .kpi-row { display: flex; justify-content: space-between; margin-bottom: 1.5rem; text-align: center; background: rgba(255,255,255,0.03); border-radius: 12px; padding: 12px; }
+        .kpi-item { flex: 1; border-right: 1px solid rgba(255,255,255,0.1); }
+        .kpi-item:last-child { border: none; }
+        .kpi-val { font-weight: 700; color: #fff; display: block; font-size: 1rem; }
+        .kpi-lbl { font-size: 0.7rem; color: var(--tv-text-muted); text-transform: uppercase; }
+
+        .card-actions { display: flex; gap: 8px; }
+        .btn-card { flex: 1; padding: 8px; border-radius: 50px; font-size: 0.85rem; text-align: center; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #fff; transition: 0.2s; }
+        .btn-card:hover { background: rgba(255,255,255,0.1); }
+        .btn-card.primary { background: var(--tv-yellow); color: #000; border-color: var(--tv-yellow); font-weight: 700; }
+        .btn-card.primary:hover { background: var(--tv-yellow-hover); }
+
+        /* =========================================
+           7. LIST VIEW (TABLE) - Hidden by default
+        ========================================= */
+        .drivers-table-container { display: none; background: var(--tv-card-bg); border: var(--tv-border); border-radius: var(--tv-radius); overflow: hidden; }
+        
+        .tv-table { width: 100%; border-collapse: collapse; }
+        .tv-table th { background: rgba(15, 23, 42, 0.4); padding: 1rem 1.5rem; text-align: left; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--tv-text-muted); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .tv-table td { padding: 1rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #e2e8f0; vertical-align: middle; font-size: 0.9rem; }
+        .tv-table tr:hover td { background: rgba(255,255,255,0.02); }
+        
+        .table-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 10px; }
+        
+        /* Show table if .view-list class is on container */
+        .view-mode-list .drivers-grid { display: none; }
+        .view-mode-list .drivers-table-container { display: block; }
+
+        /* =========================================
+           8. PAGINATION
+        ========================================= */
+        .pagination-container { margin-top: 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .page-info { color: var(--tv-text-muted); font-size: 0.9rem; }
+        .pagination { display: flex; gap: 5px; }
+        .page-btn { width: 36px; height: 36px; border-radius: 50%; background: transparent; border: 1px solid rgba(255,255,255,0.1); color: var(--tv-text-muted); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; }
+        .page-btn:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        .page-btn.active { background: var(--tv-yellow); color: #000; border-color: var(--tv-yellow); font-weight: 700; }
+
+        @media (max-width: 991px) {
+            .tv-sidebar { transform: translateX(-100%); }
+            .tv-sidebar.show { transform: translateX(0); }
+            .tv-main-content { margin-left: 0; }
+        }

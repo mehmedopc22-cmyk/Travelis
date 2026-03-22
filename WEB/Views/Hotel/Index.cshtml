@@ -1,0 +1,275 @@
+﻿<div class="container">
+
+    <!-- HERO SECTION (Compact for Grid) -->
+    <section class="tv-hero-section pt-0 pb-5">
+        <div class="tv-hotels-hero">
+            <div class="tv-hotels-hero-inner row align-items-center g-4">
+                <div class="col-lg-7">
+                    <span class="tv-hotels-hero-badge mb-2">
+                        <i class="fa-solid fa-map-location-dot"></i> София · 12-15 Дек
+                    </span>
+                    <h1 class="tv-hotels-hero-title mb-2">Хотели в София</h1>
+                    <p class="tv-hotels-hero-sub mb-0">@Model?.Count ?? 0 намерени обекта.</p>
+                </div>
+                <div class="col-lg-5 text-lg-end">
+                    <div class="d-inline-flex gap-2">
+                        <button class="tv-btn-primary"><i class="fa-solid fa-pen-to-square me-2"></i> Промени</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN LAYOUT: FILTERS LEFT, GRID RIGHT -->
+    <div class="row g-4 g-xl-5 align-items-start">
+
+        <!-- LEFT: FILTERS SIDEBAR -->
+        <aside class="col-12 col-xl-4 col-xxl-3">
+
+            <!-- Mobile filter button -->
+            <div class="d-flex d-xl-none justify-content-between align-items-center mb-3">
+                <button class="tv-mobile-filter-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#tvFiltersOffcanvas">
+                    <i class="fa-solid fa-sliders"></i> Филтри
+                </button>
+                <span class="tv-results-count small">
+                    @(Model?.Count ?? 0) обекта
+                </span>
+            </div>
+
+            <!-- Desktop filter panel -->
+            <div class="d-none d-xl-block tv-filter-shell sticky-xl-top" style="top: 100px;">
+                <div class="tv-filter-panel">
+
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="tv-filter-title-main">Филтри за хотели</div>
+                            <div class="tv-filter-sub">Избери тип, цена, удобства и рейтинг.</div>
+                        </div>
+                        <button class="btn btn-link p-0 tv-filter-sub">Изчисти всички</button>
+                    </div>
+
+                    <!-- Тип обект -->
+                    <div class="tv-filter-section">
+                        <div class="tv-filter-label">Тип обект</div>
+                        <div class="tv-filter-meta mb-1">Можеш да избираш повече от един.</div>
+
+                        <div class="form-check small">
+                            <input class="form-check-input" type="checkbox" id="typeAll" checked>
+                            <label class="form-check-label" for="typeAll">Всички типове</label>
+                        </div>
+                        <div class="form-check small">
+                            <input class="form-check-input" type="checkbox" id="typeHotel" checked>
+                            <label class="form-check-label" for="typeHotel">Хотел</label>
+                        </div>
+                        <div class="form-check small">
+                            <input class="form-check-input" type="checkbox" id="typeApartment">
+                            <label class="form-check-label" for="typeApartment">Апартамент</label>
+                        </div>
+                        <div class="form-check small">
+                            <input class="form-check-input" type="checkbox" id="typeGuest">
+                            <label class="form-check-label" for="typeGuest">Къща за гости</label>
+                        </div>
+                        <div class="form-check small">
+                            <input class="form-check-input" type="checkbox" id="typeSpa">
+                            <label class="form-check-label" for="typeSpa">СПА комплекс</label>
+                        </div>
+                    </div>
+
+                    <!-- Цена -->
+                    <div class="tv-filter-section">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <div class="tv-filter-label mb-0">Цена за нощувка</div>
+                            <span class="tv-filter-range-value">50 – 600 лв</span>
+                        </div>
+                        <input type="range" class="form-range tv-input-range" min="50" max="600" step="10">
+                        <div class="d-flex justify-content-between tv-filter-meta mt-1">
+                            <span>50 лв</span>
+                            <span>600+ лв</span>
+                        </div>
+                    </div>
+
+                    <!-- Популярни филтри -->
+                    <div class="tv-filter-section">
+                        <div class="tv-filter-label">Популярни филтри</div>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="tv-chip-toggle active" type="button">
+                                <i class="fa-solid fa-square-parking"></i> Безплатен паркинг
+                            </button>
+                            <button class="tv-chip-toggle" type="button">
+                                <i class="fa-solid fa-mug-hot"></i> Закуска включена
+                            </button>
+                            <button class="tv-chip-toggle" type="button">
+                                <i class="fa-solid fa-suitcase-rolling"></i> До метро
+                            </button>
+                            <button class="tv-chip-toggle" type="button">
+                                <i class="fa-solid fa-person-swimming"></i> Басейн
+                            </button>
+                            <button class="tv-chip-toggle" type="button">
+                                <i class="fa-solid fa-dog"></i> Pet-friendly
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Рейтинг на гости -->
+                    <div class="tv-filter-section">
+                        <div class="tv-filter-label">Рейтинг на гости</div>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="tv-chip-toggle" type="button">7+</button>
+                            <button class="tv-chip-toggle" type="button">8+</button>
+                            <button class="tv-chip-toggle active" type="button">9+</button>
+                            <button class="tv-chip-toggle" type="button">9.5+</button>
+                        </div>
+                    </div>
+
+                    <!-- Звезди -->
+                    <div class="tv-filter-section">
+                        <div class="tv-filter-label">Категория (звезди)</div>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="tv-chip-toggle" type="button">2★</button>
+                            <button class="tv-chip-toggle" type="button">3★</button>
+                            <button class="tv-chip-toggle active" type="button">4★</button>
+                            <button class="tv-chip-toggle" type="button">5★</button>
+                        </div>
+                    </div>
+
+                    <!-- Удобства -->
+                    <div class="tv-filter-section">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <div class="tv-filter-label mb-0">Удобства</div>
+                            <a href="#" class="tv-filter-link-more">
+                                Виж още <i class="fa-solid fa-angle-down"></i>
+                            </a>
+                        </div>
+                        <div class="form-check small">
+                            <input class="form-check-input" type="checkbox" id="amenWifi" checked>
+                            <label class="form-check-label" for="amenWifi">Wi-Fi</label>
+                        </div>
+                        <div class="form-check small">
+                            <input class="form-check-input" type="checkbox" id="amenSpa">
+                            <label class="form-check-label" for="amenSpa">СПА и уелнес</label>
+                        </div>
+                        <div class="form-check small">
+                            <input class="form-check-input" type="checkbox" id="amenParking">
+                            <label class="form-check-label" for="amenParking">Паркинг на място</label>
+                        </div>
+                        <div class="form-check small">
+                            <input class="form-check-input" type="checkbox" id="amenShuttle">
+                            <label class="form-check-label" for="amenShuttle">Трансфер до летище</label>
+                        </div>
+                        <div class="form-check small">
+                            <input class="form-check-input" type="checkbox" id="amenFamily">
+                            <label class="form-check-label" for="amenFamily">Семейни стаи</label>
+                        </div>
+                    </div>
+
+                    <!-- Дистанция -->
+                    <div class="tv-filter-section">
+                        <div class="tv-filter-label">Разстояние от центъра</div>
+                        <div class="form-check small">
+                            <input class="form-check-input" type="radio" name="dist" id="dist1" checked>
+                            <label class="form-check-label" for="dist1">До 500 м</label>
+                        </div>
+                        <div class="form-check small">
+                            <input class="form-check-input" type="radio" name="dist" id="dist2">
+                            <label class="form-check-label" for="dist2">До 1 км</label>
+                        </div>
+                        <div class="form-check small">
+                            <input class="form-check-input" type="radio" name="dist" id="dist3">
+                            <label class="form-check-label" for="dist3">До 3 км</label>
+                        </div>
+                    </div>
+
+                    <div class="tv-filter-section pt-3">
+                        <div class="d-flex tv-filter-footer-btns">
+                            <button class="tv-btn-primary flex-grow-1" type="button">
+                                Приложи филтри
+                            </button>
+                            <button class="tv-btn-glass d-none d-xxl-inline-flex" type="button">
+                                <i class="fa-solid fa-robot"></i> AI филтър
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OFFCANVAS (mobile / tablet) -->
+            <div class="offcanvas offcanvas-end tv-offcanvas-filters d-xl-none" tabindex="-1" id="tvFiltersOffcanvas">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title text-white">Филтри</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Затвори"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <!-- Same content structure for mobile -->
+                    <div class="tv-filter-panel">
+                        <p class="tv-filter-sub mb-0">
+                            Тук се зареждат филтрите за мобилна версия (огледално на десктоп).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- RIGHT: HOTEL GRID -->
+        <div class="col-12 col-xl-8 col-xxl-9">
+
+            <!-- TOOLBAR -->
+            <div class="tv-grid-toolbar">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="tv-view-switcher">
+                        <a href="hotel_list.html" class="tv-view-btn" aria-label="List View">
+                            <i class="fa-solid fa-list"></i>
+                        </a>
+                        <button class="tv-view-btn active" aria-label="Grid View">
+                            <i class="fa-solid fa-border-all"></i>
+                        </button>
+                    </div>
+                    <span class="text-white-50 small">
+                        Показани 1-@(Model?.Count ?? 0) от @(Model?.Count ?? 0)
+                    </span>
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+                    <label class="text-white-50 small me-1">Сортирай:</label>
+                    <select class="form-select form-select-sm bg-dark text-white border-secondary" style="width: auto; border-radius: 20px;">
+                        <option>Препоръчани</option>
+                        <option>Цена (Ниска &rarr; Висока)</option>
+                        <option>Рейтинг</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- HOTEL CARDS STACK -->
+            <div class="vstack gap-3 tv-hotels-results">
+                @if (Model != null)
+                {
+                    foreach (var hotel in Model)
+                    {
+                        <partial name="_HotelCardPartial" model="hotel" />
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-info rounded-4">
+                        Няма намерени хотели.
+                    </div>
+                }
+            </div>
+            <!-- PAGINATION -->
+            <nav class="tv-pagination" aria-label="Пагинация">
+                <a href="#" class="tv-page-link" aria-label="Предишна">
+                    <i class="fa-solid fa-angle-left"></i>
+                </a>
+                <a href="#" class="tv-page-link active">1</a>
+                <a href="#" class="tv-page-link">2</a>
+                <a href="#" class="tv-page-link">3</a>
+                <span class="tv-page-link disabled" aria-disabled="true">…</span>
+                <a href="#" class="tv-page-link">6</a>
+                <a href="#" class="tv-page-link" aria-label="Следваща">
+                    <i class="fa-solid fa-angle-right"></i>
+                </a>
+            </nav>
+
+        </div>
+    </div>
+
+</div>

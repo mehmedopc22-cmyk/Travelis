@@ -1,0 +1,51 @@
+.tv-delete-card {
+            background: rgba(15,23,42,.92);
+            border: 1px solid rgba(220,38,38,.4);
+            border-radius: 18px;
+            padding: 1.8rem;
+        }
+
+        .tv-delete-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #f87171;
+        }
+
+        .tv-delete-desc {
+            color: rgba(248,113,113,.85);
+            font-size: .95rem;
+        }
+
+        .tv-delete-list li {
+            margin-bottom: .6rem;
+            color: rgba(255,255,255,.85);
+        }
+
+        .tv-delete-list i {
+            color: #ef4444;
+        }
+
+        .tv-checkbox label {
+            color: #e5e7eb;
+        }
+
+        .tv-delete-btn {
+            background: rgba(220,38,38,.85);
+            border: 1px solid rgba(220,38,38,.6);
+            color: #fff;
+            padding: .55rem 1.3rem;
+            border-radius: 12px;
+            transition: .2s;
+        }
+
+        .tv-delete-btn:hover {
+            background: #b91c1c;
+        }
+
+        .tv-cancel-btn {
+            background: rgba(255,255,255,.1);
+            border: 1px solid rgba(255,255,255,.15);
+            color: #cbd5e1;
+            padding: .55rem 1.3rem;
+            border-radius: 12px;
+        }

@@ -1,0 +1,955 @@
+/* =========================================
+   TRAVELIS UI KIT - COMPONENTS
+========================================= */
+
+/* NAVBAR */
+.tv-navbar {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    background: transparent;
+}
+
+.tv-navbar-shell {
+    background: rgb(15 23 42 / 85%);
+    backdrop-filter: blur(18px);
+    border-radius: var(--tv-radius-pill);
+    border: 1px solid rgb(148 163 184 / 55%);
+    padding: 8px 18px;
+    box-shadow: 0 18px 45px rgb(15 23 42 / 60%);
+}
+
+.tv-navbar-toggler {
+    border: none;
+    color: #e5e7eb;
+    font-size: 1rem;
+}
+
+.tv-navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.tv-brand-pill {
+    background: linear-gradient(135deg, #38bdf8, #2563eb);
+    color: #fff;
+    padding: 8px 22px;
+    border-radius: var(--tv-radius-pill);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.98rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 25px rgb(56 189 248 / 35%);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.tv-brand-pill i {
+    font-size: 1rem;
+}
+
+.tv-brand-pill:hover {
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 14px 32px rgb(56 189 248 / 55%);
+}
+
+/* Navbar links */
+.tv-nav-link {
+    color: #e2e8f0 !important;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 18px !important;
+    border-radius: var(--tv-radius-pill);
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.tv-nav-link:hover,
+.tv-nav-link.active {
+    color: #e0f2fe !important;
+    background: rgb(15 23 42 / 60%);
+}
+
+/* Login button */
+.tv-btn-login {
+    border: 1px solid rgb(148 163 184 / 50%);
+    background: rgb(15 23 42 / 50%);
+    color: #e5e7eb;
+    font-weight: 600;
+    padding: 8px 22px;
+    border-radius: var(--tv-radius-pill);
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.25s ease;
+}
+
+.tv-btn-login:hover {
+    background: #e5e7eb;
+    color: #0f172a;
+    border-color: transparent;
+}
+
+/* HERO */
+.tv-hero-section {
+    padding-top: 120px;
+    padding-bottom: 40px;
+}
+
+.tv-hero-shell {
+    position: relative;
+    border-radius: var(--tv-radius-hero);
+    overflow: hidden;
+    padding: 48px 40px;
+    background:
+        radial-gradient(circle at top left, rgb(56 189 248 / 18%), transparent 60%),
+        radial-gradient(circle at bottom right, rgb(124 58 237 / 18%), transparent 60%),
+        linear-gradient(135deg, #020617 0%, #0b1120 40%, #111827 100%),
+        url("https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1600&q=80");
+    background-size: cover;
+    background-blend-mode: overlay, overlay, normal, soft-light;
+    box-shadow: var(--tv-shadow-strong);
+}
+
+/* Hero orbs */
+.tv-hero-orb {
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(70px);
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 0;
+    animation: tv-orbFloat 12s ease-in-out infinite;
+}
+
+.tv-hero-orb.orb-1 {
+    width: 260px;
+    height: 260px;
+    top: -80px;
+    left: -40px;
+    background: radial-gradient(circle, #38bdf8, transparent);
+}
+
+.tv-hero-orb.orb-2 {
+    width: 220px;
+    height: 220px;
+    bottom: -90px;
+    right: 30px;
+    background: radial-gradient(circle, #7c3aed, transparent);
+    animation-delay: 2s;
+}
+
+.tv-hero-orb.orb-3 {
+    width: 200px;
+    height: 200px;
+    top: 30%;
+    right: 45%;
+    background: radial-gradient(circle, #22c55e, transparent);
+    animation-delay: 4s;
+}
+
+@keyframes tv-orbFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Hero copy */
+.tv-hero-copy {
+    position: relative;
+    z-index: 1;
+    color: #e5e7eb;
+}
+
+.tv-hero-title {
+    font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+}
+
+.tv-hero-desc {
+    font-size: 1.05rem;
+    max-width: 520px;
+    color: #cbd5f5;
+}
+
+.tv-hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.tv-hero-chip {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding: 6px 12px;
+    border-radius: var(--tv-radius-pill);
+    border: 1px solid rgb(148 163 184 / 65%);
+    color: #e5e7eb;
+    background: rgb(15 23 42 / 45%);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tv-hero-chip i {
+    font-size: 0.85rem;
+    color: #38bdf8;
+}
+
+.tv-hero-subnote {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgb(148 163 184 / 90%);
+}
+
+.tv-hero-subnote i {
+    color: #22c55e;
+    margin-right: 6px;
+}
+
+/* Booking card */
+.tv-booking-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background: rgb(15 23 42 / 90%);
+    backdrop-filter: blur(26px);
+    border-radius: 28px;
+    padding: 20px 18px;
+    border: 1px solid rgb(148 163 184 / 60%);
+    box-shadow: 0 22px 55px rgb(15 23 42 / 90%);
+}
+
+/* Booking tabs */
+.tv-booking-tabs {
+    background: rgb(15 23 42 / 80%);
+    border-radius: var(--tv-radius-pill);
+    padding: 4px;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.tv-booking-tabs .nav-link {
+    color: #94a3b8;
+    background: transparent;
+    border-radius: var(--tv-radius-pill);
+    padding: 8px 16px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    border: none;
+}
+
+.tv-booking-tabs .nav-link:hover {
+    color: #e2e8f0;
+}
+
+.tv-booking-tabs .nav-link.active {
+    background: linear-gradient(135deg, #38bdf8, #2563eb);
+    color: #0b1120;
+    box-shadow: 0 6px 18px rgb(37 99 235 / 55%);
+}
+
+/* Inputs */
+.tv-form-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #94a3b8;
+    font-weight: 700;
+    margin-bottom: 6px;
+    margin-left: 4px;
+}
+
+.tv-input-group {
+    position: relative;
+}
+
+.tv-input {
+    width: 100%;
+    height: 48px;
+    border-radius: var(--tv-radius-pill);
+    border: 1px solid rgb(148 163 184 / 70%);
+    background: rgb(15 23 42 / 85%);
+    padding: 0 16px 0 42px;
+    color: #e5e7eb;
+    font-size: 0.9rem;
+    font-weight: 500;
+    outline: none;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.tv-input::placeholder {
+    color: rgb(148 163 184 / 70%);
+}
+
+.tv-input:focus {
+    border-color: #38bdf8;
+    background: rgb(15 23 42 / 98%);
+    box-shadow: 0 0 0 1px rgb(56 189 248 / 80%), 0 0 0 8px rgb(56 189 248 / 16%);
+}
+
+.tv-input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: color 0.18s ease;
+}
+
+.tv-input:focus + .tv-input-icon,
+.tv-input:focus ~ .tv-input-icon {
+    color: #38bdf8;
+}
+
+/* Primary gradient button */
+.tv-btn-primary {
+    border-radius: var(--tv-radius-pill);
+    border: none;
+    background-image: linear-gradient(135deg, var(--tv-electric-sky), var(--tv-royal-blue));
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    padding: 0.85rem 1.7rem;
+    box-shadow: 0 12px 30px rgb(14 165 233 / 45%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    transition: all 0.18s ease;
+}
+
+.tv-btn-primary:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+    box-shadow: 0 16px 36px rgb(14 165 233 / 60%);
+    color: #f9fafb;
+}
+
+.tv-btn-primary:active {
+    transform: scale(0.97);
+    box-shadow: 0 5px 18px rgb(14 165 233 / 50%);
+}
+
+/* Glass button */
+.tv-btn-glass {
+    border-radius: var(--tv-radius-pill);
+    border: 1px solid rgb(148 163 184 / 60%);
+    background: rgb(15 23 42 / 85%);
+    color: var(--tv-soft-text);
+    font-weight: 500;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.18s ease;
+}
+
+.tv-btn-glass:hover {
+    background: rgb(15 23 42 / 98%);
+    border-color: var(--tv-electric-sky);
+    color: #e5f2ff;
+    box-shadow: 0 0 18px rgb(15 23 42 / 90%);
+}
+
+/* Outline button in cards */
+.tv-btn-outline {
+    border-radius: var(--tv-radius-pill);
+    border-width: 1px;
+    font-size: 0.82rem;
+    padding: 6px 18px;
+    color: #bfdbfe;
+    border: 1px solid rgb(129 140 248 / 80%);
+    background: rgb(15 23 42 / 80%);
+    font-weight: 600;
+    transition: all 0.18s ease;
+}
+
+.tv-btn-outline:hover {
+    color: #0b1120;
+    background: linear-gradient(135deg, #38bdf8, #2563eb);
+    border-color: transparent;
+}
+
+/* Section header */
+.tv-section-header {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tv-section-badge {
+    font-size: 0.75rem;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.tv-section-title-main {
+    color: #e5e7eb;
+    font-weight: 700;
+}
+
+.tv-section-link {
+    color: #bfdbfe;
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.tv-section-link:hover {
+    color: #e0f2fe;
+}
+
+/* Hotel cards */
+.tv-hotel-card {
+    background: rgb(15 23 42 / 96%);
+    border-radius: var(--tv-radius-card);
+    overflow: hidden;
+    border: 1px solid rgb(30 64 175 / 60%);
+    box-shadow: 0 18px 40px rgb(15 23 42 / 90%);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.tv-hotel-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 26px 70px rgb(15 23 42 / 100%);
+    border-color: rgb(56 189 248 / 90%);
+}
+
+.tv-hotel-media {
+    position: relative;
+}
+
+.tv-hotel-img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.tv-hotel-card:hover .tv-hotel-img {
+    transform: scale(1.06);
+}
+
+.tv-badge-rating {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgb(15 23 42 / 90%);
+    backdrop-filter: blur(10px);
+    padding: 6px 12px;
+    border-radius: var(--tv-radius-pill);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #e5e7eb;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid rgb(148 163 184 / 70%);
+}
+
+.tv-badge-rating i {
+    color: #fbbf24;
+}
+
+.tv-badge-amenity {
+    font-size: 0.75rem;
+    background: rgb(15 23 42 / 90%);
+    border: 1px solid rgb(148 163 184 / 70%);
+    color: #cbd5f5;
+    padding: 5px 10px;
+    border-radius: var(--tv-radius-pill);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tv-badge-amenity i {
+    font-size: 0.8rem;
+}
+
+.tv-hotel-body {
+    padding: 1.2rem 1.3rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    height: 100%;
+}
+
+.tv-hotel-title {
+    color: #e5e7eb;
+    font-weight: 700;
+}
+
+.tv-hotel-location,
+.tv-hotel-sub {
+    color: #9ca3af;
+    font-size: 0.85rem;
+    margin-bottom: 0.15rem;
+}
+
+.tv-hotel-highlight {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.tv-text-success {
+    color: #4ade80 !important;
+}
+
+.tv-hotel-footer {
+    margin-top: auto;
+    padding-top: 0.7rem;
+    border-top: 1px solid rgb(31 41 55 / 70%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.tv-price-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #9ca3af;
+    display: block;
+}
+
+.tv-price-value {
+    color: #e5e7eb;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+/* Transport widget */
+.tv-transport-widget {
+    background: rgb(15 23 42 / 96%);
+    border-radius: 24px;
+    border: 1px solid rgb(55 65 81 / 90%);
+    padding: 22px 20px 22px 22px;
+    box-shadow: 0 22px 60px rgb(15 23 42 / 95%);
+}
+
+.tv-transport-title {
+    color: #e5e7eb;
+    font-weight: 700;
+}
+
+.tv-badge-live {
+    background: radial-gradient(circle at top left, #f97316, #ef4444);
+    border-radius: var(--tv-radius-pill);
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* Timeline */
+.tv-timeline {
+    margin-top: 18px;
+}
+
+.tv-timeline-item {
+    position: relative;
+    padding-left: 32px;
+    padding-bottom: 20px;
+}
+
+.tv-timeline-item::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 0;
+    bottom: 0;
+    border-left: 1px dashed rgb(148 163 184 / 60%);
+}
+
+.tv-timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.tv-timeline-dot {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    background: #0b1120;
+    border: 3px solid #22c55e;
+    box-shadow: 0 0 0 4px rgb(34 197 94 / 20%);
+}
+
+.tv-timeline-dot-muted {
+    border-color: #64748b;
+    box-shadow: 0 0 0 4px rgb(100 116 139 / 18%);
+}
+
+.tv-timeline-title {
+    color: #e5e7eb;
+    font-weight: 600;
+}
+
+.tv-timeline-time {
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.tv-timeline-sub {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    font-weight: 600;
+}
+
+/* AI banner */
+.tv-ai-banner {
+    background: linear-gradient(135deg, #38bdf8 0%, #6366f1 80%);
+    border-radius: 22px;
+    padding: 18px 18px 22px;
+    color: white;
+    margin-top: 22px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgb(37 99 235 / 90%);
+}
+
+.tv-ai-bg-icon {
+    position: absolute;
+    font-size: 4.5rem;
+    right: -18px;
+    bottom: -16px;
+    opacity: 0.22;
+    transform: rotate(-15deg);
+}
+
+.tv-ai-btn {
+    border-radius: var(--tv-radius-pill);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 14px;
+}
+
+/* Stays cards */
+.tv-stay-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.4rem;
+    background: rgb(15 23 42 / 96%);
+    border: 1px solid rgb(148 163 184 / 55%);
+    box-shadow: 0 22px 60px rgb(15 23 42 / 90%);
+    display: flex;
+    flex-direction: column;
+}
+
+.tv-stay-media {
+    position: relative;
+    overflow: hidden;
+}
+
+.tv-stay-media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgb(15 23 42 / 95%) 0%,
+        rgb(15 23 42 / 20%) 40%,
+        transparent 100%
+    );
+    z-index: 1;
+}
+
+.tv-stay-img {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.06);
+    transition: transform 0.4s ease;
+}
+
+.tv-stay-card:hover .tv-stay-img {
+    transform: scale(1.12);
+}
+
+.tv-stay-badge {
+    position: absolute;
+    z-index: 2;
+    top: 0.7rem;
+    right: 0.8rem;
+}
+
+/* Tag glass */
+.tv-tag-glass {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--tv-radius-pill);
+    border: 1px solid rgb(148 163 184 / 55%);
+    background: radial-gradient(circle at 0 0,
+        rgb(56 189 248 / 18%),
+        rgb(15 23 42 / 95%));
+    font-size: 0.75rem;
+    color: var(--tv-soft-text);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.tv-stay-content {
+    padding: 0.9rem 0.9rem 1rem;
+}
+
+.tv-stay-meta-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin-bottom: 0.4rem;
+}
+
+.tv-stay-location {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #e5f2ff;
+}
+
+.tv-stay-text {
+    font-size: 0.78rem;
+    color: var(--tv-muted-text);
+    margin-bottom: 0.7rem;
+}
+
+.tv-stay-rating {
+    font-size: 0.8rem;
+    color: var(--tv-soft-text);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.tv-stay-rating i {
+    color: #facc15;
+}
+
+.tv-stay-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    color: rgb(148 163 184 / 95%);
+}
+
+.tv-stay-price {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.tv-stay-price strong {
+    font-size: 0.95rem;
+    color: #e5f2ff;
+}
+
+.tv-stay-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.tv-stay-tag {
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid rgb(148 163 184 / 60%);
+    font-size: 0.68rem;
+    color: rgb(148 163 184 / 98%);
+    background: rgb(15 23 42 / 96%);
+}
+
+/* Transport strip */
+.tv-transport-shell {
+    margin-top: 2rem;
+    padding: 1.4rem;
+    border-radius: 1.6rem;
+    background:
+        radial-gradient(circle at 0 0,
+            rgb(56 189 248 / 16%),
+            transparent 60%),
+        rgb(15 23 42 / 96%);
+    border: 1px solid rgb(148 163 184 / 55%);
+    box-shadow: var(--tv-shadow-soft);
+}
+
+.tv-transport-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    background: rgb(34 197 94 / 12%);
+    border: 1px solid rgb(74 222 128 / 70%);
+    font-size: 0.72rem;
+    color: #bbf7d0;
+}
+
+.tv-transport-badge i {
+    color: #4ade80;
+}
+
+/* Metro line */
+.tv-transport-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.tv-metro-line {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 0.75rem;
+    font-size: 0.78rem;
+    color: var(--tv-muted-text);
+}
+
+.tv-metro-dots {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.tv-metro-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: #38bdf8;
+    position: relative;
+}
+
+.tv-metro-dot.muted {
+    background: rgb(148 163 184 / 60%);
+}
+
+.tv-metro-dot.active::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 1px solid rgb(56 189 248 / 65%);
+}
+
+.tv-metro-line-seg {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(
+        to right,
+        rgb(56 189 248 / 75%),
+        rgb(59 130 246 / 75%)
+    );
+}
+
+/* Transport stats & progress */
+.tv-transport-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.8rem;
+    color: var(--tv-muted-text);
+}
+
+.tv-transport-stat strong {
+    font-size: 0.95rem;
+    color: #e5f2ff;
+}
+
+.tv-pill-progress {
+    width: 100%;
+    height: 7px;
+    border-radius: 999px;
+    background: rgb(15 23 42 / 90%);
+    overflow: hidden;
+    position: relative;
+}
+
+.tv-pill-progress-fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--tv-electric-sky), var(--tv-royal-blue));
+}
+
+/* Avatars & rating */
+.tv-avatar-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #020617;
+}
+
+.tv-hero-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    color: #e5f2ff;
+}
+
+.tv-hero-rating i {
+    color: #fbbf24;
+}
+
+/* FAQ accordion tweak */
+.tv-faq-accordion .accordion-button {
+    box-shadow: none;
+}
+
+.tv-faq-accordion .accordion-button::after {
+    filter: invert(1);
+}
+
+.sticky-lg-top {
+    position: sticky;
+    top: 120px;
+    z-index: 1;
+}
+
+.table {
+    padding: .5rem !important;
+    border-bottom-width: var(--bs-border-width) !important;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg))) !important;
+}

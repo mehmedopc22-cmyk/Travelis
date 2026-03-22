@@ -1,0 +1,410 @@
+/* =========================================
+           TRAVELIS DESIGN SYSTEM
+           ========================================= */
+        :root {
+            /* Brand Colors */
+            --tv-bg-void: #0f172a;
+            --tv-bg-ambient: #020617;
+            --tv-electric-sky: #0ea5e9;
+            --tv-deep-ocean: #1e3a8a;
+            --tv-royal-blue: #2563eb;
+            --tv-accent-purple: #7c3aed;
+            
+            /* Text Colors */
+            --tv-text-main: #f8fafc;
+            --tv-text-soft: #bae6fd;
+            --tv-text-muted: rgb(148 163 184 / 90%); /* Slate-400 */
+            
+            /* Status Colors */
+            --tv-success: #10b981;
+            --tv-warning: #f59e0b;
+            --tv-error: #ef4444;
+            --tv-info: #3b82f6;
+
+            /* Dimensions */
+            --tv-radius-pill: 9999px;
+            --tv-radius-card: 24px;
+            --tv-radius-sm: 12px;
+            
+            /* Glassmorphism */
+            --tv-glass-bg: rgb(15 23 42 / 75%);
+            --tv-glass-border: 1px solid rgb(148 163 184 / 20%);
+            --tv-shadow-soft: 0 20px 50px rgb(0 0 0 / 50%);
+        }
+
+        body.tv-body {
+            font-family: 'Comfortaa', cursive, sans-serif;
+            background-color: var(--tv-bg-void);
+            background-image: radial-gradient(circle at top right, #1e293b 0%, var(--tv-bg-void) 40%, #000 100%);
+            color: var(--tv-text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- AMBIENT ORBS --- */
+        .tv-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.4;
+            pointer-events: none;
+            animation: floatOrb 15s infinite alternate ease-in-out;
+        }
+        .orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--tv-deep-ocean); }
+        .orb-2 { bottom: 10%; right: -10%; width: 40vw; height: 40vw; background: #7c3aed; opacity: 0.2; }
+        
+        @keyframes floatOrb {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-40px) scale(1.05); }
+        }
+
+        /* --- NAVBAR --- */
+        .tv-navbar {
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: 0.3s;
+        }
+        .tv-navbar-shell {
+            background: rgb(15 23 42 / 85%);
+            backdrop-filter: blur(20px);
+            border-radius: var(--tv-radius-pill);
+            border: 1px solid rgb(148 163 184 / 40%);
+            padding: 10px 24px;
+            box-shadow: 0 10px 40px rgb(0 0 0 / 40%);
+        }
+        .tv-brand-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .tv-nav-link {
+            color: var(--tv-text-muted) !important;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 8px 18px !important;
+            border-radius: var(--tv-radius-pill);
+            transition: 0.2s;
+        }
+        .tv-nav-link:hover {
+            color: #fff !important;
+            background: rgb(255 255 255 / 5%);
+        }
+        .tv-btn-login {
+            border: 1px solid rgb(148 163 184 / 40%);
+            background: rgb(255 255 255 / 5%);
+            color: #e5e7eb;
+            border-radius: var(--tv-radius-pill);
+            padding: 8px 24px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.2s;
+            text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .tv-btn-login:hover {
+            background: #fff;
+            color: var(--tv-bg-void);
+        }
+
+        /* --- BUTTONS --- */
+        .tv-btn-primary {
+            background: linear-gradient(135deg, var(--tv-electric-sky), var(--tv-royal-blue));
+            border: none;
+            color: white;
+            font-weight: 700;
+            padding: 14px 32px;
+            border-radius: var(--tv-radius-pill);
+            box-shadow: 0 8px 30px rgb(14 165 233 / 40%);
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 1rem;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+        .tv-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 40px rgb(14 165 233 / 60%);
+            color: white;
+        }
+        .tv-btn-primary:active { transform: translateY(0); }
+
+        .tv-btn-outline {
+            background: transparent;
+            border: 1px solid rgb(148 163 184 / 50%);
+            color: #cbd5e1;
+            padding: 8px 20px;
+            border-radius: var(--tv-radius-pill);
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+        .tv-btn-outline:hover {
+            border-color: var(--tv-electric-sky);
+            color: #fff;
+            background: rgb(56 189 248 / 10%);
+        }
+
+        /* --- STEPS WIZARD --- */
+        .tv-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+            color: var(--tv-text-muted);
+            position: relative;
+        }
+        .tv-step-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+        .tv-step-item.active {
+            opacity: 1;
+            color: #fff;
+            font-weight: 700;
+        }
+        .tv-step-number {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: rgb(255 255 255 / 10%);
+            border: 1px solid rgb(255 255 255 / 10%);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .tv-step-item.active .tv-step-number {
+            background: var(--tv-electric-sky);
+            border-color: var(--tv-electric-sky);
+            color: #0f172a;
+            box-shadow: 0 0 15px rgb(14 165 233 / 40%);
+        }
+        .tv-step-line {
+            width: 60px; height: 2px;
+            background: rgb(255 255 255 / 10%);
+            border-radius: 2px;
+        }
+        /* Mobile Steps Fix */
+        @media (max-width: 768px) {
+            .tv-step-text { display: none; }
+            .tv-step-line { width: 30px; }
+        }
+
+        /* --- ROOM CARD --- */
+        .tv-room-card-large {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .tv-room-img-wrapper {
+            flex: 0 0 280px;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .tv-room-img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            min-height: 200px;
+        }
+        .tv-room-badge {
+            position: absolute;
+            top: 10px; left: 10px;
+            background: rgb(15 23 42 / 80%);
+            backdrop-filter: blur(4px);
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid rgb(255 255 255 / 20%);
+        }
+        .tv-room-info { flex: 1; }
+        .tv-amenity-pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgb(255 255 255 / 5%);
+            border: 1px solid rgb(255 255 255 / 10%);
+            color: #bae6fd;
+            font-size: 0.8rem;
+        }
+
+        /* --- EXTRAS CARDS (Advanced) --- */
+        .tv-extra-card {
+            background: rgb(255 255 255 / 2%);
+            border: 1px solid rgb(148 163 184 / 15%);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .tv-extra-card:hover {
+            background: rgb(255 255 255 / 5%);
+            border-color: rgb(56 189 248 / 30%);
+        }
+        .tv-extra-card.selected {
+            background: linear-gradient(90deg, rgb(14 165 233 / 10%), transparent);
+            border-color: var(--tv-electric-sky);
+            box-shadow: 0 0 20px rgb(14 165 233 / 10%);
+        }
+        .tv-extra-card.selected::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: var(--tv-electric-sky);
+        }
+        
+        .tv-extra-img {
+            width: 80px; height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+        
+        /* Quantity Control */
+        .tv-qty-control {
+            display: flex;
+            align-items: center;
+            background: rgb(15 23 42 / 60%);
+            border-radius: 999px;
+            padding: 4px;
+            border: 1px solid rgb(148 163 184 / 30%);
+        }
+        .tv-qty-btn {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .tv-qty-btn:hover { background: rgb(255 255 255 / 10%); color: var(--tv-electric-sky); }
+        .tv-qty-value {
+            width: 40px; text-align: center;
+            font-weight: 700; font-size: 0.95rem;
+        }
+        
+        /* Toggle Switch */
+        .tv-switch {
+            width: 50px; height: 28px;
+            background: rgb(255 255 255 / 15%);
+            border-radius: 999px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .tv-switch::after {
+            content: '';
+            position: absolute;
+            top: 3px; left: 3px;
+            width: 22px; height: 22px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .tv-extra-checkbox:checked + .tv-switch {
+            background: var(--tv-electric-sky);
+        }
+        .tv-extra-checkbox:checked + .tv-switch::after {
+            left: 25px;
+        }
+
+        /* --- UPSELL CARD --- */
+        .tv-upsell-card {
+            background: linear-gradient(135deg, rgb(245 158 11 / 10%), rgb(15 23 42 / 80%));
+            border: 1px solid rgb(245 158 11 / 30%);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .tv-upsell-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: rgb(245 158 11 / 20%);
+            color: #fbbf24;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* --- STICKY SIDEBAR --- */
+        .tv-sticky-summary {
+            position: sticky;
+            top: 100px;
+            z-index: 90;
+        }
+        .tv-price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--tv-text-muted);
+        }
+        .tv-price-row.total {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgb(255 255 255 / 10%);
+            color: #fff;
+            font-size: 1.1rem;
+        }
+        .tv-divider {
+            height: 1px;
+            background: rgb(255 255 255 / 10%);
+            margin: 1.5rem 0;
+        }
+        .tv-promo-input {
+            width: 100%;
+            background: rgb(15 23 42 / 60%);
+            border: 1px solid rgb(148 163 184 / 30%);
+            padding: 10px 14px;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        .tv-promo-input:focus { outline: none; border-color: var(--tv-electric-sky); }
+
+        /* Animation */
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Checkbox styling */
+        .form-check-input {
+            background-color: rgb(255 255 255 / 10%);
+            border-color: rgb(148 163 184 / 40%);
+        }
+        .form-check-input:checked {
+            background-color: var(--tv-electric-sky);
+            border-color: var(--tv-electric-sky);
+        }

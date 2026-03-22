@@ -1,0 +1,338 @@
+/* --- CORE VARIABLES & RESET --- */
+        :root {
+            --tv-bg-dark: #0f172a;
+            --tv-primary: #3b82f6;
+            --tv-accent: #06b6d4;
+            --tv-glass-bg: rgba(30, 41, 59, 0.7);
+            --tv-glass-border: rgba(255, 255, 255, 0.1);
+            --tv-glass-highlight: rgba(255, 255, 255, 0.05);
+            --font-display: 'Comfortaa', cursive;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--tv-bg-dark);
+            color: #e2e8f0;
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        h1, h2, h3, h4, h5, h6, .tv-brand-pill {
+            font-family: var(--font-display);
+        }
+
+        /* --- BACKGROUND ORBS --- */
+        .tv-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: orbFloat 10s infinite alternate ease-in-out;
+        }
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--tv-primary), transparent);
+            top: -100px;
+            left: -100px;
+        }
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--tv-accent), transparent);
+            bottom: -100px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 50px); }
+        }
+
+        /* --- GLASS COMPONENTS --- */
+        .tv-glass-card {
+            background: var(--tv-glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--tv-glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* --- NAVBAR --- */
+        .tv-navbar {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--tv-glass-border);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0 !important;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .tv-brand-pill {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: white;
+            text-decoration: none;
+            gap: 10px;
+        }
+        .tv-nav-link {
+            color: rgba(255, 255, 255, 0.7) !important;
+            transition: color 0.2s;
+            font-size: 0.95rem;
+        }
+        .tv-nav-link:hover, .tv-nav-link.active {
+            color: white !important;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+        .tv-input-group {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--tv-glass-border);
+            border-radius: 20px;
+            padding: 5px 15px;
+            display: flex;
+            align-items: center;
+        }
+        .tv-input {
+            background: transparent;
+            border: none;
+            color: white;
+            width: 100%;
+            outline: none;
+            padding-left: 10px;
+        }
+        .tv-navbar-toggler {
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        /* --- SEARCH SECTION --- */
+        .tv-search-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--tv-glass-border);
+            backdrop-filter: blur(16px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: -40px; /* Overlap aesthetics */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .tv-search-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 5px;
+            display: block;
+        }
+        .tv-search-value {
+            background: transparent;
+            border: none;
+            color: white;
+            font-weight: 600;
+            width: 100%;
+            padding: 5px 0;
+            outline: none;
+        }
+        .tv-search-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        @media (min-width: 992px) {
+            .tv-search-item {
+                border-bottom: none;
+                border-right: 1px solid rgba(255, 255, 255, 0.1);
+                padding-bottom: 0;
+                margin-bottom: 0;
+                padding-right: 15px;
+            }
+            .tv-search-item:last-child {
+                border-right: none;
+            }
+        }
+
+        /* --- BUTTONS --- */
+        .tv-btn {
+            border: none;
+            border-radius: 12px;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .tv-btn-primary {
+            background: linear-gradient(135deg, var(--tv-primary), var(--tv-accent));
+            color: white;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+        }
+        .tv-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
+            color: white;
+        }
+        .tv-btn-glass {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .tv-btn-glass:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* --- HERO GRID --- */
+        .hero-main-img {
+            height: 300px;
+            border-radius: 16px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-sub-img {
+            height: 140px;
+            border-radius: 16px;
+            background-size: cover;
+            background-position: center;
+        }
+        @media(min-width: 992px) {
+            .hero-main-img { height: 450px; }
+            .hero-sub-img { height: 215px; }
+        }
+
+        /* --- AMENITIES --- */
+        .tv-amenity-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        @media(min-width: 576px) { .tv-amenity-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media(min-width: 992px) { .tv-amenity-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .tv-amenity-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+        .tv-amenity-box:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .tv-amenity-icon-lg {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--tv-accent);
+        }
+        .tv-amenity-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .tv-amenity-list li { margin-bottom: 4px; }
+
+        /* --- FILTERS --- */
+        .tv-filter-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            scrollbar-width: thin;
+        }
+        .tv-filter-chip {
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .tv-filter-chip input { display: none; }
+        .tv-filter-chip i { margin-right: 5px; }
+        .tv-filter-chip {
+            padding: 8px 16px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        .tv-filter-chip:has(input:checked) {
+            background: var(--tv-primary);
+            color: white;
+            border-color: var(--tv-primary);
+        }
+
+        /* --- GUEST DROPDOWN --- */
+        .tv-guest-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 320px;
+            background: #1e293b;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            z-index: 1050;
+            display: none;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            margin-top: 10px;
+        }
+        .tv-guest-dropdown.show { display: block; }
+        .tv-guest-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .tv-counter-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: transparent;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .tv-counter-btn:hover { background: rgba(255,255,255,0.1); }
+        .tv-counter-value { width: 20px; text-align: center; }
+
+        /* --- BADGES --- */
+        .tv-room-feature-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 4px 8px;
+            border-radius: 6px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            color: #cbd5e1;
+        }
+
+        /* --- RESPONSIVE FIXES --- */
+        @media (max-width: 991px) {
+            .tv-navbar-collapse {
+                background: rgba(15, 23, 42, 0.95);
+                padding: 20px;
+                border-radius: 16px;
+                margin-top: 10px;
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+            .tv-guest-dropdown {
+                width: 100%; /* Full width on mobile search */
+                left: 0;
+            }
+        }

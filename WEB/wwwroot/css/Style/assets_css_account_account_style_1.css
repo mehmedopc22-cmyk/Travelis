@@ -1,0 +1,195 @@
+/* Account-specific behaviour and missing helpers */
+
+        .tv-account-sidebar {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .tv-account-section {
+            display: none;
+        }
+        .tv-account-section.active {
+            display: block;
+        }
+
+        .tv-nav-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            opacity: .6;
+            padding: .75rem 1.2rem .25rem;
+        }
+
+        .tv-nav-separator {
+            height: 1px;
+            opacity: .2;
+            background: linear-gradient(90deg, transparent, rgba(148, 163, 184, .6), transparent);
+            margin: .4rem 1.2rem;
+        }
+
+        .tv-sidebar-stats {
+            font-size: 0.75rem;
+        }
+
+        .tv-sidebar-stat .label {
+            opacity: .65;
+        }
+        .tv-sidebar-stat .value {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Glass table for payments / sessions */
+        .tv-glass-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .tv-glass-table thead tr {
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        .tv-glass-table th,
+        .tv-glass-table td {
+            padding: 0.65rem 0.8rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+            vertical-align: middle;
+        }
+
+        .tv-glass-table tbody tr:hover {
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        /* Status pills used in payments & sessions */
+        .tv-status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.18rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            border: 1px solid transparent;
+        }
+        .tv-status-pill.paid {
+            color: #4ade80;
+            border-color: rgba(74, 222, 128, 0.35);
+            background: rgba(22, 101, 52, 0.25);
+        }
+        .tv-status-pill.pending {
+            color: #eab308;
+            border-color: rgba(234, 179, 8, 0.35);
+            background: rgba(120, 53, 15, 0.25);
+        }
+        .tv-status-pill.refunded {
+            color: #38bdf8;
+            border-color: rgba(56, 189, 248, 0.35);
+            background: rgba(15, 118, 110, 0.25);
+        }
+        .tv-status-pill.failed {
+            color: #fb7185;
+            border-color: rgba(248, 113, 113, 0.4);
+            background: rgba(127, 29, 29, 0.25);
+        }
+
+        /* AI badge in profile header */
+        .tv-badge-ai {
+            font-size: 0.72rem;
+            padding: 0.12rem 0.5rem;
+            border-radius: 999px;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            background: radial-gradient(circle at top left, rgba(59,130,246,0.45), transparent 55%);
+            color: #e5f0ff;
+        }
+
+        /* Small chips for preferences, tags, etc. */
+        .tv-chip-small {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.18rem 0.55rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            background: rgba(15, 23, 42, .85);
+            border: 1px solid rgba(148, 163, 184, .35);
+        }
+
+        /* Booking cards */
+        .tv-booking-item {
+            background: rgba(15, 23, 42, .92);
+            border-radius: var(--tv-radius-card, 18px);
+            border: 1px solid rgba(148, 163, 184, .3);
+            padding: 1rem 1.1rem;
+        }
+        .tv-booking-item + .tv-booking-item {
+            margin-top: 0.9rem;
+        }
+        .tv-booking-label {
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            font-size: .7rem;
+            opacity: .6;
+        }
+        .tv-booking-value {
+            display: block;
+            font-size: .85rem;
+            color: #e5e7eb;
+        }
+        .tv-booking-meta {
+            font-size: 0.78rem;
+            color: rgba(148, 163, 184, .9);
+        }
+
+        .tv-booking-empty {
+            padding: 1.75rem 1.5rem;
+            border-radius: 1.1rem;
+            background: rgba(15,23,42,.9);
+            border: 1px dashed rgba(148,163,184,.35);
+        }
+
+        /* Message preview pill (messages section) */
+        .tv-message-preview {
+            padding: .75rem .9rem;
+            border-radius: .9rem;
+            border: 1px solid rgba(148,163,184,.25);
+            background: rgba(15,23,42,.9);
+        }
+
+        /* Delete account warning */
+        .tv-delete-alert {
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            background: rgba(127,29,29,.55);
+            border: 1px solid rgba(248,113,113,.5);
+            font-size: .9rem;
+        }
+
+        /* Empty / helper states */
+        .tv-wishlist-empty {
+            padding: 1.75rem 1.5rem;
+            border-radius: 1.1rem;
+            background: rgba(15,23,42,.85);
+            border: 1px dashed rgba(148,163,184,.35);
+        }
+
+        .tv-form-note {
+            font-size: .75rem;
+            opacity: .6;
+        }
+
+        .tv-notice-gdpr {
+            font-size: .75rem;
+            opacity: .7;
+            margin-top: .5rem;
+        }
+
+        /* Rating badge used in wishlist items */
+        .tv-rating-badge {
+            background: rgba(34, 197, 94, .18);
+            color: #bbf7d0;
+            border-radius: 999px;
+            padding: 2px 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }

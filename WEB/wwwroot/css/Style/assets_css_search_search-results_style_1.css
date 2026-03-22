@@ -1,0 +1,133 @@
+body.tv-body {
+            background: var(--tv-bg-void);
+            font-family: 'Comfortaa', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Decorative orbs */
+        .tv-orb {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle at center, rgba(14, 165, 233, 0.45), transparent 70%);
+            filter: blur(120px);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .tv-orb--left { top: -120px; left: -150px; }
+        .tv-orb--right { bottom: -160px; right: -160px; }
+
+        /* Hero */
+        .tv-search-hero {
+            padding: 70px 0 40px 0;
+            position: relative;
+        }
+        .tv-search-hero-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+        }
+        .tv-search-hero-sub {
+            color: var(--tv-text-soft);
+            font-size: 1rem;
+        }
+
+        /* Search toolbar */
+        .tv-search-toolbar {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(18px);
+            padding: 22px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+        .tv-search-input {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+        }
+        .tv-search-input::placeholder { color: rgba(255,255,255,0.5); }
+
+        /* Tabs */
+        .tv-tabs {
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 25px;
+        }
+        .tv-tabs .nav-link {
+            color: var(--tv-text-soft);
+            font-weight: 600;
+            border-radius: 18px;
+            padding: 8px 18px;
+            margin-right: 10px;
+        }
+        .tv-tabs .nav-link.active {
+            background: linear-gradient(135deg, var(--tv-electric-sky), var(--tv-royal-blue));
+            color: white !important;
+        }
+
+        /* Cards general */
+        .tv-result-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 22px;
+            padding: 18px;
+            display: flex;
+            gap: 18px;
+            backdrop-filter: blur(16px);
+        }
+        .tv-result-img {
+            width: 180px;
+            height: 140px;
+            border-radius: 16px;
+            object-fit: cover;
+        }
+        .tv-result-title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .tv-result-meta { color: var(--tv-text-soft); font-size: 0.9rem; }
+        .tv-result-price { font-size: 1.3rem; font-weight: 700; color: white; }
+
+        /* No results */
+        .tv-no-results-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 22px;
+            text-align: center;
+            padding: 60px 30px;
+            backdrop-filter: blur(18px);
+        }
+        .tv-no-results-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+        }
+        .tv-no-results-sub {
+            color: var(--tv-text-soft);
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        /* Pagination */
+        .tv-pagination {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .tv-page-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            color: white;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            margin: 0 4px;
+            font-weight: 600;
+        }
+        .tv-page-link.active {
+            background: linear-gradient(135deg, var(--tv-electric-sky), var(--tv-royal-blue));
+        }

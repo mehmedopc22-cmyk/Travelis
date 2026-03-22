@@ -1,0 +1,48 @@
+.tv-security-card {
+            background: rgba(15,23,42,.92);
+            border-radius: 18px;
+            border: 1px solid rgba(148,163,184,.35);
+            padding: 1.6rem;
+        }
+
+        .tv-security-section-title {
+            font-size: 1.2rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .tv-security-description {
+            color: rgba(148,163,184,.8);
+            font-size: .9rem;
+        }
+
+        .tv-device-item {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(148,163,184,.15);
+        }
+
+        .tv-device-item:last-child {
+            border-bottom: none;
+        }
+
+        .tv-device-name {
+            font-weight: 600;
+            color: #e5e7eb;
+        }
+
+        .tv-device-meta {
+            font-size: .8rem;
+            color: rgba(148,163,184,.85);
+        }
+
+        .tv-login-entry {
+            padding: .9rem 0;
+            border-bottom: 1px solid rgba(148,163,184,.12);
+        }
+
+        .tv-security-badge {
+            padding: .25rem .6rem;
+            border-radius: 999px;
+            font-size: .75rem;
+            border: 1px solid rgba(148,163,184,.25);
+        }

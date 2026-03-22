@@ -1,0 +1,643 @@
+/* =========================================
+           1. CORE VARIABLES & THEME
+        ========================================= */
+:root {
+    /* Brand Colors */
+    --tv-bg-dark: #0f172a;
+    /* Slate 900 */
+    --tv-bg-darker: #020617;
+    /* Slate 950 */
+    --tv-card-bg: rgba(30, 41, 59, 0.85);
+    /* Glass Slate 800 */
+
+    /* Taxi Accents */
+    --tv-yellow: #fbbf24;
+    /* Amber 400 */
+    --tv-yellow-hover: #f59e0b;
+    /* Amber 500 */
+    --tv-yellow-glow: rgba(251, 191, 36, 0.3);
+
+    /* Status Colors */
+    --tv-success: #10b981;
+    /* Emerald 500 */
+    --tv-danger: #ef4444;
+    /* Red 500 */
+    --tv-gray: #64748b;
+    /* Slate 500 */
+
+    /* Text */
+    --tv-text-main: #f8fafc;
+    --tv-text-muted: #94a3b8;
+
+    /* UI Elements */
+    --tv-border: 1px solid rgba(255, 255, 255, 0.08);
+    --tv-radius: 16px;
+    --tv-radius-pill: 9999px;
+    --tv-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Base Reset */
+body {
+    font-family: 'Comfortaa', sans-serif;
+    background-color: var(--tv-bg-darker);
+    color: var(--tv-text-main);
+    overflow: hidden;
+    /* App-like feel */
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    display: flex;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--tv-bg-darker);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+/* =========================================
+           2. SIDEBAR (DRIVER LIST)
+        ========================================= */
+.fleet-sidebar {
+    width: 380px;
+    min-width: 380px;
+    height: 100%;
+    background: #0f172a;
+    border-right: var(--tv-border);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+/* Header Area */
+.fleet-header {
+    padding: 1.5rem;
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom: var(--tv-border);
+    backdrop-filter: blur(10px);
+}
+
+.tv-brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.tv-brand i {
+    color: var(--tv-yellow);
+    font-size: 1.4rem;
+}
+
+/* Search Input */
+.search-wrapper {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--tv-text-muted);
+}
+
+.tv-search-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 10px 10px 10px 40px;
+    color: white;
+    font-size: 0.9rem;
+    transition: 0.2s;
+}
+
+.tv-search-input:focus {
+    outline: none;
+    border-color: var(--tv-yellow);
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Filter Tabs */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    margin-top: 1rem;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.filter-tab {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--tv-text-muted);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.filter-tab:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+}
+
+.filter-tab.active {
+    background: var(--tv-yellow);
+    color: #000;
+    border-color: var(--tv-yellow);
+    box-shadow: 0 0 10px var(--tv-yellow-glow);
+}
+
+/* Driver List */
+.fleet-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+}
+
+.driver-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    margin-bottom: 4px;
+}
+
+.driver-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.driver-item.active {
+    background: rgba(251, 191, 36, 0.08);
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+.driver-avatar {
+    position: relative;
+    margin-right: 12px;
+}
+
+.driver-img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.status-badge-dot {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #0f172a;
+}
+
+.s-free {
+    background: var(--tv-success);
+    box-shadow: 0 0 6px var(--tv-success);
+}
+
+.s-busy {
+    background: var(--tv-danger);
+}
+
+.s-offline {
+    background: var(--tv-gray);
+}
+
+.driver-info {
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.driver-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+}
+
+.driver-car {
+    font-size: 0.75rem;
+    color: var(--tv-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.car-plate {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-family: monospace;
+    letter-spacing: 0.5px;
+    color: #e2e8f0;
+}
+
+.driver-meta {
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--tv-text-muted);
+    min-width: 60px;
+}
+
+.meta-val {
+    font-weight: 700;
+    color: #fff;
+    display: block;
+}
+
+/* =========================================
+           3. MAP CONTAINER
+        ========================================= */
+.map-wrapper {
+    flex-grow: 1;
+    position: relative;
+    background: #1e293b;
+}
+
+#fleetMap {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Map Overlays */
+.map-overlay {
+    position: absolute;
+    z-index: 500;
+    /* Above Leaflet tiles */
+}
+
+/* Top Bar */
+.map-top-bar {
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-map-control {
+    background: var(--tv-card-bg);
+    backdrop-filter: blur(12px);
+    border: var(--tv-border);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: 0.2s;
+    text-decoration: none;
+}
+
+.btn-map-control:hover {
+    background: white;
+    color: #0f172a;
+}
+
+/* Stats Card (Top Right) */
+.stats-panel {
+    top: 20px;
+    right: 20px;
+    width: 260px;
+    background: var(--tv-card-bg);
+    backdrop-filter: blur(16px);
+    border: var(--tv-border);
+    border-radius: 20px;
+    padding: 1.2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--tv-text-muted);
+}
+
+.stat-val {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.text-yellow {
+    color: var(--tv-yellow);
+}
+
+.stat-progress {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.stat-bar {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.5s;
+}
+
+/* Legend (Bottom Left) */
+.map-legend {
+    bottom: 30px;
+    left: 20px;
+    background: var(--tv-card-bg);
+    backdrop-filter: blur(12px);
+    border: var(--tv-border);
+    border-radius: 12px;
+    padding: 10px 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: #cbd5e1;
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+/* =========================================
+           4. DRIVER DETAILS DRAWER (Slide over)
+        ========================================= */
+.driver-drawer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    bottom: 20px;
+    width: 320px;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 0;
+    z-index: 600;
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+    transform: translateX(120%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.driver-drawer.open {
+    transform: translateX(0);
+}
+
+.drawer-header {
+    padding: 20px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
+    position: relative;
+}
+
+.btn-close-drawer {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-close-drawer:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.drawer-avatar-lg {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--tv-yellow);
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.drawer-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.drawer-stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.drawer-stat-box {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+}
+
+.box-label {
+    font-size: 0.7rem;
+    color: var(--tv-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.box-val {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 4px;
+}
+
+.drawer-actions {
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.btn-drawer {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-drawer:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-drawer.primary {
+    background: var(--tv-yellow);
+    color: #000;
+    border-color: var(--tv-yellow);
+}
+
+.btn-drawer.primary:hover {
+    background: var(--tv-yellow-hover);
+}
+
+/* =========================================
+           5. LEAFLET CUSTOMIZATIONS
+        ========================================= */
+.leaflet-container {
+    background: #1e293b;
+    font-family: 'Comfortaa', sans-serif;
+}
+
+/* Dark Map Tiles Filter */
+.leaflet-tile-pane {
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+/* Custom Marker Icon (DivIcon) */
+.custom-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.marker-pin {
+    width: 36px;
+    height: 36px;
+    background: #0f172a;
+    border: 2px solid var(--tv-yellow);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.marker-pin::after {
+    content: '';
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    /* Image set via JS inline style */
+    background-color: #334155;
+    transform: rotate(45deg);
+}
+
+.custom-marker:hover {
+    z-index: 1000 !important;
+    transform: scale(1.2);
+}
+
+.marker-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(251, 191, 36, 0.4);
+    animation: pulse 2s infinite;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .fleet-sidebar {
+        position: absolute;
+        transform: translateX(-100%);
+    }
+
+    .fleet-sidebar.show {
+        transform: translateX(0);
+    }
+
+    .map-top-bar {
+        left: 60px;
+    }
+
+    /* Space for toggle button */
+    .driver-drawer {
+        width: 90%;
+        right: 5%;
+        bottom: 5%;
+        top: auto;
+        height: 70%;
+        transform: translateY(120%);
+    }
+
+    .driver-drawer.open {
+        transform: translateY(0);
+    }
+}

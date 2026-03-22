@@ -1,0 +1,259 @@
+:root {
+            --tv-bg-dark: #0f172a;
+            --tv-card-bg: rgba(30, 41, 59, 0.7);
+            --tv-border: rgba(148, 163, 184, 0.2);
+            --tv-electric-sky: #38bdf8;
+            --tv-accent-gradient: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            --tv-text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Comfortaa', sans-serif;
+            background-color: var(--tv-bg-dark);
+            color: #f8fafc;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Background Orbs */
+        .tv-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: orbFloat 10s infinite alternate ease-in-out;
+        }
+
+        .orb-1 { width: 300px; height: 300px; background: #0ea5e9; top: -50px; left: -50px; }
+        .orb-2 { width: 400px; height: 400px; background: #6366f1; bottom: 0; right: -100px; animation-delay: -5s; }
+
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(20px, 40px); }
+        }
+
+        /* Navbar & Layout */
+        .tv-partner-layout { padding-top: 80px; }
+        .tv-navbar {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--tv-border);
+            position: fixed;
+            top: 0; width: 100%; z-index: 1040; height: 80px;
+        }
+        .tv-brand-pill {
+            text-decoration: none; color: white; display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem;
+        }
+
+        /* Sidebar */
+        .tv-sidebar-desktop {
+            position: fixed; top: 80px; left: 0; bottom: 0; width: 260px;
+            background: rgba(15, 23, 42, 0.5); border-right: 1px solid var(--tv-border);
+            overflow-y: auto; z-index: 1030; padding-top: 2rem;
+        }
+        .tv-main-wrapper { margin-left: 260px; padding: 2rem; }
+        @media (max-width: 991.98px) {
+            .tv-sidebar-desktop { display: none; }
+            .tv-main-wrapper { margin-left: 0; padding: 1rem; }
+        }
+
+        .tv-nav-item {
+            display: flex; align-items: center; padding: 12px 24px; color: var(--tv-text-muted);
+            text-decoration: none; transition: all 0.2s; border-left: 3px solid transparent;
+            font-weight: 500; font-size: 0.95rem; margin-bottom: 4px;
+        }
+        .tv-nav-item:hover { background: rgba(255, 255, 255, 0.03); color: #fff; }
+        .tv-nav-item.active {
+            background: rgba(56, 189, 248, 0.1); color: var(--tv-electric-sky);
+            border-left-color: var(--tv-electric-sky);
+        }
+        .tv-nav-item i { width: 24px; text-align: center; margin-right: 12px; }
+
+        /* --- CAR CARD STYLES (Adapted from your request) --- */
+        
+        .tv-hotel-grid-card {
+            background: var(--tv-card-bg);
+            border: 1px solid var(--tv-border);
+            border-radius: 20px;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .tv-hotel-grid-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-color: var(--tv-electric-sky);
+        }
+
+        .tv-hotel-grid-media {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .tv-hotel-grid-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .tv-hotel-grid-card:hover .tv-hotel-grid-img {
+            transform: scale(1.05);
+        }
+
+        /* Badges on Image */
+        .tv-grid-badge-top {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--tv-electric-sky);
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 99px;
+            z-index: 2;
+        }
+        .badge-status-active { background: #10b981; color: white; }
+        .badge-status-maintenance { background: #f59e0b; color: #0f172a; }
+
+        .tv-grid-location-badge {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Card Body */
+        .tv-hotel-grid-body {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .tv-hotel-grid-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .tv-hotel-grid-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            margin: 0;
+        }
+
+        .tv-grid-reg-number {
+            font-size: 0.75rem;
+            color: var(--tv-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(255,255,255,0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-top: 4px;
+            display: inline-block;
+        }
+
+        .tv-hotel-grid-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* Specs */
+        .tv-grid-amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .tv-spec-item {
+            font-size: 0.75rem;
+            color: #cbd5e1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--tv-border);
+            padding: 4px 10px;
+            border-radius: 99px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .tv-spec-item i { color: var(--tv-electric-sky); }
+
+        /* Footer */
+        .tv-hotel-grid-footer {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--tv-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tv-grid-price-label {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--tv-text-muted);
+        }
+        .tv-grid-price-val {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .tv-btn-grid-action {
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid var(--tv-border);
+            padding: 8px 16px;
+            border-radius: 99px;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tv-btn-grid-action:hover {
+            background: var(--tv-electric-sky);
+            color: #0f172a;
+            border-color: var(--tv-electric-sky);
+        }
+
+        /* Main Buttons */
+        .btn-primary-tv {
+            background: var(--tv-accent-gradient); border: none; color: white;
+            padding: 10px 24px; border-radius: 99px; font-weight: 600; transition: 0.3s;
+        }
+        .btn-primary-tv:hover { box-shadow: 0 0 20px rgba(14, 165, 233, 0.4); transform: translateY(-1px); }
+
+        .tv-input-search {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--tv-border);
+            color: white;
+            border-radius: 99px;
+            padding: 10px 20px;
+        }

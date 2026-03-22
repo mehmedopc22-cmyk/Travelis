@@ -1,0 +1,634 @@
+/* --------------------------------------------------------
+           TRAVELIS SUPPORT – NEW TICKET (PREMIUM WIZARD)
+           Visual upgrade only. Keeps structure & JS, improves:
+           - Spacing & rhythm
+           - Stepper + active card state
+           - Chips / priorities / stats
+           - Hero composition & orbs
+        --------------------------------------------------------- */
+
+        body.tv-body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main.tv-main-support {
+            flex: 1;
+            padding-top: 96px;
+            padding-bottom: 56px;
+        }
+
+        @media (max-width: 767.98px) {
+            main.tv-main-support {
+                padding-top: 80px;
+                padding-bottom: 40px;
+            }
+        }
+
+        /* Top breadcrumb bar */
+        .tv-section.border-bottom {
+            background: radial-gradient(circle at 0 0, rgba(148,163,184,0.12), transparent 65%);
+        }
+
+        /* HERO REFINEMENTS (reuse Travelis hero, but softer) */
+        .tv-hero-section {
+            position: relative;
+            padding-top: 1.75rem;
+            padding-bottom: 2.5rem;
+        }
+
+        @media (min-width: 992px) {
+            .tv-hero-section {
+                padding-top: 2.25rem;
+                padding-bottom: 3rem;
+            }
+        }
+
+        .tv-hero-shell {
+            position: relative;
+            border-radius: 28px;
+            padding: 1.8rem 1.8rem 2.1rem;
+            background: radial-gradient(circle at 0 0, rgba(56,189,248,0.16), transparent 65%),
+                        radial-gradient(circle at 100% 100%, rgba(168,85,247,0.16), transparent 60%),
+                        rgba(15,23,42,0.96);
+            border: 1px solid rgba(148,163,184,0.24);
+            box-shadow:
+                0 24px 60px rgba(15,23,42,0.9),
+                inset 0 0 40px rgba(15,23,42,0.85);
+            overflow: hidden;
+        }
+
+        @media (min-width: 992px) {
+            .tv-hero-shell {
+                padding: 2.2rem 2.3rem 2.4rem;
+            }
+        }
+
+        .tv-hero-orb {
+            position: absolute;
+            border-radius: 999px;
+            filter: blur(80px);
+            opacity: 0.55;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .tv-hero-orb.orb-1 {
+            width: 420px;
+            height: 420px;
+            top: -140px;
+            left: -90px;
+            background: radial-gradient(circle at 30% 15%, rgba(56,189,248,0.85), transparent 60%);
+        }
+
+        .tv-hero-orb.orb-2 {
+            width: 360px;
+            height: 360px;
+            bottom: -150px;
+            right: -60px;
+            background: radial-gradient(circle at 70% 70%, rgba(251,191,36,0.85), transparent 60%);
+        }
+
+        .tv-hero-orb.orb-3 {
+            width: 280px;
+            height: 280px;
+            top: 20%;
+            right: 35%;
+            background: radial-gradient(circle at 50% 50%, rgba(168,85,247,0.75), transparent 65%);
+            opacity: 0.35;
+            filter: blur(70px);
+        }
+
+        .tv-hero-copy {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tv-hero-title {
+            font-size: clamp(1.8rem, 2.4vw, 2.4rem);
+            font-weight: 700;
+            color: #f9fafb;
+        }
+
+        .tv-hero-title-sub {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(148,163,184,0.9);
+        }
+
+        .tv-hero-desc {
+            font-size: 0.92rem;
+            color: #bfdbfe;
+        }
+
+        .tv-hero-chip {
+            border-radius: 999px;
+            font-size: 0.78rem;
+            padding: 0.3rem 0.9rem;
+            border: 1px solid rgba(148,163,184,0.5);
+            background: rgba(15,23,42,0.96);
+            color: rgba(226,232,240,0.97);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            backdrop-filter: blur(16px);
+        }
+
+        .tv-hero-chip i {
+            font-size: 0.82rem;
+            opacity: 0.95;
+        }
+
+        .tv-hero-subnote {
+            font-size: 0.78rem;
+            color: rgba(148,163,184,1);
+        }
+
+        .tv-hero-subnote i {
+            color: #facc15;
+            margin-right: 0.4rem;
+        }
+
+        @media (max-width: 767.98px) {
+            .tv-hero-shell {
+                padding: 1.4rem 1.2rem 1.8rem;
+                border-radius: 22px;
+            }
+
+            .tv-hero-orb.orb-3 {
+                display: none;
+            }
+        }
+
+        /* HERO – RIGHT CARD */
+        .tv-support-hero-card {
+            position: relative;
+            z-index: 1;
+            border-radius: 24px;
+            border: 1px solid rgba(148,163,184,0.35);
+            box-shadow:
+                0 18px 45px rgba(0,0,0,0.9),
+                inset 0 0 40px rgba(15,23,42,0.85);
+            backdrop-filter: blur(22px) saturate(150%);
+        }
+
+        .tv-avatar-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(15,23,42,0.9);
+        }
+
+        .tv-avatar-support {
+            background: radial-gradient(circle at 0 0, #f9fafb, #0ea5e9);
+            color: #0f172a;
+        }
+
+        .tv-avatar-success {
+            background: radial-gradient(circle at 0 0, #f9fafb, #22c55e);
+            color: #022c22;
+        }
+
+        .tv-badge-live {
+            border-radius: 999px;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.75rem;
+            border: 1px solid rgba(34,197,94,0.65);
+            color: #bbf7d0;
+            background: rgba(22,163,74,0.15);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .tv-badge-live i {
+            font-size: 0.55rem;
+            color: #22c55e;
+        }
+
+        .tv-stat-chip {
+            border-radius: 18px;
+            padding: 0.65rem 0.8rem;
+            background: radial-gradient(circle at 0 0, rgba(56,189,248,0.18), transparent 70%);
+            border: 1px solid rgba(148,163,184,0.35);
+            backdrop-filter: blur(16px);
+        }
+
+        .tv-support-meta-box {
+            border-radius: 18px;
+            border: 1px solid rgba(148,163,184,0.45);
+            background: radial-gradient(circle at 0 0, rgba(15,23,42,0.96), rgba(15,23,42,0.98));
+        }
+
+        .tv-link {
+            font-size: 0.78rem;
+        }
+
+        /* WIZARD STEPPER */
+        .tv-step-progress {
+            background: rgba(15,23,42,0.9);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .tv-step-progress .progress-bar {
+            background: linear-gradient(90deg, #38bdf8, #a855f7);
+        }
+
+        .tv-stepper {
+            border-radius: 999px;
+            padding: 0.25rem;
+            background: radial-gradient(circle at 0 0, rgba(15,23,42,0.98), rgba(15,23,42,0.94));
+            border: 1px solid rgba(148,163,184,0.35);
+        }
+
+        .tv-step-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            cursor: default;
+            color: rgba(148,163,184,0.95);
+            transition: all 0.18s ease;
+        }
+
+        .tv-step-pill-index {
+            width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            border: 1px solid rgba(148,163,184,0.6);
+        }
+
+        .tv-step-pill-label {
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .tv-step-pill.active {
+            background: radial-gradient(circle at 0 0, rgba(56,189,248,0.3), transparent 65%);
+            color: #e5f2ff;
+            box-shadow: 0 0 0 1px rgba(56,189,248,0.6);
+        }
+
+        .tv-step-pill.active .tv-step-pill-index {
+            border-color: rgba(56,189,248,0.9);
+            background: rgba(15,23,42,0.9);
+            color: #e0f2fe;
+        }
+
+        .tv-step-pill.completed {
+            color: rgba(148,163,184,0.9);
+        }
+
+        .tv-step-pill.completed .tv-step-pill-index {
+            border-color: rgba(34,197,94,0.8);
+            background: rgba(22,163,74,0.2);
+            color: #bbf7d0;
+        }
+
+        .tv-step-pill.completed .tv-step-pill-label::after {
+            content: " ✓";
+            font-size: 0.7rem;
+            color: #22c55e;
+        }
+
+        @media (max-width: 575.98px) {
+            .tv-stepper {
+                padding: 0.2rem;
+            }
+            .tv-step-pill-label {
+                display: none;
+            }
+            .tv-step-pill {
+                padding-inline: 0.5rem;
+            }
+        }
+
+        /* CARD SHELL FOR STEPS */
+        .tv-ticket-step {
+            border-radius: 24px;
+            border: 1px solid rgba(148,163,184,0.35);
+            background: radial-gradient(circle at 0 0, rgba(148,163,184,0.16), rgba(15,23,42,0.97));
+            box-shadow:
+                0 18px 45px rgba(15,23,42,0.95),
+                inset 0 0 40px rgba(15,23,42,0.95);
+            backdrop-filter: blur(18px);
+            transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+        }
+
+        .tv-ticket-step--active {
+            border-color: rgba(56,189,248,0.9);
+            box-shadow:
+                0 22px 55px rgba(15,23,42,1),
+                0 0 0 1px rgba(56,189,248,0.5);
+            transform: translateY(-1px);
+        }
+
+        .tv-ticket-step--completed {
+            border-style: dashed;
+            border-color: rgba(148,163,184,0.65);
+            opacity: 0.98;
+        }
+
+        @media (max-width: 767.98px) {
+            .tv-ticket-step {
+                border-radius: 20px;
+                padding-inline: 1.25rem !important;
+            }
+        }
+
+        /* FORM ELEMENT REFINEMENTS */
+        .tv-form-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: rgba(148,163,184,0.95);
+        }
+
+        .tv-input-group {
+            position: relative;
+        }
+
+        .tv-input-icon {
+            position: absolute;
+            left: 0.85rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.86rem;
+            color: rgba(148,163,184,0.95);
+            z-index: 2;
+        }
+
+        .tv-input {
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.55);
+            background: rgba(15,23,42,0.96);
+            color: #e5e7eb;
+            font-size: 0.86rem;
+            padding: 0.55rem 0.95rem 0.55rem 2.35rem;
+        }
+
+        .tv-input::placeholder {
+            color: rgba(148,163,184,0.8);
+        }
+
+        .tv-input:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 1px rgba(56,189,248,0.4);
+            outline: none;
+        }
+
+        textarea.tv-input {
+            border-radius: 18px;
+            padding: 0.8rem 0.9rem;
+        }
+
+        /* TOPIC CHIPS */
+        .tv-chip-select {
+            border-radius: 16px;
+            padding: 0.55rem 0.7rem;
+            background: rgba(15,23,42,0.96);
+            border: 1px solid rgba(148,163,184,0.5);
+            color: rgba(226,232,240,0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.2rem;
+            font-size: 0.85rem;
+            text-align: left;
+            transition: all 0.18s ease;
+        }
+
+        .tv-chip-select i {
+            font-size: 0.95rem;
+        }
+
+        .tv-chip-select small {
+            font-size: 0.78rem;
+        }
+
+        .tv-chip-select.active {
+            background: radial-gradient(circle at 0 0, rgba(56,189,248,0.32), transparent 65%);
+            border-color: rgba(56,189,248,0.9);
+            box-shadow: 0 0 0 1px rgba(56,189,248,0.5), 0 14px 35px rgba(15,23,42,0.95);
+        }
+
+        .tv-chip-select:hover:not(.active) {
+            border-color: rgba(148,163,184,0.85);
+            box-shadow: 0 10px 28px rgba(15,23,42,0.9);
+        }
+
+        /* REF TYPE (small pills) */
+        .tv-chip-toggle {
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.6);
+            background: rgba(15,23,42,0.95);
+            color: rgba(226,232,240,0.95);
+            padding: 0.2rem 0.75rem;
+            font-size: 0.78rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.18s ease;
+        }
+
+        .tv-chip-toggle-sm {
+            padding-block: 0.25rem;
+        }
+
+        .tv-chip-toggle.active {
+            border-color: rgba(59,130,246,0.9);
+            background: radial-gradient(circle at 0 0, rgba(59,130,246,0.4), transparent 70%);
+            color: #eff6ff;
+            box-shadow: 0 0 0 1px rgba(59,130,246,0.8);
+        }
+
+        /* PRIORITY CHIPS */
+        .tv-chip-priority {
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.7);
+            background: rgba(15,23,42,0.95);
+            color: rgba(226,232,240,0.98);
+            padding: 0.25rem 0.85rem;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            transition: all 0.18s ease;
+        }
+
+        .tv-chip-priority-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 999px;
+        }
+
+        .tv-chip-priority-dot--normal {
+            background: #22c55e;
+        }
+
+        .tv-chip-priority-dot--high {
+            background: #f97316;
+        }
+
+        .tv-chip-priority-dot--urgent {
+            background: #ef4444;
+        }
+
+        .tv-chip-priority.active {
+            border-color: rgba(56,189,248,0.9);
+            background: radial-gradient(circle at 0 0, rgba(56,189,248,0.32), transparent 60%);
+            color: #e0f2fe;
+            box-shadow: 0 0 0 1px rgba(56,189,248,0.6);
+        }
+
+        /* UPLOAD AREA */
+        .tv-upload-box {
+            border-radius: 18px;
+            border: 1px dashed rgba(148,163,184,0.7);
+            background: radial-gradient(circle at 0 0, rgba(15,23,42,0.98), rgba(15,23,42,0.94));
+            transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .tv-upload-box:hover {
+            border-style: solid;
+            border-color: rgba(56,189,248,0.9);
+            background: radial-gradient(circle at 0 0, rgba(56,189,248,0.22), rgba(15,23,42,0.96));
+            box-shadow: 0 16px 40px rgba(15,23,42,0.95);
+        }
+
+        .tv-upload-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.75);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 0 0, rgba(56,189,248,0.3), transparent 60%);
+            color: #e0f2fe;
+            box-shadow: 0 12px 32px rgba(15,23,42,0.95);
+        }
+
+        .tv-upload-icon i {
+            font-size: 1.1rem;
+        }
+
+        .tv-attachment-list {
+            border-radius: 12px;
+            background: rgba(15,23,42,0.96);
+            padding: 0.65rem 0.75rem;
+            border: 1px solid rgba(30,41,59,0.95);
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .tv-attachment-item {
+            padding: 0.2rem 0.1rem;
+        }
+
+        /* REVIEW CARD */
+        .tv-ticket-review {
+            border-radius: 18px;
+            border: 1px solid rgba(148,163,184,0.6);
+            background: radial-gradient(circle at 0 0, rgba(15,23,42,0.98), rgba(15,23,42,0.94));
+        }
+
+        .tv-tag-glass {
+            border-radius: 999px;
+            padding: 0.15rem 0.75rem;
+            font-size: 0.78rem;
+            border: 1px solid rgba(148,163,184,0.7);
+            background: rgba(15,23,42,0.98);
+            color: #e5e7eb;
+        }
+
+        /* BUTTONS (REUSED TOKENS BUT TIGHTENED) */
+        .tv-btn-primary {
+            border-radius: 999px;
+            border: none;
+            font-size: 0.86rem;
+            padding: 0.5rem 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #38bdf8, #6366f1);
+            color: #020617;
+            box-shadow: 0 12px 32px rgba(56,189,248,0.45);
+        }
+
+        .tv-btn-primary:hover {
+            transform: translateY(-1px);
+        }
+
+        .tv-btn-primary.tv-btn-primary-sm {
+            padding-block: 0.4rem;
+            font-size: 0.8rem;
+        }
+
+        .tv-btn-outline,
+        .tv-btn-outline-sm {
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.7);
+            background: transparent;
+            font-size: 0.82rem;
+            padding: 0.42rem 1.05rem;
+            color: rgba(226,232,240,0.96);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .tv-btn-outline-sm {
+            font-size: 0.8rem;
+            padding-block: 0.36rem;
+        }
+
+        .tv-btn-outline:hover,
+        .tv-btn-outline-sm:hover {
+            border-color: rgba(56,189,248,0.9);
+            box-shadow: 0 0 0 1px rgba(56,189,248,0.5);
+        }
+
+        /* CHIP GHOST (attachments row) */
+        .tv-chip-ghost {
+            font-size: 0.75rem;
+            border-radius: 999px;
+            border: 1px dashed rgba(148,163,184,0.7);
+            padding: 0.3rem 0.85rem;
+            color: #cbd5e1;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            background: rgba(15,23,42,0.95);
+        }
+
+        .tv-chip-ghost i {
+            font-size: 0.85rem;
+        }
+
+        /* SUCCESS STATE */
+        #ticketSuccessState .tv-glass-soft {
+            border-radius: 26px;
+            background: radial-gradient(circle at 0 0, rgba(34,197,94,0.16), rgba(15,23,42,0.98));
+        }
+
+        /* FOOTER */
+        footer.tv-glass-soft {
+            border-radius: 0;
+        }

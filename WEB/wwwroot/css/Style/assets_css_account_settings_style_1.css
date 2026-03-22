@@ -1,0 +1,26 @@
+.tv-settings-card {
+            background: rgba(15,23,42,.92);
+            border: 1px solid rgba(148,163,184,.35);
+            border-radius: 18px;
+            padding: 1.6rem;
+        }
+
+        .tv-settings-title {
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .tv-settings-desc {
+            font-size: .9rem;
+            color: rgba(148,163,184,.85);
+        }
+
+        .tv-settings-toggle label {
+            color: #e5e7eb;
+            font-size: .9rem;
+        }
+
+        .form-switch .form-check-input {
+            cursor: pointer;
+        }
