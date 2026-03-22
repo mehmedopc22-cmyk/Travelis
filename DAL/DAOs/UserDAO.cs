@@ -86,7 +86,7 @@ namespace DAL.DAOs
 
             try
             {
-                Guid userId = user.Id == Guid.Empty ? Guid.NewGuid() : user.Id;
+                Guid userId = user.UserId == Guid.Empty ? Guid.NewGuid() : user.UserId;
 
                 sqlConnection.Execute(SQLQueries.Users_Insert, new
                 {
@@ -127,7 +127,7 @@ namespace DAL.DAOs
             {
                 int rows = sqlConnection.Execute(SQLQueries.Users_Update, new
                 {
-                    user.Id,
+                    user.UserId,
                     user.Email,
                     user.FirstName,
                     user.LastName,

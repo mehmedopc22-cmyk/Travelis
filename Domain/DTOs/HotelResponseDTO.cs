@@ -1,6 +1,10 @@
-﻿namespace Domain.Entities
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Domain.DTOs
 {
-    public class HotelEntity
+    public class HotelResponseDTO
     {
         public Guid HotelId { get; set; } = Guid.Empty;
         public string Name { get; set; } = string.Empty;
@@ -10,10 +14,5 @@
         public string PostalCode { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public int Status { get; set; } = -1;
-        public bool Approved { get; set; } = false;
-
-        public DateTime? CreatedAt { get; set; } = null;
-        public DateTime? UpdatedAt { get; set; } = null;
     }
 }

@@ -22,6 +22,7 @@ namespace API
             builder.Services.AddTransient<IFactory<SqlConnection>, DatabaseFactory>();
             builder.Services.AddTransient<IUserDAO, UserDAO>();
             builder.Services.AddTransient<IHotelDAO, HotelDAO>();
+            builder.Services.AddTransient<IHotelReservationDAO, HotelReservationDAO>();
             builder.Services.AddSingleton<PasswordHasherService>();
             builder.Services.AddSingleton<JWTService>();
             builder.Services

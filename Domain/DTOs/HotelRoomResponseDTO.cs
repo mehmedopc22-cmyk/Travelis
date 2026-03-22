@@ -1,6 +1,10 @@
-﻿namespace Domain.Entities
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Domain.DTOs
 {
-    public class HotelRoomEntity
+    public class HotelRoomResponseDTO
     {
         public Guid HotelRoomId { get; set; } = Guid.Empty;
         public Guid HotelID { get; set; } = Guid.Empty;
@@ -10,8 +14,5 @@
         public int Floor { get; set; } = -1;
         public int BedCount { get; set; } = -1;
         public int Capacity { get; set; } = -1;
-
-        public DateTime? CreatedAt { get; set; } = null;
-        public DateTime? UpdatedAt { get; set; } = null;
     }
 }

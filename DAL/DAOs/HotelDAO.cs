@@ -51,14 +51,14 @@ namespace DAL.DAOs
 
             try
             {
-                hotel.Id = hotel.Id == Guid.Empty ? Guid.NewGuid() : hotel.Id;
+                hotel.HotelId = hotel.HotelId == Guid.Empty ? Guid.NewGuid() : hotel.HotelId;
 
                 hotel.CreatedAt = DateTime.Now;
                 hotel.UpdatedAt = DateTime.Now;
 
                 sqlConnection.Execute(SQLQueries.Hotels_Insert, new
                 {
-                    hotel.Id,
+                    hotel.HotelId,
                     hotel.Name,
                     hotel.Country,
                     hotel.City,
@@ -92,7 +92,7 @@ namespace DAL.DAOs
             {
                 int rows = sqlConnection.Execute(SQLQueries.Hotels_Update, new
                 {
-                    hotel.Id,
+                    hotel.HotelId,
                     hotel.Name,
                     hotel.Country,
                     hotel.City,
