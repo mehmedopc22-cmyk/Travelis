@@ -19,7 +19,7 @@ namespace WEB.Controllers
             List<HotelCardViewModel> model = (hotelDtos ?? new List<HotelEntity>())
                 .Select(h => new HotelCardViewModel
                 {
-                    Id = h.Id,
+                    Id = h.HotelId,
                     Name = h.Name,
                     Country = h.Country,
                     City = h.City,
