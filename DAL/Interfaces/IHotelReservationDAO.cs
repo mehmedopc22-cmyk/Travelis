@@ -7,5 +7,6 @@ namespace DAL.Interfaces
     {
         HotelReservationResponseDTO InsertHotelReservation(HotelReservationCreationDTO creationData);
         IEnumerable<HotelReservationResponseDTO> SelectByUserId(Guid id);
+        bool UpdateHotelReservation(Guid reservationId, HotelReservationPatchDTO newReservationData);
     }
 }

@@ -1,35 +1,16 @@
-﻿using DAL.DAOs;
-using DAL.Interfaces;
+﻿using DAL.Interfaces;
 using Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [ApiController]
-    public class HotelReservationController(IHotelReservationDAO hotelREservationDAO) : ControllerBase
+    [Route("hotel-reservations")]
+    public class HotelReservationController(IHotelReservationDAO hotelReservationDAO) : ControllerBase
     {
-        private readonly IHotelReservationDAO _hotelReservationDAO = hotelREservationDAO;
+        private readonly IHotelReservationDAO _hotelReservationDAO = hotelReservationDAO;
 
-        [HttpGet("/hotel/reservations")]
-        public ActionResult<IEnumerable<HotelReservationResponseDTO>> GetHotelReservations()
-        {
-            try
-            {
-                var hotelReservations = _hotelReservationDAO.SelectAll();
-                if (hotelReservations == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(hotelReservations);
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
-        }
-
-        [HttpGet("/hotel/reservations/{id}")]
+        [HttpGet("{id}")]
         public ActionResult<HotelReservationResponseDTO> GetHotelReservationById(Guid id)
         {
             try
@@ -37,41 +18,69 @@ namespace API.Controllers
                 var hotelReservation = _hotelReservationDAO.SelectById(id);
                 return hotelReservation != null ? Ok(hotelReservation) : NotFound();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return Problem(detail: ex.Message, statusCode: 500);
             }
         }
 
-        [HttpGet("/hotel/user/reservations")]
-        public ActionResult<IEnumerable<HotelReservationResponseDTO>> GetHotelReservationByUserId(Guid userId)
+        [HttpGet]
+        public ActionResult<IEnumerable<HotelReservationResponseDTO>> GetHotelReservations([FromQuery] Guid? userId)
         {
             try
             {
-                var hotelReservation = _hotelReservationDAO.SelectByUserId(id);
+                if(userId == null)
+                {
+                    var hotelReservations = _hotelReservationDAO.SelectAll();
+                    if (hotelReservations == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(hotelReservations);
+                }
+
+                var hotelReservation = _hotelReservationDAO.SelectByUserId(userId.Value);
                 return hotelReservation != null ? Ok(hotelReservation) : NotFound();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return Problem(detail: ex.Message, statusCode: 500);
             }
         }
 
-        [HttpPost("/hotel/reservations")]
+        [HttpPost]
         public ActionResult<HotelReservationResponseDTO> CreateHotelReservation([FromBody] HotelReservationCreationDTO creationData)
         {
             try
             {
                 var createdHotelReservation = _hotelReservationDAO.InsertHotelReservation(creationData);
-                return createdHotelReservation != null ? Ok(createdHotelReservation) : BadRequest();
+                if(createdHotelReservation == null)
+                    return BadRequest("Failed to create hotel reservation. Please check the provided data.");
+
+                return CreatedAtAction(nameof(GetHotelReservationById), new { id = createdHotelReservation.Id }, createdHotelReservation);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return Problem(detail: ex.Message, statusCode: 500);
             }
         }
 
-        [HttpDelete("/hotel/reservations/{id}")]
+        [HttpPatch("{id}")]
+        public ActionResult UpdateHotelReservation(Guid id, [FromBody] HotelReservationPatchDTO patchData)
+        {
+            try
+            {
+                bool updated = _hotelReservationDAO.UpdateHotelReservation(id, patchData);
+                return updated ? NoContent() : NotFound();
+            }
+            catch (Exception ex)
+            {
+                return Problem(detail: ex.Message, statusCode: 500);
+            }
+        }
+
+        [HttpDelete("{id}")]
         public ActionResult DeleteHotelReservation(Guid id)
         {
             try
@@ -79,9 +88,9 @@ namespace API.Controllers
                 bool deleted = _hotelReservationDAO.Delete(id);
                 return deleted ? NoContent() : NotFound();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return Problem(detail: ex.Message, statusCode: 500);
             }
         }
     }

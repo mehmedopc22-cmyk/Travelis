@@ -11,57 +11,6 @@ namespace DAL.DAOs
     {
         private readonly IFactory<SqlConnection> _databaseFactory = databaseFactory;
 
-        public bool Delete(Guid id)
-        {
-            try
-            {
-                using SqlConnection sqlConnection = _databaseFactory.GetConnection();
-                var rowsAffected = sqlConnection.Execute(SQLQueries.HotelReservations_Delete, new { Id = id});
-
-                return rowsAffected > 0;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
-
-        public HotelReservationResponseDTO Insert(HotelReservationResponseDTO creationData)
-        {
-            return null;
-        }
-
-        public HotelReservationResponseDTO InsertHotelReservation(HotelReservationCreationDTO creationData)
-        {
-            try
-            {
-                Guid hotelId = Guid.NewGuid();
-
-                using SqlConnection sqlConnection = _databaseFactory.GetConnection();
-                var rowsAffected = sqlConnection.Execute(SQLQueries.HotelReservations_Insert, new
-                {
-                    Id = hotelId,
-                    HotelID = creationData.HotelId,
-                    UserID = creationData.UserId,
-                    RoomID = creationData.RoomId,
-                    CheckIn = creationData.CheckIn,
-                    CheckOut = creationData.CheckOut,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
-                });
-
-                if (rowsAffected == 0)
-                    return null;
-
-                HotelReservationResponseDTO? createdHotelReservation = SelectById(hotelId);
-                return createdHotelReservation;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
         public IEnumerable<HotelReservationResponseDTO> SelectAll()
         {
             try
@@ -149,7 +98,99 @@ namespace DAL.DAOs
 
         public bool Update(HotelReservationResponseDTO entity)
         {
-            return false;
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateHotelReservation(Guid reservationId, HotelReservationPatchDTO newReservationData)
+        {
+            try
+            {
+                using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+                // 1. Initialize DynamicParameters and a list to hold our SQL SET clauses
+                var parameters = new DynamicParameters();
+                parameters.Add("@Id", reservationId);
+                parameters.Add("@UpdatedAt", DateTime.UtcNow); // Always update the timestamp
+
+                var setClauses = new List<string> { "[UpdatedAt] = @UpdatedAt" };
+
+                if (newReservationData.CheckIn.HasValue)
+                {
+                    setClauses.Add("[CheckIn] = @CheckIn");
+                    parameters.Add("@CheckIn", newReservationData.CheckIn.Value);
+                }
+
+                if (newReservationData.CheckOut.HasValue)
+                {
+                    setClauses.Add("[CheckOut] = @CheckOut");
+                    parameters.Add("@CheckOut", newReservationData.CheckOut.Value);
+                }
+
+                // 3. If nothing was provided to update (except the timestamp), just return true or throw an error
+                if (setClauses.Count == 1)
+                {
+                    return false; // Or throw a "No values provided for update" exception
+                }
+
+                var sql = $@"UPDATE [HotelReservation] SET {string.Join(", ", setClauses)} WHERE [Id] = @Id";
+                var rowsAffected = sqlConnection.Execute(sql, parameters);
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public HotelReservationResponseDTO InsertHotelReservation(HotelReservationCreationDTO creationData)
+        {
+            try
+            {
+                Guid hotelId = Guid.NewGuid();
+
+                using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+                var rowsAffected = sqlConnection.Execute(SQLQueries.HotelReservations_Insert, new
+                {
+                    Id = hotelId,
+                    HotelID = creationData.HotelId,
+                    UserID = creationData.UserId,
+                    RoomID = creationData.RoomId,
+                    CheckIn = creationData.CheckIn,
+                    CheckOut = creationData.CheckOut,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                });
+
+                if (rowsAffected == 0)
+                    return null;
+
+                HotelReservationResponseDTO? createdHotelReservation = SelectById(hotelId);
+                return createdHotelReservation;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public HotelReservationResponseDTO Insert(HotelReservationResponseDTO creationData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(Guid id)
+        {
+            try
+            {
+                using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+                var rowsAffected = sqlConnection.Execute(SQLQueries.HotelReservations_Delete, new { Id = id });
+
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }
