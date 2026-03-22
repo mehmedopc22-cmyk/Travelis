@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("hotel-reservations")]
     public class HotelReservationController(IHotelReservationDAO hotelReservationDAO) : ControllerBase
