@@ -1,6 +1,7 @@
 ﻿using API.Helpers;
 using DAL.Interfaces;
 using Domain.DTOs;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -33,6 +34,32 @@ namespace API.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName
             });
+        }
+
+
+        [HttpPost("register")]
+        public ActionResult<LoginResponseDTO> Register(UserRegisterDTO user)
+        {
+            if (user == null)
+                return BadRequest();
+
+            string passwordHash = passwordHasher.Hash(user.PasswordHash);
+
+            UserEntity userEntity = new UserEntity
+            {
+                Id = Guid.NewGuid(),
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PasswordHash = passwordHash,
+                RoleId = user.RoleId,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
+            };
+
+            _userDAO.Insert(userEntity);
+
+            return Ok();
         }
     }
 }

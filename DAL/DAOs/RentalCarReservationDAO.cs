@@ -21,10 +21,10 @@ namespace DAL.DAOs
                 var rowsAffected = sqlConnection.Execute(SQLQueries.RentalCarReservations_Insert, new
                 {
                     Id = reservationId,
-                    UserId = creationData.UserId,
-                    CarId = creationData.CarId,
-                    UseFrom = creationData.UseFrom,
-                    UseTo = creationData.UseTo,
+                    creationData.UserId,
+                    creationData.CarId,
+                    creationData.UseFrom,
+                    creationData.UseTo,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                 });

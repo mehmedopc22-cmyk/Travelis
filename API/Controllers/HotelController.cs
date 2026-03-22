@@ -1,9 +1,11 @@
 ﻿using DAL.Interfaces;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     [ApiController]
     public class HotelController(IHotelDAO hotelDAO) : ControllerBase
     {

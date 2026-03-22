@@ -1,12 +1,15 @@
 ﻿using DAL.DAOs;
 using DAL.Interfaces;
 using Domain.DTOs.RentalCarReservation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("rental-car-reservations")]
+    //[Authorize]
     [ApiController]
+    [Route("rental-car-reservations")]
+
     public class RentalCarReservationController(IRentalCarReservationDAO rentalCarReservationDAO) : ControllerBase
     {
         private readonly IRentalCarReservationDAO _rentalCarReservationDAO = rentalCarReservationDAO;

@@ -1,9 +1,11 @@
 ﻿using DAL.Interfaces;
 using Domain.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("hotel-reservations")]
     public class HotelReservationController(IHotelReservationDAO hotelReservationDAO) : ControllerBase
