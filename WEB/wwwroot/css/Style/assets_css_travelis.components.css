@@ -32,7 +32,6 @@
 }
 
 .tv-brand-pill {
-    background: linear-gradient(135deg, #38bdf8, #2563eb);
     color: #fff;
     padding: 8px 22px;
     border-radius: var(--tv-radius-pill);

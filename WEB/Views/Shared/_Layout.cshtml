@@ -23,8 +23,8 @@
 
                     <a href="../index.html" class="tv-brand-pill d-flex align-items-center text-decoration-none">
                         <img src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png"
-                             style="height:20px; filter:brightness(0) invert(1);" alt="Travelis Logo">
-                        <span>Travelis.bg</span>
+                             style="height:20px; filter:brightness(0) invert(1); " alt="Travelis Logo">
+                        <span>Travelis</span>
                     </a>
 
                     <button class="navbar-toggler tv-navbar-toggler"
@@ -41,7 +41,7 @@
 
                         <ul class="navbar-nav align-items-lg-center gap-lg-2 me-lg-4">
                             <li class="nav-item">
-                                <a class="nav-link tv-nav-link" href="../hotels/hotels-home.html">
+                                <a class="nav-link tv-nav-link" asp-action="Index" asp-controller="Hotel">
                                     <i class="fa-solid fa-hotel me-1"></i> Хотели
                                 </a>
                             </li>
@@ -78,11 +78,20 @@
         </main>
     </div>
 
-    @* <footer class="border-top footer text-muted">
+    <footer class="tv-glass-soft mt-auto border-0 rounded-0 border-top border-secondary border-opacity-25 py-4">
         <div class="container">
-            &copy; 2026 - WEB - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+                <div class="small text-secondary">
+                    &copy; 2025 Travelis.bg. Всички права запазени.
+                </div>
+                <div class="d-flex gap-3">
+                    <a href="#" class="text-secondary text-decoration-none small hover-white">Помощ</a>
+                    <a href="#" class="text-secondary text-decoration-none small hover-white">Условия</a>
+                    <a href="#" class="text-secondary text-decoration-none small hover-white">Поверителност</a>
+                </div>
+            </div>
         </div>
-    </footer> *@
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

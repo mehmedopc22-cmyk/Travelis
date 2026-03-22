@@ -2,7 +2,625 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container" >
+    <div class="tv-navbar-shell d-flex align-items-center justify-content-between w-100">
+
+        <!-- NAVIGATION -->
+        <div class="collapse navbar-collapse justify-content-end mt-3 mt-lg-0" id="tvMainNav">
+
+            <!-- MAIN LINKS -->
+            <ul class="navbar-nav align-items-lg-center gap-lg-2 me-lg-4">
+                <li class="nav-item">
+                    <a class="nav-link tv-nav-link">
+                        <i class="fa-solid fa-hotel me-1"></i> Хотели
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link tv-nav-link" href="#">
+                        <i class="fa-solid fa-taxi me-1"></i> Такси
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link tv-nav-link" href="#">
+                        <i class="fa-solid fa-train-subway me-1"></i> Градски Транспорт
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link tv-nav-link" href="#">
+                        <i class="fa-solid fa-robot me-1"></i> AI Маршрути
+                    </a>
+                </li>
+            </ul>
+
+            <!-- SEARCH -->
+            <div class="d-flex align-items-center me-lg-4 my-3 my-lg-0 flex-grow-1 flex-lg-grow-0" style="max-width:260px;">
+                <div class="tv-input-group w-100">
+                    <span class="tv-input-icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" class="tv-input" placeholder="Търси...">
+                </div>
+            </div>
+
+            <!-- AUTH BUTTONS -->
+            <div class="d-flex align-items-center gap-2 mb-2 mb-lg-0 flex-nowrap">
+                <button class="tv-btn-login">
+                    <i class="fa-regular fa-circle-user me-1"></i> Вход
+                </button>
+
+                <button class="tv-btn-login">
+                    <i class="fa-solid fa-user-plus me-1"></i> Регистрация
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
+</nav>
+
+<main>
+
+    <!-- HERO + BOOKING -->
+    <section class="tv-hero-section">
+        <div class="container">
+            <div class="tv-hero-shell">
+                <div class="tv-hero-orb orb-1"></div>
+                <div class="tv-hero-orb orb-2"></div>
+                <div class="tv-hero-orb orb-3"></div>
+
+                <div class="row g-5 align-items-center position-relative">
+                    <!-- LEFT: HERO COPY -->
+                    <div class="col-12 col-lg-7">
+                        <div class="tv-hero-copy">
+                            <h1 class="tv-hero-title">
+                                Открий България<br />по нов начин.
+                            </h1>
+                            <p class="tv-hero-desc">
+                                От спа уикенди във Велинград до ски в Банско и бизнес пътувания в София. Всички резервации на едно място.
+                            </p>
+
+                            <div class="tv-hero-badges">
+                                <span class="tv-hero-chip">
+                                    <i class="fa-solid fa-check-double"></i> Проверени хотели
+                                </span>
+                                <span class="tv-hero-chip">
+                                    <i class="fa-solid fa-map-location-dot"></i> Live Транспорт
+                                </span>
+                                <span class="tv-hero-chip">
+                                    <i class="fa-solid fa-umbrella-beach"></i> БГ Курорти
+                                </span>
+                            </div>
+
+                            <p class="tv-hero-subnote mt-3">
+                                <i class="fa-solid fa-bolt"></i> Над 2500 обекта в България
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: BOOKING PANEL -->
+                    <div class="col-12 col-lg-5">
+                        <div class="tv-booking-card">
+                            <ul class="nav nav-pills tv-booking-tabs mb-3" id="tvBookingTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active"
+                                            id="tv-tab-hotel"
+                                            data-bs-toggle="pill"
+                                            data-bs-target="#tv-pane-hotel"
+                                            type="button"
+                                            role="tab"
+                                            aria-controls="tv-pane-hotel"
+                                            aria-selected="true">
+                                        <i class="fa-solid fa-bed me-1"></i>Хотел
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link"
+                                            id="tv-tab-car"
+                                            data-bs-toggle="pill"
+                                            data-bs-target="#tv-pane-car"
+                                            type="button"
+                                            role="tab"
+                                            aria-controls="tv-pane-car"
+                                            aria-selected="false">
+                                        <i class="fa-solid fa-car-side me-1"></i>Кола
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link"
+                                            id="tv-tab-taxi"
+                                            data-bs-toggle="pill"
+                                            data-bs-target="#tv-pane-taxi"
+                                            type="button"
+                                            role="tab"
+                                            aria-controls="tv-pane-taxi"
+                                            aria-selected="false">
+                                        <i class="fa-solid fa-taxi me-1"></i>Такси
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link"
+                                            id="tv-tab-transport"
+                                            data-bs-toggle="pill"
+                                            data-bs-target="#tv-pane-transport"
+                                            type="button"
+                                            role="tab"
+                                            aria-controls="tv-pane-transport"
+                                            aria-selected="false">
+                                        <i class="fa-solid fa-train-subway me-1"></i>Градски
+                                    </button>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content" id="tvBookingTabContent">
+                                <!-- HOTEL TAB -->
+                                <div class="tab-pane fade show active" id="tv-pane-hotel" role="tabpanel" aria-labelledby="tv-tab-hotel">
+                                    <div class="mb-3">
+                                        <label class="tv-form-label">Дестинация</label>
+                                        <div class="tv-input-group">
+                                            <span class="tv-input-icon">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </span>
+                                            <input type="text" class="tv-input" placeholder="Напр. София, Бургас, Хотел Рила">
+                                        </div>
+                                    </div>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-6">
+                                            <label class="tv-form-label">Настаняване</label>
+                                            <div class="tv-input-group">
+                                                <span class="tv-input-icon">
+                                                    <i class="fa-regular fa-calendar"></i>
+                                                </span>
+                                                <input type="text" class="tv-input" placeholder="Дата"
+                                                       onfocus="(this.type='date')">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="tv-form-label">Напускане</label>
+                                            <div class="tv-input-group">
+                                                <span class="tv-input-icon">
+                                                    <i class="fa-regular fa-calendar"></i>
+                                                </span>
+                                                <input type="text" class="tv-input" placeholder="Дата"
+                                                       onfocus="(this.type='date')">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="tv-btn-primary w-100">
+                                        Търси оферти <i class="fa-solid fa-arrow-right"></i>
+                                    </button>
+                                </div>
+
+                                <!-- CAR TAB -->
+                                <div class="tab-pane fade" id="tv-pane-car" role="tabpanel" aria-labelledby="tv-tab-car">
+                                    <div class="mb-3">
+                                        <label class="tv-form-label">Взимане от</label>
+                                        <div class="tv-input-group">
+                                            <span class="tv-input-icon">
+                                                <i class="fa-solid fa-location-dot"></i>
+                                            </span>
+                                            <input type="text" class="tv-input" placeholder="Летище, град или адрес">
+                                        </div>
+                                    </div>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-6">
+                                            <label class="tv-form-label">Дата от</label>
+                                            <div class="tv-input-group">
+                                                <span class="tv-input-icon">
+                                                    <i class="fa-regular fa-calendar"></i>
+                                                </span>
+                                                <input type="text" class="tv-input" placeholder="Дата"
+                                                       onfocus="(this.type='date')">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="tv-form-label">Дата до</label>
+                                            <div class="tv-input-group">
+                                                <span class="tv-input-icon">
+                                                    <i class="fa-regular fa-calendar"></i>
+                                                </span>
+                                                <input type="text" class="tv-input" placeholder="Дата"
+                                                       onfocus="(this.type='date')">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="tv-btn-primary w-100">
+                                        Намери кола <i class="fa-solid fa-car-side"></i>
+                                    </button>
+                                </div>
+
+                                <!-- TAXI TAB -->
+                                <div class="tab-pane fade" id="tv-pane-taxi" role="tabpanel" aria-labelledby="tv-tab-taxi">
+                                    <div class="mb-3">
+                                        <label class="tv-form-label">Откъде</label>
+                                        <div class="tv-input-group">
+                                            <span class="tv-input-icon">
+                                                <i class="fa-solid fa-circle-dot"></i>
+                                            </span>
+                                            <input type="text" class="tv-input" placeholder="Текущ адрес">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="tv-form-label">Накъде</label>
+                                        <div class="tv-input-group">
+                                            <span class="tv-input-icon">
+                                                <i class="fa-solid fa-location-dot"></i>
+                                            </span>
+                                            <input type="text" class="tv-input" placeholder="Дестинация">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="tv-form-label">Кога</label>
+                                        <div class="tv-input-group">
+                                            <span class="tv-input-icon">
+                                                <i class="fa-regular fa-clock"></i>
+                                            </span>
+                                            <input type="text" class="tv-input" placeholder="Веднага (~3 мин)">
+                                        </div>
+                                    </div>
+                                    <button class="tv-btn-primary w-100">
+                                        Поръчай такси <i class="fa-solid fa-taxi"></i>
+                                    </button>
+                                </div>
+
+                                <!-- PUBLIC TRANSPORT TAB -->
+                                <div class="tab-pane fade" id="tv-pane-transport" role="tabpanel" aria-labelledby="tv-tab-transport">
+                                    <div class="mb-3">
+                                        <label class="tv-form-label">Начална точка</label>
+                                        <div class="tv-input-group">
+                                            <span class="tv-input-icon">
+                                                <i class="fa-solid fa-circle-dot"></i>
+                                            </span>
+                                            <input type="text" class="tv-input" placeholder="Спирка или адрес">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="tv-form-label">Крайна цел</label>
+                                        <div class="tv-input-group">
+                                            <span class="tv-input-icon">
+                                                <i class="fa-solid fa-location-dot"></i>
+                                            </span>
+                                            <input type="text" class="tv-input" placeholder="Къде отивате?">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="tv-form-label">Час на тръгване</label>
+                                        <div class="tv-input-group">
+                                            <span class="tv-input-icon">
+                                                <i class="fa-regular fa-clock"></i>
+                                            </span>
+                                            <input type="time" class="tv-input" value="09:00">
+                                        </div>
+                                    </div>
+                                    <button class="tv-btn-primary w-100">
+                                        Покажи маршрути <i class="fa-solid fa-route"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div> <!-- tv-booking-card -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <div class="container">
+    
+
+        <!-- POPULAR STAYS -->
+        <section class="tv-section py-4 py-md-5">
+            <header class="tv-section-header">
+                <div>
+                    <div class="tv-section-title-small">Популярни престои</div>
+                    <div class="tv-section-subtitle">
+                        Апартаменти и къщи за гости в любимите български дестинации.
+                    </div>
+                </div>
+                <button class="tv-btn-glass" type="button">
+                    Всички места
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </header>
+
+            <div class="row g-3">
+                <!-- Stay 1 -->
+                <div class="col-12 col-md-4">
+                    <article class="tv-stay-card h-100">
+                        <div class="tv-stay-media">
+                            <div class="tv-stay-img"
+                                 style="background-image: url('https://kapana-art-sky-studios-parking-included.plovdiv-hotels.com/data/Imgs/OriginalPhoto/16471/1647193/1647193227/img-kapana-art-sky-studios-parking-included-plovdiv-6.JPEG');">
+                            </div>
+                            <div class="tv-stay-badge tv-tag-glass">
+                                <i class="fas fa-crown"></i>
+                                Guest Favorite
+                            </div>
+                        </div>
+                        <div class="tv-stay-content">
+                            <div class="tv-stay-meta-top">
+                                <div>
+                                    <div class="tv-stay-location">Art Loft · Пловдив (Капана)</div>
+                                    <div class="tv-stay-text">
+                                        В сърцето на творческия квартал. Идеален за уикенд туризъм.
+                                    </div>
+                                </div>
+                                <div class="tv-stay-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.98 · 150 отзива</span>
+                                </div>
+                            </div>
+                            <div class="tv-stay-footer">
+                                <div class="tv-stay-price">
+                                    <strong>110 BGN</strong>
+                                    <span>на нощ</span>
+                                </div>
+                                <div class="tv-stay-tags">
+                                    <span class="tv-stay-tag">
+                                        <i class="fas fa-wifi me-1"></i>Оптика
+                                    </span>
+                                    <span class="tv-stay-tag">
+                                        <i class="fas fa-coffee me-1"></i>Кафе
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Stay 2 -->
+                <div class="col-12 col-md-4">
+                    <article class="tv-stay-card h-100">
+                        <div class="tv-stay-media">
+                            <div class="tv-stay-img"
+                                 style="background-image: url('https://morski-briz.com/images/2019/08/01/.jpg');">
+                            </div>
+                            <div class="tv-stay-badge tv-tag-glass">
+                                <i class="fas fa-water"></i>
+                                Първа линия
+                            </div>
+                        </div>
+                        <div class="tv-stay-content">
+                            <div class="tv-stay-meta-top">
+                                <div>
+                                    <div class="tv-stay-location">Вила "Морски бриз" · Лозенец</div>
+                                    <div class="tv-stay-text">
+                                        Самостоятелна вила с двор, барбекю и изглед към плаж Оазис.
+                                    </div>
+                                </div>
+                                <div class="tv-stay-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.90 · 62 отзива</span>
+                                </div>
+                            </div>
+                            <div class="tv-stay-footer">
+                                <div class="tv-stay-price">
+                                    <strong>250 BGN</strong>
+                                    <span>на нощ</span>
+                                </div>
+                                <div class="tv-stay-tags">
+                                    <span class="tv-stay-tag">
+                                        <i class="fas fa-car me-1"></i>Паркинг
+                                    </span>
+                                    <span class="tv-stay-tag">
+                                        <i class="fas fa-paw me-1"></i>Pet friendly
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Stay 3 -->
+                <div class="col-12 col-md-4">
+                    <article class="tv-stay-card h-100">
+                        <div class="tv-stay-media">
+                            <div class="tv-stay-img"
+                                 style="background-image: url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/220164400.jpg?k=1aefd73caad27d52c39fc3b2b816c4ec39f18ecbe7ea761216b38ea3cc4711eb&o=');">
+                            </div>
+                            <div class="tv-stay-badge tv-tag-glass">
+                                <i class="fas fa-snowflake"></i>
+                                Ски зона
+                            </div>
+                        </div>
+                        <div class="tv-stay-content">
+                            <div class="tv-stay-meta-top">
+                                <div>
+                                    <div class="tv-stay-location">Алпин Студио · Боровец</div>
+                                    <div class="tv-stay-text">
+                                        Уютно студио на метри от кабинковия лифт Ястребец.
+                                    </div>
+                                </div>
+                                <div class="tv-stay-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.85 · 94 отзива</span>
+                                </div>
+                            </div>
+                            <div class="tv-stay-footer">
+                                <div class="tv-stay-price">
+                                    <strong>135 BGN</strong>
+                                    <span>на нощ</span>
+                                </div>
+                                <div class="tv-stay-tags">
+                                    <span class="tv-stay-tag">
+                                        <i class="fas fa-bolt me-1"></i>Self check-in
+                                    </span>
+                                    <span class="tv-stay-tag">
+                                        <i class="fas fa-fire me-1"></i>Камина
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- REVIEWS -->
+        <section class="tv-section py-4 py-md-5">
+            <header class="tv-section-header">
+                <div>
+                    <div class="tv-section-title-small">Мнения на пътуващите</div>
+                    <div class="tv-section-subtitle">Реални отзиви от българи.</div>
+                </div>
+            </header>
+
+            <div class="row g-3">
+                <div class="col-12 col-md-4">
+                    <article class="tv-glass-soft p-4 tv-review-card h-100">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="tv-avatar-circle" style="background:linear-gradient(135deg,#a5b4fc,#38bdf8);">И</div>
+                            <div>
+                                <strong class="text-white">Иван Петров</strong><br />
+                                <small class="text-sky-200">Варна -> София</small>
+                            </div>
+                        </div>
+                        <p class="small text-light">
+                            “Travelis ми помогна да намеря хотел до НДК и веднага ми показа как да стигна с метрото от летището. Супер удобно!”
+                        </p>
+                        <div class="tv-hero-rating mt-2">
+                            <i class="fas fa-star"></i><strong>5.0</strong>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <article class="tv-glass-soft p-4 tv-review-card h-100">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="tv-avatar-circle" style="background:linear-gradient(135deg,#34d399,#0ea5e9);">Е</div>
+                            <div>
+                                <strong class="text-white">Елена Димитрова</strong><br />
+                                <small class="text-sky-200">Почивка в Пампорово</small>
+                            </div>
+                        </div>
+                        <p class="small text-light">
+                            “Използвах филтъра за спа хотели и намерих страхотна оферта за Каменар. Цените са абсолютно реални.”
+                        </p>
+                        <div class="tv-hero-rating mt-2">
+                            <i class="fas fa-star"></i><strong>4.9</strong>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <article class="tv-glass-soft p-4 tv-review-card h-100">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="tv-avatar-circle" style="background:linear-gradient(135deg,#f472b6,#93c5fd);">Г</div>
+                            <div>
+                                <strong class="text-white">Георги Христов</strong><br />
+                                <small class="text-sky-200">Бизнес пътуване Пловдив</small>
+                            </div>
+                        </div>
+                        <p class="small text-light">
+                            “Най-накрая българско приложение, което комбинира Spark, таксита и хотели на едно място.”
+                        </p>
+                        <div class="tv-hero-rating mt-2">
+                            <i class="fas fa-star"></i><strong>5.0</strong>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTNER SECTION -->
+        <section class="tv-section py-4 py-md-5">
+            <div class="tv-glass p-4 p-lg-5 position-relative overflow-hidden tv-partner-shell">
+                <div class="row align-items-center g-4">
+                    <div class="col-12 col-lg-6">
+                        <h2 class="fw-bold text-white mb-3">Имаш хотел или къща за гости?</h2>
+                        <p class="text-sky-200">
+                            Стани партньор на Travelis.bg и достигни до хиляди български туристи.
+                            Интеграция с Booking и Airbnb календари.
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-3 mt-3">
+                            <div class="tv-glass-soft px-3 py-2 rounded-pill small text-white">
+                                <i class="fas fa-chart-line me-1 text-success"></i>0% комисиона (Месец 1)
+                            </div>
+                            <div class="tv-glass-soft px-3 py-2 rounded-pill small text-white">
+                                <i class="fas fa-headset me-1 text-info"></i>БГ Поддръжка
+                            </div>
+                        </div>
+
+                        <button class="tv-btn-primary mt-4">
+                            <i class="fas fa-door-open"></i>
+                            Добави обект
+                        </button>
+                    </div>
+
+                    <div class="col-12 col-lg-6 text-center">
+                        <img src="https://corewave.io/assets/media/others/Become_partner.png"
+                             class="img-fluid tv-partner-img" alt="Partner" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="tv-section py-4 py-md-5">
+            <header class="tv-section-header">
+                <div>
+                    <div class="tv-section-title-small">Често задавани въпроси</div>
+                    <div class="tv-section-subtitle">Помощ за твоето пътуване в България.</div>
+                </div>
+            </header>
+
+            <div class="accordion tv-faq-accordion" id="tvFaqAccordion">
+                <div class="accordion-item tv-glass-soft mb-3">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button bg-transparent text-white"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#tvFaq1"
+                                aria-expanded="true"
+                                aria-controls="tvFaq1">
+                            Какви разплащателни методи приемате?
+                        </button>
+                    </h2>
+                    <div id="tvFaq1" class="accordion-collapse collapse show" data-bs-parent="#tvFaqAccordion">
+                        <div class="accordion-body text-sky-200 small">
+                            Приемаме всички карти (Visa, Mastercard), Revolut, както и ePay.bg за удобство на българските потребители.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item tv-glass-soft mb-3">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-transparent text-white"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#tvFaq2"
+                                aria-expanded="false"
+                                aria-controls="tvFaq2">
+                            Издавате ли фактури за командировки?
+                        </button>
+                    </h2>
+                    <div id="tvFaq2" class="accordion-collapse collapse" data-bs-parent="#tvFaqAccordion">
+                        <div class="accordion-body text-sky-200 small">
+                            Да, автоматично издаваме ДДС фактура за всяка резервация на хотел или rent-a-car в рамките на България.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item tv-glass-soft mb-3">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-transparent text-white"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#tvFaq3"
+                                aria-expanded="false"
+                                aria-controls="tvFaq3">
+                            Актуална ли е информацията за градския транспорт?
+                        </button>
+                    </h2>
+                    <div id="tvFaq3" class="accordion-collapse collapse" data-bs-parent="#tvFaqAccordion">
+                        <div class="accordion-body text-sky-200 small">
+                            Да, Travelis е свързан директно с API на ЦГМ София и показва движението на автобуси, трамваи и метро в реално време.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div> 
