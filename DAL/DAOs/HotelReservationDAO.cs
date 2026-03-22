@@ -1,9 +1,7 @@
 ﻿using DAL.Interfaces;
 using Dapper;
 using Domain.DTOs;
-using Domain.Entities;
 using Microsoft.Data.SqlClient;
-using System.Collections;
 
 namespace DAL.DAOs
 {

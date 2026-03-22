@@ -1,9 +1,6 @@
 ﻿using DAL.Interfaces;
 using Microsoft.Data.SqlClient;
-using System;
 using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DAL.Factories
 {

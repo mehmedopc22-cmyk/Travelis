@@ -1,6 +1,5 @@
 ﻿using DAL.Interfaces;
 using Domain.Entities;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers

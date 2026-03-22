@@ -1,5 +1,4 @@
-﻿
-namespace Domain.DTOs
+﻿namespace Domain.DTOs
 {
     public class HotelReservationPatchDTO
     {

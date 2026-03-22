@@ -1,5 +1,4 @@
-﻿using DAL.Factories;
-using DAL.Interfaces;
+﻿using DAL.Interfaces;
 using Dapper;
 using Domain.DTOs;
 using Domain.DTOs.RentalCarReservation;
