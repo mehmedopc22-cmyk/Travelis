@@ -869,8 +869,7 @@ namespace DAL {
         ///    rm.[Capacity]
         ///
         ///FROM [HotelReservation] res
-        ///INNER JOIN [Hotels] h ON res.[HotelID] = h.[Id]
-        ///INNER JOIN [Users] u ON [rest of string was truncated]&quot;;.
+        ///INNER JOIN [Hotels] h ON res.[HotelID] = h.[Id [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string HotelReservations_SelectAll {
             get {
@@ -926,8 +925,7 @@ namespace DAL {
         ///    rm.[Capacity]
         ///
         ///FROM [HotelReservation] res
-        ///INNER JOIN [Hotels] h ON res.[HotelID] = h.[Id]
-        ///INNER JOIN [Users] u ON [rest of string was truncated]&quot;;.
+        ///INNER JOIN [Hotels] h ON res.[HotelID] = h.[Id [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string HotelReservations_SelectById {
             get {
@@ -964,8 +962,7 @@ namespace DAL {
         ///    rm.[Capacity]
         ///
         ///FROM [HotelReservation] res
-        ///INNER JOIN [Hotels] h ON res.[HotelID] = h.[Id]
-        ///INNER JOIN [Users] u ON [rest of string was truncated]&quot;;.
+        ///INNER JOIN [Hotels] h ON res.[HotelID] = h.[Id [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string HotelReservations_SelectByUserId {
             get {
@@ -1198,6 +1195,18 @@ namespace DAL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Status
+        ///FROM Hotels
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Hotels_CheckHotelStatus {
+            get {
+                return ResourceManager.GetString("Hotels_CheckHotelStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DELETE FROM Hotels
         ///WHERE Id = @Id.
         /// </summary>
@@ -1282,11 +1291,57 @@ namespace DAL {
         ///    CreatedAt,
         ///    UpdatedAt
         ///FROM Hotels
+        ///WHERE Email = @Email.
+        /// </summary>
+        internal static string Hotels_SelectByEmail {
+            get {
+                return ResourceManager.GetString("Hotels_SelectByEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Name,
+        ///    Country,
+        ///    City,
+        ///    Street,
+        ///    PostalCode,
+        ///    PhoneNumber,
+        ///    Email,
+        ///    Status,
+        ///    Approved,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM Hotels
         ///WHERE Id = @Id.
         /// </summary>
         internal static string Hotels_SelectById {
             get {
                 return ResourceManager.GetString("Hotels_SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    Id,
+        ///    Name,
+        ///    Country,
+        ///    City,
+        ///    Street,
+        ///    PostalCode,
+        ///    PhoneNumber,
+        ///    Email,
+        ///    Status,
+        ///    Approved,
+        ///    CreatedAt,
+        ///    UpdatedAt
+        ///FROM Hotels
+        ///WHERE Country = @Country.
+        /// </summary>
+        internal static string Hotels_SelecyByCoutryName {
+            get {
+                return ResourceManager.GetString("Hotels_SelecyByCoutryName", resourceCulture);
             }
         }
         
@@ -1308,6 +1363,19 @@ namespace DAL {
         internal static string Hotels_Update {
             get {
                 return ResourceManager.GetString("Hotels_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE Hotels
+        ///SET
+        ///    Status = 1
+        ///
+        ///WHERE Id = @Id.
+        /// </summary>
+        internal static string Hotels_UpdateHotelStatus {
+            get {
+                return ResourceManager.GetString("Hotels_UpdateHotelStatus", resourceCulture);
             }
         }
         

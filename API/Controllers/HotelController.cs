@@ -7,11 +7,12 @@ namespace API.Controllers
 {
     //[Authorize]
     [ApiController]
+    [Route("hotel")]
     public class HotelController(IHotelDAO hotelDAO) : ControllerBase
     {
         private readonly IHotelDAO _hotelDAO = hotelDAO;
 
-        [HttpGet("getAllHotels")]
+        [HttpGet("all")]
         public ActionResult<IEnumerable<HotelEntity>> GetHotels() {
 
             try
@@ -28,16 +29,16 @@ namespace API.Controllers
             catch (Exception)
             {
                 return BadRequest();
-            }              
+            }
         }
 
-        [HttpPost("getHotelById")]
-        public ActionResult<HotelEntity> GetHotelById(Guid HotelId)
+        [HttpGet("{id}")]
+        public ActionResult<HotelEntity> GetHotelById(Guid hotelId)
         {
 
             try
             {
-                HotelEntity? hotel = _hotelDAO.SelectById(HotelId);
+                HotelEntity? hotel = _hotelDAO.SelectById(hotelId);
 
                 if (hotel == null)
                 {
@@ -54,7 +55,65 @@ namespace API.Controllers
             }
         }
 
-        [HttpPost("insertHotel")]
+        [HttpGet("country/{countryName}")]
+        public ActionResult<IEnumerable<HotelEntity>> GetHotelByConutry(string countryName)
+        {
+
+            try
+            {
+                IEnumerable<HotelEntity>? hotels = _hotelDAO.SelectByCountryName(countryName);
+
+                if (hotels == null || !hotels.Any())
+                {
+                    return NotFound();
+                }
+
+                return Ok(hotels);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("contact/{email}")]
+        public ActionResult<IEnumerable<HotelEntity>> GetHotelByEmail(string email)
+        {
+
+            try
+            {
+                IEnumerable<HotelEntity>? hotels = _hotelDAO.SelectByEmail(email);
+
+                if (hotels == null || !hotels.Any())
+                {
+                    return NotFound();
+                }
+
+                return Ok(hotels);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("status/{hotelId}")]
+        public ActionResult<int> CheckHotelStatus(Guid hotelId)
+        {
+
+            try
+            {
+                int status = _hotelDAO.CheckHotelStatus(hotelId);
+
+                return Ok(status);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("{HotelEntity}")]
         public ActionResult InsertHotel([FromBody] HotelEntity hotel)
         {
             try
@@ -74,8 +133,49 @@ namespace API.Controllers
             }
         }
 
-        [HttpPut("updateHotel")]
-        public ActionResult updateHotel([FromBody] HotelEntity hotel)
+        [HttpPost("application/{HotelEntity}")]
+        public ActionResult InsertHotelForApproval([FromBody] HotelEntity hotel)
+        {
+            try
+            {
+                hotel.Approved = false;
+
+                HotelEntity insertedHotel = _hotelDAO.Insert(hotel);
+
+                if (insertedHotel == null)
+                {
+                    return StatusCode(500, "Insertion failed");
+                }
+
+                return Ok(hotel);
+            }
+
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPatch("approve/{hotelId}")]
+        public ActionResult ApproveHotel(Guid hotelId) {
+            try
+            {
+                if (_hotelDAO.UpdateHotelStatusTrue(hotelId)) {
+                    return Ok();
+                }
+
+                return BadRequest();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+
+                throw;
+            }
+        }
+
+        [HttpPut("{HotelEntity}")]
+        public ActionResult UpdateHotel([FromBody] HotelEntity hotel)
         {
             try
             {
@@ -87,6 +187,21 @@ namespace API.Controllers
                 return BadRequest();
             }
 
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteHotel(Guid hotelId) {
+            try
+            {
+                if (_hotelDAO.Delete(hotelId)) {
+                    return Ok();
+                }
+                return BadRequest();
+            }
             catch (Exception)
             {
                 return BadRequest();

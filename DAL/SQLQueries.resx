@@ -1500,4 +1500,51 @@ INNER JOIN [Users] u ON res.[UserID] = u.[Id]
 INNER JOIN [HotelRooms] rm ON res.[RoomID] = rm.[Id];</value>
     <comment>Get all hotel reservations</comment>
   </data>
+  <data name="Hotels_SelecyByCoutryName" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Name,
+    Country,
+    City,
+    Street,
+    PostalCode,
+    PhoneNumber,
+    Email,
+    Status,
+    Approved,
+    CreatedAt,
+    UpdatedAt
+FROM Hotels
+WHERE Country = @Country</value>
+  </data>
+  <data name="Hotels_SelectByEmail" xml:space="preserve">
+    <value>SELECT
+    Id,
+    Name,
+    Country,
+    City,
+    Street,
+    PostalCode,
+    PhoneNumber,
+    Email,
+    Status,
+    Approved,
+    CreatedAt,
+    UpdatedAt
+FROM Hotels
+WHERE Email = @Email</value>
+  </data>
+  <data name="Hotels_CheckHotelStatus" xml:space="preserve">
+    <value>SELECT
+    Status
+FROM Hotels
+WHERE Id = @Id</value>
+  </data>
+  <data name="Hotels_UpdateHotelStatus" xml:space="preserve">
+    <value>UPDATE Hotels
+SET
+    Status = 1
+
+WHERE Id = @Id</value>
+  </data>
 </root>

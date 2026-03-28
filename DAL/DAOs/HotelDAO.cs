@@ -45,6 +45,56 @@ namespace DAL.DAOs
             }
         }
 
+        public IEnumerable<HotelEntity> SelectByCountryName(string countryName)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+                return sqlConnection.Query<HotelEntity>(
+                    SQLQueries.Hotels_SelecyByCoutryName,
+                    new { Country = countryName }
+                );
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<HotelEntity> SelectByEmail(string hotelEmail)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+                return sqlConnection.Query<HotelEntity>(
+                    SQLQueries.Hotels_SelectByEmail,
+                    new { Email = hotelEmail }
+                );
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public int CheckHotelStatus(Guid hotelId)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+            try
+            {
+                return sqlConnection.ExecuteScalar<int>(
+                    SQLQueries.Hotels_CheckHotelStatus,
+                    new { Id = hotelId }
+                );
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
+
         public HotelEntity Insert(HotelEntity hotel)
         {
             using SqlConnection sqlConnection = _databaseFactory.GetConnection();
@@ -106,6 +156,23 @@ namespace DAL.DAOs
                 });
 
                 return rows > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateHotelStatusTrue(Guid hotelId)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+               sqlConnection.Query<bool>(SQLQueries.Hotels_UpdateHotelStatus, new { Id = hotelId });
+
+               return true;
+
             }
             catch (Exception)
             {
