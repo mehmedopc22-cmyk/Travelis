@@ -2199,6 +2199,84 @@ namespace DAL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  SELECT
+        ///        Id,
+        ///        Email,
+        ///        FirstName,
+        ///        LastName,
+        ///        LoyaltyPoints,
+        ///        AvatarURL,
+        ///        PasswordHash,
+        ///        MFAType,
+        ///        TFASecret,
+        ///        IsVerified,
+        ///        Status,
+        ///        RoleId,
+        ///        LastLoginAt,
+        ///        CreatedAt,
+        ///        UpdatedAt
+        ///    FROM Users
+        ///    WHERE RoleId = @RoleId.
+        /// </summary>
+        internal static string Users_SelectByRoleId {
+            get {
+                return ResourceManager.GetString("Users_SelectByRoleId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///        Id,
+        ///        Email,
+        ///        FirstName,
+        ///        LastName,
+        ///        LoyaltyPoints,
+        ///        AvatarURL,
+        ///        PasswordHash,
+        ///        MFAType,
+        ///        TFASecret,
+        ///        IsVerified,
+        ///        Status,
+        ///        RoleId,
+        ///        LastLoginAt,
+        ///        CreatedAt,
+        ///        UpdatedAt
+        ///    FROM Users
+        ///    WHERE Status = @Status.
+        /// </summary>
+        internal static string Users_SelectByStatus {
+            get {
+                return ResourceManager.GetString("Users_SelectByStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  SELECT
+        ///        Id,
+        ///        Email,
+        ///        FirstName,
+        ///        LastName,
+        ///        LoyaltyPoints,
+        ///        AvatarURL,
+        ///        PasswordHash,
+        ///        MFAType,
+        ///        TFASecret,
+        ///        IsVerified,
+        ///        Status,
+        ///        RoleId,
+        ///        LastLoginAt,
+        ///        CreatedAt,
+        ///        UpdatedAt
+        ///    FROM Users
+        ///    WHERE Email = @Email.
+        /// </summary>
+        internal static string Users_SelectUserByEmail {
+            get {
+                return ResourceManager.GetString("Users_SelectUserByEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UPDATE Users
         ///SET
         ///    Email = @Email,
@@ -2232,6 +2310,32 @@ namespace DAL {
         internal static string Users_UpdateLastLogin {
             get {
                 return ResourceManager.GetString("Users_UpdateLastLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to   UPDATE Users
+        ///    SET
+        ///        Status = @Status,
+        ///        UpdatedAt = @UpdatedAt
+        ///    WHERE Id = @UserId.
+        /// </summary>
+        internal static string Users_UpdateStatus {
+            get {
+                return ResourceManager.GetString("Users_UpdateStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to     UPDATE Users
+        ///    SET
+        ///        IsVerified = @IsVerified,
+        ///        UpdatedAt = @UpdatedAt
+        ///    WHERE Id = @UserId.
+        /// </summary>
+        internal static string Users_UpdateVerification {
+            get {
+                return ResourceManager.GetString("Users_UpdateVerification", resourceCulture);
             }
         }
     }

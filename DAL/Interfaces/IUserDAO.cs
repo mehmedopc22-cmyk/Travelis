@@ -8,5 +8,11 @@ namespace DAL.Interfaces
         UserLoginDTO? SelectByEmail(string email);
         bool EmailExists(string email);
         bool UpdateLastLogin(Guid userId);
+
+        UserEntity? SelectUserByEmail(string email);
+        IEnumerable<UserEntity> SelectByRoleId(Guid roleId);
+        IEnumerable<UserEntity> SelectByStatus(byte status);
+        bool UpdateStatus(Guid userId, byte status);
+        bool UpdateVerification(Guid userId, bool isVerified);
     }
 }

@@ -1547,4 +1547,78 @@ SET
 
 WHERE Id = @Id</value>
   </data>
+  <data name="Users_SelectUserByEmail" xml:space="preserve">
+    <value> SELECT
+        Id,
+        Email,
+        FirstName,
+        LastName,
+        LoyaltyPoints,
+        AvatarURL,
+        PasswordHash,
+        MFAType,
+        TFASecret,
+        IsVerified,
+        Status,
+        RoleId,
+        LastLoginAt,
+        CreatedAt,
+        UpdatedAt
+    FROM Users
+    WHERE Email = @Email</value>
+  </data>
+  <data name="Users_SelectByRoleId" xml:space="preserve">
+    <value> SELECT
+        Id,
+        Email,
+        FirstName,
+        LastName,
+        LoyaltyPoints,
+        AvatarURL,
+        PasswordHash,
+        MFAType,
+        TFASecret,
+        IsVerified,
+        Status,
+        RoleId,
+        LastLoginAt,
+        CreatedAt,
+        UpdatedAt
+    FROM Users
+    WHERE RoleId = @RoleId</value>
+  </data>
+  <data name="Users_SelectByStatus" xml:space="preserve">
+    <value>SELECT
+        Id,
+        Email,
+        FirstName,
+        LastName,
+        LoyaltyPoints,
+        AvatarURL,
+        PasswordHash,
+        MFAType,
+        TFASecret,
+        IsVerified,
+        Status,
+        RoleId,
+        LastLoginAt,
+        CreatedAt,
+        UpdatedAt
+    FROM Users
+    WHERE Status = @Status</value>
+  </data>
+  <data name="Users_UpdateStatus" xml:space="preserve">
+    <value>  UPDATE Users
+    SET
+        Status = @Status,
+        UpdatedAt = @UpdatedAt
+    WHERE Id = @UserId</value>
+  </data>
+  <data name="Users_UpdateVerification" xml:space="preserve">
+    <value>    UPDATE Users
+    SET
+        IsVerified = @IsVerified,
+        UpdatedAt = @UpdatedAt
+    WHERE Id = @UserId</value>
+  </data>
 </root>

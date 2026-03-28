@@ -33,12 +33,12 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<HotelEntity> GetHotelById(Guid hotelId)
+        public ActionResult<HotelEntity> GetHotelById(Guid Id)
         {
 
             try
             {
-                HotelEntity? hotel = _hotelDAO.SelectById(hotelId);
+                HotelEntity? hotel = _hotelDAO.SelectById(Id);
 
                 if (hotel == null)
                 {

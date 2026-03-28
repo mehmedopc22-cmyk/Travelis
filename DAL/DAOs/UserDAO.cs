@@ -119,6 +119,103 @@ namespace DAL.DAOs
             }
         }
 
+        public UserEntity? SelectUserByEmail(string email)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+                return sqlConnection.QueryFirstOrDefault<UserEntity>(
+                    SQLQueries.Users_SelectUserByEmail,
+                    new { Email = email }
+                );
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<UserEntity> SelectByRoleId(Guid roleId)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+                return sqlConnection.Query<UserEntity>(
+                    SQLQueries.Users_SelectByRoleId,
+                    new { RoleId = roleId }
+                );
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<UserEntity>();
+            }
+        }
+
+        public IEnumerable<UserEntity> SelectByStatus(byte status)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+                return sqlConnection.Query<UserEntity>(
+                    SQLQueries.Users_SelectByStatus,
+                    new { Status = status }
+                );
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<UserEntity>();
+            }
+        }
+
+        public bool UpdateStatus(Guid userId, byte status)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+                int rows = sqlConnection.Execute(
+                    SQLQueries.Users_UpdateStatus,
+                    new
+                    {
+                        UserId = userId,
+                        Status = status,
+                        UpdatedAt = DateTime.UtcNow
+                    });
+
+                return rows > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateVerification(Guid userId, bool isVerified)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+                int rows = sqlConnection.Execute(
+                    SQLQueries.Users_UpdateVerification,
+                    new
+                    {
+                        UserId = userId,
+                        IsVerified = isVerified,
+                        UpdatedAt = DateTime.UtcNow
+                    });
+
+                return rows > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public bool Update(UserEntity user)
         {
             using SqlConnection sqlConnection = _databaseFactory.GetConnection();
