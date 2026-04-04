@@ -16,7 +16,7 @@ namespace DAL.DAOs
                 using SqlConnection sqlConnection = _databaseFactory.GetConnection();
 
                 var sql = SQLQueries.HotelReservations_SelectAll;
-                var reservations = sqlConnection.Query<HotelReservationResponseDTO, HotelResponseDTO, UserResponseDTO, HotelRoomResponseDTO, HotelReservationResponseDTO>(
+                var reservations = sqlConnection.Query<HotelReservationResponseDTO, HotelResponseDTO, UserResponseDTO, HotelReservationRoomResponseDTO, HotelReservationResponseDTO>(
                     sql,
                     (res, hotel, user, room) =>
                     {
@@ -43,7 +43,7 @@ namespace DAL.DAOs
                 using SqlConnection sqlConnection = _databaseFactory.GetConnection();
 
                 var sql = SQLQueries.HotelReservations_SelectByUserId;
-                var reservations = sqlConnection.Query<HotelReservationResponseDTO, HotelResponseDTO, UserResponseDTO, HotelRoomResponseDTO, HotelReservationResponseDTO>(
+                var reservations = sqlConnection.Query<HotelReservationResponseDTO, HotelResponseDTO, UserResponseDTO, HotelReservationRoomResponseDTO, HotelReservationResponseDTO>(
                      sql,
                      (res, hotel, user, room) =>
                      {
@@ -72,7 +72,7 @@ namespace DAL.DAOs
 
                 var sql = SQLQueries.HotelReservations_SelectById;
 
-                var reservation = sqlConnection.Query<HotelReservationResponseDTO, HotelResponseDTO, UserResponseDTO, HotelRoomResponseDTO, HotelReservationResponseDTO>(
+                var reservation = sqlConnection.Query<HotelReservationResponseDTO, HotelResponseDTO, UserResponseDTO, HotelReservationRoomResponseDTO, HotelReservationResponseDTO>(
                     sql,
                     (res, hotel, user, room) =>
                     {

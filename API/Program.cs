@@ -23,6 +23,7 @@ namespace API
             builder.Services.AddTransient<IHotelDAO, HotelDAO>();
             builder.Services.AddTransient<IHotelReservationDAO, HotelReservationDAO>();
             builder.Services.AddTransient<IRentalCarReservationDAO, RentalCarReservationDAO>();
+            builder.Services.AddTransient<IHotelRoomDAO, HotelRoomDAO>();
             builder.Services.AddSingleton<PasswordHasherService>();
             builder.Services.AddSingleton<JWTService>();
             builder.Services

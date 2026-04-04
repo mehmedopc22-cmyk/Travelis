@@ -2,8 +2,8 @@
 {
     public class HotelRoomResponseDTO
     {
-        public Guid HotelRoomId { get; set; } = Guid.Empty;
-        public Guid HotelID { get; set; } = Guid.Empty;
+        public Guid Id { get; set; } = Guid.Empty;
+        public HotelRoomHotelResponseDTO Hotel { get; set; } = null;
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; } = -1;
         public string RoomNo { get; set; } = string.Empty;

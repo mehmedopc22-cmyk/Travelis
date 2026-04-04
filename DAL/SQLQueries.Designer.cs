@@ -22,7 +22,7 @@ namespace DAL {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SQLQueries {
+    public class SQLQueries {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace DAL {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DAL.SQLQueries", typeof(SQLQueries).Assembly);
@@ -51,7 +51,7 @@ namespace DAL {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -64,7 +64,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM AIRecommendations
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string AIRecommendations_Delete {
+        public static string AIRecommendations_Delete {
             get {
                 return ResourceManager.GetString("AIRecommendations_Delete", resourceCulture);
             }
@@ -86,7 +86,7 @@ namespace DAL {
         ///    @PromptedUserId
         ///).
         /// </summary>
-        internal static string AIRecommendations_Insert {
+        public static string AIRecommendations_Insert {
             get {
                 return ResourceManager.GetString("AIRecommendations_Insert", resourceCulture);
             }
@@ -100,7 +100,7 @@ namespace DAL {
         ///    PromptedUserId
         ///FROM AIRecommendations.
         /// </summary>
-        internal static string AIRecommendations_SelectAll {
+        public static string AIRecommendations_SelectAll {
             get {
                 return ResourceManager.GetString("AIRecommendations_SelectAll", resourceCulture);
             }
@@ -115,7 +115,7 @@ namespace DAL {
         ///FROM AIRecommendations
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string AIRecommendations_SelectById {
+        public static string AIRecommendations_SelectById {
             get {
                 return ResourceManager.GetString("AIRecommendations_SelectById", resourceCulture);
             }
@@ -130,7 +130,7 @@ namespace DAL {
         ///FROM AIRecommendations
         ///WHERE PromptedUserId = @PromptedUserId.
         /// </summary>
-        internal static string AIRecommendations_SelectByUserId {
+        public static string AIRecommendations_SelectByUserId {
             get {
                 return ResourceManager.GetString("AIRecommendations_SelectByUserId", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace DAL {
         ///    PromptedUserId = @PromptedUserId
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string AIRecommendations_Update {
+        public static string AIRecommendations_Update {
             get {
                 return ResourceManager.GetString("AIRecommendations_Update", resourceCulture);
             }
@@ -154,7 +154,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM Comments
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Comments_Delete {
+        public static string Comments_Delete {
             get {
                 return ResourceManager.GetString("Comments_Delete", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace DAL {
         ///    @UpdatedAt
         ///).
         /// </summary>
-        internal static string Comments_Insert {
+        public static string Comments_Insert {
             get {
                 return ResourceManager.GetString("Comments_Insert", resourceCulture);
             }
@@ -196,7 +196,7 @@ namespace DAL {
         ///    UpdatedAt
         ///FROM Comments.
         /// </summary>
-        internal static string Comments_SelectAll {
+        public static string Comments_SelectAll {
             get {
                 return ResourceManager.GetString("Comments_SelectAll", resourceCulture);
             }
@@ -213,7 +213,7 @@ namespace DAL {
         ///FROM Comments
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Comments_SelectById {
+        public static string Comments_SelectById {
             get {
                 return ResourceManager.GetString("Comments_SelectById", resourceCulture);
             }
@@ -230,7 +230,7 @@ namespace DAL {
         ///FROM Comments
         ///WHERE UserId = @UserId.
         /// </summary>
-        internal static string Comments_SelectByUserId {
+        public static string Comments_SelectByUserId {
             get {
                 return ResourceManager.GetString("Comments_SelectByUserId", resourceCulture);
             }
@@ -245,7 +245,7 @@ namespace DAL {
         ///    UpdatedAt = @UpdatedAt
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Comments_Update {
+        public static string Comments_Update {
             get {
                 return ResourceManager.GetString("Comments_Update", resourceCulture);
             }
@@ -255,7 +255,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM Conveniences
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Conveniences_Delete {
+        public static string Conveniences_Delete {
             get {
                 return ResourceManager.GetString("Conveniences_Delete", resourceCulture);
             }
@@ -273,7 +273,7 @@ namespace DAL {
         ///    @Name
         ///).
         /// </summary>
-        internal static string Conveniences_Insert {
+        public static string Conveniences_Insert {
             get {
                 return ResourceManager.GetString("Conveniences_Insert", resourceCulture);
             }
@@ -285,7 +285,7 @@ namespace DAL {
         ///    Name
         ///FROM Conveniences.
         /// </summary>
-        internal static string Conveniences_SelectAll {
+        public static string Conveniences_SelectAll {
             get {
                 return ResourceManager.GetString("Conveniences_SelectAll", resourceCulture);
             }
@@ -298,7 +298,7 @@ namespace DAL {
         ///FROM Conveniences
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Conveniences_SelectById {
+        public static string Conveniences_SelectById {
             get {
                 return ResourceManager.GetString("Conveniences_SelectById", resourceCulture);
             }
@@ -310,7 +310,7 @@ namespace DAL {
         ///    Name = @Name
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Conveniences_Update {
+        public static string Conveniences_Update {
             get {
                 return ResourceManager.GetString("Conveniences_Update", resourceCulture);
             }
@@ -320,7 +320,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM Currencies
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Currencies_Delete {
+        public static string Currencies_Delete {
             get {
                 return ResourceManager.GetString("Currencies_Delete", resourceCulture);
             }
@@ -340,7 +340,7 @@ namespace DAL {
         ///    @Code
         ///).
         /// </summary>
-        internal static string Currencies_Insert {
+        public static string Currencies_Insert {
             get {
                 return ResourceManager.GetString("Currencies_Insert", resourceCulture);
             }
@@ -353,7 +353,7 @@ namespace DAL {
         ///    Code
         ///FROM Currencies.
         /// </summary>
-        internal static string Currencies_SelectAll {
+        public static string Currencies_SelectAll {
             get {
                 return ResourceManager.GetString("Currencies_SelectAll", resourceCulture);
             }
@@ -367,7 +367,7 @@ namespace DAL {
         ///FROM Currencies
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Currencies_SelectById {
+        public static string Currencies_SelectById {
             get {
                 return ResourceManager.GetString("Currencies_SelectById", resourceCulture);
             }
@@ -380,7 +380,7 @@ namespace DAL {
         ///    Code = @Code
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Currencies_Update {
+        public static string Currencies_Update {
             get {
                 return ResourceManager.GetString("Currencies_Update", resourceCulture);
             }
@@ -390,7 +390,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM HotelComments
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelComments_Delete {
+        public static string HotelComments_Delete {
             get {
                 return ResourceManager.GetString("HotelComments_Delete", resourceCulture);
             }
@@ -401,7 +401,7 @@ namespace DAL {
         ///WHERE HotelId = @HotelId
         ///  AND CommentId = @CommentId.
         /// </summary>
-        internal static string HotelComments_DeleteByHotelAndComment {
+        public static string HotelComments_DeleteByHotelAndComment {
             get {
                 return ResourceManager.GetString("HotelComments_DeleteByHotelAndComment", resourceCulture);
             }
@@ -421,7 +421,7 @@ namespace DAL {
         ///    @CommentId
         ///).
         /// </summary>
-        internal static string HotelComments_Insert {
+        public static string HotelComments_Insert {
             get {
                 return ResourceManager.GetString("HotelComments_Insert", resourceCulture);
             }
@@ -434,7 +434,7 @@ namespace DAL {
         ///    CommentId
         ///FROM HotelComments.
         /// </summary>
-        internal static string HotelComments_SelectAll {
+        public static string HotelComments_SelectAll {
             get {
                 return ResourceManager.GetString("HotelComments_SelectAll", resourceCulture);
             }
@@ -448,7 +448,7 @@ namespace DAL {
         ///FROM HotelComments
         ///WHERE HotelId = @HotelId.
         /// </summary>
-        internal static string HotelComments_SelectByHotelId {
+        public static string HotelComments_SelectByHotelId {
             get {
                 return ResourceManager.GetString("HotelComments_SelectByHotelId", resourceCulture);
             }
@@ -462,7 +462,7 @@ namespace DAL {
         ///FROM HotelComments
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelComments_SelectById {
+        public static string HotelComments_SelectById {
             get {
                 return ResourceManager.GetString("HotelComments_SelectById", resourceCulture);
             }
@@ -472,7 +472,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM HotelConveniences
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelConveniences_Delete {
+        public static string HotelConveniences_Delete {
             get {
                 return ResourceManager.GetString("HotelConveniences_Delete", resourceCulture);
             }
@@ -483,7 +483,7 @@ namespace DAL {
         ///WHERE HotelId = @HotelId
         ///  AND ConvenienceId = @ConvenienceId.
         /// </summary>
-        internal static string HotelConveniences_DeleteByHotelAndConvenience {
+        public static string HotelConveniences_DeleteByHotelAndConvenience {
             get {
                 return ResourceManager.GetString("HotelConveniences_DeleteByHotelAndConvenience", resourceCulture);
             }
@@ -503,7 +503,7 @@ namespace DAL {
         ///    @ConvenienceId
         ///).
         /// </summary>
-        internal static string HotelConveniences_Insert {
+        public static string HotelConveniences_Insert {
             get {
                 return ResourceManager.GetString("HotelConveniences_Insert", resourceCulture);
             }
@@ -516,7 +516,7 @@ namespace DAL {
         ///    ConvenienceId
         ///FROM HotelConveniences.
         /// </summary>
-        internal static string HotelConveniences_SelectAll {
+        public static string HotelConveniences_SelectAll {
             get {
                 return ResourceManager.GetString("HotelConveniences_SelectAll", resourceCulture);
             }
@@ -530,7 +530,7 @@ namespace DAL {
         ///FROM HotelConveniences hc
         ///WHERE hc.HotelId = @HotelId.
         /// </summary>
-        internal static string HotelConveniences_SelectByHotelId {
+        public static string HotelConveniences_SelectByHotelId {
             get {
                 return ResourceManager.GetString("HotelConveniences_SelectByHotelId", resourceCulture);
             }
@@ -544,7 +544,7 @@ namespace DAL {
         ///FROM HotelConveniences
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelConveniences_SelectById {
+        public static string HotelConveniences_SelectById {
             get {
                 return ResourceManager.GetString("HotelConveniences_SelectById", resourceCulture);
             }
@@ -554,7 +554,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM HotelPayments
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelPayments_Delete {
+        public static string HotelPayments_Delete {
             get {
                 return ResourceManager.GetString("HotelPayments_Delete", resourceCulture);
             }
@@ -580,7 +580,7 @@ namespace DAL {
         ///    @CreatedAt
         ///).
         /// </summary>
-        internal static string HotelPayments_Insert {
+        public static string HotelPayments_Insert {
             get {
                 return ResourceManager.GetString("HotelPayments_Insert", resourceCulture);
             }
@@ -596,7 +596,7 @@ namespace DAL {
         ///    CreatedAt
         ///FROM HotelPayments.
         /// </summary>
-        internal static string HotelPayments_SelectAll {
+        public static string HotelPayments_SelectAll {
             get {
                 return ResourceManager.GetString("HotelPayments_SelectAll", resourceCulture);
             }
@@ -613,7 +613,7 @@ namespace DAL {
         ///FROM HotelPayments
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelPayments_SelectById {
+        public static string HotelPayments_SelectById {
             get {
                 return ResourceManager.GetString("HotelPayments_SelectById", resourceCulture);
             }
@@ -630,7 +630,7 @@ namespace DAL {
         ///FROM HotelPayments
         ///WHERE UserId = @UserId.
         /// </summary>
-        internal static string HotelPayments_SelectByUserId {
+        public static string HotelPayments_SelectByUserId {
             get {
                 return ResourceManager.GetString("HotelPayments_SelectByUserId", resourceCulture);
             }
@@ -640,7 +640,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM HotelRatings
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelRatings_Delete {
+        public static string HotelRatings_Delete {
             get {
                 return ResourceManager.GetString("HotelRatings_Delete", resourceCulture);
             }
@@ -651,7 +651,7 @@ namespace DAL {
         ///WHERE HotelId = @HotelId
         ///  AND RatingId = @RatingId.
         /// </summary>
-        internal static string HotelRatings_DeleteByHotelAndRating {
+        public static string HotelRatings_DeleteByHotelAndRating {
             get {
                 return ResourceManager.GetString("HotelRatings_DeleteByHotelAndRating", resourceCulture);
             }
@@ -671,7 +671,7 @@ namespace DAL {
         ///    @RatingId
         ///).
         /// </summary>
-        internal static string HotelRatings_Insert {
+        public static string HotelRatings_Insert {
             get {
                 return ResourceManager.GetString("HotelRatings_Insert", resourceCulture);
             }
@@ -684,7 +684,7 @@ namespace DAL {
         ///    RatingId
         ///FROM HotelRatings.
         /// </summary>
-        internal static string HotelRatings_SelectAll {
+        public static string HotelRatings_SelectAll {
             get {
                 return ResourceManager.GetString("HotelRatings_SelectAll", resourceCulture);
             }
@@ -698,7 +698,7 @@ namespace DAL {
         ///FROM HotelRatings
         ///WHERE HotelId = @HotelId.
         /// </summary>
-        internal static string HotelRatings_SelectByHotelId {
+        public static string HotelRatings_SelectByHotelId {
             get {
                 return ResourceManager.GetString("HotelRatings_SelectByHotelId", resourceCulture);
             }
@@ -712,7 +712,7 @@ namespace DAL {
         ///FROM HotelRatings
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelRatings_SelectById {
+        public static string HotelRatings_SelectById {
             get {
                 return ResourceManager.GetString("HotelRatings_SelectById", resourceCulture);
             }
@@ -722,7 +722,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM HotelRentalCars
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelRentalCars_Delete {
+        public static string HotelRentalCars_Delete {
             get {
                 return ResourceManager.GetString("HotelRentalCars_Delete", resourceCulture);
             }
@@ -733,7 +733,7 @@ namespace DAL {
         ///WHERE HotelId = @HotelId
         ///  AND RentalCarId = @RentalCarId.
         /// </summary>
-        internal static string HotelRentalCars_DeleteByHotelAndRentalCar {
+        public static string HotelRentalCars_DeleteByHotelAndRentalCar {
             get {
                 return ResourceManager.GetString("HotelRentalCars_DeleteByHotelAndRentalCar", resourceCulture);
             }
@@ -753,7 +753,7 @@ namespace DAL {
         ///    @RentalCarId
         ///).
         /// </summary>
-        internal static string HotelRentalCars_Insert {
+        public static string HotelRentalCars_Insert {
             get {
                 return ResourceManager.GetString("HotelRentalCars_Insert", resourceCulture);
             }
@@ -766,7 +766,7 @@ namespace DAL {
         ///    RentalCarId
         ///FROM HotelRentalCars.
         /// </summary>
-        internal static string HotelRentalCars_SelectAll {
+        public static string HotelRentalCars_SelectAll {
             get {
                 return ResourceManager.GetString("HotelRentalCars_SelectAll", resourceCulture);
             }
@@ -780,7 +780,7 @@ namespace DAL {
         ///FROM HotelRentalCars
         ///WHERE HotelId = @HotelId.
         /// </summary>
-        internal static string HotelRentalCars_SelectByHotelId {
+        public static string HotelRentalCars_SelectByHotelId {
             get {
                 return ResourceManager.GetString("HotelRentalCars_SelectByHotelId", resourceCulture);
             }
@@ -794,7 +794,7 @@ namespace DAL {
         ///FROM HotelRentalCars
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelRentalCars_SelectById {
+        public static string HotelRentalCars_SelectById {
             get {
                 return ResourceManager.GetString("HotelRentalCars_SelectById", resourceCulture);
             }
@@ -804,7 +804,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM HotelReservation
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelReservations_Delete {
+        public static string HotelReservations_Delete {
             get {
                 return ResourceManager.GetString("HotelReservations_Delete", resourceCulture);
             }
@@ -834,7 +834,7 @@ namespace DAL {
         ///    @UpdatedAt
         ///).
         /// </summary>
-        internal static string HotelReservations_Insert {
+        public static string HotelReservations_Insert {
             get {
                 return ResourceManager.GetString("HotelReservations_Insert", resourceCulture);
             }
@@ -871,7 +871,7 @@ namespace DAL {
         ///FROM [HotelReservation] res
         ///INNER JOIN [Hotels] h ON res.[HotelID] = h.[Id [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string HotelReservations_SelectAll {
+        public static string HotelReservations_SelectAll {
             get {
                 return ResourceManager.GetString("HotelReservations_SelectAll", resourceCulture);
             }
@@ -890,7 +890,7 @@ namespace DAL {
         ///FROM HotelReservation
         ///WHERE HotelId = @HotelId.
         /// </summary>
-        internal static string HotelReservations_SelectByHotelId {
+        public static string HotelReservations_SelectByHotelId {
             get {
                 return ResourceManager.GetString("HotelReservations_SelectByHotelId", resourceCulture);
             }
@@ -927,7 +927,7 @@ namespace DAL {
         ///FROM [HotelReservation] res
         ///INNER JOIN [Hotels] h ON res.[HotelID] = h.[Id [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string HotelReservations_SelectById {
+        public static string HotelReservations_SelectById {
             get {
                 return ResourceManager.GetString("HotelReservations_SelectById", resourceCulture);
             }
@@ -964,7 +964,7 @@ namespace DAL {
         ///FROM [HotelReservation] res
         ///INNER JOIN [Hotels] h ON res.[HotelID] = h.[Id [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string HotelReservations_SelectByUserId {
+        public static string HotelReservations_SelectByUserId {
             get {
                 return ResourceManager.GetString("HotelReservations_SelectByUserId", resourceCulture);
             }
@@ -981,7 +981,7 @@ namespace DAL {
         ///    UpdatedAt = @UpdatedAt
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelReservations_Update {
+        public static string HotelReservations_Update {
             get {
                 return ResourceManager.GetString("HotelReservations_Update", resourceCulture);
             }
@@ -991,7 +991,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM HotelRoomConveniences
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelRoomConveniences_Delete {
+        public static string HotelRoomConveniences_Delete {
             get {
                 return ResourceManager.GetString("HotelRoomConveniences_Delete", resourceCulture);
             }
@@ -1002,7 +1002,7 @@ namespace DAL {
         ///WHERE HotelRoomId = @HotelRoomId
         ///  AND ConvenienceId = @ConvenienceId.
         /// </summary>
-        internal static string HotelRoomConveniences_DeleteByRoomAndConvenience {
+        public static string HotelRoomConveniences_DeleteByRoomAndConvenience {
             get {
                 return ResourceManager.GetString("HotelRoomConveniences_DeleteByRoomAndConvenience", resourceCulture);
             }
@@ -1022,7 +1022,7 @@ namespace DAL {
         ///    @ConvenienceId
         ///).
         /// </summary>
-        internal static string HotelRoomConveniences_Insert {
+        public static string HotelRoomConveniences_Insert {
             get {
                 return ResourceManager.GetString("HotelRoomConveniences_Insert", resourceCulture);
             }
@@ -1035,7 +1035,7 @@ namespace DAL {
         ///    ConvenienceId
         ///FROM HotelRoomConveniences.
         /// </summary>
-        internal static string HotelRoomConveniences_SelectAll {
+        public static string HotelRoomConveniences_SelectAll {
             get {
                 return ResourceManager.GetString("HotelRoomConveniences_SelectAll", resourceCulture);
             }
@@ -1049,7 +1049,7 @@ namespace DAL {
         ///FROM HotelRoomConveniences
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelRoomConveniences_SelectById {
+        public static string HotelRoomConveniences_SelectById {
             get {
                 return ResourceManager.GetString("HotelRoomConveniences_SelectById", resourceCulture);
             }
@@ -1063,7 +1063,7 @@ namespace DAL {
         ///FROM HotelRoomConveniences
         ///WHERE HotelRoomId = @HotelRoomId.
         /// </summary>
-        internal static string HotelRoomConveniences_SelectByRoomId {
+        public static string HotelRoomConveniences_SelectByRoomId {
             get {
                 return ResourceManager.GetString("HotelRoomConveniences_SelectByRoomId", resourceCulture);
             }
@@ -1073,7 +1073,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM HotelRooms
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelRooms_Delete {
+        public static string HotelRooms_Delete {
             get {
                 return ResourceManager.GetString("HotelRooms_Delete", resourceCulture);
             }
@@ -1107,69 +1107,80 @@ namespace DAL {
         ///    @UpdatedAt
         ///).
         /// </summary>
-        internal static string HotelRooms_Insert {
+        public static string HotelRooms_Insert {
             get {
                 return ResourceManager.GetString("HotelRooms_Insert", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT
-        ///    Id,
-        ///    HotelId,
-        ///    Description,
-        ///    Price,
-        ///    RoomNo,
-        ///    Floor,
-        ///    BedCount,
-        ///    Capacity,
-        ///    CreatedAt,
-        ///    UpdatedAt
-        ///FROM HotelRooms.
+        ///   Looks up a localized string similar to 
+        ///		SELECT 
+        ///		
+        ///		res.[Id],
+        ///        res.[Description],
+        ///        res.[Price],
+        ///        res.[RoomNo],
+        ///        res.[Floor],
+        ///        res.[BedCount],
+        ///        res.[Capacity],
+        ///		
+        ///		hotel.[Id] AS HotelId,
+        ///		hotel.[Name]
+        ///
+        ///        FROM [HotelRooms] res
+        ///        INNER JOIN [Hotels] hotel ON res.[hotelId] = hotel.[Id];
+        ///  .
         /// </summary>
-        internal static string HotelRooms_SelectAll {
+        public static string HotelRooms_SelectAll {
             get {
                 return ResourceManager.GetString("HotelRooms_SelectAll", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT
-        ///    Id,
-        ///    HotelId,
-        ///    Description,
-        ///    Price,
-        ///    RoomNo,
-        ///    Floor,
-        ///    BedCount,
-        ///    Capacity,
-        ///    CreatedAt,
-        ///    UpdatedAt
-        ///FROM HotelRooms
-        ///WHERE HotelId = @HotelId.
+        ///   Looks up a localized string similar to SELECT 
+        ///		
+        ///		res.[Id],
+        ///        res.[Description],
+        ///        res.[Price],
+        ///        res.[RoomNo],
+        ///        res.[Floor],
+        ///        res.[BedCount],
+        ///        res.[Capacity],
+        ///		
+        ///		hotel.[Id] AS HotelId,
+        ///		hotel.[Name]
+        ///
+        ///        FROM [HotelRooms] res
+        ///        INNER JOIN [Hotels] hotel ON res.[HotelId] = hotel.[Id]
+        ///	    WHERE hotel.[Id] = @Id.
         /// </summary>
-        internal static string HotelRooms_SelectByHotelId {
+        public static string HotelRooms_SelectByHotelId {
             get {
                 return ResourceManager.GetString("HotelRooms_SelectByHotelId", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT
-        ///    Id,
-        ///    HotelId,
-        ///    Description,
-        ///    Price,
-        ///    RoomNo,
-        ///    Floor,
-        ///    BedCount,
-        ///    Capacity,
-        ///    CreatedAt,
-        ///    UpdatedAt
-        ///FROM HotelRooms
-        ///WHERE Id = @Id.
+        ///   Looks up a localized string similar to SELECT 
+        ///		
+        ///		res.[Id],
+        ///        res.[Description],
+        ///        res.[Price],
+        ///        res.[RoomNo],
+        ///        res.[Floor],
+        ///        res.[BedCount],
+        ///        res.[Capacity],
+        ///		
+        ///		hotel.[Id] AS HotelId,
+        ///		hotel.[Name]
+        ///
+        ///        FROM [HotelRooms] res
+        ///        INNER JOIN [Hotels] hotel ON res.[hotelId] = hotel.[Id]
+        ///        WHERE res.[Id] = @Id;.
         /// </summary>
-        internal static string HotelRooms_SelectById {
+        public static string HotelRooms_SelectById {
             get {
                 return ResourceManager.GetString("HotelRooms_SelectById", resourceCulture);
             }
@@ -1188,7 +1199,7 @@ namespace DAL {
         ///    UpdatedAt = @UpdatedAt
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string HotelRooms_Update {
+        public static string HotelRooms_Update {
             get {
                 return ResourceManager.GetString("HotelRooms_Update", resourceCulture);
             }
@@ -1200,7 +1211,7 @@ namespace DAL {
         ///FROM Hotels
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Hotels_CheckHotelStatus {
+        public static string Hotels_CheckHotelStatus {
             get {
                 return ResourceManager.GetString("Hotels_CheckHotelStatus", resourceCulture);
             }
@@ -1210,7 +1221,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM Hotels
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Hotels_Delete {
+        public static string Hotels_Delete {
             get {
                 return ResourceManager.GetString("Hotels_Delete", resourceCulture);
             }
@@ -1248,7 +1259,7 @@ namespace DAL {
         ///    @UpdatedAt
         ///).
         /// </summary>
-        internal static string Hotels_Insert {
+        public static string Hotels_Insert {
             get {
                 return ResourceManager.GetString("Hotels_Insert", resourceCulture);
             }
@@ -1270,7 +1281,7 @@ namespace DAL {
         ///    UpdatedAt
         ///FROM Hotels.
         /// </summary>
-        internal static string Hotels_SelectAll {
+        public static string Hotels_SelectAll {
             get {
                 return ResourceManager.GetString("Hotels_SelectAll", resourceCulture);
             }
@@ -1293,7 +1304,7 @@ namespace DAL {
         ///FROM Hotels
         ///WHERE Email = @Email.
         /// </summary>
-        internal static string Hotels_SelectByEmail {
+        public static string Hotels_SelectByEmail {
             get {
                 return ResourceManager.GetString("Hotels_SelectByEmail", resourceCulture);
             }
@@ -1316,7 +1327,7 @@ namespace DAL {
         ///FROM Hotels
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Hotels_SelectById {
+        public static string Hotels_SelectById {
             get {
                 return ResourceManager.GetString("Hotels_SelectById", resourceCulture);
             }
@@ -1339,7 +1350,7 @@ namespace DAL {
         ///FROM Hotels
         ///WHERE Country = @Country.
         /// </summary>
-        internal static string Hotels_SelecyByCoutryName {
+        public static string Hotels_SelecyByCoutryName {
             get {
                 return ResourceManager.GetString("Hotels_SelecyByCoutryName", resourceCulture);
             }
@@ -1360,7 +1371,7 @@ namespace DAL {
         ///    UpdatedAt = @UpdatedAt
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Hotels_Update {
+        public static string Hotels_Update {
             get {
                 return ResourceManager.GetString("Hotels_Update", resourceCulture);
             }
@@ -1373,7 +1384,7 @@ namespace DAL {
         ///
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Hotels_UpdateHotelStatus {
+        public static string Hotels_UpdateHotelStatus {
             get {
                 return ResourceManager.GetString("Hotels_UpdateHotelStatus", resourceCulture);
             }
@@ -1383,7 +1394,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM Ratings
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Ratings_Delete {
+        public static string Ratings_Delete {
             get {
                 return ResourceManager.GetString("Ratings_Delete", resourceCulture);
             }
@@ -1405,7 +1416,7 @@ namespace DAL {
         ///    @CreatedAt
         ///).
         /// </summary>
-        internal static string Ratings_Insert {
+        public static string Ratings_Insert {
             get {
                 return ResourceManager.GetString("Ratings_Insert", resourceCulture);
             }
@@ -1419,7 +1430,7 @@ namespace DAL {
         ///    CreatedAt
         ///FROM Ratings.
         /// </summary>
-        internal static string Ratings_SelectAll {
+        public static string Ratings_SelectAll {
             get {
                 return ResourceManager.GetString("Ratings_SelectAll", resourceCulture);
             }
@@ -1434,7 +1445,7 @@ namespace DAL {
         ///FROM Ratings
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Ratings_SelectById {
+        public static string Ratings_SelectById {
             get {
                 return ResourceManager.GetString("Ratings_SelectById", resourceCulture);
             }
@@ -1447,7 +1458,7 @@ namespace DAL {
         ///    Rating = @Rating
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Ratings_Update {
+        public static string Ratings_Update {
             get {
                 return ResourceManager.GetString("Ratings_Update", resourceCulture);
             }
@@ -1457,7 +1468,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM RentalCarReservation
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string RentalCarReservations_Delete {
+        public static string RentalCarReservations_Delete {
             get {
                 return ResourceManager.GetString("RentalCarReservations_Delete", resourceCulture);
             }
@@ -1485,7 +1496,7 @@ namespace DAL {
         ///    @UpdatedAt
         ///).
         /// </summary>
-        internal static string RentalCarReservations_Insert {
+        public static string RentalCarReservations_Insert {
             get {
                 return ResourceManager.GetString("RentalCarReservations_Insert", resourceCulture);
             }
@@ -1511,7 +1522,7 @@ namespace DAL {
         ///INNER JOIN [RentalCars] c ON res.[CarID] = c.[Id]
         ///INNER JOIN [Users] u ON res.[UserID] = u.[Id];.
         /// </summary>
-        internal static string RentalCarReservations_SelectAll {
+        public static string RentalCarReservations_SelectAll {
             get {
                 return ResourceManager.GetString("RentalCarReservations_SelectAll", resourceCulture);
             }
@@ -1539,7 +1550,7 @@ namespace DAL {
         ///
         ///WHERE res.[Id] = @Id.
         /// </summary>
-        internal static string RentalCarReservations_SelectById {
+        public static string RentalCarReservations_SelectById {
             get {
                 return ResourceManager.GetString("RentalCarReservations_SelectById", resourceCulture);
             }
@@ -1567,7 +1578,7 @@ namespace DAL {
         ///
         ///WHERE u.[Id] = @Id.
         /// </summary>
-        internal static string RentalCarReservations_SelectByUserId {
+        public static string RentalCarReservations_SelectByUserId {
             get {
                 return ResourceManager.GetString("RentalCarReservations_SelectByUserId", resourceCulture);
             }
@@ -1583,7 +1594,7 @@ namespace DAL {
         ///    UpdatedAt = @UpdatedAt
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string RentalCarReservations_Update {
+        public static string RentalCarReservations_Update {
             get {
                 return ResourceManager.GetString("RentalCarReservations_Update", resourceCulture);
             }
@@ -1593,7 +1604,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM RentalCars
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string RentalCars_Delete {
+        public static string RentalCars_Delete {
             get {
                 return ResourceManager.GetString("RentalCars_Delete", resourceCulture);
             }
@@ -1615,7 +1626,7 @@ namespace DAL {
         ///    @Kilometers
         ///).
         /// </summary>
-        internal static string RentalCars_Insert {
+        public static string RentalCars_Insert {
             get {
                 return ResourceManager.GetString("RentalCars_Insert", resourceCulture);
             }
@@ -1629,7 +1640,7 @@ namespace DAL {
         ///    Kilometers
         ///FROM RentalCars.
         /// </summary>
-        internal static string RentalCars_SelectAll {
+        public static string RentalCars_SelectAll {
             get {
                 return ResourceManager.GetString("RentalCars_SelectAll", resourceCulture);
             }
@@ -1644,7 +1655,7 @@ namespace DAL {
         ///FROM RentalCars
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string RentalCars_SelectById {
+        public static string RentalCars_SelectById {
             get {
                 return ResourceManager.GetString("RentalCars_SelectById", resourceCulture);
             }
@@ -1658,7 +1669,7 @@ namespace DAL {
         ///    Kilometers = @Kilometers
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string RentalCars_Update {
+        public static string RentalCars_Update {
             get {
                 return ResourceManager.GetString("RentalCars_Update", resourceCulture);
             }
@@ -1668,7 +1679,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM TaxiCompany
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string TaxiCompanies_Delete {
+        public static string TaxiCompanies_Delete {
             get {
                 return ResourceManager.GetString("TaxiCompanies_Delete", resourceCulture);
             }
@@ -1706,7 +1717,7 @@ namespace DAL {
         ///    @UpdatedAt
         ///).
         /// </summary>
-        internal static string TaxiCompanies_Insert {
+        public static string TaxiCompanies_Insert {
             get {
                 return ResourceManager.GetString("TaxiCompanies_Insert", resourceCulture);
             }
@@ -1728,7 +1739,7 @@ namespace DAL {
         ///    UpdatedAt
         ///FROM TaxiCompany.
         /// </summary>
-        internal static string TaxiCompanies_SelectAll {
+        public static string TaxiCompanies_SelectAll {
             get {
                 return ResourceManager.GetString("TaxiCompanies_SelectAll", resourceCulture);
             }
@@ -1751,7 +1762,7 @@ namespace DAL {
         ///FROM TaxiCompany
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string TaxiCompanies_SelectById {
+        public static string TaxiCompanies_SelectById {
             get {
                 return ResourceManager.GetString("TaxiCompanies_SelectById", resourceCulture);
             }
@@ -1772,7 +1783,7 @@ namespace DAL {
         ///    UpdatedAt = @UpdatedAt
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string TaxiCompanies_Update {
+        public static string TaxiCompanies_Update {
             get {
                 return ResourceManager.GetString("TaxiCompanies_Update", resourceCulture);
             }
@@ -1782,7 +1793,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM TaxiCompanyComments
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string TaxiCompanyComments_Delete {
+        public static string TaxiCompanyComments_Delete {
             get {
                 return ResourceManager.GetString("TaxiCompanyComments_Delete", resourceCulture);
             }
@@ -1793,7 +1804,7 @@ namespace DAL {
         ///WHERE TaxiCompanyId = @TaxiCompanyId
         ///  AND CommentId = @CommentId.
         /// </summary>
-        internal static string TaxiCompanyComments_DeleteByTaxiCompanyAndComment {
+        public static string TaxiCompanyComments_DeleteByTaxiCompanyAndComment {
             get {
                 return ResourceManager.GetString("TaxiCompanyComments_DeleteByTaxiCompanyAndComment", resourceCulture);
             }
@@ -1813,7 +1824,7 @@ namespace DAL {
         ///    @CommentId
         ///).
         /// </summary>
-        internal static string TaxiCompanyComments_Insert {
+        public static string TaxiCompanyComments_Insert {
             get {
                 return ResourceManager.GetString("TaxiCompanyComments_Insert", resourceCulture);
             }
@@ -1826,7 +1837,7 @@ namespace DAL {
         ///    CommentId
         ///FROM TaxiCompanyComments.
         /// </summary>
-        internal static string TaxiCompanyComments_SelectAll {
+        public static string TaxiCompanyComments_SelectAll {
             get {
                 return ResourceManager.GetString("TaxiCompanyComments_SelectAll", resourceCulture);
             }
@@ -1840,7 +1851,7 @@ namespace DAL {
         ///FROM TaxiCompanyComments
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string TaxiCompanyComments_SelectById {
+        public static string TaxiCompanyComments_SelectById {
             get {
                 return ResourceManager.GetString("TaxiCompanyComments_SelectById", resourceCulture);
             }
@@ -1854,7 +1865,7 @@ namespace DAL {
         ///FROM TaxiCompanyComments
         ///WHERE TaxiCompanyId = @TaxiCompanyId.
         /// </summary>
-        internal static string TaxiCompanyComments_SelectByTaxiCompanyId {
+        public static string TaxiCompanyComments_SelectByTaxiCompanyId {
             get {
                 return ResourceManager.GetString("TaxiCompanyComments_SelectByTaxiCompanyId", resourceCulture);
             }
@@ -1864,7 +1875,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM TaxiCompanyRatings
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string TaxiCompanyRatings_Delete {
+        public static string TaxiCompanyRatings_Delete {
             get {
                 return ResourceManager.GetString("TaxiCompanyRatings_Delete", resourceCulture);
             }
@@ -1875,7 +1886,7 @@ namespace DAL {
         ///WHERE TaxiCompanyId = @TaxiCompanyId
         ///  AND RatingId = @RatingId.
         /// </summary>
-        internal static string TaxiCompanyRatings_DeleteByTaxiCompanyAndRating {
+        public static string TaxiCompanyRatings_DeleteByTaxiCompanyAndRating {
             get {
                 return ResourceManager.GetString("TaxiCompanyRatings_DeleteByTaxiCompanyAndRating", resourceCulture);
             }
@@ -1895,7 +1906,7 @@ namespace DAL {
         ///    @RatingId
         ///).
         /// </summary>
-        internal static string TaxiCompanyRatings_Insert {
+        public static string TaxiCompanyRatings_Insert {
             get {
                 return ResourceManager.GetString("TaxiCompanyRatings_Insert", resourceCulture);
             }
@@ -1908,7 +1919,7 @@ namespace DAL {
         ///    RatingId
         ///FROM TaxiCompanyRatings.
         /// </summary>
-        internal static string TaxiCompanyRatings_SelectAll {
+        public static string TaxiCompanyRatings_SelectAll {
             get {
                 return ResourceManager.GetString("TaxiCompanyRatings_SelectAll", resourceCulture);
             }
@@ -1922,7 +1933,7 @@ namespace DAL {
         ///FROM TaxiCompanyRatings
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string TaxiCompanyRatings_SelectById {
+        public static string TaxiCompanyRatings_SelectById {
             get {
                 return ResourceManager.GetString("TaxiCompanyRatings_SelectById", resourceCulture);
             }
@@ -1936,7 +1947,7 @@ namespace DAL {
         ///FROM TaxiCompanyRatings
         ///WHERE TaxiCompanyId = @TaxiCompanyId.
         /// </summary>
-        internal static string TaxiCompanyRatings_SelectByTaxiCompanyId {
+        public static string TaxiCompanyRatings_SelectByTaxiCompanyId {
             get {
                 return ResourceManager.GetString("TaxiCompanyRatings_SelectByTaxiCompanyId", resourceCulture);
             }
@@ -1946,7 +1957,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM TaxiReservation
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string TaxiReservations_Delete {
+        public static string TaxiReservations_Delete {
             get {
                 return ResourceManager.GetString("TaxiReservations_Delete", resourceCulture);
             }
@@ -1976,7 +1987,7 @@ namespace DAL {
         ///    @UpdatedAt
         ///).
         /// </summary>
-        internal static string TaxiReservations_Insert {
+        public static string TaxiReservations_Insert {
             get {
                 return ResourceManager.GetString("TaxiReservations_Insert", resourceCulture);
             }
@@ -1994,7 +2005,7 @@ namespace DAL {
         ///    UpdatedAt
         ///FROM TaxiReservation.
         /// </summary>
-        internal static string TaxiReservations_SelectAll {
+        public static string TaxiReservations_SelectAll {
             get {
                 return ResourceManager.GetString("TaxiReservations_SelectAll", resourceCulture);
             }
@@ -2013,7 +2024,7 @@ namespace DAL {
         ///FROM TaxiReservation
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string TaxiReservations_SelectById {
+        public static string TaxiReservations_SelectById {
             get {
                 return ResourceManager.GetString("TaxiReservations_SelectById", resourceCulture);
             }
@@ -2032,7 +2043,7 @@ namespace DAL {
         ///FROM TaxiReservation
         ///WHERE UserId = @UserId.
         /// </summary>
-        internal static string TaxiReservations_SelectByUserId {
+        public static string TaxiReservations_SelectByUserId {
             get {
                 return ResourceManager.GetString("TaxiReservations_SelectByUserId", resourceCulture);
             }
@@ -2049,7 +2060,7 @@ namespace DAL {
         ///    UpdatedAt = @UpdatedAt
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string TaxiReservations_Update {
+        public static string TaxiReservations_Update {
             get {
                 return ResourceManager.GetString("TaxiReservations_Update", resourceCulture);
             }
@@ -2059,7 +2070,7 @@ namespace DAL {
         ///   Looks up a localized string similar to DELETE FROM Users
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Users_Delete {
+        public static string Users_Delete {
             get {
                 return ResourceManager.GetString("Users_Delete", resourceCulture);
             }
@@ -2076,7 +2087,7 @@ namespace DAL {
         ///ELSE 0
         ///END AS BIT).
         /// </summary>
-        internal static string Users_EmailExists {
+        public static string Users_EmailExists {
             get {
                 return ResourceManager.GetString("Users_EmailExists", resourceCulture);
             }
@@ -2120,7 +2131,7 @@ namespace DAL {
         ///    @UpdatedAt
         ///).
         /// </summary>
-        internal static string Users_Insert {
+        public static string Users_Insert {
             get {
                 return ResourceManager.GetString("Users_Insert", resourceCulture);
             }
@@ -2145,7 +2156,7 @@ namespace DAL {
         ///    UpdatedAt
         ///FROM Users.
         /// </summary>
-        internal static string Users_SelectAll {
+        public static string Users_SelectAll {
             get {
                 return ResourceManager.GetString("Users_SelectAll", resourceCulture);
             }
@@ -2166,7 +2177,7 @@ namespace DAL {
         ///INNER JOIN Roles r ON r.Id = u.RoleId
         ///WHERE u.Email = @Email.
         /// </summary>
-        internal static string Users_SelectByEmail {
+        public static string Users_SelectByEmail {
             get {
                 return ResourceManager.GetString("Users_SelectByEmail", resourceCulture);
             }
@@ -2192,7 +2203,7 @@ namespace DAL {
         ///FROM Users
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Users_SelectById {
+        public static string Users_SelectById {
             get {
                 return ResourceManager.GetString("Users_SelectById", resourceCulture);
             }
@@ -2218,7 +2229,7 @@ namespace DAL {
         ///    FROM Users
         ///    WHERE RoleId = @RoleId.
         /// </summary>
-        internal static string Users_SelectByRoleId {
+        public static string Users_SelectByRoleId {
             get {
                 return ResourceManager.GetString("Users_SelectByRoleId", resourceCulture);
             }
@@ -2244,7 +2255,7 @@ namespace DAL {
         ///    FROM Users
         ///    WHERE Status = @Status.
         /// </summary>
-        internal static string Users_SelectByStatus {
+        public static string Users_SelectByStatus {
             get {
                 return ResourceManager.GetString("Users_SelectByStatus", resourceCulture);
             }
@@ -2270,7 +2281,7 @@ namespace DAL {
         ///    FROM Users
         ///    WHERE Email = @Email.
         /// </summary>
-        internal static string Users_SelectUserByEmail {
+        public static string Users_SelectUserByEmail {
             get {
                 return ResourceManager.GetString("Users_SelectUserByEmail", resourceCulture);
             }
@@ -2294,7 +2305,7 @@ namespace DAL {
         ///    UpdatedAt = @UpdatedAt
         ///WHERE Id = @Id.
         /// </summary>
-        internal static string Users_Update {
+        public static string Users_Update {
             get {
                 return ResourceManager.GetString("Users_Update", resourceCulture);
             }
@@ -2307,7 +2318,7 @@ namespace DAL {
         ///    UpdatedAt = @UpdatedAt
         ///WHERE Id = @UserId.
         /// </summary>
-        internal static string Users_UpdateLastLogin {
+        public static string Users_UpdateLastLogin {
             get {
                 return ResourceManager.GetString("Users_UpdateLastLogin", resourceCulture);
             }
@@ -2320,7 +2331,7 @@ namespace DAL {
         ///        UpdatedAt = @UpdatedAt
         ///    WHERE Id = @UserId.
         /// </summary>
-        internal static string Users_UpdateStatus {
+        public static string Users_UpdateStatus {
             get {
                 return ResourceManager.GetString("Users_UpdateStatus", resourceCulture);
             }
@@ -2333,7 +2344,7 @@ namespace DAL {
         ///        UpdatedAt = @UpdatedAt
         ///    WHERE Id = @UserId.
         /// </summary>
-        internal static string Users_UpdateVerification {
+        public static string Users_UpdateVerification {
             get {
                 return ResourceManager.GetString("Users_UpdateVerification", resourceCulture);
             }

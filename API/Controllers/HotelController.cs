@@ -1,4 +1,6 @@
-﻿using DAL.Interfaces;
+﻿using DAL.DAOs;
+using DAL.Interfaces;
+using Domain.DTOs;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,9 +10,10 @@ namespace API.Controllers
     //[Authorize]
     [ApiController]
     [Route("hotel")]
-    public class HotelController(IHotelDAO hotelDAO) : ControllerBase
+    public class HotelController(IHotelDAO hotelDAO, IHotelRoomDAO hotelRoomDAO) : ControllerBase
     {
         private readonly IHotelDAO _hotelDAO = hotelDAO;
+        private readonly IHotelRoomDAO _hotelRoomDAO = hotelRoomDAO;
 
         [HttpGet("all")]
         public ActionResult<IEnumerable<HotelEntity>> GetHotels() {
@@ -205,6 +208,19 @@ namespace API.Controllers
             catch (Exception)
             {
                 return BadRequest();
+            }
+        }
+
+        [HttpGet("{hotelId}/rooms")]
+        public ActionResult<HotelRoomResponseDTO> GetHotelByHotelId(Guid hotelId)
+        {
+            try
+            {
+                return Ok(_hotelRoomDAO.SelectByHotelId(hotelId));
+            }
+            catch (Exception ex)
+            {
+                return Problem(detail: ex.Message, statusCode: 500);
             }
         }
     }
