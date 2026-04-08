@@ -8,5 +8,5 @@ public class TaxiReservationUpdateDTO
     public string DestinationAddress { get; set; }
     public DateTime Time { get; set; }
 
-    public DateTimeOffset? UpdatedAt { get; set; } = null;
+    //public DateTimeOffset? UpdatedAt { get; set; } = null;
 }

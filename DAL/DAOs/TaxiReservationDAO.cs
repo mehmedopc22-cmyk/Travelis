@@ -36,7 +36,6 @@ public class TaxiReservationDAO(IFactory<SqlConnection> databaseFactory) : ITaxi
         }
         catch (SqlException ex)
         {
-            Console.WriteLine(ex.Message);
             return Enumerable.Empty<TaxiReservationEntity>().FirstOrDefault();
         }
     }
@@ -64,12 +63,13 @@ public class TaxiReservationDAO(IFactory<SqlConnection> databaseFactory) : ITaxi
         }
         catch (SqlException ex)
         {
-            throw new Exception("Database error while inserting User", ex);
+            return null;
         }
         catch (Exception ex)
         {
-            throw new Exception("Unexpected error while inserting User", ex);
+            return null;
         }
+
     }
 
     public bool Update(TaxiReservationEntity taxiReservation)
@@ -89,18 +89,18 @@ public class TaxiReservationDAO(IFactory<SqlConnection> databaseFactory) : ITaxi
                 UpdatedAt = DateTime.UtcNow
             });
 
-            return rows == 1;
+            return rows > 0;
         }
 
         catch (SqlException ex)
         {
-            throw new Exception("Database error while updating User", ex);
+            return false;
         }
         catch (Exception ex)
         {
-            throw new Exception("Unexpected error while updating User", ex);
-
+            return false;
         }
+        
     }
 
     public bool Delete(Guid id)
@@ -117,12 +117,11 @@ public class TaxiReservationDAO(IFactory<SqlConnection> databaseFactory) : ITaxi
         }
         catch (SqlException ex)
         {
-            throw new Exception("Database error while deleting User", ex);
+            return  false;
         }
         catch (Exception ex)
         {
-            throw new Exception("Unexpected error while deleting User", ex);
-
+            return false;
         }
     }
 
@@ -153,7 +152,9 @@ public class TaxiReservationDAO(IFactory<SqlConnection> databaseFactory) : ITaxi
         catch (Exception)
         {
             return Enumerable.Empty<TaxiReservationResponseDTO>();
-        }    }
+        }
+        
+    }
 
     public IEnumerable<TaxiReservationResponseDTO> SelectByUserIdWithUserName(Guid userId)
     {
@@ -190,11 +191,11 @@ public class TaxiReservationDAO(IFactory<SqlConnection> databaseFactory) : ITaxi
         }
         catch (SqlException ex)
         {
-            throw new Exception("Database error while inserting User", ex);
+            return null;
         }
         catch (Exception ex)
         {
-            throw new Exception("Unexpected error while inserting User", ex);
+            return null;
         }
     }
 
@@ -214,17 +215,16 @@ public class TaxiReservationDAO(IFactory<SqlConnection> databaseFactory) : ITaxi
                 UpdatedAt = DateTime.UtcNow
             });
 
-            return rows == 1;
+            return rows > 0;
         }
 
         catch (SqlException ex)
         {
-            throw new Exception("Database error while updating User", ex);
+            return false;
         }
         catch (Exception ex)
         {
-            throw new Exception("Unexpected error while updating User", ex);
-
+            return false;
         }
     }
 }

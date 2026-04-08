@@ -10,6 +10,6 @@ public class TaxiReservationResponseDTO
     public required DateTime Time { get; set; }
     public required string UserName { get; set; }
     
-    public DateTimeOffset? CreatedAt { get; set; } = null;
-    public DateTimeOffset? UpdatedAt { get; set; } = null;
+//     public DateTimeOffset? CreatedAt { get; set; } = null;
+//     public DateTimeOffset? UpdatedAt { get; set; } = null;
 }
