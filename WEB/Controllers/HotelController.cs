@@ -12,7 +12,7 @@ namespace WEB.Controllers
         public async Task<IActionResult> IndexAsync()
         {
             var hotelDtos = await Utils.CallApiAsync<List<HotelEntity>>(
-                   _configuration["DefaultApiUrl"] + "getAllHotels",
+                   _configuration["DefaultApiUrl"] + "hotel/all",
                    HttpMethod.Get
                );
 
