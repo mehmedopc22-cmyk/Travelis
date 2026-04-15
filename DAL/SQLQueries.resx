@@ -1263,7 +1263,8 @@ WHERE Id = @Id</value>
     DestinationAddress,
     Time,
     CreatedAt,
-    UpdatedAt
+    UpdatedAt, 
+    Status
 FROM TaxiReservation</value>
   </data>
   <data name="TaxiReservations_SelectById" xml:space="preserve">
@@ -1275,7 +1276,8 @@ FROM TaxiReservation</value>
     DestinationAddress,
     Time,
     CreatedAt,
-    UpdatedAt
+    UpdatedAt,
+    Status
 FROM TaxiReservation
 WHERE Id = @Id</value>
   </data>
@@ -1288,7 +1290,8 @@ WHERE Id = @Id</value>
     DestinationAddress,
     Time,
     CreatedAt,
-    UpdatedAt
+    UpdatedAt,
+    Status
 FROM TaxiReservation
 WHERE UserId = @UserId</value>
   </data>
@@ -1302,7 +1305,8 @@ WHERE UserId = @UserId</value>
     DestinationAddress,
     Time,
     CreatedAt,
-    UpdatedAt
+    UpdatedAt,
+    Status
 )
 VALUES
 (
@@ -1313,7 +1317,8 @@ VALUES
     @DestinationAddress,
     @Time,
     @CreatedAt,
-    @UpdatedAt
+    @UpdatedAt,
+    @Status
 )</value>
   </data>
   <data name="TaxiReservations_Update" xml:space="preserve">
@@ -1324,7 +1329,8 @@ SET
     PickupAddress = @PickupAddress,
     DestinationAddress = @DestinationAddress,
     Time = @Time,
-    UpdatedAt = @UpdatedAt
+    UpdatedAt = @UpdatedAt,
+    Status = @Status
 WHERE Id = @Id</value>
   </data>
   <data name="TaxiReservations_Delete" xml:space="preserve">
