@@ -7,6 +7,8 @@ public class TaxiReservationCreationDTO
     public required string PickupAddress { get; set; }
     public required string DestinationAddress { get; set; }
     public required DateTime Time { get; set; }
+    public required int Status { get; set; }
+    
 }
 
 

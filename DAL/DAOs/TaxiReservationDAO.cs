@@ -55,7 +55,7 @@ public class TaxiReservationDAO(IFactory<SqlConnection> databaseFactory) : ITaxi
                 UpdatedAt = DateTime.UtcNow,
                 taxiReservation.DestinationAddress,
                 taxiReservation.PickupAddress,
-                taxiReservation.TaxiCompantyID,
+                TaxiCompantyID = taxiReservation.TaxiCompanyID,
                 taxiReservation.UserID,
                 taxiReservation.Time
             });
@@ -83,7 +83,7 @@ public class TaxiReservationDAO(IFactory<SqlConnection> databaseFactory) : ITaxi
                 taxiReservation.Id,
                 taxiReservation.DestinationAddress,
                 taxiReservation.PickupAddress,
-                taxiReservation.TaxiCompantyID,
+                TaxiCompantyID = taxiReservation.TaxiCompanyID,
                 taxiReservation.UserID,
                 taxiReservation.Time,
                 UpdatedAt = DateTime.UtcNow
@@ -185,7 +185,8 @@ public class TaxiReservationDAO(IFactory<SqlConnection> databaseFactory) : ITaxi
                 taxiReservation.TaxiCompanyId,
                 taxiReservation.PickupAddress,
                 taxiReservation.DestinationAddress,
-                taxiReservation.Time
+                taxiReservation.Time,
+                taxiReservation.Status
             });
             return taxiReservation;
         }
