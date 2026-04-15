@@ -1632,4 +1632,74 @@ WHERE Id = @Id</value>
         UpdatedAt = @UpdatedAt
     WHERE Id = @UserId</value>
   </data>
+  <data name="TaxiReservations_SelectAllWithUserName" xml:space="preserve">
+      <value>SELECT
+    tr.Id,
+    tr.TaxiCompanyId,
+    c.Name AS TaxiCompanyName,
+    c.PhoneNumber AS TaxiCompanyPhoneNumber,
+    tr.UserId,
+    tr.PickupAddress,
+    tr.DestinationAddress,
+    tr.Time,
+    tr.CreatedAt,
+    tr.UpdatedAt,
+    tr.Status,
+    CONCAT(u.FirstName, ' ', u.LastName) AS UserName
+FROM TaxiReservation AS tr
+INNER JOIN Users AS u ON tr.UserId = u.Id
+INNER JOIN TaxiCompany AS c ON tr.TaxiCompanyId = c.Id;
+</value>
+  </data>
+  <data name="TaxiReservations_SelectByUserIdWithUserName" xml:space="preserve">
+      <value>SELECT
+    tr.Id,
+    tr.TaxiCompanyId,
+    c.Name AS TaxiCompanyName,
+    c.PhoneNumber AS TaxiCompanyPhoneNumber,
+    tr.UserId,
+    tr.PickupAddress,
+    tr.DestinationAddress,
+    tr.Time,
+    tr.CreatedAt,
+    tr.UpdatedAt,
+    tr.Status,
+    CONCAT(u.FirstName, ' ', u.LastName) AS UserName
+FROM TaxiReservation AS tr
+INNER JOIN Users AS u ON tr.UserId = u.Id
+INNER JOIN TaxiCompany AS c ON tr.TaxiCompanyId = c.Id
+WHERE tr.UserId = @UserId
+</value>
+  </data>
+  <data name="TaxiReservations_InsertSimple" xml:space="preserve">
+      <value>INSERT INTO TaxiReservation
+(
+    UserId,
+    TaxiCompanyId,
+    PickupAddress,
+    DestinationAddress,
+    Time,
+    Status
+)
+VALUES
+(
+    @UserId, 
+    @TaxiCompanyId,
+    @PickupAddress,
+    @DestinationAddress,
+    @Time,
+    @Status
+ )</value>
+  </data>
+  <data name="TaxiReservations_UpdateSimple" xml:space="preserve">
+      <value>UPDATE TaxiReservation
+SET
+    TaxiCompanyId = @TaxiCompanyId,
+    PickupAddress = @PickupAddress,
+    DestinationAddress = @DestinationAddress,
+    Time = @Time,
+    UpdatedAt = @UpdatedAt,
+    Status = @Status
+WHERE Id = @Id</value>
+  </data>
 </root>

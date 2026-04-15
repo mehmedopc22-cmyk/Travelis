@@ -1994,6 +1994,32 @@ namespace DAL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO TaxiReservation
+        ///(
+        ///    UserId,
+        ///    TaxiCompanyId,
+        ///    PickupAddress,
+        ///    DestinationAddress,
+        ///    Time,
+        ///    Status
+        ///)
+        ///VALUES
+        ///(
+        ///    @UserId, 
+        ///    @TaxiCompanyId,
+        ///    @PickupAddress,
+        ///    @DestinationAddress,
+        ///    @Time,
+        ///    @Status
+        /// ).
+        /// </summary>
+        public static string TaxiReservations_InsertSimple {
+            get {
+                return ResourceManager.GetString("TaxiReservations_InsertSimple", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SELECT
         ///    Id,
         ///    TaxiCompanyId,
@@ -2008,6 +2034,31 @@ namespace DAL {
         public static string TaxiReservations_SelectAll {
             get {
                 return ResourceManager.GetString("TaxiReservations_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    tr.Id,
+        ///    tr.TaxiCompanyId,
+        ///    c.Name AS TaxiCompanyName,
+        ///    c.PhoneNumber AS TaxiCompanyPhoneNumber,
+        ///    tr.UserId,
+        ///    tr.PickupAddress,
+        ///    tr.DestinationAddress,
+        ///    tr.Time,
+        ///    tr.CreatedAt,
+        ///    tr.UpdatedAt,
+        ///    tr.Status,
+        ///    CONCAT(u.FirstName, &apos; &apos;, u.LastName) AS UserName
+        ///FROM TaxiReservation AS tr
+        ///INNER JOIN Users AS u ON tr.UserId = u.Id
+        ///INNER JOIN TaxiCompany AS c ON tr.TaxiCompanyId = c.Id;
+        ///.
+        /// </summary>
+        public static string TaxiReservations_SelectAllWithUserName {
+            get {
+                return ResourceManager.GetString("TaxiReservations_SelectAllWithUserName", resourceCulture);
             }
         }
         
@@ -2050,6 +2101,32 @@ namespace DAL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    tr.Id,
+        ///    tr.TaxiCompanyId,
+        ///    c.Name AS TaxiCompanyName,
+        ///    c.PhoneNumber AS TaxiCompanyPhoneNumber,
+        ///    tr.UserId,
+        ///    tr.PickupAddress,
+        ///    tr.DestinationAddress,
+        ///    tr.Time,
+        ///    tr.CreatedAt,
+        ///    tr.UpdatedAt,
+        ///    tr.Status,
+        ///    CONCAT(u.FirstName, &apos; &apos;, u.LastName) AS UserName
+        ///FROM TaxiReservation AS tr
+        ///INNER JOIN Users AS u ON tr.UserId = u.Id
+        ///INNER JOIN TaxiCompany AS c ON tr.TaxiCompanyId = c.Id
+        ///WHERE tr.UserId = @UserId
+        ///.
+        /// </summary>
+        public static string TaxiReservations_SelectByUserIdWithUserName {
+            get {
+                return ResourceManager.GetString("TaxiReservations_SelectByUserIdWithUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UPDATE TaxiReservation
         ///SET
         ///    TaxiCompanyId = @TaxiCompanyId,
@@ -2063,6 +2140,23 @@ namespace DAL {
         public static string TaxiReservations_Update {
             get {
                 return ResourceManager.GetString("TaxiReservations_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE TaxiReservation
+        ///SET
+        ///    TaxiCompanyId = @TaxiCompanyId,
+        ///    PickupAddress = @PickupAddress,
+        ///    DestinationAddress = @DestinationAddress,
+        ///    Time = @Time,
+        ///    UpdatedAt = @UpdatedAt,
+        ///    Status = @Status
+        ///WHERE Id = @Id.
+        /// </summary>
+        public static string TaxiReservations_UpdateSimple {
+            get {
+                return ResourceManager.GetString("TaxiReservations_UpdateSimple", resourceCulture);
             }
         }
         
