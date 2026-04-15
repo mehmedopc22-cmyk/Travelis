@@ -1,0 +1,124 @@
+﻿@model WEB.Models.ProfileViewModel
+@using System.Security.Claims
+
+@{
+    ViewData["Title"] = "Профил";
+}
+
+<main class="tv-account-main mt-3">
+    <section class="py-4">
+        <div class="container">
+            <div class="row g-4">
+
+                <!-- SIDEBAR -->
+                <div class="col-lg-3">
+                    <aside class="tv-glass-card tv-account-sidebar">
+
+                        <div class="tv-sidebar-profile">
+                            <div class="tv-avatar-wrap">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="tv-avatar" alt="">
+                            </div>
+
+                            <div class="tv-user-name">
+                                @Model.FirstName @Model.LastName
+                            </div>
+
+                            <div class="tv-user-email">
+                                @Model.Email
+                            </div>
+
+                            <span class="tv-user-badge">
+                                <i class="fa-solid fa-crown text-warning me-1"></i>
+                                @Model.Role
+                            </span>
+                        </div>
+
+                        <nav class="tv-sidebar-nav">
+
+                            <div class="tv-nav-label">Акаунт</div>
+
+                            <a class="tv-nav-item active" asp-action="Profile" asp-controller="Account">
+                                <i class="fa-regular fa-user"></i> <span>Профил</span>
+                            </a>
+
+                            <a class="tv-nav-item" href="#">
+                                <i class="fa-solid fa-ticket"></i> <span>Резервации</span>
+                            </a>
+
+                            <div class="tv-nav-separator"></div>
+
+                            <form asp-action="Logout" method="post">
+                                @Html.AntiForgeryToken()
+                                <button class="tv-nav-item danger w-100 text-start border-0 bg-transparent">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Изход</span>
+                                </button>
+                            </form>
+
+                        </nav>
+                    </aside>
+                </div>
+
+                <!-- PROFILE CONTENT -->
+                <div class="col-lg-9">
+                    <div class="tv-account-section">
+
+                        <div class="tv-page-header">
+                            <div>
+                                <h1 class="tv-page-title">
+                                    <i class="fa-regular fa-user me-2 text-info"></i>
+                                    Профил
+                                </h1>
+                                <p class="tv-page-subtitle mb-0">
+                                    Управлявай личните си данни.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- PERSONAL INFO -->
+                        <div class="tv-glass-card p-4 mb-4">
+
+                            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary border-opacity-25 pb-3">
+                                <div>
+                                    <div class="tv-section-label">Лични данни</div>
+                                    <h4 class="text-white m-0">Основна информация</h4>
+                                </div>
+                            </div>
+
+                            <form asp-action="UpdateProfile" method="post">
+
+                                @Html.AntiForgeryToken()
+
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <label>Име</label>
+                                        <input asp-for="FirstName" class="tv-input" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Фамилия</label>
+                                        <input asp-for="LastName" class="tv-input" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Имейл адрес</label>
+                                        <input asp-for="Email" class="tv-input" />
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-end mt-4 gap-2">
+                                    <button type="submit" class="tv-btn tv-btn-primary">
+                                        Запази промените
+                                    </button>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>

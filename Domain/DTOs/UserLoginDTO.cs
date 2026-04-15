@@ -13,6 +13,7 @@
         public string LastName { get; set; } = null!;
 
         public string RoleName { get; set; } = null!;
+        public Guid RoleId { get; set; }
 
         public bool IsVerified { get; set; }
 

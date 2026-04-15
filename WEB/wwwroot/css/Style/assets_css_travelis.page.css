@@ -4,7 +4,7 @@
 
 /* NAVBAR */
 .tv-navbar {
-    position: fixed;
+    position: sticky;
     top: 0px;
     left: 0;
     width: 100%;

@@ -1,0 +1,74 @@
+﻿@model WEB.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container-fluid tv-auth-wrapper d-flex align-items-center justify-content-center min-vh-100 mt-3">
+
+    <div class="row justify-content-center w-100">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+
+            <!-- AUTH CARD -->
+            <div class="tv-auth-card p-4 p-md-5">
+
+                <h1 class="tv-auth-title text-center">Вход</h1>
+                <p class="tv-auth-sub text-center">Влез в Travelis и продължи пътешествието.</p>
+
+                <form asp-action="Login" method="post" novalidate autocomplete="off">
+
+                    @Html.AntiForgeryToken()
+
+                    <!-- GLOBAL ERROR -->
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label class="tv-form-label" asp-for="Email">Имейл</label>
+                        <div class="tv-input-group">
+                            <input asp-for="Email" class="tv-input w-100" placeholder="example@mail.com" />
+                            <span class="tv-input-icon"><i class="fa-regular fa-envelope"></i></span>
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-2">
+                        <label class="tv-form-label" asp-for="Password">Парола</label>
+                        <div class="tv-input-group">
+                            <input asp-for="Password" type="password" class="tv-input w-100" placeholder="********" />
+                            <span class="tv-input-icon"><i class="fa-solid fa-lock"></i></span>
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <!-- Forgot password -->
+                    <div class="d-flex justify-content-end mb-3">
+                        <a href="#" class="tv-forgot-link">Забравена парола?</a>
+                    </div>
+
+                    <!-- Login Button -->
+                    <button type="submit" class="tv-btn-login-big w-100">
+                        <i class="fa-solid fa-right-to-bracket me-2"></i> Вход
+                    </button>
+                </form>
+
+                <!-- Register link -->
+                <p class="text-center mt-3" style="color:#94a3b8;font-size:0.85rem;">
+                    Нямаш акаунт?
+                    <a asp-action="Register" style="color:#38bdf8;text-decoration:none;">
+                        Създай профил
+                    </a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

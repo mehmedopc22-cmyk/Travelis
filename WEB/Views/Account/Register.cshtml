@@ -1,0 +1,88 @@
+﻿@model WEB.Models.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="container-fluid tv-auth-wrapper d-flex align-items-center justify-content-center min-vh-100 mt-3">
+
+    <div class="row justify-content-center w-100">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+
+            <div class="tv-auth-card p-4 p-md-5">
+
+                <h1 class="tv-auth-title text-center">Регистрация</h1>
+                <p class="tv-auth-sub text-center">Създай своя Travelis профил · бързо и лесно</p>
+
+                <form asp-action="Register" method="post" novalidate autocomplete="off">
+                    @Html.AntiForgeryToken()
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label class="tv-form-label" asp-for="FirstName">Име</label>
+                        <div class="tv-input-group">
+                            <input asp-for="FirstName" class="tv-input w-100" placeholder="Име" autocomplete="given-name" />
+                            <span class="tv-input-icon"><i class="fa-regular fa-user"></i></span>
+                        </div>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="tv-form-label" asp-for="LastName">Фамилия</label>
+                        <div class="tv-input-group">
+                            <input asp-for="LastName" class="tv-input w-100" placeholder="Фамилия" autocomplete="family-name" />
+                            <span class="tv-input-icon"><i class="fa-regular fa-user"></i></span>
+                        </div>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="tv-form-label" asp-for="Email">Имейл</label>
+                        <div class="tv-input-group">
+                            <input asp-for="Email" class="tv-input w-100" placeholder="example@mail.com" autocomplete="email" />
+                            <span class="tv-input-icon"><i class="fa-regular fa-envelope"></i></span>
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <label class="tv-form-label" asp-for="Password">Парола</label>
+                            <div class="tv-input-group">
+                                <input asp-for="Password" type="password" class="tv-input w-100" placeholder="Минимум 6 символа" autocomplete="new-password" />
+                                <span class="tv-input-icon"><i class="fa-solid fa-lock"></i></span>
+                            </div>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label class="tv-form-label" asp-for="ConfirmPassword">Повтори</label>
+                            <div class="tv-input-group">
+                                <input asp-for="ConfirmPassword" type="password" class="tv-input w-100" placeholder="Потвърди парола" autocomplete="new-password" />
+                                <span class="tv-input-icon"><i class="fa-solid fa-lock"></i></span>
+                            </div>
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="tv-btn-primary w-100 mt-4">
+                        <i class="fa-solid fa-user-plus me-2"></i> Създай профил
+                    </button>
+                </form>
+
+                <p class="text-center mt-3" style="color:#94a3b8;font-size:0.85rem;">
+                    Вече имаш акаунт?
+                    <a asp-action="Login" style="color:#38bdf8;text-decoration:none;">Вход</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

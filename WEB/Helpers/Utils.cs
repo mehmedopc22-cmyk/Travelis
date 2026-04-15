@@ -37,9 +37,15 @@ namespace WEB.Helpers
             HttpMethod method,
             object? body = null,
             string contentType = "application/json",
+            string? bearerToken = null,
             CancellationToken cancellationToken = default)
         {
             using HttpRequestMessage request = new(method, url);
+
+            if (!string.IsNullOrWhiteSpace(bearerToken))
+            {
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+            }
 
             if (body is not null)
             {

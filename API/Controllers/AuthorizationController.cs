@@ -45,6 +45,9 @@ namespace API.Controllers
 
             string passwordHash = passwordHasher.Hash(user.PasswordHash);
 
+            //За сега остава така това е за регистрация на нормален потрбител
+            user.RoleId = new Guid("5A519675-975E-4C0E-8409-A45442E2645C");
+
             UserEntity userEntity = new UserEntity
             {
                 Id = Guid.NewGuid(),
