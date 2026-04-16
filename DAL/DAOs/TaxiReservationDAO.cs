@@ -213,6 +213,7 @@ public class TaxiReservationDAO(IFactory<SqlConnection> databaseFactory) : ITaxi
                 taxiReservation.PickupAddress,
                 taxiReservation.TaxiCompanyId,
                 taxiReservation.Time,
+                taxiReservation.Status,
                 UpdatedAt = DateTime.UtcNow
             });
 
