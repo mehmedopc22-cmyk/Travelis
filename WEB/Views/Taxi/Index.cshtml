@@ -1,0 +1,302 @@
+@model List<TaxiCompanyListItemViewModel>
+@{
+    ViewData["Title"] = "Taxi";
+    var apiError = ViewData["TaxiApiError"] as bool? == true;
+    var createTaxiSuccess = ViewData["CreateTaxiSuccess"] as string;
+    var createTaxiError = ViewData["CreateTaxiError"] as string;
+    var pickupFilter = ViewData["PickupFilter"] as string ?? string.Empty;
+    var dropoffFilter = ViewData["DropoffFilter"] as string ?? string.Empty;
+    var companyNameFilter = ViewData["CompanyNameFilter"] as string ?? string.Empty;
+    var hasAnyFilter = !string.IsNullOrWhiteSpace(companyNameFilter)
+        || !string.IsNullOrWhiteSpace(pickupFilter)
+        || !string.IsNullOrWhiteSpace(dropoffFilter);
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Style/assets_css_taxi_taxi-home_style_1.css" asp-append-version="true" />
+}
+
+<div class="taxi-home">
+    <section class="tv-hero position-relative">
+        <div class="blob blob-yellow"></div>
+        <div class="blob blob-blue"></div>
+
+        <div class="container">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-6">
+                    <p class="text-blue mb-2"><i class="fa-solid fa-bolt me-1"></i> Fast pickup</p>
+                    <h1 class="hero-title mb-3">Book a taxi in seconds</h1>
+                    <p class="text-secondary mb-0">
+                        Enter your pickup and drop-off, choose a vehicle class, and track your driver live.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="glass-panel search-card">
+                        <h2 class="h5 text-white mb-3">Where to?</h2>
+                        <form asp-controller="Taxi" asp-action="Index" method="get">
+                            <div class="tv-input-group">
+                                <i class="fa-solid fa-circle-dot tv-input-icon"></i>
+                                <input type="text" class="tv-input" name="pickup" value="@pickupFilter" placeholder="Pickup address" autocomplete="off" />
+                            </div>
+                            <div class="tv-input-group">
+                                <i class="fa-solid fa-location-dot tv-input-icon"></i>
+                                <input type="text" class="tv-input" name="dropoff" value="@dropoffFilter" placeholder="Drop-off address" autocomplete="off" />
+                            </div>
+                            <div class="tv-input-group">
+                                <i class="fa-solid fa-building tv-input-icon"></i>
+                                <input type="text" class="tv-input" name="companyName" value="@companyNameFilter" placeholder="Taxi company name" autocomplete="off" />
+                            </div>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                <button type="button" class="chip-toggle active">Economy</button>
+                                <button type="button" class="chip-toggle">Comfort</button>
+                                <button type="button" class="chip-toggle">Premium</button>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn-primary-custom">
+                                    <i class="fa-solid fa-taxi me-2"></i>See taxis
+                                </button>
+                                @if (hasAnyFilter)
+                                {
+                                    <a asp-controller="Taxi" asp-action="Index" class="btn btn-outline-light">Clear</a>
+                                }
+                            </div>
+                        </form>
+                        @if (hasAnyFilter)
+                        {
+                            <p class="small text-secondary mt-3 mb-0">
+                                Showing results for
+                                @if (!string.IsNullOrWhiteSpace(companyNameFilter))
+                                {
+                                    <span>company: <strong>@companyNameFilter</strong></span>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(companyNameFilter)
+                                    && (!string.IsNullOrWhiteSpace(pickupFilter) || !string.IsNullOrWhiteSpace(dropoffFilter)))
+                                {
+                                    <span>, </span>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(pickupFilter))
+                                {
+                                    <span>pickup: <strong>@pickupFilter</strong></span>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(pickupFilter) && !string.IsNullOrWhiteSpace(dropoffFilter))
+                                {
+                                    <span>, </span>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(dropoffFilter))
+                                {
+                                    <span>drop-off: <strong>@dropoffFilter</strong></span>
+                                }
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-5 order-lg-2">
+                    <div class="glass-panel map-preview rounded-4">
+                        <div class="map-road"></div>
+                        <div class="map-pulse"></div>
+                        <div class="map-car"><i class="fa-solid fa-taxi"></i></div>
+                    </div>
+                </div>
+                <div class="col-lg-7 order-lg-1">
+                    <h2 class="h4 text-white mb-3">Live route preview</h2>
+                    <p class="text-secondary mb-0">
+                        Your driver’s route is estimated before you confirm. Fares update if traffic changes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 border-top border-secondary border-opacity-25">
+        <div class="container">
+            <h2 class="h4 text-white mb-2">Taxi companies (from database)</h2>
+            <p class="small text-secondary mb-4">All operators loaded via API from <code>TaxiCompany</code>.</p>
+
+            @if (apiError)
+            {
+                <div class="alert alert-warning mb-0" role="alert">
+                    Could not reach the API. Start the <strong>API</strong> project and check <code>DefaultApiUrl</code> in appsettings (expected endpoint: <code>taxi/all</code>).
+                </div>
+            }
+            else if (!Model.Any())
+            {
+                <div class="glass-panel p-4 text-secondary">
+                    @if (hasAnyFilter)
+                    {
+                        <span>No taxi companies found for the selected filters.</span>
+                    }
+                    else
+                    {
+                        <span>No taxi companies to show. Add rows to <code>TaxiCompany</code>.</span>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="row g-3">
+                    @foreach (var c in Model)
+                    {
+                        <div class="col-md-6 col-xl-4">
+                            <div class="glass-panel vehicle-card p-4 h-100">
+                                <h3 class="h6 text-white mb-2">@c.Name</h3>
+                                <p class="small text-secondary mb-2"><i class="fa-solid fa-location-dot me-1"></i>@c.FullAddress</p>
+                                <p class="small text-secondary mb-1"><i class="fa-solid fa-phone me-1"></i>@c.PhoneNumber</p>
+                                <p class="small text-secondary mb-0"><i class="fa-solid fa-envelope me-1"></i>@c.Email</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </section>
+
+    <section class="pb-5 border-top border-secondary border-opacity-25">
+        <div class="container">
+            <h2 class="h4 text-white mb-3">Admin: Add Taxi Company</h2>
+            <p class="small text-secondary mb-4">Only administrators can add new taxi companies.</p>
+
+            @if (!string.IsNullOrWhiteSpace(createTaxiSuccess))
+            {
+                <div class="alert alert-success" role="alert">@createTaxiSuccess</div>
+            }
+            @if (!string.IsNullOrWhiteSpace(createTaxiError))
+            {
+                <div class="alert alert-danger" role="alert">@createTaxiError</div>
+            }
+
+            <form asp-controller="Taxi" asp-action="CreateCompany" method="post" class="glass-panel p-4">
+                @Html.AntiForgeryToken()
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label class="form-label text-white">Admin Key *</label>
+                        <input class="form-control bg-dark text-white border-secondary" type="password" name="AdminKey" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label text-white">Company Name *</label>
+                        <input class="form-control bg-dark text-white border-secondary" type="text" name="Name" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label text-white">Email *</label>
+                        <input class="form-control bg-dark text-white border-secondary" type="email" name="Email" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label text-white">Country *</label>
+                        <input class="form-control bg-dark text-white border-secondary" type="text" name="Country" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label text-white">City *</label>
+                        <input class="form-control bg-dark text-white border-secondary" type="text" name="City" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label text-white">Postal Code *</label>
+                        <input class="form-control bg-dark text-white border-secondary" type="text" name="PostalCode" required />
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label text-white">Street *</label>
+                        <input class="form-control bg-dark text-white border-secondary" type="text" name="Street" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label text-white">Phone Number</label>
+                        <input class="form-control bg-dark text-white border-secondary" type="text" name="PhoneNumber" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label text-white">Status</label>
+                        <input class="form-control bg-dark text-white border-secondary" type="number" name="Status" value="1" />
+                    </div>
+                    <div class="col-md-6 d-flex align-items-end">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="true" id="approvedCheck" name="Approved" />
+                            <label class="form-check-label text-white" for="approvedCheck">
+                                Approved
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn-primary-custom">
+                            <i class="fa-solid fa-plus me-2"></i>Add company
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="pb-5">
+        <div class="container">
+            <h2 class="h4 text-white mb-4">Choose a ride</h2>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="glass-panel vehicle-card p-4">
+                        <span class="vehicle-tag tag-economy d-inline-block mb-2">Economy</span>
+                        <h3 class="h6 text-white">City</h3>
+                        <p class="small text-secondary mb-3">Up to 4 passengers</p>
+                        <div class="price-display">from 4.50 BGN</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-panel vehicle-card p-4">
+                        <span class="vehicle-tag tag-comfort d-inline-block mb-2">Comfort</span>
+                        <h3 class="h6 text-white">Comfort</h3>
+                        <p class="small text-secondary mb-3">Extra legroom</p>
+                        <div class="price-display">from 7.00 BGN</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-panel vehicle-card p-4">
+                        <span class="vehicle-tag tag-premium d-inline-block mb-2">Premium</span>
+                        <h3 class="h6 text-white">Van</h3>
+                        <p class="small text-secondary mb-3">Up to 7 passengers</p>
+                        <div class="price-display">from 12.00 BGN</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-5">
+        <div class="container">
+            <h2 class="h4 text-white mb-4">How it works</h2>
+            <div class="row g-4">
+                <div class="col-md-4 d-flex gap-3">
+                    <div class="step-circle">1</div>
+                    <div>
+                        <h3 class="h6 text-white">Enter addresses</h3>
+                        <p class="small text-secondary mb-0">Pickup and destination in the form above.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex gap-3">
+                    <div class="step-circle">2</div>
+                    <div>
+                        <h3 class="h6 text-white">Pick a class</h3>
+                        <p class="small text-secondary mb-0">Economy, Comfort, or Premium — see the price upfront.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex gap-3">
+                    <div class="step-circle">3</div>
+                    <div>
+                        <h3 class="h6 text-white">Confirm &amp; ride</h3>
+                        <p class="small text-secondary mb-0">Meet your driver and track the trip on the map.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.taxi-home .chip-toggle').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.taxi-home .chip-toggle').forEach(function (b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+            });
+        });
+    </script>
+}

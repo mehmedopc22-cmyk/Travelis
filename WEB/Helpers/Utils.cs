@@ -54,6 +54,14 @@ namespace WEB.Helpers
                 request.Content = CreateHttpContent(body, contentType);
             }
 
+            if (headers is not null)
+            {
+                foreach (KeyValuePair<string, string> header in headers)
+                {
+                    request.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                }
+            }
+
             using HttpResponseMessage response = await HttpClient.SendAsync(
                 request,
                 HttpCompletionOption.ResponseHeadersRead,
