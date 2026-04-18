@@ -13,15 +13,15 @@
     <link rel="stylesheet" href="~/css/Style/assets_css_travelis.tokens.css" />
     <link rel="stylesheet" href="~/css/Style/assets_css_travelis.components.css" />
     <link rel="stylesheet" href="~/css/Style/assets_css_travelis.page.css" />
-    @await RenderSectionAsync("Styles", required: false)
+
 </head>
 <body>
     <header>
         <nav class="tv-navbar navbar navbar-expand-lg sticky-top">
             <div class="container">
                 <div class="tv-navbar-shell d-flex align-items-center justify-content-between w-100">
-                    <a asp-action="Index" asp-controller="Home" class="tv-brand-pill d-flex align-items-center text-decoration-none">
 
+                    <a asp-action="Index" asp-controller="Home" class="tv-brand-pill d-flex align-items-center text-decoration-none">
                         <img src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png"
                              style="height:20px; filter:brightness(0) invert(1); " alt="Travelis Logo">
                         <span>Travelis</span>
@@ -51,7 +51,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link tv-nav-link" asp-controller="Taxi" asp-action="Index">
+                                <a class="nav-link tv-nav-link" asp-action="Index" asp-controller="Taxi">
                                     <i class="fa-solid fa-taxi me-1"></i> Такси
                                 </a>
                             </li>

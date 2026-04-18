@@ -127,16 +127,11 @@ namespace WEB.Controllers
 
             try
             {
-                Dictionary<string, string> headers = new()
-                {
-                    ["X-Admin-Key"] = input.AdminKey
-                };
 
                 await Utils.CallApiAsync<TaxiCompanyEntity>(
                     _configuration["DefaultApiUrl"] + "taxi",
                     HttpMethod.Post,
                     company,
-                    headers: headers,
                     cancellationToken: cancellationToken);
 
                 TempData["CreateTaxiSuccess"] = $"Taxi company '{company.Name}' was added successfully.";

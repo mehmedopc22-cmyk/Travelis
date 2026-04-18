@@ -27,7 +27,6 @@ namespace API
             builder.Services.AddScoped<IRoleDAO, RoleDAO>();
             builder.Services.AddTransient<IRentalCarReservationDAO, RentalCarReservationDAO>();
             builder.Services.AddTransient<IHotelRoomDAO, HotelRoomDAO>();
-            builder.Services.AddTransient<ITaxiCompanyDAO, TaxiCompanyDAO>();
             builder.Services.AddTransient<ITaxiReservationDAO, TaxiReservationDAO>();
             builder.Services.AddSingleton<PasswordHasherService>();
             builder.Services.AddSingleton<JWTService>();
