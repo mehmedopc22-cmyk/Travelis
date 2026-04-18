@@ -1558,11 +1558,12 @@ FROM Hotels
 WHERE Id = @Id</value>
   </data>
   <data name="Hotels_UpdateHotelStatus" xml:space="preserve">
-    <value>UPDATE Hotels
+    <value>UPDATE [Hotels]
 SET
-    Status = 1
-
-WHERE Id = @Id</value>
+    [Approved] = 1,
+    [Status] = 1,
+    [UpdatedAt] = @UpdatedAt
+WHERE [Id] = @Id</value>
   </data>
   <data name="Users_SelectUserByEmail" xml:space="preserve">
     <value> SELECT
@@ -1583,6 +1584,15 @@ WHERE Id = @Id</value>
         UpdatedAt
     FROM Users
     WHERE Email = @Email</value>
+  </data>
+  <data name="Roles_SelectAll" xml:space="preserve">
+    <value> SELECT *
+    FROM Roles</value>
+  </data>
+  <data name="Roles_SelectById" xml:space="preserve">
+    <value> SELECT *
+    FROM Roles
+    </value>
   </data>
   <data name="Users_SelectByRoleId" xml:space="preserve">
     <value> SELECT
@@ -1639,7 +1649,7 @@ WHERE Id = @Id</value>
     WHERE Id = @UserId</value>
   </data>
   <data name="TaxiReservations_SelectAllWithUserName" xml:space="preserve">
-      <value>SELECT
+    <value>SELECT
     tr.Id,
     tr.TaxiCompanyId,
     c.Name AS TaxiCompanyName,
@@ -1658,7 +1668,7 @@ INNER JOIN TaxiCompany AS c ON tr.TaxiCompanyId = c.Id;
 </value>
   </data>
   <data name="TaxiReservations_SelectByUserIdWithUserName" xml:space="preserve">
-      <value>SELECT
+    <value>SELECT
     tr.Id,
     tr.TaxiCompanyId,
     c.Name AS TaxiCompanyName,
@@ -1678,7 +1688,7 @@ WHERE tr.UserId = @UserId
 </value>
   </data>
   <data name="TaxiReservations_InsertSimple" xml:space="preserve">
-      <value>INSERT INTO TaxiReservation
+    <value>INSERT INTO TaxiReservation
 (
     UserId,
     TaxiCompanyId,
@@ -1698,7 +1708,7 @@ VALUES
  )</value>
   </data>
   <data name="TaxiReservations_UpdateSimple" xml:space="preserve">
-      <value>UPDATE TaxiReservation
+    <value>UPDATE TaxiReservation
 SET
     TaxiCompanyId = @TaxiCompanyId,
     PickupAddress = @PickupAddress,
@@ -1707,5 +1717,13 @@ SET
     UpdatedAt = @UpdatedAt,
     Status = @Status
 WHERE Id = @Id</value>
+  </data>
+  <data name="Hotels_UpdateHotelStatusRejected" xml:space="preserve">
+    <value>UPDATE [Hotels]
+SET
+    [Approved] = 0,
+    [Status] = 2,
+    [UpdatedAt] = @UpdatedAt
+WHERE [Id] = @Id</value>
   </data>
 </root>

@@ -1,0 +1,67 @@
+﻿@model List<Domain.Entities.HotelEntity>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Одобрение на хотели";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Style/assets_css_admin_hotels_hotel-approval_style_1.css" />
+}
+
+<div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-3">
+    <div>
+        <h2 class="fw-bold mb-1">Заявки за добавяне</h2>
+        <p class="text-white-50 mb-0">
+            Чакащи одобрение: <span class="text-warning fw-bold">@Model.Count</span>
+        </p>
+    </div>
+</div>
+
+<div class="row g-4">
+    @foreach (var hotel in Model)
+    {
+        <div class="col-12 col-md-6 col-xl-4">
+            <div class="tv-card tv-hotel-card">
+                <div class="tv-hotel-details p-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="fw-bold mb-0">@hotel.Name</h5>
+                    </div>
+
+                    <div class="small text-white-50 mb-3">
+                        <i class="fa-solid fa-location-dot me-1"></i>
+                        @hotel.City, @hotel.Country
+                    </div>
+
+                    <div class="tv-info-row">
+                        <span class="text-white-50">Имейл</span>
+                        <span>@hotel.Email</span>
+                    </div>
+
+                    <div class="tv-info-row">
+                        <span class="text-white-50">Телефон</span>
+                        <span>@hotel.PhoneNumber</span>
+                    </div>
+
+                    <div class="d-flex gap-2 mt-3 pt-3 border-top border-white border-opacity-10">
+                        <form asp-controller="AdminHotel" asp-action="Reject" method="post" class="flex-grow-1">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="hotelId" value="@hotel.Id" />
+                            <button type="submit" class="btn tv-btn-danger w-100">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </form>
+
+                        <form asp-controller="AdminHotel" asp-action="Approve" method="post" class="flex-grow-1">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="hotelId" value="@hotel.Id" />
+                            <button type="submit" class="btn btn-success w-100">
+                                <i class="fa-solid fa-check"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

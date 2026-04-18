@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Travelis Admin</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/Style/assets_css_travelis.tokens.css" />
+    <link rel="stylesheet" href="~/css/Style/assets_css_travelis.components.css" />
+    <link rel="stylesheet" href="~/css/Style/assets_css_travelis.page.css" />
+    <link rel="stylesheet" href="~/css/Style/assets_css_admin.css "/>
+    @RenderSection("Styles", required: false)
+</head>
+<body class="tv-body">
+
+    <div class="tv-orb orb-1"></div>
+    <div class="tv-orb orb-2"></div>
+
+    <div class="tv-admin-wrapper">
+
+        <aside class="tv-sidebar" id="sidebar">
+            <a asp-controller="Admin" asp-action="Index" class="tv-brand">
+                <img src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png" alt="Logo">
+                <span>Travelis Admin</span>
+            </a>
+
+            <div class="tv-nav-scroll">
+                <div class="tv-nav-label">Общ преглед</div>
+                <a asp-controller="Admin" asp-action="Index" class="tv-nav-link">
+                    <i class="fa-solid fa-chart-pie"></i> Табло
+                </a>
+
+                <div class="tv-nav-label">Управление</div>
+
+                <a asp-controller="AdminUser" asp-action="Index" class="tv-nav-link">
+                    <i class="fa-solid fa-users"></i> Потребители
+                </a>
+
+                <a asp-controller="AdminUser" asp-action="Roles" class="tv-nav-link ms-3 small text-white-50 border-start border-white border-opacity-10 ps-2" style="border-radius: 0;">
+                    Роли & Групи
+                </a>
+
+                <a asp-controller="AdminHotel" asp-action="Pending" class="tv-nav-link">
+                    <i class="fa-solid fa-hotel"></i> Хотели
+                </a>
+            </div>
+
+            <div class="tv-user-panel">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Admin" class="tv-avatar">
+                <div class="flex-grow-1" style="line-height: 1.2;">
+                    <div style="font-weight: 700; font-size: 0.9rem;">
+                        @(User.FindFirst("FirstName")?.Value ?? "Admin User")
+                    </div>
+                </div>
+                <a asp-controller="Account" asp-action="Logout" class="btn tv-btn-glass tv-btn-icon" title="Изход">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
+            </div>
+        </aside>
+
+        <div class="tv-main">
+            <header class="tv-topbar">
+                <div class="container-xxl d-flex align-items-center justify-content-between px-0">
+                    <div class="d-flex align-items-center">
+                        <button class="btn tv-btn-glass d-lg-none me-3" type="button"
+                                onclick="document.getElementById('sidebar').classList.toggle('show')">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <h5 class="mb-0 fw-bold d-none d-md-block">@ViewData["Title"]</h5>
+                    </div>
+                </div>
+            </header>
+
+            <div class="tv-content-scroll">
+                <main class="container-xxl py-4">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

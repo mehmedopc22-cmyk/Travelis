@@ -24,33 +24,30 @@ namespace API
             builder.Services.AddTransient<IUserDAO, UserDAO>();
             builder.Services.AddTransient<IHotelDAO, HotelDAO>();
             builder.Services.AddTransient<IHotelReservationDAO, HotelReservationDAO>();
+            builder.Services.AddScoped<IRoleDAO, RoleDAO>();
             builder.Services.AddTransient<IRentalCarReservationDAO, RentalCarReservationDAO>();
             builder.Services.AddTransient<IHotelRoomDAO, HotelRoomDAO>();
             builder.Services.AddTransient<ITaxiReservationDAO, TaxiReservationDAO>();
             builder.Services.AddSingleton<PasswordHasherService>();
             builder.Services.AddSingleton<JWTService>();
             builder.Services
-            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-
-                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                    ValidAudience = builder.Configuration["Jwt:Audience"],
-
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])
-                    ),
-
-                    NameClaimType = ClaimTypes.NameIdentifier,
-                    RoleClaimType = ClaimTypes.Role
-                };
-            });
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                        ValidAudience = builder.Configuration["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
+                        NameClaimType = ClaimTypes.Email,
+                        RoleClaimType = ClaimTypes.Role
+                    };
+                });
 
             builder.Services.AddAuthorization();
 

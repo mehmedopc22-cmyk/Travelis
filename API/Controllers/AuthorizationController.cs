@@ -32,7 +32,9 @@ namespace API.Controllers
             {
                 Token = token,
                 FirstName = user.FirstName,
-                LastName = user.LastName
+                LastName = user.LastName,
+                Role = user.RoleName,
+                UserId = user.Id
             });
         }
 

@@ -1,6 +1,6 @@
-﻿namespace Domain.DTOs
+﻿namespace WEB.Models
 {
-    public class LoginResponseDTO
+    public class LoginResponseViewModel
     {
         public string Token { get; set; } = string.Empty;
         public string? FirstName { get; set; }

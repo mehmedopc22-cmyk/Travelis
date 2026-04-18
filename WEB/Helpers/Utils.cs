@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Microsoft.AspNetCore.Http;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
@@ -44,7 +45,8 @@ namespace WEB.Helpers
 
             if (!string.IsNullOrWhiteSpace(bearerToken))
             {
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+                request.Headers.Authorization =
+                    new AuthenticationHeaderValue("Bearer", bearerToken);
             }
 
             if (body is not null)
@@ -80,7 +82,36 @@ namespace WEB.Helpers
                 return (T)(object)responseContent;
             }
 
-            return JsonSerializer.Deserialize<T>(responseContent, JsonOptions);
+            try
+            {
+                return JsonSerializer.Deserialize<T>(responseContent, JsonOptions);
+            }
+            catch (JsonException ex)
+            {
+                throw new InvalidOperationException(
+                    $"Failed to deserialize API response to {typeof(T).Name}. Response: {responseContent}", ex);
+            }
+        }
+
+        public static Task<T?> CallApiAsync<T>(
+            string url,
+            HttpMethod method,
+            HttpContext? currentHttpContext,
+            object? body = null,
+            string contentType = "application/json",
+            CancellationToken cancellationToken = default)
+        {
+            string? bearerToken =
+                currentHttpContext?.Session.GetString("JwtToken")
+                ?? currentHttpContext?.User.FindFirst("AccessToken")?.Value;
+
+            return CallApiAsync<T>(
+                url: url,
+                method: method,
+                body: body,
+                contentType: contentType,
+                bearerToken: bearerToken,
+                cancellationToken: cancellationToken);
         }
 
         private static HttpContent CreateHttpContent(object body, string contentType)

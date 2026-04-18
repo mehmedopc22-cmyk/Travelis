@@ -1,0 +1,93 @@
+﻿@model WEB.Models.HotelApplicationViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Кандидатстване за хотел";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8 col-xl-7">
+
+            <div class="tv-glass-soft p-4 p-md-5 rounded-4">
+                <div class="mb-4 text-center">
+                    <h1 class="fw-bold text-white mb-2">Кандидатствай като партньор</h1>
+                    <p class="text-secondary mb-0">
+                        Подай информация за твоя хотел и ние ще прегледаме заявката ти.
+                    </p>
+                </div>
+
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success rounded-4 mb-4">
+                        @TempData["SuccessMessage"]
+                    </div>
+                }
+
+                <form asp-controller="Hotel" asp-action="Apply" method="post" novalidate>
+                    @Html.AntiForgeryToken()
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label asp-for="Name" class="form-label text-white-50 fw-semibold"></label>
+                            <input asp-for="Name" class="tv-input w-100" placeholder="Напр. Grand Hotel Sofia" />
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Country" class="form-label text-white-50 fw-semibold"></label>
+                            <input asp-for="Country" class="tv-input w-100" placeholder="България" />
+                            <span asp-validation-for="Country" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="City" class="form-label text-white-50 fw-semibold"></label>
+                            <input asp-for="City" class="tv-input w-100" placeholder="София" />
+                            <span asp-validation-for="City" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-8">
+                            <label asp-for="Street" class="form-label text-white-50 fw-semibold"></label>
+                            <input asp-for="Street" class="tv-input w-100" placeholder="бул. България 1" />
+                            <span asp-validation-for="Street" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label asp-for="PostalCode" class="form-label text-white-50 fw-semibold"></label>
+                            <input asp-for="PostalCode" class="tv-input w-100" placeholder="1000" />
+                            <span asp-validation-for="PostalCode" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="PhoneNumber" class="form-label text-white-50 fw-semibold"></label>
+                            <input asp-for="PhoneNumber" class="tv-input w-100" placeholder="+359 888 123 456" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Email" class="form-label text-white-50 fw-semibold"></label>
+                            <input asp-for="Email" class="tv-input w-100" placeholder="hotel@example.com" />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex flex-column flex-sm-row gap-3 justify-content-end">
+                        <a asp-controller="Hotel" asp-action="Index" class="btn tv-btn-glass px-4">
+                            Отказ
+                        </a>
+                        <button type="submit" class="btn tv-btn-primary px-4">
+                            <i class="fa-solid fa-paper-plane me-2"></i> Изпрати заявка
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

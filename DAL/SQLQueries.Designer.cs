@@ -1378,15 +1378,30 @@ namespace DAL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UPDATE Hotels
+        ///   Looks up a localized string similar to UPDATE [Hotels]
         ///SET
-        ///    Status = 1
-        ///
-        ///WHERE Id = @Id.
+        ///    [Approved] = 1,
+        ///    [Status] = 1,
+        ///    [UpdatedAt] = @UpdatedAt
+        ///WHERE [Id] = @Id.
         /// </summary>
         public static string Hotels_UpdateHotelStatus {
             get {
                 return ResourceManager.GetString("Hotels_UpdateHotelStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE [Hotels]
+        ///SET
+        ///    [Approved] = 0,
+        ///    [Status] = 2,
+        ///    [UpdatedAt] = @UpdatedAt
+        ///WHERE [Id] = @Id.
+        /// </summary>
+        public static string Hotels_UpdateHotelStatusRejected {
+            get {
+                return ResourceManager.GetString("Hotels_UpdateHotelStatusRejected", resourceCulture);
             }
         }
         
@@ -1672,6 +1687,27 @@ namespace DAL {
         public static string RentalCars_Update {
             get {
                 return ResourceManager.GetString("RentalCars_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  SELECT *
+        ///    FROM Roles.
+        /// </summary>
+        public static string Roles_SelectAll {
+            get {
+                return ResourceManager.GetString("Roles_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  SELECT *
+        ///    FROM Roles
+        ///    .
+        /// </summary>
+        public static string Roles_SelectById {
+            get {
+                return ResourceManager.GetString("Roles_SelectById", resourceCulture);
             }
         }
         
@@ -1973,7 +2009,8 @@ namespace DAL {
         ///    DestinationAddress,
         ///    Time,
         ///    CreatedAt,
-        ///    UpdatedAt
+        ///    UpdatedAt,
+        ///    Status
         ///)
         ///VALUES
         ///(
@@ -1984,7 +2021,8 @@ namespace DAL {
         ///    @DestinationAddress,
         ///    @Time,
         ///    @CreatedAt,
-        ///    @UpdatedAt
+        ///    @UpdatedAt,
+        ///    @Status
         ///).
         /// </summary>
         public static string TaxiReservations_Insert {
@@ -2028,7 +2066,8 @@ namespace DAL {
         ///    DestinationAddress,
         ///    Time,
         ///    CreatedAt,
-        ///    UpdatedAt
+        ///    UpdatedAt, 
+        ///    Status
         ///FROM TaxiReservation.
         /// </summary>
         public static string TaxiReservations_SelectAll {
@@ -2071,7 +2110,8 @@ namespace DAL {
         ///    DestinationAddress,
         ///    Time,
         ///    CreatedAt,
-        ///    UpdatedAt
+        ///    UpdatedAt,
+        ///    Status
         ///FROM TaxiReservation
         ///WHERE Id = @Id.
         /// </summary>
@@ -2090,7 +2130,8 @@ namespace DAL {
         ///    DestinationAddress,
         ///    Time,
         ///    CreatedAt,
-        ///    UpdatedAt
+        ///    UpdatedAt,
+        ///    Status
         ///FROM TaxiReservation
         ///WHERE UserId = @UserId.
         /// </summary>
@@ -2134,7 +2175,8 @@ namespace DAL {
         ///    PickupAddress = @PickupAddress,
         ///    DestinationAddress = @DestinationAddress,
         ///    Time = @Time,
-        ///    UpdatedAt = @UpdatedAt
+        ///    UpdatedAt = @UpdatedAt,
+        ///    Status = @Status
         ///WHERE Id = @Id.
         /// </summary>
         public static string TaxiReservations_Update {

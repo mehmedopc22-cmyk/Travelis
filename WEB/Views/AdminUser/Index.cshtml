@@ -1,0 +1,154 @@
+﻿@model WEB.Models.AdminUsersIndexViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Потребители";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Style/assets_css_admin_users_users-list_style_1.css" />
+}
+
+<div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-3">
+    <div>
+        <h2 class="fw-bold mb-1">Управление на акаунти</h2>
+        <p class="text-white-50 mb-0">
+            Общ брой потребители: <span class="text-white fw-bold">@Model.Users.Count</span>
+        </p>
+    </div>
+</div>
+
+<div class="tv-card p-0 overflow-hidden">
+    <div class="table-responsive">
+        <table class="tv-table">
+            <thead>
+                <tr>
+                    <th>Потребител</th>
+                    <th>Роля</th>
+                    <th>Регистриран</th>
+                    <th>Статус</th>
+                    <th class="text-end">Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    var currentRole = Model.Roles.FirstOrDefault(r => r.Id == user.RoleId);
+
+                    <tr>
+                        <td>
+                            <div class="fw-bold small">@user.FirstName @user.LastName</div>
+                            <div class="text-white-50 small">@user.Email</div>
+                        </td>
+
+                        <td>
+                            <span class="small text-white-50">
+                                @(currentRole?.Name ?? "Unknown role")
+                            </span>
+                        </td>
+
+                        <td class="small text-white-50">
+                            @user.CreatedAt.ToString()
+                        </td>
+
+                        <td class="small text-white-50">
+                            @(user.Status == 1 ? "Активен" : user.Status == 2 ? "Блокиран" : "Неактивен")
+                        </td>
+
+                        <td class="text-end">
+                            <button type="button"
+                                    class="btn tv-btn-glass btn-sm edit-user-btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editUserModal"
+                                    data-id="@user.Id"
+                                    data-email="@user.Email"
+                                    data-firstname="@user.FirstName"
+                                    data-lastname="@user.LastName"
+                                    data-roleid="@user.RoleId"
+                                    data-status="@user.Status">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content tv-card border-0">
+            <div class="modal-header border-0">
+                <h5 class="modal-title text-white">Редакция на потребител</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <form asp-controller="AdminUser" asp-action="UpdateUser" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="modal-body">
+                    <input type="hidden" id="EditUser_Id" name="Id" />
+
+                    <div class="mb-3">
+                        <label class="form-label text-white-50">Име</label>
+                        <input type="text" id="EditUser_FirstName" name="FirstName" class="tv-input w-100" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-white-50">Фамилия</label>
+                        <input type="text" id="EditUser_LastName" name="LastName" class="tv-input w-100" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-white-50">Имейл</label>
+                        <input type="email" id="EditUser_Email" name="Email" class="tv-input w-100" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-white-50">Роля</label>
+                        <select id="EditUser_RoleId" name="RoleId" class="tv-input w-100" required>
+                            @foreach (var role in Model.Roles)
+                            {
+                                <option value="@role.Id">@role.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-white-50">Статус</label>
+                        <select id="EditUser_Status" name="Status" class="tv-input w-100" required>
+                            <option value="1">Активен</option>
+                            <option value="0">Неактивен</option>
+                            <option value="2">Блокиран</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn tv-btn-glass" data-bs-dismiss="modal">Отказ</button>
+                    <button type="submit" class="btn tv-btn-primary">Запази</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const editButtons = document.querySelectorAll(".edit-user-btn");
+
+            editButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    document.getElementById("EditUser_Id").value = this.dataset.id;
+                    document.getElementById("EditUser_Email").value = this.dataset.email;
+                    document.getElementById("EditUser_FirstName").value = this.dataset.firstname;
+                    document.getElementById("EditUser_LastName").value = this.dataset.lastname;
+                    document.getElementById("EditUser_RoleId").value = this.dataset.roleid;
+                    document.getElementById("EditUser_Status").value = this.dataset.status;
+                });
+            });
+        });
+    </script>
+}

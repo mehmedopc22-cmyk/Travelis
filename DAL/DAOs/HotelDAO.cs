@@ -58,7 +58,7 @@ namespace DAL.DAOs
             }
             catch (Exception)
             {
-                return null;
+                return Enumerable.Empty<HotelEntity>();
             }
         }
 
@@ -75,13 +75,14 @@ namespace DAL.DAOs
             }
             catch (Exception)
             {
-                return null;
+                return Enumerable.Empty<HotelEntity>();
             }
         }
 
         public int CheckHotelStatus(Guid hotelId)
         {
             using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
             try
             {
                 return sqlConnection.ExecuteScalar<int>(
@@ -102,7 +103,6 @@ namespace DAL.DAOs
             try
             {
                 hotel.Id = hotel.Id == Guid.Empty ? Guid.NewGuid() : hotel.Id;
-
                 hotel.CreatedAt = DateTime.Now;
                 hotel.UpdatedAt = DateTime.Now;
 
@@ -169,10 +169,37 @@ namespace DAL.DAOs
 
             try
             {
-               sqlConnection.Query<bool>(SQLQueries.Hotels_UpdateHotelStatus, new { Id = hotelId });
+                int rows = sqlConnection.Execute(
+                    SQLQueries.Hotels_UpdateHotelStatus,
+                    new
+                    {
+                        Id = hotelId,
+                        UpdatedAt = DateTime.UtcNow
+                    });
 
-               return true;
+                return rows > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
+        public bool UpdateHotelStatusRejected(Guid hotelId)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+                int rows = sqlConnection.Execute(
+                    SQLQueries.Hotels_UpdateHotelStatusRejected,
+                    new
+                    {
+                        Id = hotelId,
+                        UpdatedAt = DateTime.UtcNow
+                    });
+
+                return rows > 0;
             }
             catch (Exception)
             {

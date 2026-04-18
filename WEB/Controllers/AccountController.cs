@@ -49,13 +49,13 @@ namespace WEB.Controllers
 
             try
             {
-                LoginRequestDTO request = new()
+                LoginRequestViewModel request = new()
                 {
                     Email = model.Email,
                     Password = model.Password
                 };
 
-                LoginResponseDTO? response = await Utils.CallApiAsync<LoginResponseDTO>(
+                LoginResponseViewModel? response = await Utils.CallApiAsync<LoginResponseViewModel>(
                     $"{apiBaseUrl.TrimEnd('/')}/login",
                     HttpMethod.Post,
                     request,
@@ -66,6 +66,8 @@ namespace WEB.Controllers
                     ModelState.AddModelError(string.Empty, "Login failed.");
                     return View(model);
                 }
+
+                HttpContext.Session.SetString("JwtToken", response.Token);
 
                 List<Claim> claims =
                 [
@@ -142,7 +144,7 @@ namespace WEB.Controllers
 
             try
             {
-                RegisterRequestDTO request = new()
+                RegisterRequestViewModel request = new()
                 {
                     Email = model.Email,
                     PasswordHash = model.Password,
@@ -190,6 +192,7 @@ namespace WEB.Controllers
             return View(model);
         }
 
+
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -203,10 +206,12 @@ namespace WEB.Controllers
             // Update cookie claims (important!)
             var claims = new List<Claim>
             {
+                new Claim(ClaimTypes.NameIdentifier, User.FindFirstValue(ClaimTypes.NameIdentifier) ?? ""),
                 new Claim(ClaimTypes.Name, model.Email),
                 new Claim(ClaimTypes.Email, model.Email),
                 new Claim("FirstName", model.FirstName),
                 new Claim("LastName", model.LastName),
+                new Claim("AccessToken", User.FindFirstValue("AccessToken") ?? ""),
                 new Claim(ClaimTypes.Role, User.FindFirstValue(ClaimTypes.Role) ?? "")
             };
 
@@ -226,6 +231,9 @@ namespace WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
+            HttpContext.Session.Remove("JwtToken");
+            HttpContext.Session.Clear();
+
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction(nameof(Login));
         }

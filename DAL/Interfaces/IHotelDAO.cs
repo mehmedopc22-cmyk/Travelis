@@ -4,10 +4,10 @@ namespace DAL.Interfaces
 {
     public interface IHotelDAO : IBaseDAO<HotelEntity>
     {
-        public IEnumerable<HotelEntity> SelectByCountryName(string countryName);
-        public IEnumerable<HotelEntity> SelectByEmail(string hotelEmail);
-        public int CheckHotelStatus(Guid hotelId);
-        public bool UpdateHotelStatusTrue(Guid hotelId);
-
+        IEnumerable<HotelEntity> SelectByCountryName(string countryName);
+        IEnumerable<HotelEntity> SelectByEmail(string hotelEmail);
+        int CheckHotelStatus(Guid hotelId);
+        bool UpdateHotelStatusTrue(Guid hotelId);
+        bool UpdateHotelStatusRejected(Guid hotelId);
     }
 }
