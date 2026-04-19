@@ -3,7 +3,7 @@ using System.Net.Mail;
 
 namespace API.Helpers
 {
-    public class SmtpEmailService(IConfiguration configuration) : IEmailService
+    public class SmtpEmailService(IConfiguration configuration) 
     {
         private readonly IConfiguration _configuration = configuration;
 

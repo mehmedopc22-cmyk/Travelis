@@ -31,7 +31,7 @@ namespace API
             builder.Services.AddTransient<ITaxiReservationDAO, TaxiReservationDAO>();
             builder.Services.AddSingleton<PasswordHasherService>();
             builder.Services.AddSingleton<JWTService>();
-            builder.Services.AddTransient<IEmailService, SmtpEmailService>();
+            builder.Services.AddTransient<SmtpEmailService>();
             builder.Services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
