@@ -15,12 +15,12 @@ namespace API.Controllers
         IUserDAO userDAO,
         JWTService jwtService,
         PasswordHasherService passwordHasher,
-        IEmailService emailService) : ControllerBase
+        SmtpEmailService emailService) : ControllerBase
     {
         private readonly IUserDAO _userDAO = userDAO;
         private readonly JWTService _jwtService = jwtService;
         private readonly PasswordHasherService _passwordHasher = passwordHasher;
-        private readonly IEmailService _emailService = emailService;
+        private readonly SmtpEmailService _emailService = emailService;
 
         [HttpPost("login")]
         public ActionResult<LoginResponseDTO> Login(LoginRequestDTO request)
