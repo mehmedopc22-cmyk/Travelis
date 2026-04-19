@@ -19,6 +19,7 @@ namespace API
 
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();
+            builder.Services.AddHttpClient();
             
             builder.Services.AddTransient<IFactory<SqlConnection>, DatabaseFactory>();
             builder.Services.AddTransient<IUserDAO, UserDAO>();
@@ -30,6 +31,7 @@ namespace API
             builder.Services.AddTransient<ITaxiReservationDAO, TaxiReservationDAO>();
             builder.Services.AddSingleton<PasswordHasherService>();
             builder.Services.AddSingleton<JWTService>();
+            builder.Services.AddTransient<IEmailService, SmtpEmailService>();
             builder.Services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

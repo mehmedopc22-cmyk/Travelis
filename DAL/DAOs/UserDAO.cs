@@ -216,6 +216,29 @@ namespace DAL.DAOs
             }
         }
 
+        public bool UpdatePasswordHash(Guid userId, string passwordHash)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+                int rows = sqlConnection.Execute(
+                    "UPDATE Users SET PasswordHash = @PasswordHash, UpdatedAt = @UpdatedAt WHERE Id = @UserId",
+                    new
+                    {
+                        UserId = userId,
+                        PasswordHash = passwordHash,
+                        UpdatedAt = DateTime.UtcNow
+                    });
+
+                return rows > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public bool Update(UserEntity user)
         {
             using SqlConnection sqlConnection = _databaseFactory.GetConnection();

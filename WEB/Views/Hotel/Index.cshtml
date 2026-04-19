@@ -1,248 +1,325 @@
-﻿<div class="container">
+@model WEB.Models.HotelIndexViewModel
 
-    <!-- HERO SECTION (Compact for Grid) -->
+@{
+    ViewData["Title"] = "Хотели";
+    string sortBy = Model.Filters.SortBy;
+}
+
+<div class="container">
+    <div id="aiLoadingOverlay"
+         class="position-fixed top-0 start-0 w-100 h-100 d-none align-items-center justify-content-center"
+         style="z-index: 2000; background: rgba(2, 6, 23, 0.72); backdrop-filter: blur(6px);">
+        <div class="tv-glass-card p-4 text-center" style="max-width: 340px;">
+            <div class="spinner-border text-info mb-3" role="status" aria-hidden="true"></div>
+            <div class="text-white fw-bold">AI филтърът работи</div>
+            <div class="text-white-50 small mt-1">Изчакваме локалния модел да анализира хотелите.</div>
+        </div>
+    </div>
+
     <section class="tv-hero-section pt-0 pb-5">
         <div class="tv-hotels-hero">
             <div class="tv-hotels-hero-inner row align-items-center g-4">
                 <div class="col-lg-7">
                     <span class="tv-hotels-hero-badge mb-2">
-                        <i class="fa-solid fa-map-location-dot"></i> София · 12-15 Дек
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        @(string.IsNullOrWhiteSpace(Model.Filters.Destination) ? "Всички дестинации" : Model.Filters.Destination)
                     </span>
-                    <h1 class="tv-hotels-hero-title mb-2">Хотели в София</h1>
-                    <p class="tv-hotels-hero-sub mb-0">@Model?.Count ?? 0 намерени обекта.</p>
+                    <h1 class="tv-hotels-hero-title mb-2">@Model.DestinationTitle</h1>
+                    <p class="tv-hotels-hero-sub mb-0">@Model.TotalCount намерени обекта.</p>
                 </div>
                 <div class="col-lg-5 text-lg-end">
-                    <div class="d-inline-flex gap-2">
-                        <button class="tv-btn-primary"><i class="fa-solid fa-pen-to-square me-2"></i> Промени</button>
-                    </div>
+                    <a class="tv-btn-primary text-decoration-none" href="#hotelFilters">
+                        <i class="fa-solid fa-pen-to-square me-2"></i> Промени
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- MAIN LAYOUT: FILTERS LEFT, GRID RIGHT -->
     <div class="row g-4 g-xl-5 align-items-start">
 
-        <!-- LEFT: FILTERS SIDEBAR -->
         <aside class="col-12 col-xl-4 col-xxl-3">
 
-            <!-- Mobile filter button -->
             <div class="d-flex d-xl-none justify-content-between align-items-center mb-3">
                 <button class="tv-mobile-filter-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#tvFiltersOffcanvas">
                     <i class="fa-solid fa-sliders"></i> Филтри
                 </button>
                 <span class="tv-results-count small">
-                    @(Model?.Count ?? 0) обекта
+                    @Model.TotalCount обекта
                 </span>
             </div>
 
-            <!-- Desktop filter panel -->
-            <div class="d-none d-xl-block tv-filter-shell sticky-xl-top" style="top: 100px;">
-                <div class="tv-filter-panel">
+            @if (TempData["AiFilterMessage"] is string aiFilterMessage)
+            {
+                <div class="alert alert-info py-2 mb-3">
+                    @aiFilterMessage
+                </div>
+            }
+            @if (ViewData["AiFilterMessage"] is string aiFilterViewMessage)
+            {
+                <div class="alert alert-info py-2 mb-3">
+                    @aiFilterViewMessage
+                </div>
+            }
+            @if (TempData["AiFilterError"] is string aiFilterError)
+            {
+                <div class="alert alert-danger py-2 mb-3">
+                    @aiFilterError
+                </div>
+            }
+
+            <div class="d-none d-xl-block tv-filter-shell sticky-xl-top" style="top: 100px;" id="hotelFilters">
+                <form asp-action="Index" method="get" class="tv-filter-panel">
 
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
                             <div class="tv-filter-title-main">Филтри за хотели</div>
-                            <div class="tv-filter-sub">Избери тип, цена, удобства и рейтинг.</div>
+                            <div class="tv-filter-sub">Избери дестинация, цена и подредба.</div>
                         </div>
-                        <button class="btn btn-link p-0 tv-filter-sub">Изчисти всички</button>
+                        <a class="btn btn-link p-0 tv-filter-sub text-decoration-none" asp-action="Index">Изчисти всички</a>
                     </div>
 
-                    <!-- Тип обект -->
                     <div class="tv-filter-section">
-                        <div class="tv-filter-label">Тип обект</div>
-                        <div class="tv-filter-meta mb-1">Можеш да избираш повече от един.</div>
-
-                        <div class="form-check small">
-                            <input class="form-check-input" type="checkbox" id="typeAll" checked>
-                            <label class="form-check-label" for="typeAll">Всички типове</label>
-                        </div>
-                        <div class="form-check small">
-                            <input class="form-check-input" type="checkbox" id="typeHotel" checked>
-                            <label class="form-check-label" for="typeHotel">Хотел</label>
-                        </div>
-                        <div class="form-check small">
-                            <input class="form-check-input" type="checkbox" id="typeApartment">
-                            <label class="form-check-label" for="typeApartment">Апартамент</label>
-                        </div>
-                        <div class="form-check small">
-                            <input class="form-check-input" type="checkbox" id="typeGuest">
-                            <label class="form-check-label" for="typeGuest">Къща за гости</label>
-                        </div>
-                        <div class="form-check small">
-                            <input class="form-check-input" type="checkbox" id="typeSpa">
-                            <label class="form-check-label" for="typeSpa">СПА комплекс</label>
+                        <label class="tv-filter-label" for="destination">Дестинация</label>
+                        <div class="tv-input-group">
+                            <input id="destination"
+                                   name="Destination"
+                                   value="@Model.Filters.Destination"
+                                   class="tv-input w-100"
+                                   placeholder="София, Варна, хотел..." />
+                            <span class="tv-input-icon"><i class="fa-solid fa-location-dot"></i></span>
                         </div>
                     </div>
 
-                    <!-- Цена -->
                     <div class="tv-filter-section">
-                        <div class="d-flex justify-content-between align-items-center mb-1">
-                            <div class="tv-filter-label mb-0">Цена за нощувка</div>
-                            <span class="tv-filter-range-value">50 – 600 лв</span>
-                        </div>
-                        <input type="range" class="form-range tv-input-range" min="50" max="600" step="10">
-                        <div class="d-flex justify-content-between tv-filter-meta mt-1">
-                            <span>50 лв</span>
-                            <span>600+ лв</span>
+                        <div class="tv-filter-label">Цена за нощувка</div>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <label class="tv-filter-meta" for="minPrice">От</label>
+                                <input id="minPrice"
+                                       name="MinPrice"
+                                       value="@Model.Filters.MinPrice"
+                                       class="tv-input w-100"
+                                       type="number"
+                                       min="0"
+                                       step="10"
+                                       placeholder="50" />
+                            </div>
+                            <div class="col-6">
+                                <label class="tv-filter-meta" for="maxPrice">До</label>
+                                <input id="maxPrice"
+                                       name="MaxPrice"
+                                       value="@Model.Filters.MaxPrice"
+                                       class="tv-input w-100"
+                                       type="number"
+                                       min="0"
+                                       step="10"
+                                       placeholder="600" />
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Популярни филтри -->
                     <div class="tv-filter-section">
-                        <div class="tv-filter-label">Популярни филтри</div>
-                        <div class="d-flex flex-wrap gap-2">
-                            <button class="tv-chip-toggle active" type="button">
-                                <i class="fa-solid fa-square-parking"></i> Безплатен паркинг
-                            </button>
-                            <button class="tv-chip-toggle" type="button">
-                                <i class="fa-solid fa-mug-hot"></i> Закуска включена
-                            </button>
-                            <button class="tv-chip-toggle" type="button">
-                                <i class="fa-solid fa-suitcase-rolling"></i> До метро
-                            </button>
-                            <button class="tv-chip-toggle" type="button">
-                                <i class="fa-solid fa-person-swimming"></i> Басейн
-                            </button>
-                            <button class="tv-chip-toggle" type="button">
-                                <i class="fa-solid fa-dog"></i> Pet-friendly
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Рейтинг на гости -->
-                    <div class="tv-filter-section">
-                        <div class="tv-filter-label">Рейтинг на гости</div>
-                        <div class="d-flex flex-wrap gap-2">
-                            <button class="tv-chip-toggle" type="button">7+</button>
-                            <button class="tv-chip-toggle" type="button">8+</button>
-                            <button class="tv-chip-toggle active" type="button">9+</button>
-                            <button class="tv-chip-toggle" type="button">9.5+</button>
-                        </div>
-                    </div>
-
-                    <!-- Звезди -->
-                    <div class="tv-filter-section">
-                        <div class="tv-filter-label">Категория (звезди)</div>
-                        <div class="d-flex flex-wrap gap-2">
-                            <button class="tv-chip-toggle" type="button">2★</button>
-                            <button class="tv-chip-toggle" type="button">3★</button>
-                            <button class="tv-chip-toggle active" type="button">4★</button>
-                            <button class="tv-chip-toggle" type="button">5★</button>
-                        </div>
-                    </div>
-
-                    <!-- Удобства -->
-                    <div class="tv-filter-section">
-                        <div class="d-flex justify-content-between align-items-center mb-1">
-                            <div class="tv-filter-label mb-0">Удобства</div>
-                            <a href="#" class="tv-filter-link-more">
-                                Виж още <i class="fa-solid fa-angle-down"></i>
-                            </a>
-                        </div>
-                        <div class="form-check small">
-                            <input class="form-check-input" type="checkbox" id="amenWifi" checked>
-                            <label class="form-check-label" for="amenWifi">Wi-Fi</label>
-                        </div>
-                        <div class="form-check small">
-                            <input class="form-check-input" type="checkbox" id="amenSpa">
-                            <label class="form-check-label" for="amenSpa">СПА и уелнес</label>
-                        </div>
-                        <div class="form-check small">
-                            <input class="form-check-input" type="checkbox" id="amenParking">
-                            <label class="form-check-label" for="amenParking">Паркинг на място</label>
-                        </div>
-                        <div class="form-check small">
-                            <input class="form-check-input" type="checkbox" id="amenShuttle">
-                            <label class="form-check-label" for="amenShuttle">Трансфер до летище</label>
-                        </div>
-                        <div class="form-check small">
-                            <input class="form-check-input" type="checkbox" id="amenFamily">
-                            <label class="form-check-label" for="amenFamily">Семейни стаи</label>
-                        </div>
-                    </div>
-
-                    <!-- Дистанция -->
-                    <div class="tv-filter-section">
-                        <div class="tv-filter-label">Разстояние от центъра</div>
-                        <div class="form-check small">
-                            <input class="form-check-input" type="radio" name="dist" id="dist1" checked>
-                            <label class="form-check-label" for="dist1">До 500 м</label>
-                        </div>
-                        <div class="form-check small">
-                            <input class="form-check-input" type="radio" name="dist" id="dist2">
-                            <label class="form-check-label" for="dist2">До 1 км</label>
-                        </div>
-                        <div class="form-check small">
-                            <input class="form-check-input" type="radio" name="dist" id="dist3">
-                            <label class="form-check-label" for="dist3">До 3 км</label>
-                        </div>
+                        <label class="tv-filter-label" for="sortBySidebar">Сортирай</label>
+                        <select id="sortBySidebar" name="SortBy" class="form-select bg-dark text-white border-secondary">
+                            <option value="recommended" selected='@(sortBy == "recommended")'>Препоръчани</option>
+                            <option value="name" selected='@(sortBy == "name")'>Име</option>
+                            <option value="city" selected='@(sortBy == "city")'>Град</option>
+                            <option value="price_asc" selected='@(sortBy == "price_asc")'>Цена (Ниска &rarr; Висока)</option>
+                            <option value="price_desc" selected='@(sortBy == "price_desc")'>Цена (Висока &rarr; Ниска)</option>
+                        </select>
                     </div>
 
                     <div class="tv-filter-section pt-3">
                         <div class="d-flex tv-filter-footer-btns">
-                            <button class="tv-btn-primary flex-grow-1" type="button">
+                            <button class="tv-btn-primary flex-grow-1" type="submit">
                                 Приложи филтри
-                            </button>
-                            <button class="tv-btn-glass d-none d-xxl-inline-flex" type="button">
-                                <i class="fa-solid fa-robot"></i> AI филтър
                             </button>
                         </div>
                     </div>
-                </div>
+                </form>
+
+                <form asp-action="AiFilter" method="post" class="tv-filter-panel mt-3 js-ai-filter-form">
+                    @Html.AntiForgeryToken()
+
+                    <div class="tv-filter-section">
+                        <div class="tv-filter-label">
+                            <i class="fa-solid fa-robot me-1"></i> AI филтър
+                        </div>
+                        <label class="tv-filter-meta mb-1" for="aiLocation">Локация</label>
+                        <input id="aiLocation"
+                               name="SelectedLocation"
+                               value="@Model.Filters.Destination"
+                               class="tv-input w-100 mb-3"
+                               required
+                               placeholder="Напр. София, Варна, Банско" />
+                        <div class="tv-filter-meta mb-2">Опиши какъв хотел търсиш.</div>
+                        <textarea name="Prompt"
+                                  class="tv-input w-100"
+                                  rows="4"
+                                  required
+                                  placeholder="Напр. евтин хотел в центъра, под 120 лв, най-ниска цена"></textarea>
+                    </div>
+
+                    <button class="tv-btn-glass w-100 justify-content-center" type="submit">
+                        <span class="js-ai-button-content">
+                            <i class="fa-solid fa-robot"></i> AI филтър
+                        </span>
+                    </button>
+                </form>
             </div>
 
-            <!-- OFFCANVAS (mobile / tablet) -->
             <div class="offcanvas offcanvas-end tv-offcanvas-filters d-xl-none" tabindex="-1" id="tvFiltersOffcanvas">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-white">Филтри</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Затвори"></button>
                 </div>
                 <div class="offcanvas-body">
-                    <!-- Same content structure for mobile -->
-                    <div class="tv-filter-panel">
-                        <p class="tv-filter-sub mb-0">
-                            Тук се зареждат филтрите за мобилна версия (огледално на десктоп).
-                        </p>
-                    </div>
+                    <form asp-action="Index" method="get" class="tv-filter-panel">
+                        <div class="tv-filter-section">
+                            <label class="tv-filter-label" for="mobileDestination">Дестинация</label>
+                            <div class="tv-input-group">
+                                <input id="mobileDestination"
+                                       name="Destination"
+                                       value="@Model.Filters.Destination"
+                                       class="tv-input w-100"
+                                       placeholder="София, Варна, хотел..." />
+                                <span class="tv-input-icon"><i class="fa-solid fa-location-dot"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="tv-filter-section">
+                            <div class="tv-filter-label">Цена за нощувка</div>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <label class="tv-filter-meta" for="mobileMinPrice">От</label>
+                                    <input id="mobileMinPrice"
+                                           name="MinPrice"
+                                           value="@Model.Filters.MinPrice"
+                                           class="tv-input w-100"
+                                           type="number"
+                                           min="0"
+                                           step="10"
+                                           placeholder="50" />
+                                </div>
+                                <div class="col-6">
+                                    <label class="tv-filter-meta" for="mobileMaxPrice">До</label>
+                                    <input id="mobileMaxPrice"
+                                           name="MaxPrice"
+                                           value="@Model.Filters.MaxPrice"
+                                           class="tv-input w-100"
+                                           type="number"
+                                           min="0"
+                                           step="10"
+                                           placeholder="600" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tv-filter-section">
+                            <label class="tv-filter-label" for="mobileSortBy">Сортирай</label>
+                            <select id="mobileSortBy" name="SortBy" class="form-select bg-dark text-white border-secondary">
+                                <option value="recommended" selected='@(sortBy == "recommended")'>Препоръчани</option>
+                                <option value="name" selected='@(sortBy == "name")'>Име</option>
+                                <option value="city" selected='@(sortBy == "city")'>Град</option>
+                                <option value="price_asc" selected='@(sortBy == "price_asc")'>Цена (Ниска &rarr; Висока)</option>
+                                <option value="price_desc" selected='@(sortBy == "price_desc")'>Цена (Висока &rarr; Ниска)</option>
+                            </select>
+                        </div>
+
+                        <div class="tv-filter-section pt-3">
+                            <button class="tv-btn-primary w-100" type="submit">
+                                Приложи филтри
+                            </button>
+                            <a class="tv-btn-glass w-100 mt-2 text-decoration-none justify-content-center" asp-action="Index">
+                                Изчисти всички
+                            </a>
+                        </div>
+                    </form>
+
+                    <form asp-action="AiFilter" method="post" class="tv-filter-panel mt-3 js-ai-filter-form">
+                        @Html.AntiForgeryToken()
+
+                        <div class="tv-filter-section">
+                            <div class="tv-filter-label">
+                                <i class="fa-solid fa-robot me-1"></i> AI филтър
+                            </div>
+                            <label class="tv-filter-meta mb-1" for="mobileAiLocation">Локация</label>
+                            <input id="mobileAiLocation"
+                                   name="SelectedLocation"
+                                   value="@Model.Filters.Destination"
+                                   class="tv-input w-100 mb-3"
+                                   required
+                                   placeholder="Напр. София, Варна, Банско" />
+                            <div class="tv-filter-meta mb-2">Опиши какъв хотел търсиш.</div>
+                            <textarea name="Prompt"
+                                      class="tv-input w-100"
+                                      rows="4"
+                                      required
+                                      placeholder="Напр. евтин хотел в центъра, под 120 лв, най-ниска цена"></textarea>
+                        </div>
+
+                        <button class="tv-btn-glass w-100 justify-content-center" type="submit">
+                            <span class="js-ai-button-content">
+                                <i class="fa-solid fa-robot"></i> AI филтър
+                            </span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </aside>
 
-        <!-- RIGHT: HOTEL GRID -->
         <div class="col-12 col-xl-8 col-xxl-9">
 
-            <!-- TOOLBAR -->
             <div class="tv-grid-toolbar">
                 <div class="d-flex align-items-center gap-3">
                     <div class="tv-view-switcher">
-                        <a href="hotel_list.html" class="tv-view-btn" aria-label="List View">
+                        <button class="tv-view-btn" type="button" aria-label="List View">
                             <i class="fa-solid fa-list"></i>
-                        </a>
-                        <button class="tv-view-btn active" aria-label="Grid View">
+                        </button>
+                        <button class="tv-view-btn active" type="button" aria-label="Grid View">
                             <i class="fa-solid fa-border-all"></i>
                         </button>
                     </div>
                     <span class="text-white-50 small">
-                        Показани 1-@(Model?.Count ?? 0) от @(Model?.Count ?? 0)
+                        Показани @(Model.TotalCount == 0 ? 0 : 1)-@Model.TotalCount от @Model.TotalCount
                     </span>
                 </div>
 
-                <div class="d-flex align-items-center gap-2">
-                    <label class="text-white-50 small me-1">Сортирай:</label>
-                    <select class="form-select form-select-sm bg-dark text-white border-secondary" style="width: auto; border-radius: 20px;">
-                        <option>Препоръчани</option>
-                        <option>Цена (Ниска &rarr; Висока)</option>
-                        <option>Рейтинг</option>
+                <form asp-action="Index" method="get" class="d-flex align-items-center gap-2">
+                    <input type="hidden" name="Destination" value="@Model.Filters.Destination" />
+                    <input type="hidden" name="MinPrice" value="@Model.Filters.MinPrice" />
+                    <input type="hidden" name="MaxPrice" value="@Model.Filters.MaxPrice" />
+                    <label class="text-white-50 small me-1" for="sortByToolbar">Сортирай:</label>
+                    <select id="sortByToolbar"
+                            name="SortBy"
+                            class="form-select form-select-sm bg-dark text-white border-secondary"
+                            style="width: auto; border-radius: 20px;"
+                            onchange="this.form.submit()">
+                        <option value="recommended" selected='@(sortBy == "recommended")'>Препоръчани</option>
+                        <option value="name" selected='@(sortBy == "name")'>Име</option>
+                        <option value="city" selected='@(sortBy == "city")'>Град</option>
+                        <option value="price_asc" selected='@(sortBy == "price_asc")'>Цена (Ниска &rarr; Висока)</option>
+                        <option value="price_desc" selected='@(sortBy == "price_desc")'>Цена (Висока &rarr; Ниска)</option>
                     </select>
-                </div>
+                </form>
             </div>
 
-            <!-- HOTEL CARDS STACK -->
+            @if (!string.IsNullOrWhiteSpace(Model.AiResponse))
+            {
+                <div class="tv-glass-card p-4 mb-3">
+                    <div class="d-flex align-items-center gap-2 mb-2 text-info fw-bold">
+                        <i class="fa-solid fa-robot"></i>
+                        AI отговор
+                    </div>
+                    <p class="text-white-50 mb-0">@Model.AiResponse</p>
+                </div>
+            }
+
             <div class="vstack gap-3 tv-hotels-results">
-                @if (Model != null)
+                @if (Model.Hotels.Any())
                 {
-                    foreach (var hotel in Model)
+                    foreach (var hotel in Model.Hotels)
                     {
                         <partial name="_HotelCardPartial" model="hotel" />
                     }
@@ -254,22 +331,32 @@
                     </div>
                 }
             </div>
-            <!-- PAGINATION -->
-            <nav class="tv-pagination" aria-label="Пагинация">
-                <a href="#" class="tv-page-link" aria-label="Предишна">
-                    <i class="fa-solid fa-angle-left"></i>
-                </a>
-                <a href="#" class="tv-page-link active">1</a>
-                <a href="#" class="tv-page-link">2</a>
-                <a href="#" class="tv-page-link">3</a>
-                <span class="tv-page-link disabled" aria-disabled="true">…</span>
-                <a href="#" class="tv-page-link">6</a>
-                <a href="#" class="tv-page-link" aria-label="Следваща">
-                    <i class="fa-solid fa-angle-right"></i>
-                </a>
-            </nav>
 
         </div>
     </div>
 
 </div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll(".js-ai-filter-form").forEach((form) => {
+            form.addEventListener("submit", () => {
+                if (!form.checkValidity()) {
+                    return;
+                }
+
+                const overlay = document.getElementById("aiLoadingOverlay");
+                overlay?.classList.remove("d-none");
+                overlay?.classList.add("d-flex");
+
+                form.querySelectorAll("button[type='submit']").forEach((button) => {
+                    button.setAttribute("disabled", "disabled");
+                    const content = button.querySelector(".js-ai-button-content");
+                    if (content) {
+                        content.innerHTML = '<span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span> AI филтърът работи';
+                    }
+                });
+            });
+        });
+    </script>
+}

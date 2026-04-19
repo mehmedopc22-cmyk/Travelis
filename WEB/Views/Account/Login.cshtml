@@ -19,6 +19,13 @@
 
                     @Html.AntiForgeryToken()
 
+                    @if (TempData["ForgotPasswordMessage"] is string forgotPasswordMessage)
+                    {
+                        <div class="alert alert-info py-2 mb-3">
+                            @forgotPasswordMessage
+                        </div>
+                    }
+
                     <!-- GLOBAL ERROR -->
                     <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
 
@@ -44,7 +51,7 @@
 
                     <!-- Forgot password -->
                     <div class="d-flex justify-content-end mb-3">
-                        <a href="#" class="tv-forgot-link">Забравена парола?</a>
+                        <a asp-action="ForgotPassword" class="tv-forgot-link">Забравена парола?</a>
                     </div>
 
                     <!-- Login Button -->

@@ -71,6 +71,7 @@ namespace WEB.Controllers
 
                 List<Claim> claims =
                 [
+                    new Claim(ClaimTypes.NameIdentifier, response.UserId.ToString()),
                     new Claim(ClaimTypes.Name, model.Email),
                     new Claim(ClaimTypes.Email, model.Email),
                     new Claim("AccessToken", response.Token),
@@ -103,6 +104,59 @@ namespace WEB.Controllers
             catch (HttpRequestException ex)
             {
                 ModelState.AddModelError(string.Empty, $"Login failed: {ex.Message}");
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"Unexpected error: {ex.Message}");
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ForgotPassword()
+        {
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                return RedirectToAction(nameof(Profile));
+            }
+
+            return View(new ForgotPasswordViewModel());
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model, CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            string apiBaseUrl = _configuration["DefaultApiUrl"] ?? string.Empty;
+
+            if (string.IsNullOrWhiteSpace(apiBaseUrl))
+            {
+                ModelState.AddModelError(string.Empty, "API base URL is not configured.");
+                return View(model);
+            }
+
+            try
+            {
+                await Utils.CallApiAsync<string>(
+                    $"{apiBaseUrl.TrimEnd('/')}/forgot-password",
+                    HttpMethod.Post,
+                    model,
+                    cancellationToken: cancellationToken);
+
+                TempData["ForgotPasswordMessage"] = "Ако има профил с този имейл, ще получиш временна парола.";
+                return RedirectToAction(nameof(Login));
+            }
+            catch (HttpRequestException ex)
+            {
+                ModelState.AddModelError(string.Empty, $"Password reset failed: {ex.Message}");
                 return View(model);
             }
             catch (Exception ex)
@@ -229,6 +283,55 @@ namespace WEB.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model, CancellationToken cancellationToken)
+        {
+            ProfileViewModel profileModel = BuildProfileViewModel();
+
+            if (!ModelState.IsValid)
+            {
+                return View("Profile", profileModel);
+            }
+
+            string apiBaseUrl = _configuration["DefaultApiUrl"] ?? string.Empty;
+
+            if (string.IsNullOrWhiteSpace(apiBaseUrl))
+            {
+                ModelState.AddModelError(string.Empty, "API base URL is not configured.");
+                return View("Profile", profileModel);
+            }
+
+            try
+            {
+                await Utils.CallApiAsync<string>(
+                    $"{apiBaseUrl.TrimEnd('/')}/change-password",
+                    HttpMethod.Post,
+                    HttpContext,
+                    model,
+                    cancellationToken: cancellationToken);
+
+                TempData["ProfileMessage"] = "Паролата е сменена успешно.";
+                return RedirectToAction(nameof(Profile));
+            }
+            catch (HttpRequestException ex) when (ex.Message.Contains("400"))
+            {
+                ModelState.AddModelError(string.Empty, "Текущата парола е неправилна.");
+                return View("Profile", profileModel);
+            }
+            catch (HttpRequestException ex)
+            {
+                ModelState.AddModelError(string.Empty, $"Password change failed: {ex.Message}");
+                return View("Profile", profileModel);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"Unexpected error: {ex.Message}");
+                return View("Profile", profileModel);
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             HttpContext.Session.Remove("JwtToken");
@@ -242,6 +345,17 @@ namespace WEB.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+
+        private ProfileViewModel BuildProfileViewModel()
+        {
+            return new ProfileViewModel
+            {
+                Email = User.FindFirstValue(ClaimTypes.Email) ?? "",
+                FirstName = User.FindFirstValue("FirstName") ?? "",
+                LastName = User.FindFirstValue("LastName") ?? "",
+                Role = User.FindFirstValue(ClaimTypes.Role) ?? ""
+            };
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using Domain.Entities;
+using Domain.DTOs;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 using WEB.Helpers;
 using WEB.Models;
 
@@ -9,32 +11,69 @@ namespace WEB.Controllers
     {
         private readonly IConfiguration _configuration = configuration;
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> IndexAsync([FromQuery] HotelFilterViewModel filters)
         {
+            string apiBaseUrl = (_configuration["DefaultApiUrl"] ?? string.Empty).TrimEnd('/');
+            string queryString = BuildHotelFilterQueryString(filters);
+
             var hotelDtos = await Utils.CallApiAsync<List<HotelEntity>>(
-                _configuration["DefaultApiUrl"] + "hotel/all",
+                $"{apiBaseUrl}/hotel/filter{queryString}",
                 HttpMethod.Get
             );
 
-            List<HotelCardViewModel> model = (hotelDtos ?? new List<HotelEntity>())
-                .Select(h => new HotelCardViewModel
-                {
-                    Id = h.Id,
-                    Name = h.Name,
-                    Country = h.Country,
-                    City = h.City,
-                    Street = h.Street,
-                    PostalCode = h.PostalCode,
-                    PhoneNumber = h.PhoneNumber,
-                    Email = h.Email,
-                    Approved = h.Approved,
-                    Status = h.Status,
-                    CreatedAt = h.CreatedAt,
-                    UpdatedAt = h.UpdatedAt
-                })
-                .ToList();
+            List<HotelCardViewModel> model = MapHotelCards(hotelDtos ?? new List<HotelEntity>());
 
-            return View(model);
+            return View(new HotelIndexViewModel
+            {
+                Filters = filters,
+                Hotels = model
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AiFilter(HotelAiFilterViewModel model, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrWhiteSpace(model.SelectedLocation))
+            {
+                TempData["AiFilterError"] = "Моля, въведи локация, за да може AI филтърът да работи.";
+                return RedirectToAction("Index", new
+                {
+                    Destination = model.SelectedLocation
+                });
+            }
+
+            if (string.IsNullOrWhiteSpace(model.Prompt))
+            {
+                TempData["AiFilterError"] = "Моля, опиши какъв хотел търсиш.";
+                return RedirectToAction("Index", new
+                {
+                    Destination = model.SelectedLocation
+                });
+            }
+
+            AiHotelFilterResponseDTO? response = await Utils.CallApiAsync<AiHotelFilterResponseDTO>(
+                $"{(_configuration["DefaultApiUrl"] ?? string.Empty).TrimEnd('/')}/ai/hotels/filter",
+                HttpMethod.Post,
+                new AiHotelFilterRequestDTO
+                {
+                    SelectedLocation = model.SelectedLocation,
+                    Prompt = model.Prompt
+                },
+                cancellationToken: cancellationToken);
+
+            ViewData["AiFilterMessage"] = $"AI филтърът беше приложен за {model.SelectedLocation}.";
+
+            return View("Index", new HotelIndexViewModel
+            {
+                Filters = new HotelFilterViewModel
+                {
+                    Destination = model.SelectedLocation,
+                    SortBy = "recommended"
+                },
+                Hotels = MapHotelCards(response?.Hotels ?? new List<HotelEntity>()),
+                AiResponse = response?.AiResponse
+            });
         }
 
         [HttpGet]
@@ -76,6 +115,53 @@ namespace WEB.Controllers
             TempData["SuccessMessage"] = "Заявката беше изпратена успешно и очаква одобрение.";
 
             return RedirectToAction(nameof(Apply));
+        }
+
+        private static string BuildHotelFilterQueryString(HotelFilterViewModel filters)
+        {
+            Dictionary<string, string?> query = new()
+            {
+                ["destination"] = filters.Destination,
+                ["sortBy"] = filters.SortBy
+            };
+
+            if (filters.MinPrice.HasValue)
+            {
+                query["minPrice"] = filters.MinPrice.Value.ToString(CultureInfo.InvariantCulture);
+            }
+
+            if (filters.MaxPrice.HasValue)
+            {
+                query["maxPrice"] = filters.MaxPrice.Value.ToString(CultureInfo.InvariantCulture);
+            }
+
+            string[] parts = query
+                .Where(pair => !string.IsNullOrWhiteSpace(pair.Value))
+                .Select(pair => $"{Uri.EscapeDataString(pair.Key)}={Uri.EscapeDataString(pair.Value!)}")
+                .ToArray();
+
+            return parts.Length == 0 ? string.Empty : $"?{string.Join("&", parts)}";
+        }
+
+        private static List<HotelCardViewModel> MapHotelCards(IEnumerable<HotelEntity> hotels)
+        {
+            return hotels
+                .Select(h => new HotelCardViewModel
+                {
+                    Id = h.Id,
+                    Name = h.Name,
+                    Country = h.Country,
+                    City = h.City,
+                    Street = h.Street,
+                    PostalCode = h.PostalCode,
+                    PhoneNumber = h.PhoneNumber,
+                    Email = h.Email,
+                    Approved = h.Approved,
+                    Status = h.Status,
+                    CreatedAt = h.CreatedAt,
+                    UpdatedAt = h.UpdatedAt
+                })
+                .ToList();
         }
     }
 }

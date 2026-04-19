@@ -14,5 +14,6 @@ namespace DAL.Interfaces
         IEnumerable<UserEntity> SelectByStatus(byte status);
         bool UpdateStatus(Guid userId, byte status);
         bool UpdateVerification(Guid userId, bool isVerified);
+        bool UpdatePasswordHash(Guid userId, string passwordHash);
     }
 }

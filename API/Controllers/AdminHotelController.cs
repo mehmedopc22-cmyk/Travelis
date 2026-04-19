@@ -1,4 +1,4 @@
-﻿using DAL.Interfaces;
+using DAL.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +26,7 @@ namespace API.Controllers
             return success ? Ok() : BadRequest();
         }
 
-        [HttpPatch("reject/{hotelId:guid}")]
+        [HttpPatch("{hotelId:guid}/reject")]
         public ActionResult RejectHotel(Guid hotelId)
         {
             try

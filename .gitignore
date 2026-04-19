@@ -10,6 +10,12 @@
 *.userosscache
 *.sln.docstates
 *.env
+.venv/
+**/.venv/
+LocalAIService/models/
+LocalAIService/hf-cache/
+LocalAIService/logs/
+LocalAIService/.tmp/
 *.idea/**
 
 # User-specific files (MonoDevelop/Xamarin Studio)

@@ -35,6 +35,21 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet("filter")]
+        public ActionResult<IEnumerable<HotelEntity>> GetFilteredHotels([FromQuery] HotelFilterRequestDTO filters)
+        {
+            try
+            {
+                IEnumerable<HotelEntity> hotels = _hotelDAO.SelectFiltered(filters);
+
+                return Ok(hotels);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpGet("{id}")]
         public ActionResult<HotelEntity> GetHotelById(Guid Id)
         {
