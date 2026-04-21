@@ -1,0 +1,36 @@
+INSERT INTO Users
+(
+    Id,
+    Email,
+    FirstName,
+    LastName,
+    LoyaltyPoints,
+    AvatarID,
+    PasswordHash,
+    MFAType,
+    TFASecret,
+    IsVerified,
+    Status,
+    RoleId,
+    LastLoginAt,
+    CreatedAt,
+    UpdatedAt
+)
+VALUES
+(
+    @Id,
+    @Email,
+    @FirstName,
+    @LastName,
+    @LoyaltyPoints,
+    @AvatarID,
+    @PasswordHash,
+    @MFAType,
+    @TFASecret,
+    @IsVerified,
+    @Status,
+    @RoleId,
+    @LastLoginAt,
+    @CreatedAt,
+    @UpdatedAt
+)

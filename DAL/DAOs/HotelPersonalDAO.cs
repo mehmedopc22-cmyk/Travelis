@@ -15,7 +15,7 @@ namespace DAL.DAOs
 
             try
             {
-                return sqlConnection.Query<HotelPersonalEntity>("SELECT HotelId, UserId FROM [HotelPersonal]");
+                return sqlConnection.Query<HotelPersonalEntity>(SQLQueries.HotelPersonal_SelectAll);
             }
             catch (Exception)
             {
@@ -30,7 +30,7 @@ namespace DAL.DAOs
             try
             {
                 return sqlConnection.Query<HotelPersonalEntity>(
-                    "SELECT HotelId, UserId FROM [HotelPersonal] WHERE HotelId = @HotelId",
+                    SQLQueries.HotelPersonal_SelectByHotelId,
                     new { HotelId = hotelId });
             }
             catch (Exception)
@@ -46,7 +46,7 @@ namespace DAL.DAOs
             try
             {
                 return sqlConnection.Query<HotelPersonalEntity>(
-                    "SELECT HotelId, UserId FROM [HotelPersonal] WHERE UserId = @UserId",
+                    SQLQueries.HotelPersonal_SelectByUserId,
                     new { UserId = userId });
             }
             catch (Exception)
@@ -62,11 +62,7 @@ namespace DAL.DAOs
             try
             {
                 return sqlConnection.ExecuteScalar<int>(
-                    """
-                    SELECT COUNT(1)
-                    FROM [HotelPersonal]
-                    WHERE HotelId = @HotelId AND UserId = @UserId
-                    """,
+                    SQLQueries.HotelPersonal_Exists,
                     new { HotelId = hotelId, UserId = userId }) > 0;
             }
             catch (Exception)
@@ -87,7 +83,7 @@ namespace DAL.DAOs
                 }
 
                 int rows = sqlConnection.Execute(
-                    "INSERT INTO [HotelPersonal] (HotelId, UserId) VALUES (@HotelId, @UserId)",
+                    SQLQueries.HotelPersonal_Assign,
                     new { HotelId = hotelId, UserId = userId });
 
                 return rows > 0;
@@ -105,7 +101,7 @@ namespace DAL.DAOs
             try
             {
                 int rows = sqlConnection.Execute(
-                    "DELETE FROM [HotelPersonal] WHERE HotelId = @HotelId AND UserId = @UserId",
+                    SQLQueries.HotelPersonal_Remove,
                     new { HotelId = hotelId, UserId = userId });
 
                 return rows > 0;

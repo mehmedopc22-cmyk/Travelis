@@ -161,7 +161,7 @@ namespace DAL.DAOs
                     return false; // Or throw a "No values provided for update" exception
                 }
 
-                var sql = $@"UPDATE [HotelRooms] SET {string.Join(", ", setClauses)} WHERE [Id] = @Id";
+                var sql = string.Format(SQLQueries.HotelRooms_UpdateDynamic, string.Join(", ", setClauses));
                 var rowsAffected = sqlConnection.Execute(sql, parameters);
                 return rowsAffected > 0;
             }

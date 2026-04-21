@@ -20,7 +20,7 @@ namespace DAL.DAOs
             };
 
             sqlConnection.Execute(
-                "INSERT INTO [Images] (Id, Name) VALUES (@Id, @Name)",
+                SQLQueries.Images_Insert,
                 image);
 
             return image;
@@ -33,7 +33,7 @@ namespace DAL.DAOs
             try
             {
                 return sqlConnection.QueryFirstOrDefault<ImageEntity>(
-                    "SELECT Id, Name FROM [Images] WHERE Id = @ImageId",
+                    SQLQueries.Images_SelectById,
                     new { ImageId = imageId });
             }
             catch (Exception)
@@ -49,13 +49,7 @@ namespace DAL.DAOs
             try
             {
                 return sqlConnection.Query<ImageEntity>(
-                    """
-                    SELECT i.Id, i.Name
-                    FROM [UserImages] ui
-                    INNER JOIN [Images] i ON i.Id = ui.ImageId
-                    WHERE ui.UserId = @UserId
-                    ORDER BY ui.Id DESC
-                    """,
+                    SQLQueries.Images_SelectByUserId,
                     new { UserId = userId });
             }
             catch (Exception)
@@ -71,13 +65,7 @@ namespace DAL.DAOs
             try
             {
                 return sqlConnection.Query<ImageEntity>(
-                    """
-                    SELECT i.Id, i.Name
-                    FROM [HotelImages] hi
-                    INNER JOIN [Images] i ON i.Id = hi.ImageId
-                    WHERE hi.HotelId = @HotelId
-                    ORDER BY hi.Id DESC
-                    """,
+                    SQLQueries.Images_SelectByHotelId,
                     new { HotelId = hotelId });
             }
             catch (Exception)
@@ -93,7 +81,7 @@ namespace DAL.DAOs
             try
             {
                 int rows = sqlConnection.Execute(
-                    "INSERT INTO [UserImages] (Id, UserId, ImageId) VALUES (@Id, @UserId, @ImageId)",
+                    SQLQueries.UserImages_Link,
                     new
                     {
                         Id = Guid.NewGuid(),
@@ -116,7 +104,7 @@ namespace DAL.DAOs
             try
             {
                 int rows = sqlConnection.Execute(
-                    "INSERT INTO [HotelImages] (Id, HotelId, ImageId) VALUES (@Id, @HotelId, @ImageId)",
+                    SQLQueries.HotelImages_Link,
                     new
                     {
                         Id = Guid.NewGuid(),

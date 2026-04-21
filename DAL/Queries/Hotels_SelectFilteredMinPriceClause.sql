@@ -1,0 +1,1 @@
+AND hr.Price >= @MinPrice

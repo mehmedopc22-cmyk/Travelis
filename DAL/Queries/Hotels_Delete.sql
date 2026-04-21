@@ -1,0 +1,2 @@
+DELETE FROM Hotels
+WHERE Id = @Id

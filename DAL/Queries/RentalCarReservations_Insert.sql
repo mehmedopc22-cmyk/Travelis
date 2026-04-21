@@ -1,0 +1,20 @@
+INSERT INTO RentalCarReservation
+(
+    Id,
+    UserId,
+    CarId,
+    UseFrom,
+    UseTo,
+    CreatedAt,
+    UpdatedAt
+)
+VALUES
+(
+    @Id,
+    @UserId,
+    @CarId,
+    @UseFrom,
+    @UseTo,
+    @CreatedAt,
+    @UpdatedAt
+)

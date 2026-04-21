@@ -22,7 +22,7 @@ namespace DAL.DAOs
             using IDbConnection db = _databaseFactory.GetConnection();
 
             return db.QueryFirstOrDefault<RoleEntity>(
-                "SELECT Id, Name, Description, CreatedAt, UpdatedAt FROM Roles WHERE Id = @Id",
+                SQLQueries.Roles_SelectById,
                 new { Id = roleId });
         }
     }

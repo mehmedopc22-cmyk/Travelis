@@ -18,18 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="SQLQueries.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>SQLQueries.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="SQLQueries.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>SQLQueries.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Content Include="Queries\**\*.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <TargetPath>Queries\%(RecursiveDir)%(Filename)%(Extension)</TargetPath>
+    </Content>
   </ItemGroup>
 
 </Project>

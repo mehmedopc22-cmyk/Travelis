@@ -181,7 +181,7 @@ namespace DAL.DAOs
                     return false;
                 }
 
-                var sql = $@"UPDATE [RentalCarReservation] SET {string.Join(", ", setClauses)} WHERE [Id] = @Id";
+                var sql = string.Format(SQLQueries.RentalCarReservations_UpdateDynamic, string.Join(", ", setClauses));
                 var rowsAffected = sqlConnection.Execute(sql, parameters);
                 return rowsAffected > 0;
             }

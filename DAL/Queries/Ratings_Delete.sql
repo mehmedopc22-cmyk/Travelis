@@ -1,0 +1,2 @@
+DELETE FROM Ratings
+WHERE Id = @Id

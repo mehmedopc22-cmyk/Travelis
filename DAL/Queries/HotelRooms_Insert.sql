@@ -1,0 +1,26 @@
+INSERT INTO HotelRooms
+(
+    Id,
+    HotelId,
+    Description,
+    Price,
+    RoomNo,
+    Floor,
+    BedCount,
+    Capacity,
+    CreatedAt,
+    UpdatedAt
+)
+VALUES
+(
+    @Id,
+    @HotelId,
+    @Description,
+    @Price,
+    @RoomNo,
+    @Floor,
+    @BedCount,
+    @Capacity,
+    @CreatedAt,
+    @UpdatedAt
+)

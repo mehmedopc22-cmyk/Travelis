@@ -37,61 +37,36 @@ namespace DAL.DAOs
             try
             {
                 DynamicParameters parameters = new();
-                StringBuilder sql = new("""
-                    SELECT
-                        h.Id,
-                        h.Name,
-                        h.Country,
-                        h.City,
-                        h.Street,
-                        h.PostalCode,
-                        h.PhoneNumber,
-                        h.Email,
-                        h.Status,
-                        h.Approved,
-                        h.CreatedAt,
-                        h.UpdatedAt
-                    FROM Hotels h
-                    WHERE 1 = 1
-                    """);
+                StringBuilder sql = new(SQLQueries.Hotels_SelectFilteredBase);
 
                 if (!string.IsNullOrWhiteSpace(filters.Destination))
                 {
-                    sql.AppendLine("""
-                        AND (
-                            h.Name LIKE @Destination
-                            OR h.Country LIKE @Destination
-                            OR h.City LIKE @Destination
-                            OR h.Street LIKE @Destination
-                        )
-                        """);
+                    sql.AppendLine();
+                    sql.AppendLine(SQLQueries.Hotels_SelectFilteredDestinationClause);
                     parameters.Add("@Destination", $"%{filters.Destination.Trim()}%");
                 }
 
                 if (filters.MinPrice.HasValue || filters.MaxPrice.HasValue)
                 {
-                    sql.AppendLine("""
-                        AND EXISTS (
-                            SELECT 1
-                            FROM HotelRooms hr
-                            WHERE hr.HotelId = h.Id
-                        """);
+                    sql.AppendLine();
+                    sql.AppendLine(SQLQueries.Hotels_SelectFilteredRoomExistsStart);
 
                     if (filters.MinPrice.HasValue)
                     {
-                        sql.AppendLine("AND hr.Price >= @MinPrice");
+                        sql.AppendLine(SQLQueries.Hotels_SelectFilteredMinPriceClause);
                         parameters.Add("@MinPrice", filters.MinPrice.Value);
                     }
 
                     if (filters.MaxPrice.HasValue)
                     {
-                        sql.AppendLine("AND hr.Price <= @MaxPrice");
+                        sql.AppendLine(SQLQueries.Hotels_SelectFilteredMaxPriceClause);
                         parameters.Add("@MaxPrice", filters.MaxPrice.Value);
                     }
 
-                    sql.AppendLine(")");
+                    sql.AppendLine(SQLQueries.Hotels_SelectFilteredRoomExistsEnd);
                 }
 
+                sql.AppendLine();
                 sql.AppendLine(GetHotelSortClause(filters.SortBy));
 
                 return sqlConnection.Query<HotelEntity>(sql.ToString(), parameters);
@@ -304,23 +279,11 @@ namespace DAL.DAOs
         {
             return sortBy?.Trim().ToLowerInvariant() switch
             {
-                "name" => "ORDER BY h.Name ASC",
-                "city" => "ORDER BY h.City ASC, h.Name ASC",
-                "price_asc" => """
-                    ORDER BY (
-                        SELECT MIN(hr.Price)
-                        FROM HotelRooms hr
-                        WHERE hr.HotelId = h.Id
-                    ) ASC, h.Name ASC
-                    """,
-                "price_desc" => """
-                    ORDER BY (
-                        SELECT MIN(hr.Price)
-                        FROM HotelRooms hr
-                        WHERE hr.HotelId = h.Id
-                    ) DESC, h.Name ASC
-                    """,
-                _ => "ORDER BY h.Approved DESC, h.Status DESC, h.Name ASC"
+                "name" => SQLQueries.Hotels_SortByName,
+                "city" => SQLQueries.Hotels_SortByCity,
+                "price_asc" => SQLQueries.Hotels_SortByPriceAsc,
+                "price_desc" => SQLQueries.Hotels_SortByPriceDesc,
+                _ => SQLQueries.Hotels_SortDefault
             };
         }
     }

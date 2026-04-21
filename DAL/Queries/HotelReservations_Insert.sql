@@ -1,0 +1,22 @@
+INSERT INTO HotelReservation
+(
+    Id,
+    HotelId,
+    UserId,
+    RoomId,
+    CheckIn,
+    CheckOut,
+    CreatedAt,
+    UpdatedAt
+)
+VALUES
+(
+    @Id,
+    @HotelId,
+    @UserId,
+    @RoomId,
+    @CheckIn,
+    @CheckOut,
+    @CreatedAt,
+    @UpdatedAt
+)

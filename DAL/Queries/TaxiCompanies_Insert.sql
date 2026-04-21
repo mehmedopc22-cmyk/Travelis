@@ -1,0 +1,30 @@
+INSERT INTO TaxiCompany
+(
+    Id,
+    Name,
+    Country,
+    City,
+    Street,
+    PostalCode,
+    PhoneNumber,
+    Email,
+    Status,
+    Approved,
+    CreatedAt,
+    UpdatedAt
+)
+VALUES
+(
+    @Id,
+    @Name,
+    @Country,
+    @City,
+    @Street,
+    @PostalCode,
+    @PhoneNumber,
+    @Email,
+    @Status,
+    @Approved,
+    @CreatedAt,
+    @UpdatedAt
+)

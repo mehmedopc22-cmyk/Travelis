@@ -1,0 +1,9 @@
+SELECT CAST(CASE
+WHEN EXISTS (
+    SELECT 1
+    FROM Users
+    WHERE Email = @Email
+)
+THEN 1
+ELSE 0
+END AS BIT)

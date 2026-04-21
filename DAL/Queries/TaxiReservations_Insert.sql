@@ -1,0 +1,24 @@
+INSERT INTO TaxiReservation
+(
+    Id,
+    TaxiCompanyId,
+    UserId,
+    PickupAddress,
+    DestinationAddress,
+    Time,
+    CreatedAt,
+    UpdatedAt,
+    Status
+)
+VALUES
+(
+    @Id,
+    @TaxiCompanyId,
+    @UserId,
+    @PickupAddress,
+    @DestinationAddress,
+    @Time,
+    @CreatedAt,
+    @UpdatedAt,
+    @Status
+)

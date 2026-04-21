@@ -53,26 +53,7 @@ namespace DAL.DAOs
             try
             {
                 return sqlConnection.QueryFirstOrDefault<UserEntity>(
-                    """
-                    SELECT
-                        Id,
-                        Email,
-                        FirstName,
-                        LastName,
-                        LoyaltyPoints,
-                        AvatarID,
-                        PasswordHash,
-                        MFAType,
-                        TFASecret,
-                        IsVerified,
-                        Status,
-                        RoleId,
-                        LastLoginAt,
-                        CreatedAt,
-                        UpdatedAt
-                    FROM Users
-                    WHERE Id = @Id
-                    """,
+                    SQLQueries.Users_SelectById,
                     new { Id = id }
                 );
             }
@@ -242,7 +223,7 @@ namespace DAL.DAOs
             try
             {
                 int rows = sqlConnection.Execute(
-                    "UPDATE Users SET PasswordHash = @PasswordHash, UpdatedAt = @UpdatedAt WHERE Id = @UserId",
+                    SQLQueries.Users_UpdatePasswordHash,
                     new
                     {
                         UserId = userId,
@@ -265,7 +246,7 @@ namespace DAL.DAOs
             try
             {
                 int rows = sqlConnection.Execute(
-                    "UPDATE Users SET RoleId = @RoleId, UpdatedAt = @UpdatedAt WHERE Id = @UserId",
+                    SQLQueries.Users_UpdateRole,
                     new
                     {
                         UserId = userId,
@@ -288,7 +269,7 @@ namespace DAL.DAOs
             try
             {
                 int rows = sqlConnection.Execute(
-                    "UPDATE Users SET AvatarID = @ImageId, UpdatedAt = @UpdatedAt WHERE Id = @UserId",
+                    SQLQueries.Users_UpdateAvatar,
                     new
                     {
                         UserId = userId,
