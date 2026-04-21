@@ -31,5 +31,7 @@
             };
 
         public string ApprovalText => Approved ? "Одобрен" : "Неодобрен";
+
+        public List<HotelRoomViewModel> Rooms { get; set; } = new List<HotelRoomViewModel>();
     }
 }
