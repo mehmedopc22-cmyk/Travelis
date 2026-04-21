@@ -46,6 +46,20 @@
                 <a asp-controller="AdminHotel" asp-action="Pending" class="tv-nav-link">
                     <i class="fa-solid fa-hotel"></i> Хотели
                 </a>
+
+                @if (User.IsInRole("GlobalAdmin"))
+                {
+                    <a asp-controller="AdminHotel" asp-action="Assignments" class="tv-nav-link ms-3 small text-white-50 border-start border-white border-opacity-10 ps-2" style="border-radius: 0;">
+                        Администратори на хотели
+                    </a>
+                }
+
+                @if (User.IsInRole("HotelAdmin"))
+                {
+                    <a asp-controller="HotelAdmin" asp-action="Index" class="tv-nav-link">
+                        <i class="fa-solid fa-building-user"></i> Моите хотели
+                    </a>
+                }
             </div>
 
             <div class="tv-user-panel">

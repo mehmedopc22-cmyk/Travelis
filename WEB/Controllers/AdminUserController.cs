@@ -47,8 +47,9 @@ namespace WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateUser(AdminUpdateUserDTO dto)
         {
+            Guid userId = dto.Id;
             await Utils.CallApiAsync<object>(
-                _configuration["DefaultApiUrl"] + $"admin/users/{dto.Id}",
+                _configuration["DefaultApiUrl"] + $"admin/users/{userId}",
                 HttpMethod.Put,
                 HttpContext,
                 dto);

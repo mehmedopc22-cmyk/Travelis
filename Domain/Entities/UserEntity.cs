@@ -7,7 +7,7 @@
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public int LoyaltyPoints { get; set; } = 0;
-        public string AvatarURL { get; set; } = string.Empty;
+        public Guid AvatarID { get; set; } = Guid.Empty;
         public string PasswordHash { get; set; } = string.Empty;
         public byte? MFAType { get; set; } = null;
         public string? TFASecret { get; set; } = null;

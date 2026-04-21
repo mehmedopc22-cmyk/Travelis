@@ -70,13 +70,17 @@ namespace API.Controllers
         [HttpPatch("{userId:guid}/role")]
         public ActionResult ChangeRole(Guid userId, [FromBody] UpdateUserRoleDTO dto)
         {
-            var user = _userDAO.SelectById(userId);
-            if (user == null) return NotFound();
+            if (_userDAO.SelectById(userId) == null)
+            {
+                return NotFound();
+            }
 
-            user.RoleId = dto.RoleId;
-            user.UpdatedAt = DateTime.UtcNow;
+            if (_roleDAO.SelectById(dto.RoleId) == null)
+            {
+                return BadRequest("Role was not found.");
+            }
 
-            return _userDAO.Update(user) ? Ok() : BadRequest();
+            return _userDAO.UpdateRole(userId, dto.RoleId) ? Ok() : BadRequest();
         }
 
         [HttpPatch("{userId:guid}/status/{status}")]

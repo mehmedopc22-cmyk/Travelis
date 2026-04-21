@@ -7088,6 +7088,17 @@ a {
     align-items: center;
     justify-content: center;
     align-content: center;
+    overflow: hidden;
+    flex: 0 0 6rem;
+}
+
+.tv-avatar-wrap .tv-avatar {
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    display: block;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .tv-user-name {

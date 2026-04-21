@@ -24,6 +24,8 @@ namespace API
             builder.Services.AddTransient<IFactory<SqlConnection>, DatabaseFactory>();
             builder.Services.AddTransient<IUserDAO, UserDAO>();
             builder.Services.AddTransient<IHotelDAO, HotelDAO>();
+            builder.Services.AddTransient<IHotelPersonalDAO, HotelPersonalDAO>();
+            builder.Services.AddTransient<IImageDAO, ImageDAO>();
             builder.Services.AddTransient<IHotelReservationDAO, HotelReservationDAO>();
             builder.Services.AddScoped<IRoleDAO, RoleDAO>();
             builder.Services.AddTransient<IRentalCarReservationDAO, RentalCarReservationDAO>();

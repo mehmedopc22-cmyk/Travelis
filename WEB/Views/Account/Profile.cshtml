@@ -16,7 +16,7 @@
 
                         <div class="tv-sidebar-profile">
                             <div class="tv-avatar-wrap">
-                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="tv-avatar" alt="">
+                                <img src="@(string.IsNullOrWhiteSpace(Model.ProfileImageUrl) ? "https://randomuser.me/api/portraits/women/44.jpg" : Model.ProfileImageUrl)" class="tv-avatar" alt="">
                             </div>
 
                             <div class="tv-user-name">
@@ -115,6 +115,51 @@
 
                         </div>
 
+                        <div class="tv-glass-card p-4 mb-4">
+
+                            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary border-opacity-25 pb-3">
+                                <div>
+                                    <div class="tv-section-label">Снимка</div>
+                                    <h4 class="text-white m-0">Профилна снимка</h4>
+                                </div>
+                            </div>
+
+                            @if (TempData["ProfileImageMessage"] is string profileImageMessage)
+                            {
+                                <div class="alert alert-success py-2 mb-3">
+                                    @profileImageMessage
+                                </div>
+                            }
+
+                            <form asp-action="UploadProfileImage" method="post" enctype="multipart/form-data">
+
+                                @Html.AntiForgeryToken()
+
+                                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                                <div class="row g-4 align-items-center">
+                                    <div class="col-md-auto">
+                                        <img src="@(string.IsNullOrWhiteSpace(Model.ProfileImageUrl) ? "https://randomuser.me/api/portraits/women/44.jpg" : Model.ProfileImageUrl)"
+                                             alt=""
+                                             class="tv-upload-avatar" />
+                                    </div>
+
+                                    <div class="col-md">
+                                        <label for="profileImage">Качи изображение</label>
+                                        <input id="profileImage" name="profileImage" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="tv-input" required />
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-end mt-4 gap-2">
+                                    <button type="submit" class="tv-btn tv-btn-primary">
+                                        Запази снимката
+                                    </button>
+                                </div>
+
+                            </form>
+
+                        </div>
+
                         <!-- PASSWORD -->
                         <div class="tv-glass-card p-4 mb-4">
 
@@ -125,7 +170,7 @@
                                 </div>
                             </div>
 
-                            @if (TempData["ProfileMessage"] is string profileMessage)
+                            @if (TempData["PasswordMessage"] is string profileMessage)
                             {
                                 <div class="alert alert-success py-2 mb-3">
                                     @profileMessage

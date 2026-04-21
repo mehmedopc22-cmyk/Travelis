@@ -1,0 +1,117 @@
+@model WEB.Models.HotelAdminManageViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Управление на хотел";
+}
+
+<div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-3">
+    <div>
+        <h2 class="fw-bold mb-1">@Model.Hotel.Name</h2>
+        <p class="text-white-50 mb-0">@Model.Hotel.City, @Model.Hotel.Country</p>
+    </div>
+
+    <a asp-controller="HotelAdmin" asp-action="Index" class="btn tv-btn-glass">
+        <i class="fa-solid fa-arrow-left me-1"></i> Моите хотели
+    </a>
+</div>
+
+@if (TempData["HotelAdminMessage"] is string message)
+{
+    <div class="alert alert-success">@message</div>
+}
+
+@if (TempData["HotelAdminError"] is string error)
+{
+    <div class="alert alert-danger">@error</div>
+}
+
+<div class="row g-4">
+    <div class="col-12 col-xl-7">
+        <div class="tv-card p-4">
+            <h5 class="fw-bold text-white mb-3">Информация за хотела</h5>
+
+            <form asp-controller="HotelAdmin" asp-action="UpdateHotel" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Hotel.Id" name="Id" />
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label>Име</label>
+                        <input asp-for="Hotel.Name" name="Name" class="tv-input" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Държава</label>
+                        <input asp-for="Hotel.Country" name="Country" class="tv-input" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Град</label>
+                        <input asp-for="Hotel.City" name="City" class="tv-input" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Улица</label>
+                        <input asp-for="Hotel.Street" name="Street" class="tv-input" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Пощенски код</label>
+                        <input asp-for="Hotel.PostalCode" name="PostalCode" class="tv-input" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Телефон</label>
+                        <input asp-for="Hotel.PhoneNumber" name="PhoneNumber" class="tv-input" />
+                    </div>
+                    <div class="col-12">
+                        <label>Имейл</label>
+                        <input asp-for="Hotel.Email" name="Email" type="email" class="tv-input" />
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end mt-4">
+                    <button type="submit" class="btn tv-btn-primary">
+                        Запази промените
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-12 col-xl-5">
+        <div class="tv-card p-4 mb-4">
+            <h5 class="fw-bold text-white mb-3">Добави снимка</h5>
+
+            <form asp-controller="HotelAdmin" asp-action="UploadHotelImage" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="hotelId" value="@Model.Hotel.Id" />
+
+                <label for="hotelImage">Изображение</label>
+                <input id="hotelImage" name="hotelImages" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="tv-input" multiple required />
+
+                <div class="d-flex justify-content-end mt-3">
+                    <button type="submit" class="btn tv-btn-primary">
+                        <i class="fa-solid fa-image me-1"></i> Добави
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="tv-card p-4">
+            <h5 class="fw-bold text-white mb-3">Снимки</h5>
+
+            @if (!Model.Images.Any())
+            {
+                <div class="text-white-50 small">Все още няма добавени снимки.</div>
+            }
+            else
+            {
+                <div class="row g-2">
+                    @foreach (var image in Model.Images)
+                    {
+                        <div class="col-6">
+                            <img src="@WEB.Controllers.HotelAdminController.BuildHotelImageUrl(image.Name)" alt="" class="w-100 rounded-3" style="aspect-ratio: 4 / 3; object-fit: cover;" />
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

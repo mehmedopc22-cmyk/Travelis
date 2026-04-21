@@ -1,4 +1,6 @@
 ﻿using System.Security.Claims;
+using Domain.DTOs;
+using Domain.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -233,15 +235,10 @@ namespace WEB.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult Profile()
+        public async Task<IActionResult> Profile(CancellationToken cancellationToken)
         {
-            ProfileViewModel model = new()
-            {
-                Email = User.FindFirstValue(ClaimTypes.Email) ?? "",
-                FirstName = User.FindFirstValue("FirstName") ?? "",
-                LastName = User.FindFirstValue("LastName") ?? "",
-                Role = User.FindFirstValue(ClaimTypes.Role) ?? ""
-            };
+            ProfileViewModel model = BuildProfileViewModel();
+            await PopulateProfileImageAsync(model, cancellationToken);
 
             return View(model);
         }
@@ -283,6 +280,43 @@ namespace WEB.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UploadProfileImage(IFormFile profileImage, CancellationToken cancellationToken)
+        {
+            ProfileViewModel profileModel = BuildProfileViewModel();
+
+            if (profileImage == null || profileImage.Length == 0)
+            {
+                ModelState.AddModelError(string.Empty, "Избери изображение за профила.");
+                return View("Profile", profileModel);
+            }
+
+            try
+            {
+                string imageName = await SaveUploadedImageAsync(profileImage, "profiles", cancellationToken);
+
+                await Utils.CallApiAsync<ImageEntity>(
+                    $"{(_configuration["DefaultApiUrl"] ?? string.Empty).TrimEnd('/')}/user/{profileModel.UserId}/profile-image",
+                    HttpMethod.Post,
+                    HttpContext,
+                    new ImageUploadRequestDTO
+                    {
+                        ImageName = imageName
+                    },
+                    cancellationToken: cancellationToken);
+
+                TempData["ProfileImageMessage"] = "Профилната снимка беше обновена.";
+                return RedirectToAction(nameof(Profile));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View("Profile", profileModel);
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model, CancellationToken cancellationToken)
         {
             ProfileViewModel profileModel = BuildProfileViewModel();
@@ -309,7 +343,7 @@ namespace WEB.Controllers
                     model,
                     cancellationToken: cancellationToken);
 
-                TempData["ProfileMessage"] = "Паролата е сменена успешно.";
+                TempData["PasswordMessage"] = "Паролата е сменена успешно.";
                 return RedirectToAction(nameof(Profile));
             }
             catch (HttpRequestException ex) when (ex.Message.Contains("400"))
@@ -349,13 +383,72 @@ namespace WEB.Controllers
 
         private ProfileViewModel BuildProfileViewModel()
         {
+            Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId);
+
             return new ProfileViewModel
             {
+                UserId = userId,
                 Email = User.FindFirstValue(ClaimTypes.Email) ?? "",
                 FirstName = User.FindFirstValue("FirstName") ?? "",
                 LastName = User.FindFirstValue("LastName") ?? "",
                 Role = User.FindFirstValue(ClaimTypes.Role) ?? ""
             };
+        }
+
+        private async Task PopulateProfileImageAsync(ProfileViewModel model, CancellationToken cancellationToken)
+        {
+            try
+            {
+                ImageEntity? image = await Utils.CallApiAsync<ImageEntity>(
+                    $"{(_configuration["DefaultApiUrl"] ?? string.Empty).TrimEnd('/')}/user/{model.UserId}/profile-image",
+                    HttpMethod.Get,
+                    HttpContext,
+                    cancellationToken: cancellationToken);
+
+                model.ProfileImageUrl = BuildUploadUrl("profiles", image?.Name);
+            }
+            catch (HttpRequestException)
+            {
+                model.ProfileImageUrl = string.Empty;
+            }
+        }
+
+        private async Task<string> SaveUploadedImageAsync(IFormFile image, string subfolder, CancellationToken cancellationToken)
+        {
+            string extension = Path.GetExtension(image.FileName).ToLowerInvariant();
+            string[] allowedExtensions = [".jpg", ".jpeg", ".png", ".webp"];
+
+            if (!allowedExtensions.Contains(extension))
+            {
+                throw new InvalidOperationException("Allowed image formats are JPG, PNG and WEBP.");
+            }
+
+            string relativeDirectory = Path.Combine("uploads", subfolder);
+            string absoluteDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", relativeDirectory);
+            Directory.CreateDirectory(absoluteDirectory);
+
+            string fileName = $"{Guid.NewGuid():N}{extension}";
+            string absolutePath = Path.Combine(absoluteDirectory, fileName);
+
+            await using FileStream stream = System.IO.File.Create(absolutePath);
+            await image.CopyToAsync(stream, cancellationToken);
+
+            return fileName;
+        }
+
+        private static string BuildUploadUrl(string subfolder, string? imageName)
+        {
+            if (string.IsNullOrWhiteSpace(imageName))
+            {
+                return string.Empty;
+            }
+
+            if (imageName.StartsWith("/", StringComparison.Ordinal) || imageName.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+            {
+                return imageName;
+            }
+
+            return "/" + Path.Combine("uploads", subfolder, imageName).Replace("\\", "/");
         }
     }
 }

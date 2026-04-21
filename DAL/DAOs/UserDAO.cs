@@ -53,7 +53,26 @@ namespace DAL.DAOs
             try
             {
                 return sqlConnection.QueryFirstOrDefault<UserEntity>(
-                    SQLQueries.Users_SelectById,
+                    """
+                    SELECT
+                        Id,
+                        Email,
+                        FirstName,
+                        LastName,
+                        LoyaltyPoints,
+                        AvatarID,
+                        PasswordHash,
+                        MFAType,
+                        TFASecret,
+                        IsVerified,
+                        Status,
+                        RoleId,
+                        LastLoginAt,
+                        CreatedAt,
+                        UpdatedAt
+                    FROM Users
+                    WHERE Id = @Id
+                    """,
                     new { Id = id }
                 );
             }
@@ -95,7 +114,7 @@ namespace DAL.DAOs
                     user.FirstName,
                     user.LastName,
                     user.LoyaltyPoints,
-                    user.AvatarURL,
+                    user.AvatarID,
                     user.PasswordHash,
                     user.MFAType,
                     user.TFASecret,
@@ -239,6 +258,52 @@ namespace DAL.DAOs
             }
         }
 
+        public bool UpdateRole(Guid userId, Guid roleId)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+                int rows = sqlConnection.Execute(
+                    "UPDATE Users SET RoleId = @RoleId, UpdatedAt = @UpdatedAt WHERE Id = @UserId",
+                    new
+                    {
+                        UserId = userId,
+                        RoleId = roleId,
+                        UpdatedAt = DateTime.UtcNow
+                    });
+
+                return rows > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateAvatar(Guid userId, Guid imageId)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+                int rows = sqlConnection.Execute(
+                    "UPDATE Users SET AvatarID = @ImageId, UpdatedAt = @UpdatedAt WHERE Id = @UserId",
+                    new
+                    {
+                        UserId = userId,
+                        ImageId = imageId,
+                        UpdatedAt = DateTime.UtcNow
+                    });
+
+                return rows > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public bool Update(UserEntity user)
         {
             using SqlConnection sqlConnection = _databaseFactory.GetConnection();
@@ -252,7 +317,7 @@ namespace DAL.DAOs
                     user.FirstName,
                     user.LastName,
                     user.LoyaltyPoints,
-                    user.AvatarURL,
+                    user.AvatarID,
                     user.PasswordHash,
                     user.MFAType,
                     user.TFASecret,

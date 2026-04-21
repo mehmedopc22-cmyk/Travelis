@@ -1,0 +1,134 @@
+@model WEB.Models.AdminHotelAssignmentsViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Администратори на хотели";
+}
+
+<div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-3">
+    <div>
+        <h2 class="fw-bold mb-1">Администратори на хотели</h2>
+        <p class="text-white-50 mb-0">
+            Одобрени хотели: <span class="text-white fw-bold">@Model.Hotels.Count</span>
+        </p>
+    </div>
+
+    <a asp-controller="AdminHotel" asp-action="Pending" class="btn tv-btn-glass">
+        <i class="fa-solid fa-clock me-1"></i> Чакащи заявки
+    </a>
+</div>
+
+@if (TempData["HotelAdminAssignmentMessage"] is string message)
+{
+    <div class="alert alert-info">
+        @message
+    </div>
+}
+
+@if (TempData["HotelAdminAssignmentError"] is string error)
+{
+    <div class="alert alert-danger">
+        @error
+    </div>
+}
+
+@if (!Model.HotelAdmins.Any())
+{
+    <div class="alert alert-warning">
+        Няма потребители с роля HotelAdmin. Създай или промени потребител от секцията „Потребители“.
+    </div>
+}
+
+@if (!Model.Hotels.Any())
+{
+    <div class="tv-card p-4">
+        <div class="text-white fw-bold mb-1">Няма одобрени хотели</div>
+        <div class="text-white-50 small">След одобрение на хотел той ще се появи тук за назначаване на администратор.</div>
+    </div>
+}
+else
+{
+    <div class="row g-4">
+        @foreach (var hotel in Model.Hotels)
+        {
+            var assignedAdmins = Model.AssignmentsFor(hotel.Id).ToList();
+            var assignedIds = assignedAdmins.Select(admin => admin.UserId).ToHashSet();
+            var availableAdmins = Model.HotelAdmins.Where(admin => !assignedIds.Contains(admin.Id)).ToList();
+
+            <div class="col-12 col-xl-6">
+                <div class="tv-card p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                        <div>
+                            <h5 class="fw-bold text-white mb-1">@hotel.Name</h5>
+                            <div class="small text-white-50">
+                                <i class="fa-solid fa-location-dot me-1"></i>
+                                @hotel.City, @hotel.Country
+                            </div>
+                        </div>
+                        <span class="badge bg-success">Одобрен</span>
+                    </div>
+
+                    <div class="small mb-3">
+                        <div class="d-flex justify-content-between gap-3 py-1 border-bottom border-white border-opacity-10">
+                            <span class="text-white-50">Имейл</span>
+                            <span class="text-white">@hotel.Email</span>
+                        </div>
+                        <div class="d-flex justify-content-between gap-3 py-1 border-bottom border-white border-opacity-10">
+                            <span class="text-white-50">Телефон</span>
+                            <span class="text-white">@hotel.PhoneNumber</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="fw-bold text-white mb-2">Назначени администратори</div>
+
+                        @if (assignedAdmins.Any())
+                        {
+                            <div class="vstack gap-2">
+                                @foreach (var admin in assignedAdmins)
+                                {
+                                    <div class="d-flex justify-content-between align-items-center gap-2 rounded-3 border border-white border-opacity-10 p-2">
+                                        <div>
+                                            <div class="small text-white fw-bold">@admin.DisplayName</div>
+                                            <div class="small text-white-50">@admin.Email</div>
+                                        </div>
+
+                                        <form asp-controller="AdminHotel" asp-action="RemoveAdmin" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="hotelId" value="@hotel.Id" />
+                                            <input type="hidden" name="userId" value="@admin.UserId" />
+                                            <button type="submit" class="btn tv-btn-danger btn-sm" title="Премахни">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="small text-white-50">Все още няма назначен хотелски администратор.</div>
+                        }
+                    </div>
+
+                    <form asp-controller="AdminHotel" asp-action="AssignAdmin" method="post" class="d-flex gap-2">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="hotelId" value="@hotel.Id" />
+
+                        <select name="userId" class="tv-input flex-grow-1" required disabled="@(!availableAdmins.Any())">
+                            <option value="">Избери хотелски администратор</option>
+                            @foreach (var admin in availableAdmins)
+                            {
+                                <option value="@admin.Id">@admin.FirstName @admin.LastName (@admin.Email)</option>
+                            }
+                        </select>
+
+                        <button type="submit" class="btn tv-btn-primary" disabled="@(!availableAdmins.Any())">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+}

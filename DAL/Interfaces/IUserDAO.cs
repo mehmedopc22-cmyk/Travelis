@@ -15,5 +15,7 @@ namespace DAL.Interfaces
         bool UpdateStatus(Guid userId, byte status);
         bool UpdateVerification(Guid userId, bool isVerified);
         bool UpdatePasswordHash(Guid userId, string passwordHash);
+        bool UpdateRole(Guid userId, Guid roleId);
+        bool UpdateAvatar(Guid userId, Guid imageId);
     }
 }
