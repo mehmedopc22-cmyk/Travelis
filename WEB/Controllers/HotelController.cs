@@ -117,6 +117,55 @@ namespace WEB.Controllers
             return RedirectToAction(nameof(Apply));
         }
 
+        public async Task<IActionResult> Details(Guid id)
+        {
+            string apiBaseUrl = (_configuration["DefaultApiUrl"] ?? string.Empty).TrimEnd('/');
+            
+            HotelEntity? hotel = await Utils.CallApiAsync<HotelEntity>(
+                $"{apiBaseUrl}/hotel/{id}",
+                HttpMethod.Get
+            );
+
+            if (hotel == null)
+            {
+                return NotFound();
+            }
+
+            var rooms = await Utils.CallApiAsync<List<HotelRoomResponseDTO>>(
+                $"{apiBaseUrl}/hotel/{id}/rooms",
+                HttpMethod.Get
+            ) ?? new List<HotelRoomResponseDTO>();
+
+            HotelCardViewModel model = new()
+            {
+                Id = hotel.Id,
+                Name = hotel.Name,
+                Country = hotel.Country,
+                City = hotel.City,
+                Street = hotel.Street,
+                PostalCode = hotel.PostalCode,
+                PhoneNumber = hotel.PhoneNumber,
+                Email = hotel.Email,
+                Approved = hotel.Approved,
+                Status = hotel.Status,
+                CreatedAt = hotel.CreatedAt,
+                UpdatedAt = hotel.UpdatedAt,
+                
+                Rooms = rooms.Select(r => new HotelRoomViewModel
+                {
+                    Id = r.Id,
+                    Description = r.Description ?? string.Empty,
+                    Price = r.Price,
+                    RoomNo = r.RoomNo ?? string.Empty,
+                    Floor = r.Floor,
+                    BedCount = r.BedCount,
+                    Capacity = r.Capacity
+                }).ToList()
+            };
+
+            return View(model);
+        }
+
         private static string BuildHotelFilterQueryString(HotelFilterViewModel filters)
         {
             Dictionary<string, string?> query = new()

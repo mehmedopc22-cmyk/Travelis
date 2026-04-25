@@ -1,0 +1,264 @@
+﻿@model WEB.Models.HotelCardViewModel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container-fluid px-0">
+    <section class="mb-5">
+        <div class="tv-search-container px-3 px-lg-5 d-block d-lg-flex">
+            <form class="row g-3 align-items-center w-100 m-0">
+                
+                <div class="col-12 col-lg-4">
+                    <div class="tv-search-item h-100">
+                        <label class="tv-search-label">Дестинация</label>
+                        <div class="d-flex align-items-center gap-2 w-100">
+                            <i class="fa-solid fa-location-dot text-info"></i>
+                            <input type="text" class="tv-search-value w-100 border-0 bg-transparent" value="@Model.Name, @Model.City" style="outline: none;">
+                        </div>
+                    </div>
+                </div>
+                    
+                <div class="col-12 col-lg-3">
+                    <div class="tv-search-item h-100">
+                        <label class="tv-search-label">Дати</label>
+                        <div class="d-flex align-items-center gap-2 w-100">
+                            <i class="fa-regular fa-calendar text-info"></i>
+                            <input type="text" class="tv-search-value w-100 border-0 bg-transparent" value="12 Дек — 15 Дек" style="outline: none;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-3 position-relative">
+                    <div class="tv-search-item h-100 border-lg-0">
+                        <label class="tv-search-label">Гости</label>
+                        <button class="tv-search-value text-start d-flex align-items-center gap-2 w-100 bg-transparent border-0 p-0"
+                                id="guestDropdownBtn" type="button" onclick="toggleGuests()">
+                            <i class="fa-solid fa-user-group text-info"></i>
+                            <span id="guestSummary">2 Възрастни, 0 Деца</span>
+                            <i class="fa-solid fa-chevron-down ms-auto small text-white-50"></i>
+                        </button>
+                            
+                        <div class="tv-guest-dropdown" id="guestDropdown">
+                            <div class="tv-guest-row">
+                                <div><div class="fw-bold text-white">Възрастни</div><div class="small text-white-50">18+</div></div>
+                                <div class="d-flex gap-3 align-items-center">
+                                    <button type="button" class="tv-counter-btn" onclick="updateCount('adults', -1)"><i class="fa-solid fa-minus"></i></button>
+                                    <span class="tv-counter-value" id="count-adults">2</span>
+                                    <button type="button" class="tv-counter-btn" onclick="updateCount('adults', 1)"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <div class="tv-guest-row">
+                                <div><div class="fw-bold text-white">Деца</div><div class="small text-white-50">2-17 г.</div></div>
+                                <div class="d-flex gap-3 align-items-center">
+                                    <button type="button" class="tv-counter-btn" onclick="updateCount('children', -1)"><i class="fa-solid fa-minus"></i></button>
+                                    <span class="tv-counter-value" id="count-children">0</span>
+                                    <button type="button" class="tv-counter-btn" onclick="updateCount('children', 1)"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <div class="tv-guest-row">
+                                <div><div class="fw-bold text-white">Стаи</div></div>
+                                <div class="d-flex gap-3 align-items-center">
+                                    <button type="button" class="tv-counter-btn" onclick="updateCount('rooms', -1)"><i class="fa-solid fa-minus"></i></button>
+                                    <span class="tv-counter-value" id="count-rooms">1</span>
+                                    <button type="button" class="tv-counter-btn" onclick="updateCount('rooms', 1)"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <button type="button" class="tv-btn tv-btn-primary w-100 justify-content-center mt-2" onclick="toggleGuests()">Готово</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <button class="tv-btn tv-btn-primary w-100 h-100 justify-content-center py-3 py-lg-2" style="border-radius: 12px;">
+                        <i class="fa-solid fa-magnifying-glass me-2"></i> Търси
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+<div class="container">
+    <section class="mb-5">
+        <div class="row align-items-end mb-4">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold text-white mb-2">@Model.Name</h1>
+                <div class="d-flex align-items-center flex-wrap gap-3 text-white-50">
+                    <span class="badge bg-opacity-10 border border-white border-opacity-10 text-white fw-normal">Хотел</span>
+                    <span>
+                        <i class="fa-solid fa-location-dot text-info"></i>
+                        @(string.IsNullOrWhiteSpace(Model.Street) ? "" : Model.Street + ", ")@Model.City, @Model.Country
+                    </span>
+                    <span class="text-warning"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> 5 Звезди</span>
+                </div>
+            </div>
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                <button class="tv-btn tv-btn-glass btn-sm"><i class="fa-solid fa-share-nodes me-2"></i> Сподели</button>
+                <button class="tv-btn tv-btn-glass btn-sm ms-2"><i class="fa-regular fa-heart me-2"></i> Запази</button>
+            </div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-lg-8">
+                <div class="hero-main-img" style="background-image: url('https://grandhotelmillenniumsofia.bg/wp-content/uploads/2019/10/grand-hotel-millennium-sofia-fb.jpg');">
+                    <span class="position-absolute top-0 start-0 m-3 badge bg-black bg-opacity-50 backdrop-blur">Изглед</span>
+                </div>
+            </div>
+            <div class="col-lg-4 d-flex flex-column gap-3">
+                <div class="hero-sub-img" style="background-image: url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/266933894.jpg?k=b3897856d11d26c8cc5df3667820f73293e4c7761b2e5e6621b6f4e0aaa2d0e7&o=');"></div>
+                <div class="hero-sub-img position-relative" style="background-image: url('https://lbcdn.airpaz.com/hotelimages/1303249/grand-millennium-sofia-dcc5ee9ffe839aace45fa64d3f3b1831.jpg');">
+                    <div class="position-absolute w-100 h-100 bg-dark bg-opacity-50 d-flex align-items-center justify-content-center" style="border-radius: 16px; cursor: pointer;">
+                        <span class="text-white fw-bold">+24 Снимки</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="row g-4">
+        <div class="col-xl-8">
+            <div class="tv-glass-card mb-4">
+                <h3 class="text-white mb-4 fs-4">Удобства</h3>
+                <div class="tv-amenity-grid">
+                    <div class="tv-amenity-box">
+                        <i class="fa-solid fa-spa tv-amenity-icon-lg"></i>
+                        <h6 class="text-white mb-2">Спа & Уелнес</h6>
+                        <ul class="tv-amenity-list">
+                            <li><i class="fa-solid fa-check text-success me-1"></i> Сауна</li>
+                            <li><i class="fa-solid fa-check text-success me-1"></i> Басейн</li>
+                        </ul>
+                    </div>
+                    <div class="tv-amenity-box">
+                        <i class="fa-solid fa-wifi tv-amenity-icon-lg"></i>
+                        <h6 class="text-white mb-2">Бизнес</h6>
+                        <ul class="tv-amenity-list">
+                            <li><i class="fa-solid fa-check text-success me-1"></i> Бърз Wi-Fi</li>
+                            <li><i class="fa-solid fa-check text-success me-1"></i> Зали</li>
+                        </ul>
+                    </div>
+                    <div class="tv-amenity-box">
+                        <i class="fa-solid fa-martini-glass-citrus tv-amenity-icon-lg"></i>
+                        <h6 class="text-white mb-2">Bar & Dine</h6>
+                        <ul class="tv-amenity-list">
+                            <li><i class="fa-solid fa-check text-success me-1"></i> Rooftop</li>
+                            <li><i class="fa-solid fa-check text-success me-1"></i> Ресторант</li>
+                        </ul>
+                    </div>
+                    <div class="tv-amenity-box">
+                        <i class="fa-solid fa-square-parking tv-amenity-icon-lg"></i>
+                        <h6 class="text-white mb-2">Паркинг</h6>
+                        <ul class="tv-amenity-list">
+                            <li><i class="fa-solid fa-check text-success me-1"></i> Подземен</li>
+                            <li><i class="fa-solid fa-check text-success me-1"></i> Валет</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tv-glass-card" id="rooms">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+                    <h3 class="text-white mb-0 fs-4">Налични Стаи</h3>
+                    <div class="text-white-50 small">@(Model.Rooms != null ? Model.Rooms.Count : 0) типа свободни</div>
+                </div>
+
+                <div class="tv-filter-scroll">
+                    <label class="tv-filter-chip"><input type="checkbox" checked> Всички</label>
+                    <label class="tv-filter-chip"><input type="checkbox"> <i class="fa-solid fa-mountain-sun"></i> Планина</label>
+                    <label class="tv-filter-chip"><input type="checkbox"> <i class="fa-solid fa-city"></i> Град</label>
+                    <label class="tv-filter-chip"><input type="checkbox"> <i class="fa-solid fa-bed"></i> King</label>
+                    <label class="tv-filter-chip"><input type="checkbox"> <i class="fa-solid fa-people-arrows"></i> Twin</label>
+                </div>
+
+                @if (Model.Rooms != null && Model.Rooms.Any())
+                {
+                    foreach (var room in Model.Rooms)
+                    {
+                        <div class="card bg-transparent border border-secondary border-opacity-25 rounded-4 overflow-hidden mb-4">
+                            <div class="row g-0">
+                                <div class="col-md-5 position-relative">
+                                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80"
+                                         class="w-100 h-100 object-fit-cover" style="min-height: 200px;" alt="Room @room.RoomNo">
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="p-4 d-flex flex-column h-100">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <h5 class="text-white fw-bold mb-0">Стая № @room.RoomNo</h5>
+                                        </div>
+                                        <div class="mb-3">
+                                            <span class="tv-room-feature-badge"><i class="fa-solid fa-people-group"></i> @room.Capacity Гости</span>
+                                            <span class="tv-room-feature-badge"><i class="fa-solid fa-bed"></i> @room.BedCount Легла</span>
+                                            <span class="tv-room-feature-badge"><i class="fa-solid fa-building"></i> Етаж @room.Floor</span>
+                                        </div>
+                                        
+                                        @if (!string.IsNullOrWhiteSpace(room.Description))
+                                        {
+                                            <p class="text-white-50 small mb-3">@room.Description</p>
+                                        }
+
+                                        <hr class="border-secondary border-opacity-25 mt-auto">
+                                        <div class="d-flex justify-content-between align-items-end">
+                                            <div>
+                                                <div class="text-white fs-4 fw-bold lh-1">@room.Price.ToString("F2") лв.</div>
+                                            </div>
+                                            <button class="tv-btn tv-btn-primary">Избери <i class="fa-solid fa-chevron-right ms-1"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning bg-opacity-10 border-warning border-opacity-25 text-warning mt-4">
+                        В момента няма въведени стаи за този хотел.
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-xl-4">
+            <div class="position-sticky" style="top: 100px; z-index: 10;">
+                    
+                <div class="tv-glass-card mb-3">
+                    <div class="d-flex justify-content-between mb-3 border-bottom border-secondary border-opacity-25 pb-3">
+                        <span class="text-white fw-bold">Общо (3 нощ.)</span>
+                        <span class="text-info fw-bold fs-4">840 лв.</span>
+                    </div>
+                        
+                    <div class="row g-2 mb-4">
+                        <div class="col-6">
+                            <div class="p-2 border border-secondary border-opacity-25 rounded bg-opacity-5">
+                                <small class="text-white-50 d-block">Настаняване</small>
+                                <div class="fw-bold text-white">12 Дек</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-2 border border-secondary border-opacity-25 rounded bg-opacity-5">
+                                <small class="text-white-50 d-block">Напускане</small>
+                                <div class="fw-bold text-white">15 Дек</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info bg-opacity-10 border-info border-opacity-25 text-info small d-flex gap-2">
+                        <i class="fa-solid fa-circle-info mt-1"></i>
+                        <div>Безплатно анулиране до 24ч преди настаняване.</div>
+                    </div>
+
+                    <button class="tv-btn tv-btn-primary w-100 justify-content-center py-3 mb-2">
+                        Провери наличност
+                    </button>
+                </div>
+
+                <div class="tv-glass-card p-2">
+                    <div style="background: url('https://media.wired.com/photos/59269cd37034dc5f91bec0f1/191:100/w_1280,c_limit/GoogleMapTA.jpg') center/cover; height: 150px; border-radius: 12px; position: relative; display: flex; align-items: center; justify-content: center;">
+                        <button class="tv-btn tv-btn-primary btn-sm"><i class="fa-solid fa-map-location-dot me-2"></i> Виж на карта</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
