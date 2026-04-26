@@ -2,6 +2,16 @@
 
 @{
     ViewData["Title"] = Model.Name;
+    List<string> hotelImages = Model.ImageUrls;
+    string fallbackMainImage = "https://grandhotelmillenniumsofia.bg/wp-content/uploads/2019/10/grand-hotel-millennium-sofia-fb.jpg";
+    string fallbackSecondImage = "https://cf.bstatic.com/xdata/images/hotel/max1024x768/266933894.jpg?k=b3897856d11d26c8cc5df3667820f73293e4c7761b2e5e6621b6f4e0aaa2d0e7&o=";
+    string fallbackThirdImage = "https://lbcdn.airpaz.com/hotelimages/1303249/grand-millennium-sofia-dcc5ee9ffe839aace45fa64d3f3b1831.jpg";
+    string mainImage = hotelImages.ElementAtOrDefault(0) ?? fallbackMainImage;
+    string secondImage = hotelImages.ElementAtOrDefault(1) ?? fallbackSecondImage;
+    string thirdImage = hotelImages.ElementAtOrDefault(2) ?? fallbackThirdImage;
+    List<string> galleryImages = hotelImages.Any()
+        ? hotelImages
+        : [fallbackMainImage, fallbackSecondImage, fallbackThirdImage];
 }
 
 <div class="container-fluid px-0">
@@ -101,17 +111,42 @@
 
         <div class="row g-3">
             <div class="col-lg-8">
-                <div class="hero-main-img" style="background-image: url('https://grandhotelmillenniumsofia.bg/wp-content/uploads/2019/10/grand-hotel-millennium-sofia-fb.jpg');">
+                <button type="button"
+                        class="position-relative overflow-hidden rounded-4 border-0 p-0 w-100 d-block"
+                        style="height: 460px; cursor: pointer;"
+                        data-bs-toggle="modal"
+                        data-bs-target="#hotelGalleryModal"
+                        aria-label="Отвори галерията">
+                    <img src="@mainImage"
+                         alt="@Model.Name"
+                         class="w-100 h-100 object-fit-cover" />
                     <span class="position-absolute top-0 start-0 m-3 badge bg-black bg-opacity-50 backdrop-blur">Изглед</span>
-                </div>
+                </button>
             </div>
             <div class="col-lg-4 d-flex flex-column gap-3">
-                <div class="hero-sub-img" style="background-image: url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/266933894.jpg?k=b3897856d11d26c8cc5df3667820f73293e4c7761b2e5e6621b6f4e0aaa2d0e7&o=');"></div>
-                <div class="hero-sub-img position-relative" style="background-image: url('https://lbcdn.airpaz.com/hotelimages/1303249/grand-millennium-sofia-dcc5ee9ffe839aace45fa64d3f3b1831.jpg');">
-                    <div class="position-absolute w-100 h-100 bg-dark bg-opacity-50 d-flex align-items-center justify-content-center" style="border-radius: 16px; cursor: pointer;">
-                        <span class="text-white fw-bold">+24 Снимки</span>
-                    </div>
-                </div>
+                <button type="button"
+                        class="overflow-hidden rounded-4 border-0 p-0 w-100 d-block"
+                        style="height: 220px; cursor: pointer;"
+                        data-bs-toggle="modal"
+                        data-bs-target="#hotelGalleryModal"
+                        aria-label="Отвори галерията">
+                    <img src="@secondImage"
+                         alt="@Model.Name"
+                         class="w-100 h-100 object-fit-cover" />
+                </button>
+                <button type="button"
+                        class="position-relative overflow-hidden rounded-4 border-0 p-0 w-100 d-block"
+                        style="height: 220px; cursor: pointer;"
+                        data-bs-toggle="modal"
+                        data-bs-target="#hotelGalleryModal"
+                        aria-label="Отвори галерията">
+                    <img src="@thirdImage"
+                         alt="@Model.Name"
+                         class="w-100 h-100 object-fit-cover" />
+                    <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex align-items-center justify-content-center">
+                        <span class="text-white fw-bold">@(galleryImages.Count > 3 ? $"+{galleryImages.Count - 3} Снимки" : $"{galleryImages.Count} Снимки")</span>
+                    </span>
+                </button>
             </div>
         </div>
     </section>
@@ -258,6 +293,55 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="hotelGalleryModal" tabindex="-1" aria-labelledby="hotelGalleryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content bg-dark text-white border border-secondary border-opacity-25">
+            <div class="modal-header border-secondary border-opacity-25">
+                <h2 class="modal-title fs-5" id="hotelGalleryModalLabel">@Model.Name</h2>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Затвори"></button>
+            </div>
+            <div class="modal-body">
+                <div id="hotelGalleryCarousel" class="carousel slide mb-4">
+                    <div class="carousel-inner rounded-4 overflow-hidden">
+                        @for (int i = 0; i < galleryImages.Count; i++)
+                        {
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <img src="@galleryImages[i]"
+                                     alt="@Model.Name"
+                                     class="d-block w-100 object-fit-cover"
+                                     style="height: min(70vh, 620px);" />
+                            </div>
+                        }
+                    </div>
+                    @if (galleryImages.Count > 1)
+                    {
+                        <button class="carousel-control-prev" type="button" data-bs-target="#hotelGalleryCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#hotelGalleryCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    }
+                </div>
+
+                <div class="row g-3">
+                    @foreach (string imageUrl in galleryImages)
+                    {
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <img src="@imageUrl"
+                                 alt="@Model.Name"
+                                 class="w-100 rounded-3 object-fit-cover"
+                                 style="aspect-ratio: 4 / 3;" />
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>

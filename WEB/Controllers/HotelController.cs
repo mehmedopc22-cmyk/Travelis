@@ -14,19 +14,26 @@ namespace WEB.Controllers
         public async Task<IActionResult> IndexAsync([FromQuery] HotelFilterViewModel filters)
         {
             string apiBaseUrl = (_configuration["DefaultApiUrl"] ?? string.Empty).TrimEnd('/');
+            filters = NormalizePaginationRequest(filters);
             string queryString = BuildHotelFilterQueryString(filters);
 
-            var hotelDtos = await Utils.CallApiAsync<List<HotelEntity>>(
+            PagedResultDTO<HotelEntity>? hotelDtos = await Utils.CallApiAsync<PagedResultDTO<HotelEntity>>(
                 $"{apiBaseUrl}/hotel/filter{queryString}",
                 HttpMethod.Get
             );
 
-            List<HotelCardViewModel> model = MapHotelCards(hotelDtos ?? new List<HotelEntity>());
+            int currentPage = hotelDtos?.Page ?? filters.Page;
+            int pageSize = hotelDtos?.PageSize ?? filters.PageSize;
+            filters.Page = currentPage;
+            filters.PageSize = pageSize;
 
             return View(new HotelIndexViewModel
             {
                 Filters = filters,
-                Hotels = model
+                Hotels = MapHotelCards(hotelDtos?.Items ?? []),
+                TotalCount = hotelDtos?.TotalCount ?? 0,
+                CurrentPage = currentPage,
+                PageSize = pageSize
             });
         }
 
@@ -64,14 +71,21 @@ namespace WEB.Controllers
 
             ViewData["AiFilterMessage"] = $"AI филтърът беше приложен за {model.SelectedLocation}.";
 
+            List<HotelCardViewModel> hotelCards = MapHotelCards(response?.Hotels ?? new List<HotelEntity>());
+            HotelFilterViewModel filters = NormalizePaginationRequest(new HotelFilterViewModel
+            {
+                Destination = model.SelectedLocation,
+                SortBy = "recommended",
+                PageSize = Math.Max(hotelCards.Count, 5)
+            });
+
             return View("Index", new HotelIndexViewModel
             {
-                Filters = new HotelFilterViewModel
-                {
-                    Destination = model.SelectedLocation,
-                    SortBy = "recommended"
-                },
-                Hotels = MapHotelCards(response?.Hotels ?? new List<HotelEntity>()),
+                Filters = filters,
+                Hotels = hotelCards,
+                TotalCount = hotelCards.Count,
+                CurrentPage = filters.Page,
+                PageSize = filters.PageSize,
                 AiResponse = response?.AiResponse
             });
         }
@@ -150,6 +164,7 @@ namespace WEB.Controllers
                 Status = hotel.Status,
                 CreatedAt = hotel.CreatedAt,
                 UpdatedAt = hotel.UpdatedAt,
+                ImageUrls = MapHotelImageUrls(hotel.Images),
                 
                 Rooms = rooms.Select(r => new HotelRoomViewModel
                 {
@@ -184,6 +199,16 @@ namespace WEB.Controllers
                 query["maxPrice"] = filters.MaxPrice.Value.ToString(CultureInfo.InvariantCulture);
             }
 
+            if (filters.Page > 1)
+            {
+                query["page"] = filters.Page.ToString(CultureInfo.InvariantCulture);
+            }
+
+            if (filters.PageSize != 5)
+            {
+                query["pageSize"] = filters.PageSize.ToString(CultureInfo.InvariantCulture);
+            }
+
             string[] parts = query
                 .Where(pair => !string.IsNullOrWhiteSpace(pair.Value))
                 .Select(pair => $"{Uri.EscapeDataString(pair.Key)}={Uri.EscapeDataString(pair.Value!)}")
@@ -208,9 +233,53 @@ namespace WEB.Controllers
                     Approved = h.Approved,
                     Status = h.Status,
                     CreatedAt = h.CreatedAt,
-                    UpdatedAt = h.UpdatedAt
+                    UpdatedAt = h.UpdatedAt,
+                    ImageUrls = MapHotelImageUrls(h.Images)
                 })
                 .ToList();
+        }
+
+        private static HotelFilterViewModel NormalizePaginationRequest(HotelFilterViewModel filters)
+        {
+            const int defaultPageSize = 5;
+            const int maxPageSize = 25;
+
+            int pageSize = filters.PageSize <= 0 ? defaultPageSize : Math.Min(filters.PageSize, maxPageSize);
+            int page = filters.Page <= 0 ? 1 : filters.Page;
+
+            filters.Page = page;
+            filters.PageSize = pageSize;
+
+            return filters;
+        }
+
+        private static List<string> MapHotelImageUrls(IEnumerable<ImageEntity>? images)
+        {
+            return (images ?? [])
+                .Select(image => BuildHotelImageUrl(image.Name))
+                .Where(url => !string.IsNullOrWhiteSpace(url))
+                .ToList();
+        }
+
+        private static string BuildHotelImageUrl(string? imageName)
+        {
+            if (string.IsNullOrWhiteSpace(imageName))
+            {
+                return string.Empty;
+            }
+
+            if (Uri.TryCreate(imageName, UriKind.Absolute, out Uri? absoluteUri)
+                && (absoluteUri.Scheme == Uri.UriSchemeHttp || absoluteUri.Scheme == Uri.UriSchemeHttps))
+            {
+                return imageName;
+            }
+
+            if (imageName.StartsWith("/", StringComparison.Ordinal))
+            {
+                return imageName;
+            }
+
+            return "/" + Path.Combine("uploads", "hotels", imageName).Replace("\\", "/");
         }
     }
 }

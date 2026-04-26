@@ -77,6 +77,76 @@ namespace DAL.DAOs
             }
         }
 
+        public PagedResultDTO<HotelEntity> SelectFilteredPaged(HotelFilterRequestDTO filters)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+                DynamicParameters parameters = new();
+                StringBuilder selectSql = new(SQLQueries.Hotels_SelectFilteredBase);
+                StringBuilder countSql = new("SELECT COUNT(*) FROM Hotels h WHERE 1 = 1");
+
+                if (!string.IsNullOrWhiteSpace(filters.Destination))
+                {
+                    selectSql.AppendLine();
+                    selectSql.AppendLine(SQLQueries.Hotels_SelectFilteredDestinationClause);
+                    countSql.AppendLine();
+                    countSql.AppendLine(SQLQueries.Hotels_SelectFilteredDestinationClause);
+                    parameters.Add("@Destination", $"%{filters.Destination.Trim()}%");
+                }
+
+                if (filters.MinPrice.HasValue || filters.MaxPrice.HasValue)
+                {
+                    selectSql.AppendLine();
+                    selectSql.AppendLine(SQLQueries.Hotels_SelectFilteredRoomExistsStart);
+                    countSql.AppendLine();
+                    countSql.AppendLine(SQLQueries.Hotels_SelectFilteredRoomExistsStart);
+
+                    if (filters.MinPrice.HasValue)
+                    {
+                        selectSql.AppendLine(SQLQueries.Hotels_SelectFilteredMinPriceClause);
+                        countSql.AppendLine(SQLQueries.Hotels_SelectFilteredMinPriceClause);
+                        parameters.Add("@MinPrice", filters.MinPrice.Value);
+                    }
+
+                    if (filters.MaxPrice.HasValue)
+                    {
+                        selectSql.AppendLine(SQLQueries.Hotels_SelectFilteredMaxPriceClause);
+                        countSql.AppendLine(SQLQueries.Hotels_SelectFilteredMaxPriceClause);
+                        parameters.Add("@MaxPrice", filters.MaxPrice.Value);
+                    }
+
+                    selectSql.AppendLine(SQLQueries.Hotels_SelectFilteredRoomExistsEnd);
+                    countSql.AppendLine(SQLQueries.Hotels_SelectFilteredRoomExistsEnd);
+                }
+
+                int pageSize = filters.PageSize <= 0 ? 5 : Math.Min(filters.PageSize, 25);
+                int totalCount = sqlConnection.ExecuteScalar<int>(countSql.ToString(), parameters);
+                int totalPages = totalCount == 0 ? 1 : (int)Math.Ceiling(totalCount / (double)pageSize);
+                int page = Math.Clamp(filters.Page <= 0 ? 1 : filters.Page, 1, totalPages);
+
+                parameters.Add("@Offset", (page - 1) * pageSize);
+                parameters.Add("@PageSize", pageSize);
+
+                selectSql.AppendLine();
+                selectSql.AppendLine(GetHotelSortClause(filters.SortBy));
+                selectSql.AppendLine("OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY");
+
+                return new PagedResultDTO<HotelEntity>
+                {
+                    Items = sqlConnection.Query<HotelEntity>(selectSql.ToString(), parameters).ToList(),
+                    TotalCount = totalCount,
+                    Page = page,
+                    PageSize = pageSize
+                };
+            }
+            catch (Exception)
+            {
+                return new PagedResultDTO<HotelEntity>();
+            }
+        }
+
         public HotelEntity? SelectById(Guid id)
         {
             using SqlConnection sqlConnection = _databaseFactory.GetConnection();

@@ -15,5 +15,7 @@
 
         public DateTime? CreatedAt { get; set; } = null;
         public DateTime? UpdatedAt { get; set; } = null;
+
+        public List<ImageEntity> Images { get; set; } = [];
     }
 }

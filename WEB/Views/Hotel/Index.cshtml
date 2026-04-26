@@ -132,6 +132,8 @@
 
                     <div class="tv-filter-section pt-3">
                         <div class="d-flex tv-filter-footer-btns">
+                            <input type="hidden" name="Page" value="1" />
+                            <input type="hidden" name="PageSize" value="@Model.PageSize" />
                             <button class="tv-btn-primary flex-grow-1" type="submit">
                                 Приложи филтри
                             </button>
@@ -228,6 +230,8 @@
                         </div>
 
                         <div class="tv-filter-section pt-3">
+                            <input type="hidden" name="Page" value="1" />
+                            <input type="hidden" name="PageSize" value="@Model.PageSize" />
                             <button class="tv-btn-primary w-100" type="submit">
                                 Приложи филтри
                             </button>
@@ -282,7 +286,7 @@
                         </button>
                     </div>
                     <span class="text-white-50 small">
-                        Показани @(Model.TotalCount == 0 ? 0 : 1)-@Model.TotalCount от @Model.TotalCount
+                        Показани @Model.FirstItemNumber-@Model.LastItemNumber от @Model.TotalCount
                     </span>
                 </div>
 
@@ -290,6 +294,8 @@
                     <input type="hidden" name="Destination" value="@Model.Filters.Destination" />
                     <input type="hidden" name="MinPrice" value="@Model.Filters.MinPrice" />
                     <input type="hidden" name="MaxPrice" value="@Model.Filters.MaxPrice" />
+                    <input type="hidden" name="Page" value="1" />
+                    <input type="hidden" name="PageSize" value="@Model.PageSize" />
                     <label class="text-white-50 small me-1" for="sortByToolbar">Сортирай:</label>
                     <select id="sortByToolbar"
                             name="SortBy"
@@ -331,6 +337,49 @@
                     </div>
                 }
             </div>
+
+            @if (Model.TotalPages > 1 && string.IsNullOrWhiteSpace(Model.AiResponse))
+            {
+                <nav class="tv-pagination" aria-label="Страници с хотели">
+                    <a class="tv-page-link @(Model.HasPreviousPage ? "" : "disabled")"
+                       asp-action="Index"
+                       asp-route-Destination="@Model.Filters.Destination"
+                       asp-route-MinPrice="@Model.Filters.MinPrice"
+                       asp-route-MaxPrice="@Model.Filters.MaxPrice"
+                       asp-route-SortBy="@Model.Filters.SortBy"
+                       asp-route-Page="@(Model.CurrentPage - 1)"
+                       asp-route-PageSize="@Model.PageSize"
+                       aria-disabled="@(!Model.HasPreviousPage)">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </a>
+
+                    @for (int pageNumber = Math.Max(1, Model.CurrentPage - 2); pageNumber <= Math.Min(Model.TotalPages, Model.CurrentPage + 2); pageNumber++)
+                    {
+                        <a class="tv-page-link @(pageNumber == Model.CurrentPage ? "active" : "")"
+                           asp-action="Index"
+                           asp-route-Destination="@Model.Filters.Destination"
+                           asp-route-MinPrice="@Model.Filters.MinPrice"
+                           asp-route-MaxPrice="@Model.Filters.MaxPrice"
+                           asp-route-SortBy="@Model.Filters.SortBy"
+                           asp-route-Page="@pageNumber"
+                           asp-route-PageSize="@Model.PageSize">
+                            @pageNumber
+                        </a>
+                    }
+
+                    <a class="tv-page-link @(Model.HasNextPage ? "" : "disabled")"
+                       asp-action="Index"
+                       asp-route-Destination="@Model.Filters.Destination"
+                       asp-route-MinPrice="@Model.Filters.MinPrice"
+                       asp-route-MaxPrice="@Model.Filters.MaxPrice"
+                       asp-route-SortBy="@Model.Filters.SortBy"
+                       asp-route-Page="@(Model.CurrentPage + 1)"
+                       asp-route-PageSize="@Model.PageSize"
+                       aria-disabled="@(!Model.HasNextPage)">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </nav>
+            }
 
         </div>
     </div>

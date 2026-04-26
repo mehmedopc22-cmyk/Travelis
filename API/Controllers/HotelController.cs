@@ -10,17 +10,18 @@ namespace API.Controllers
     //[Authorize]
     [ApiController]
     [Route("hotel")]
-    public class HotelController(IHotelDAO hotelDAO, IHotelRoomDAO hotelRoomDAO) : ControllerBase
+    public class HotelController(IHotelDAO hotelDAO, IHotelRoomDAO hotelRoomDAO, IImageDAO imageDAO) : ControllerBase
     {
         private readonly IHotelDAO _hotelDAO = hotelDAO;
         private readonly IHotelRoomDAO _hotelRoomDAO = hotelRoomDAO;
+        private readonly IImageDAO _imageDAO = imageDAO;
 
         [HttpGet("all")]
         public ActionResult<IEnumerable<HotelEntity>> GetHotels() {
 
             try
             {
-                IEnumerable<HotelEntity> hotels = _hotelDAO.SelectAll();
+                IEnumerable<HotelEntity> hotels = IncludeImages(_hotelDAO.SelectAll());
 
                 if (hotels == null)
                 {
@@ -36,11 +37,12 @@ namespace API.Controllers
         }
 
         [HttpGet("filter")]
-        public ActionResult<IEnumerable<HotelEntity>> GetFilteredHotels([FromQuery] HotelFilterRequestDTO filters)
+        public ActionResult<PagedResultDTO<HotelEntity>> GetFilteredHotels([FromQuery] HotelFilterRequestDTO filters)
         {
             try
             {
-                IEnumerable<HotelEntity> hotels = _hotelDAO.SelectFiltered(filters);
+                PagedResultDTO<HotelEntity> hotels = _hotelDAO.SelectFilteredPaged(filters);
+                hotels.Items = IncludeImages(hotels.Items).ToList();
 
                 return Ok(hotels);
             }
@@ -56,7 +58,7 @@ namespace API.Controllers
 
             try
             {
-                HotelEntity? hotel = _hotelDAO.SelectById(Id);
+                HotelEntity? hotel = IncludeImages(_hotelDAO.SelectById(Id));
 
                 if (hotel == null)
                 {
@@ -79,7 +81,7 @@ namespace API.Controllers
 
             try
             {
-                IEnumerable<HotelEntity>? hotels = _hotelDAO.SelectByCountryName(countryName);
+                IEnumerable<HotelEntity>? hotels = IncludeImages(_hotelDAO.SelectByCountryName(countryName));
 
                 if (hotels == null || !hotels.Any())
                 {
@@ -100,7 +102,7 @@ namespace API.Controllers
 
             try
             {
-                IEnumerable<HotelEntity>? hotels = _hotelDAO.SelectByEmail(email);
+                IEnumerable<HotelEntity>? hotels = IncludeImages(_hotelDAO.SelectByEmail(email));
 
                 if (hotels == null || !hotels.Any())
                 {
@@ -236,6 +238,25 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 return Problem(detail: ex.Message, statusCode: 500);
+            }
+        }
+
+        private HotelEntity? IncludeImages(HotelEntity? hotel)
+        {
+            if (hotel == null)
+            {
+                return null;
+            }
+
+            hotel.Images = _imageDAO.SelectByHotelId(hotel.Id).ToList();
+            return hotel;
+        }
+
+        private IEnumerable<HotelEntity> IncludeImages(IEnumerable<HotelEntity> hotels)
+        {
+            foreach (HotelEntity hotel in hotels)
+            {
+                yield return IncludeImages(hotel)!;
             }
         }
     }

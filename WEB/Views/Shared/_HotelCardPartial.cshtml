@@ -3,15 +3,23 @@
 <article class="tv-hotel-list-card tv-hotel-card">
     <div class="row g-0">
 
-        <!-- LEFT: placeholder instead of image -->
         <div class="col-md-5">
             <div class="tv-hotel-media tv-hotel-card-media d-flex align-items-center justify-content-center"
-                 style="background: linear-gradient(135deg, #1e293b, #0f172a); min-height: 250px;">
+                 style="@(string.IsNullOrWhiteSpace(Model.PrimaryImageUrl) ? "background: linear-gradient(135deg, #1e293b, #0f172a); min-height: 250px;" : "min-height: 250px;")">
 
-                <div class="text-center text-white-50">
-                    <i class="fa-solid fa-hotel fa-2x mb-2"></i>
-                    <div class="small">Няма изображение</div>
-                </div>
+                @if (!string.IsNullOrWhiteSpace(Model.PrimaryImageUrl))
+                {
+                    <img src="@Model.PrimaryImageUrl"
+                         alt="@Model.Name"
+                         class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" />
+                }
+                else
+                {
+                    <div class="text-center text-white-50">
+                        <i class="fa-solid fa-hotel fa-2x mb-2"></i>
+                        <div class="small">Няма изображение</div>
+                    </div>
+                }
 
                 <span class="tv-hotel-badge-tag">
                     <i class="fa-solid fa-location-dot"></i> @Model.City

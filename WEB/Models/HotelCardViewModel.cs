@@ -19,6 +19,9 @@
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
+        public List<string> ImageUrls { get; set; } = [];
+        public string PrimaryImageUrl => ImageUrls.FirstOrDefault() ?? string.Empty;
+
         public string FullLocation =>
             $"{Country}, {City} · {Street}, {PostalCode}";
 
