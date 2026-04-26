@@ -1,0 +1,513 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<main class="tv-main-hotels">
+    <div class="container">
+        <!-- HERO SECTION -->
+        <section class="tv-hero-section pt-0 pb-5">
+            <div class="tv-hotels-hero">
+                <div class="tv-hotels-hero-inner row align-items-center g-4">
+                    <div class="col-lg-7">
+                        <span class="tv-hotels-hero-badge mb-2">
+                            <i class="fa-solid fa-location-arrow"></i> София (SOF) · 12-15 Дек
+                        </span>
+                        <h1 class="tv-hotels-hero-title mb-2">Коли под наем</h1>
+                        <p class="tv-hotels-hero-sub mb-0">19 автомобила налични за твоите дати.</p>
+                    </div>
+                    <div class="col-lg-5 text-lg-end">
+                        <div class="d-inline-flex gap-2">
+                            <a asp-controller="Cars" asp-action="Index" class="tv-btn-primary text-decoration-none">
+                                <i class="fa-solid fa-pen-to-square me-2"></i> Промени
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- MAIN LAYOUT -->
+        <div class="row g-4 g-xl-5 align-items-start">
+            <!-- LEFT: FILTERS SIDEBAR -->
+            <aside class="col-12 col-xl-4 col-xxl-3">
+                <!-- Mobile Trigger -->
+                <div class="d-flex d-xl-none justify-content-between align-items-center mb-3">
+                    <button class="tv-mobile-filter-btn" data-bs-target="#tvFiltersOffcanvas" data-bs-toggle="offcanvas" type="button">
+                        <i class="fa-solid fa-sliders"></i> Филтри
+                    </button>
+                    <span class="tv-results-count small">19 автомобила</span>
+                </div>
+                <!-- Desktop Panel -->
+                <div class="d-none d-xl-block tv-filter-shell sticky-xl-top" style="top: 100px;">
+                    <div class="tv-filter-panel">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="tv-filter-title-main">Филтри</div>
+                                <div class="tv-filter-sub">Клас, гориво и екстри.</div>
+                            </div>
+                            <button class="btn btn-link p-0 tv-filter-sub text-decoration-none small">Изчисти</button>
+                        </div>
+                        <!-- Class -->
+                        <div class="tv-filter-section">
+                            <div class="tv-filter-label">Клас автомобил</div>
+                            <label class="tv-check-custom">
+                                <input checked="" class="tv-check-input" type="checkbox" />
+                                <div class="tv-check-label-inner d-flex align-items-center gap-2">
+                                    <span class="tv-check-box"><i class="fa-solid fa-check text-dark" style="font-size: 0.7rem;"></i></span>
+                                    <span class="tv-check-text">Икономичен (4)</span>
+                                </div>
+                            </label>
+                            <label class="tv-check-custom">
+                                <input class="tv-check-input" type="checkbox" />
+                                <div class="tv-check-label-inner d-flex align-items-center gap-2">
+                                    <span class="tv-check-box"><i class="fa-solid fa-check text-dark" style="font-size: 0.7rem;"></i></span>
+                                    <span class="tv-check-text">Седан / Среден (8)</span>
+                                </div>
+                            </label>
+                            <label class="tv-check-custom">
+                                <input class="tv-check-input" type="checkbox" />
+                                <div class="tv-check-label-inner d-flex align-items-center gap-2">
+                                    <span class="tv-check-box"><i class="fa-solid fa-check text-dark" style="font-size: 0.7rem;"></i></span>
+                                    <span class="tv-check-text">SUV / Джип (5)</span>
+                                </div>
+                            </label>
+                            <label class="tv-check-custom">
+                                <input class="tv-check-input" type="checkbox" />
+                                <div class="tv-check-label-inner d-flex align-items-center gap-2">
+                                    <span class="tv-check-box"><i class="fa-solid fa-check text-dark" style="font-size: 0.7rem;"></i></span>
+                                    <span class="tv-check-text">Лукс / Премиум (2)</span>
+                                </div>
+                            </label>
+                        </div>
+                        <!-- Price -->
+                        <div class="tv-filter-section">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <div class="tv-filter-label mb-0">Цена за ден</div>
+                                <span class="tv-filter-range-value">€20 - €500</span>
+                            </div>
+                            <input class="form-range tv-input-range" max="500" min="20" step="10" type="range" />
+                        </div>
+                        <!-- Specs -->
+                        <div class="tv-filter-section">
+                            <div class="tv-filter-label">Спецификации</div>
+                            <div class="d-flex flex-wrap">
+                                <button class="tv-chip-toggle active" type="button">
+                                    <i class="fa-solid fa-gear"></i>
+                                    Автоматик
+                                </button>
+                                <button class="tv-chip-toggle" type="button">
+                                    <i class="fa-solid fa-snowflake"></i>
+                                    Климатик
+                                </button>
+                                <button class="tv-chip-toggle" type="button">
+                                    <i class="fa-solid fa-gas-pump"></i>
+                                    Дизел
+                                </button>
+                                <button class="tv-chip-toggle" type="button">
+                                    <i class="fa-solid fa-leaf"></i>
+                                    Хибрид
+                                </button>
+                                <button class="tv-chip-toggle" type="button">
+                                    <i class="fa-solid fa-bolt"></i>
+                                    Електрически
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Seats -->
+                        <div class="tv-filter-section">
+                            <div class="tv-filter-label">Брой места</div>
+                            <div class="btn-group w-100" role="group">
+                                <input autocomplete="off" class="btn-check" id="s2" name="seats" type="radio" />
+                                <label class="btn btn-outline-secondary text-white btn-sm" for="s2">2+</label>
+                                <input autocomplete="off" checked="" class="btn-check" id="s4" name="seats" type="radio" />
+                                <label class="btn btn-outline-info text-white btn-sm" for="s4">4-5</label>
+                                <input autocomplete="off" class="btn-check" id="s7" name="seats" type="radio" />
+                                <label class="btn btn-outline-secondary text-white btn-sm" for="s7">7+</label>
+                            </div>
+                        </div>
+                        <!-- Actions -->
+                        <div class="tv-filter-section pt-3">
+                            <button class="tv-btn-primary w-100 py-2">Приложи филтри</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Offcanvas Mobile -->
+                <div class="offcanvas offcanvas-end tv-offcanvas-filters d-xl-none" id="tvFiltersOffcanvas" tabindex="-1">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title text-white">Филтри</h5>
+                        <button class="btn-close btn-close-white" data-bs-dismiss="offcanvas" type="button"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <!-- Same content for mobile -->
+                        <div class="tv-filter-panel">
+                            <p class="text-white-50">Mobile filters placeholder.</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <!-- MAIN LIST CONTENT -->
+            <div class="col-12 col-xl-8 col-xxl-9">
+                <!-- TOOLBAR -->
+                <div class="tv-grid-toolbar">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="tv-view-switcher">
+                            <button class="tv-view-btn active"><i class="fa-solid fa-list"></i></button>
+                            <a class="tv-view-btn" asp-controller="Cars" asp-action="Grid"><i class="fa-solid fa-border-all"></i></a>
+                        </div>
+                        <span class="text-white-50 small">Показани 1-6 от 19</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="text-white-50 small me-1">Сортирай:</label>
+                        <select class="form-select form-select-sm bg-dark text-white border-secondary rounded-pill" style="width: auto;">
+                            <option>Препоръчани</option>
+                            <option>Цена (Ниска)</option>
+                            <option>Рейтинг</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- CAR LIST STACK -->
+                <div class="vstack">
+                    <!-- ITEM 1: Toyota Yaris -->
+                    <article class="tv-card-list">
+                        <div class="row g-0 h-100">
+                            <div class="col-md-5 col-lg-4">
+                                <div class="tv-card-list-media">
+                                    <img alt="Toyota Yaris" class="tv-card-list-img" src="https://scene7.toyota.eu/is/image/toyotaeurope/YAR0003_24_WEB:Large-Landscape?ts=1722500144555&amp;resMode=sharp2&amp;op_usm=1.75,0.3,2,0&amp;fmt=png-alpha" />
+                                    <span class="tv-badge-top bg-gradient-green">Top Deal</span>
+                                    <button class="tv-fav-btn"><i class="fa-regular fa-heart"></i></button>
+                                    <div class="tv-badge-bottom">
+                                        <i class="fa-solid fa-leaf text-success"></i> Еко
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-lg-8">
+                                <div class="tv-card-list-body">
+                                    <div>
+                                        <div class="tv-list-header">
+                                            <div>
+                                                <h2 class="tv-list-title">Toyota Yaris</h2>
+                                                <small class="text-info fw-bold text-uppercase" style="font-size: 0.7rem;">Икономичен клас</small>
+                                            </div>
+                                            <div class="tv-list-rating">4.8 <i class="fa-solid fa-star"></i></div>
+                                        </div>
+                                        <div class="tv-list-specs">
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-user"></i> 4
+                                                места
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-suitcase"></i> 1
+                                                куфар
+                                            </span>
+                                            <span class="tv-spec-pill"><i class="fa-solid fa-gear"></i> Ръчна</span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-gas-pump"></i>
+                                                Бензин
+                                            </span>
+                                        </div>
+                                        <p class="tv-list-desc d-none d-lg-block">
+                                            Компактен, маневрен и икономичен
+                                            автомобил, идеален за градски условия и кратки пътувания. Нисък разход
+                                            на гориво и лесно паркиране.
+                                        </p>
+                                    </div>
+                                    <div class="tv-list-footer">
+                                        <div>
+                                            <span class="tv-price-label">Цена за ден</span>
+                                            <span class="tv-price-val">€35</span>
+                                        </div>
+                                        <a class="tv-btn-action" href="#">Избери <i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- ITEM 2: Camry Hybrid -->
+                    <article class="tv-card-list">
+                        <div class="row g-0 h-100">
+                            <div class="col-md-5 col-lg-4">
+                                <div class="tv-card-list-media">
+                                    <img alt="Toyota Camry" class="tv-card-list-img" src="https://di-uploads-pod7.dealerinspire.com/toyotachulavista/uploads/2023/09/2024-Toyota-Camry-Hybrid.png" />
+                                    <span class="tv-badge-top bg-gradient-blue">Travelis Choice</span>
+                                    <button class="tv-fav-btn"><i class="fa-regular fa-heart"></i></button>
+                                    <div class="tv-badge-bottom">
+                                        <i class="fa-solid fa-bolt text-warning"></i>
+                                        Instant
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-lg-8">
+                                <div class="tv-card-list-body">
+                                    <div>
+                                        <div class="tv-list-header">
+                                            <div>
+                                                <h2 class="tv-list-title">Toyota Camry Hybrid</h2>
+                                                <small class="text-info fw-bold text-uppercase" style="font-size: 0.7rem;">Бизнес Седан</small>
+                                            </div>
+                                            <div class="tv-list-rating">4.9 <i class="fa-solid fa-star"></i></div>
+                                        </div>
+                                        <div class="tv-list-specs">
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-user"></i> 5
+                                                места
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-suitcase"></i> 2
+                                                куфара
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-gear"></i>
+                                                Автоматик
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-leaf"></i>
+                                                Хибрид
+                                            </span>
+                                        </div>
+                                        <p class="tv-list-desc d-none d-lg-block">
+                                            Елегантен бизнес седан, съчетаващ
+                                            комфорт и ефективност. Хибридната технология осигурява тихо пътуване и
+                                            нисък разход.
+                                        </p>
+                                    </div>
+                                    <div class="tv-list-footer">
+                                        <div>
+                                            <span class="tv-price-label">Цена за ден</span>
+                                            <span class="tv-price-val text-info">€70</span>
+                                        </div>
+                                        <a class="tv-btn-action" href="#">Избери <i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- ITEM 3: VW Tiguan -->
+                    <article class="tv-card-list">
+                        <div class="row g-0 h-100">
+                            <div class="col-md-5 col-lg-4">
+                                <div class="tv-card-list-media">
+                                    <img alt="VW Tiguan" class="tv-card-list-img" src="https://7cars.bg/wp-content/uploads/2024/05/1-18.jpg" />
+                                    <button class="tv-fav-btn"><i class="fa-regular fa-heart"></i></button>
+                                    <div class="tv-badge-bottom"><i class="fa-solid fa-mountain"></i> 4x4</div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-lg-8">
+                                <div class="tv-card-list-body">
+                                    <div>
+                                        <div class="tv-list-header">
+                                            <div>
+                                                <h2 class="tv-list-title">VW Tiguan</h2>
+                                                <small class="text-info fw-bold text-uppercase" style="font-size: 0.7rem;">SUV / Джип</small>
+                                            </div>
+                                            <div class="tv-list-rating">4.7 <i class="fa-solid fa-star"></i></div>
+                                        </div>
+                                        <div class="tv-list-specs">
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-user"></i> 5
+                                                места
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-suitcase"></i> 3
+                                                куфара
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-gear"></i>
+                                                Автоматик
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-gas-pump"></i>
+                                                Дизел
+                                            </span>
+                                        </div>
+                                        <p class="tv-list-desc d-none d-lg-block">
+                                            Просторен и надежден SUV,
+                                            перфектен за семейни пътувания до планината. Системата 4x4 гарантира
+                                            сигурност при всякакви условия.
+                                        </p>
+                                    </div>
+                                    <div class="tv-list-footer">
+                                        <div>
+                                            <span class="tv-price-label">Цена за ден</span>
+                                            <span class="tv-price-val">€85</span>
+                                        </div>
+                                        <a class="tv-btn-action" href="#">Избери <i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- ITEM 4: Mercedes V-Class -->
+                    <article class="tv-card-list">
+                        <div class="row g-0 h-100">
+                            <div class="col-md-5 col-lg-4">
+                                <div class="tv-card-list-media">
+                                    <img alt="Mercedes V-Class" class="tv-card-list-img" src="https://www.novakola.bg/wp-content/uploads/2024/05/1032931705584485dsc02773-1050x700-768x512.jpg" />
+                                    <span class="tv-badge-top bg-indigo">Premium Van</span>
+                                    <button class="tv-fav-btn"><i class="fa-regular fa-heart"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-lg-8">
+                                <div class="tv-card-list-body">
+                                    <div>
+                                        <div class="tv-list-header">
+                                            <div>
+                                                <h2 class="tv-list-title">Mercedes V-Class</h2>
+                                                <small class="text-info fw-bold text-uppercase" style="font-size: 0.7rem;">Луксозен Ван</small>
+                                            </div>
+                                            <div class="tv-list-rating">5.0 <i class="fa-solid fa-star"></i></div>
+                                        </div>
+                                        <div class="tv-list-specs">
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-user"></i> 7
+                                                места
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-suitcase"></i> 5
+                                                куфара
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-gear"></i>
+                                                Автоматик
+                                            </span>
+                                            <span class="tv-spec-pill"><i class="fa-solid fa-wifi"></i> WiFi</span>
+                                        </div>
+                                        <p class="tv-list-desc d-none d-lg-block">
+                                            Първокласен комфорт за по-големи
+                                            групи. Кожен салон, мултизонов климатроник и изключително меко возене за
+                                            VIP трансфери.
+                                        </p>
+                                    </div>
+                                    <div class="tv-list-footer">
+                                        <div>
+                                            <span class="tv-price-label">Цена за ден</span>
+                                            <span class="tv-price-val">€150</span>
+                                        </div>
+                                        <a class="tv-btn-action" href="#">Избери <i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- ITEM 5: Tesla Model 3 -->
+                    <article class="tv-card-list">
+                        <div class="row g-0 h-100">
+                            <div class="col-md-5 col-lg-4">
+                                <div class="tv-card-list-media">
+                                    <img alt="Tesla Model 3" class="tv-card-list-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/2019_Tesla_Model_3_Performance_AWD_Front.jpg/1200px-2019_Tesla_Model_3_Performance_AWD_Front.jpg" />
+                                    <button class="tv-fav-btn"><i class="fa-regular fa-heart"></i></button>
+                                    <div class="tv-badge-bottom"><i class="fa-solid fa-charging-station text-success"></i> EV</div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-lg-8">
+                                <div class="tv-card-list-body">
+                                    <div>
+                                        <div class="tv-list-header">
+                                            <div>
+                                                <h2 class="tv-list-title">Tesla Model 3</h2>
+                                                <small class="text-info fw-bold text-uppercase" style="font-size: 0.7rem;">Електрически</small>
+                                            </div>
+                                            <div class="tv-list-rating">4.9 <i class="fa-solid fa-star"></i></div>
+                                        </div>
+                                        <div class="tv-list-specs">
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-user"></i> 5
+                                                места
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-suitcase"></i> 2
+                                                куфара
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-gear"></i>
+                                                Автоматик
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-bolt"></i>
+                                                Електрически
+                                            </span>
+                                        </div>
+                                        <p class="tv-list-desc d-none d-lg-block">
+                                            Насладете се на бъдещето.
+                                            Минималистичен дизайн, невероятно ускорение и напълно безшумно
+                                            придвижване с нулев отпечатък.
+                                        </p>
+                                    </div>
+                                    <div class="tv-list-footer">
+                                        <div>
+                                            <span class="tv-price-label">Цена за ден</span>
+                                            <span class="tv-price-val">€110</span>
+                                        </div>
+                                        <a class="tv-btn-action" href="#">Избери <i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- ITEM 6: BMW 4 Series -->
+                    <article class="tv-card-list">
+                        <div class="row g-0 h-100">
+                            <div class="col-md-5 col-lg-4">
+                                <div class="tv-card-list-media">
+                                    <img alt="BMW 4 Convertible" class="tv-card-list-img" src="https://www.topgear.com/sites/default/files/images/news-article/2020/09/773a5387e619ab48f7b768bcbed99f32/p90400385_highres.jpg" />
+                                    <span class="tv-badge-top bg-gradient-orange">Summer Fun</span>
+                                    <button class="tv-fav-btn"><i class="fa-regular fa-heart"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-lg-8">
+                                <div class="tv-card-list-body">
+                                    <div>
+                                        <div class="tv-list-header">
+                                            <div>
+                                                <h2 class="tv-list-title">BMW 4 Series Cabrio</h2>
+                                                <small class="text-info fw-bold text-uppercase" style="font-size: 0.7rem;">Кабриолет</small>
+                                            </div>
+                                            <div class="tv-list-rating">4.8 <i class="fa-solid fa-star"></i></div>
+                                        </div>
+                                        <div class="tv-list-specs">
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-user"></i> 4
+                                                места
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-suitcase"></i> 1
+                                                куфар
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-gear"></i>
+                                                Автоматик
+                                            </span>
+                                            <span class="tv-spec-pill">
+                                                <i class="fa-solid fa-wind"></i>
+                                                Cabrio
+                                            </span>
+                                        </div>
+                                        <p class="tv-list-desc d-none d-lg-block">
+                                            Свобода и стил. Свалете покрива и
+                                            се насладете на морския бриз или планинските пътища с този динамичен
+                                            кабриолет.
+                                        </p>
+                                    </div>
+                                    <div class="tv-list-footer">
+                                        <div>
+                                            <span class="tv-price-label">Цена за ден</span>
+                                            <span class="tv-price-val">€130</span>
+                                        </div>
+                                        <a class="tv-btn-action" href="#">Избери <i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <!-- PAGINATION (Same as grid) -->
+                <nav aria-label="Пагинация" class="tv-pagination mt-4 d-flex justify-content-center gap-2">
+                    <button class="btn btn-outline-secondary text-white border-0"><i class="fa-solid fa-angle-left"></i></button>
+                    <button class="btn btn-primary">1</button>
+                    <button class="btn btn-outline-secondary text-white border-0">2</button>
+                    <button class="btn btn-outline-secondary text-white border-0">3</button>
+                    <button class="btn btn-outline-secondary text-white border-0"><i class="fa-solid fa-angle-right"></i></button>
+                </nav>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,427 @@
+﻿@page
+@{
+    ViewData["Title"] = "Резюме на резервацията - Travelis";
+    Layout = null;
+}
+
+<main class="pb-5">
+    <div class="container">
+        <div class="row g-4">
+            <!-- LEFT COLUMN – форма за наем -->
+            <div class="col-lg-8">
+                <!-- 1. Локация и дати -->
+                <div class="tv-card-panel mb-4">
+                    <h5 class="text-white mb-1">1. Локация и дати</h5>
+                    <p class="small text-secondary mb-4">
+                        Въведете откъде и кога ще вземете и върнете автомобила.
+                        Можете да посочите всяка локация в България – летище, автогара, хотел, офис и др.
+                    </p>
+                    <form class="row g-3">
+                        <!-- Pickup location -->
+                        <div class="col-12">
+                            <label class="small text-secondary fw-bold ms-2 mb-1">Локация за вземане</label>
+                            <div class="tv-input-wrapper">
+                                <i class="fa-solid fa-location-dot tv-input-icon"></i>
+                                <input class="tv-input" placeholder="Напр. Летище Варна (VAR), Център Пловдив, хотел в Банско..." type="text" />
+                            </div>
+                        </div>
+                        <!-- Pickup date/time -->
+                        <div class="col-md-6">
+                            <label class="small text-secondary fw-bold ms-2 mb-1">Дата на вземане</label>
+                            <div class="tv-input-wrapper">
+                                <i class="fa-solid fa-calendar-day tv-input-icon"></i>
+                                <input class="tv-input" type="date" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small text-secondary fw-bold ms-2 mb-1">Час на вземане</label>
+                            <div class="tv-input-wrapper">
+                                <i class="fa-solid fa-clock tv-input-icon"></i>
+                                <input class="tv-input" type="time" />
+                            </div>
+                        </div>
+                        <!-- Different dropoff switch -->
+                        <div class="col-12">
+                            <div class="form-check form-switch d-flex align-items-center gap-2 mt-1">
+                                <input class="form-check-input" id="diffDropSwitch" type="checkbox" />
+                                <label class="form-check-label small text-white-50" for="diffDropSwitch">
+                                    Връщане на друга локация (еднопосочен наем)
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Dropoff location -->
+                        <div class="col-12">
+                            <label class="small text-secondary fw-bold ms-2 mb-1">Локация за връщане</label>
+                            <div class="tv-input-wrapper">
+                                <i class="fa-solid fa-location-crosshairs tv-input-icon"></i>
+                                <input class="tv-input" placeholder="Напр. Хотел в София, автогара Плевен, офис на партньора..." type="text" />
+                            </div>
+                            <p class="small text-secondary mt-1 mb-0">
+                                Ако оставите полето празно, ще се приеме, че връщате автомобила на същото място, откъдето го вземате.
+                            </p>
+                        </div>
+                        <!-- Dropoff date/time -->
+                        <div class="col-md-6">
+                            <label class="small text-secondary fw-bold ms-2 mb-1">Дата на връщане</label>
+                            <div class="tv-input-wrapper">
+                                <i class="fa-solid fa-calendar-check tv-input-icon"></i>
+                                <input class="tv-input" type="date" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small text-secondary fw-bold ms-2 mb-1">Час на връщане</label>
+                            <div class="tv-input-wrapper">
+                                <i class="fa-solid fa-clock-rotate-left tv-input-icon"></i>
+                                <input class="tv-input" type="time" />
+                            </div>
+                        </div>
+                        <!-- Driver age -->
+                        <div class="col-md-6">
+                            <label class="small text-secondary fw-bold ms-2 mb-1">Възраст на шофьора</label>
+                            <div class="tv-input-wrapper">
+                                <i class="fa-solid fa-user tv-input-icon"></i>
+                                <select class="tv-input">
+                                    <option>25 – 70 години (стандартна)</option>
+                                    <option>21 – 24 години (млад шофьор)</option>
+                                    <option>71+ години</option>
+                                </select>
+                            </div>
+                            <p class="small text-secondary mt-1 mb-0">
+                                При възраст под 25 или над 70 години може да има допълнителна такса от партньора.
+                            </p>
+                        </div>
+                        <!-- Residency -->
+                        <div class="col-md-6">
+                            <label class="small text-secondary fw-bold ms-2 mb-1">Държава на пребиваване</label>
+                            <div class="tv-input-wrapper">
+                                <i class="fa-solid fa-flag tv-input-icon"></i>
+                                <select class="tv-input">
+                                    <option>България</option>
+                                    <option>Държава от ЕС</option>
+                                    <option>Великобритания</option>
+                                    <option>САЩ / Канада</option>
+                                    <option>Друга държава</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- 2. Допълнителни услуги -->
+                <div class="tv-card-panel mb-4">
+                    <h5 class="text-white mb-1">2. Допълнителни услуги</h5>
+                    <p class="small text-secondary mb-4">
+                        Изберете опционални услуги. Наличността се потвърждава от партньора при финализиране на резервацията.
+                    </p>
+                    <div class="row g-3">
+                        <!-- Детско столче -->
+                        <div class="col-md-6">
+                            <div class="tv-extra-item d-flex align-items-start gap-3">
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" id="extraChildSeat" type="checkbox" />
+                                </div>
+                                <div>
+                                    <label class="form-check-label text-white fw-semibold" for="extraChildSeat">
+                                        Детско столче
+                                    </label>
+                                    <p class="small text-white-50 mb-1">
+                                        Подходящо за малки деца, отговаря на европейските стандарти за безопасност.
+                                    </p>
+                                    <div class="small text-info">
+                                        + €5 / ден
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- GPS -->
+                        <div class="col-md-6">
+                            <div class="tv-extra-item d-flex align-items-start gap-3">
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" id="extraGPS" type="checkbox" />
+                                </div>
+                                <div>
+                                    <label class="form-check-label text-white fw-semibold" for="extraGPS">
+                                        GPS навигация
+                                    </label>
+                                    <p class="small text-white-50 mb-1">
+                                        Удобна за междуградски пътувания и малки населени места.
+                                    </p>
+                                    <div class="small text-info">
+                                        + €3 / ден
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Втори шофьор -->
+                        <div class="col-md-6">
+                            <div class="tv-extra-item d-flex align-items-start gap-3">
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" id="extraDriver" type="checkbox" />
+                                </div>
+                                <div>
+                                    <label class="form-check-label text-white fw-semibold" for="extraDriver">
+                                        Втори шофьор
+                                    </label>
+                                    <p class="small text-white-50 mb-1">
+                                        Позволява включване на още един водач в договора за наем.
+                                    </p>
+                                    <div class="small text-info">
+                                        + €15 / резервация
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Зимен пакет -->
+                        <div class="col-md-6">
+                            <div class="tv-extra-item d-flex align-items-start gap-3">
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" id="extraWinter" type="checkbox" />
+                                </div>
+                                <div>
+                                    <label class="form-check-label text-white fw-semibold" for="extraWinter">
+                                        Зимен пакет (вериги, стъргалка и др.)
+                                    </label>
+                                    <p class="small text-white-50 mb-1">
+                                        Препоръчително за планински райони, ски курорти и зимни условия.
+                                    </p>
+                                    <div class="small text-info">
+                                        + €20 / резервация
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Cross-border -->
+                        <div class="col-md-6">
+                            <div class="tv-extra-item d-flex align-items-start gap-3">
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" id="extraBorder" type="checkbox" />
+                                </div>
+                                <div>
+                                    <label class="form-check-label text-white fw-semibold" for="extraBorder">
+                                        Разрешение за пътуване в чужбина
+                                    </label>
+                                    <p class="small text-white-50 mb-1">
+                                        Необходимо за Румъния, Гърция, Сърбия и други държави. Изисква предварително одобрение.
+                                    </p>
+                                    <div class="small text-info">
+                                        + €35 / резервация
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Wi-Fi -->
+                        <div class="col-md-6">
+                            <div class="tv-extra-item d-flex align-items-start gap-3">
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" id="extraWifi" type="checkbox" />
+                                </div>
+                                <div>
+                                    <label class="form-check-label text-white fw-semibold" for="extraWifi">
+                                        Мобилен Wi-Fi рутер
+                                    </label>
+                                    <p class="small text-white-50 mb-1">
+                                        Удобен за пътувания с екип, семейство или работа от пътя.
+                                    </p>
+                                    <div class="small text-info">
+                                        + €6 / ден
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-info bg-opacity-10 border border-info border-opacity-25 text-info small mt-4 mb-0">
+                        <i class="fa-solid fa-circle-info me-1"></i>
+                        Крайната цена на допълнителните услуги се изчислява според броя дни и ще бъде показана в следващата стъпка.
+                    </div>
+                </div>
+                <!-- 3. Застрахователни пакети -->
+                <div class="tv-card-panel mb-4">
+                    <h5 class="text-white mb-1">3. Застрахователни пакети</h5>
+                    <p class="small text-secondary mb-3">
+                        Изберете ниво на защита. Базовата защита е включена, а разширените пакети намаляват или премахват франчайза.
+                    </p>
+                    <div class="vstack gap-3">
+                        <!-- Basic -->
+                        <label class="tv-insurance-option">
+                            <div class="form-check">
+                                <input checked="" class="form-check-input" id="insBasic" name="insPackage" type="radio" />
+                                <div class="tv-insurance-shell">
+                                    <div class="tv-insurance-header">
+                                        <div>
+                                            <div class="tv-insurance-title">Базова защита</div>
+                                            <div class="tv-insurance-sub">CDW + TP · Франчайз ≈ €800</div>
+                                        </div>
+                                        <div class="tv-insurance-price">
+                                            Включено
+                                        </div>
+                                    </div>
+                                    <ul class="tv-list-info small mb-0">
+                                        <li><i class="fa-solid fa-check text-success me-1"></i> Покритие при ПТП и кражба</li>
+                                        <li><i class="fa-solid fa-xmark text-danger me-1"></i> Без покритие за гуми, джанти, стъкла</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </label>
+                        <!-- Standard -->
+                        <label class="tv-insurance-option">
+                            <div class="form-check">
+                                <input class="form-check-input" id="insStandard" name="insPackage" type="radio" />
+                                <div class="tv-insurance-shell">
+                                    <div class="tv-insurance-header">
+                                        <div>
+                                            <div class="tv-insurance-title">Разширена защита</div>
+                                            <div class="tv-insurance-sub">CDW + SCDW · Франчайз ≈ €300</div>
+                                        </div>
+                                        <div class="tv-insurance-price">
+                                            + €10 / ден
+                                        </div>
+                                    </div>
+                                    <ul class="tv-list-info small mb-0">
+                                        <li><i class="fa-solid fa-check text-success me-1"></i> Намален франчайз</li>
+                                        <li><i class="fa-solid fa-check text-success me-1"></i> Частично покритие на гуми и стъкла</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </label>
+                        <!-- Premium -->
+                        <label class="tv-insurance-option">
+                            <div class="form-check">
+                                <input class="form-check-input" id="insPremium" name="insPackage" type="radio" />
+                                <div class="tv-insurance-shell">
+                                    <div class="tv-insurance-header">
+                                        <div>
+                                            <div class="tv-insurance-title">Пълна защита</div>
+                                            <div class="tv-insurance-sub">Super CDW · 0 франчайз*</div>
+                                        </div>
+                                        <div class="tv-insurance-price text-info">
+                                            + €18 / ден
+                                        </div>
+                                    </div>
+                                    <ul class="tv-list-info small mb-0">
+                                        <li><i class="fa-solid fa-check text-success me-1"></i> Почти нулева отговорност при щети</li>
+                                        <li><i class="fa-solid fa-check text-success me-1"></i> Покрива гуми, стъкла, джанти</li>
+                                        <li><i class="fa-solid fa-check text-success me-1"></i> Намален депозит при вземане</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <p class="small text-secondary mt-3 mb-0">
+                        *Пълната защита не покрива груба небрежност, шофиране под влияние на алкохол/наркотици или
+                        използване на автомобила извън пътната мрежа. Подробности ще намерите в
+                        <a class="text-info text-decoration-none" href="car-policies.html">Политики за коли под наем</a>.
+                    </p>
+                </div>
+                <!-- 4. Политики и съгласие -->
+                <div class="tv-card-panel">
+                    <h5 class="text-white mb-1">4. Политики и съгласие</h5>
+                    <p class="small text-secondary mb-3">
+                        Моля, маркирайте, че приемате условията за наем и обработката на лични данни, преди да продължите.
+                    </p>
+                    <ul class="tv-list-info mb-3 small">
+                        <li>
+                            <i class="fa-solid fa-gas-pump text-info me-1"></i>
+                            Горивна политика: стандартно <strong>Пълен → Пълен</strong>, освен ако изрично не е посочено друго.
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-road text-info me-1"></i>
+                            Километри: включени дневни лимити или неограничен пробег според конкретната оферта.
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-shield-halved text-info me-1"></i>
+                            Депозитът се блокира по карта при вземане и се освобождава след връщане и липса на щети.
+                        </li>
+                    </ul>
+                    <p class="small text-secondary mb-3">
+                        Повече информация ще намерите в
+                        <a class="text-info text-decoration-none" href="/payment-policy.html">Политика за плащания</a>,
+                        <a class="text-info text-decoration-none" href="/cancellation-policy.html">Политика за отмяна</a> и
+                        <a class="text-info text-decoration-none" href="car-policies.html">Политики за коли под наем</a>.
+                    </p>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" id="agreeTerms" type="checkbox" />
+                        <label class="form-check-label small text-white-50" for="agreeTerms">
+                            Потвърждавам, че съм запознат/а и приемам условията за наем и политиките на Travelis и партньора.
+                        </label>
+                    </div>
+                    <div class="form-check mb-0">
+                        <input class="form-check-input" id="agreeGDPR" type="checkbox" />
+                        <label class="form-check-label small text-white-50" for="agreeGDPR">
+                            Съгласен/на съм личните ми данни да бъдат обработвани за целите на резервацията.
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- RIGHT SIDEBAR – резюме и „Следваща стъпка“ -->
+            <div class="col-lg-4">
+                <aside class="tv-sidebar-card position-sticky" style="top: 100px;">
+                    <!-- Car mini summary -->
+                    <div class="mb-3">
+                        <div class="d-flex gap-3">
+                            <div style="width: 92px;">
+                                <img alt="Toyota Camry Hybrid" class="img-fluid rounded-3" src="https://di-uploads-pod7.dealerinspire.com/toyotachulavista/uploads/2023/09/2024-Toyota-Camry-Hybrid.png" />
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h6 class="text-white mb-0">Toyota Camry Hybrid</h6>
+                                    <span class="badge bg-success bg-opacity-25 border border-success text-success rounded-pill small">
+                                        Travelis Choice
+                                    </span>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2 small text-white-50 mb-1">
+                                    <span><i class="fa-solid fa-user me-1"></i>5</span>
+                                    <span><i class="fa-solid fa-suitcase me-1"></i>2+1</span>
+                                    <span><i class="fa-solid fa-gear me-1"></i>Автоматик</span>
+                                    <span><i class="fa-solid fa-leaf me-1"></i>Хибрид</span>
+                                </div>
+                                <a class="text-info text-decoration-none small" href="car-detail.html">
+                                    Детайли за автомобила <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Date & location summary (placeholder, ще се пълни динамично) -->
+                    <div class="border border-secondary border-opacity-25 rounded-3 p-3 mb-3 bg-black bg-opacity-25">
+                        <div class="small text-white-50 mb-1">
+                            <i class="fa-solid fa-location-dot text-info me-1"></i>
+                            Локации за вземане и връщане ще бъдат показани тук след попълване.
+                        </div>
+                        <div class="small text-white-50">
+                            <i class="fa-solid fa-calendar-days text-info me-1"></i>
+                            Дати и часове на наема ще се изчислят автоматично.
+                        </div>
+                    </div>
+                    <!-- Price breakdown (примерни стойности) -->
+                    <h6 class="text-white mb-3">Ценова разбивка (пример)</h6>
+                    <div class="d-flex justify-content-between small text-white-50 mb-1">
+                        <span>Наем на автомобила (3 дни)</span>
+                        <span class="text-white">€210.00</span>
+                    </div>
+                    <div class="d-flex justify-content-between small text-white-50 mb-1">
+                        <span>Избран застрахователен пакет</span>
+                        <span class="text-white">от €0 / ден</span>
+                    </div>
+                    <div class="d-flex justify-content-between small text-white-50 mb-1">
+                        <span>Допълнителни услуги</span>
+                        <span class="text-white">€0.00</span>
+                    </div>
+                    <hr class="border-secondary opacity-50 my-3" />
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="fs-6 text-white fw-bold">ОБЩО (ориентировъчно)</span>
+                        <span class="fs-4 text-info fw-bold">€210</span>
+                    </div>
+                    <div class="alert alert-info bg-opacity-10 border border-info border-opacity-25 text-info small mb-3">
+                        <i class="fa-solid fa-shield-halved me-1"></i>
+                        Очакван депозит при вземане: около €200 (блокирани по карта).
+                        Точната сума ще бъде потвърдена от партньора.
+                    </div>
+                    <button class="btn w-100 rounded-pill py-2 fw-bold" style="background: linear-gradient(135deg, #0ea5e9, #2563eb); border: none;">
+                        Следваща стъпка
+                    </button>
+                    <p class="small text-secondary mt-2 mb-0 text-center">
+                        На следващата стъпка ще въведете данните на шофьора и ще завършите резервацията.
+                    </p>
+                </aside>
+            </div>
+        </div>
+    </div>
+</main>

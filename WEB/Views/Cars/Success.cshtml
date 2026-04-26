@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Резервацията е потвърдена - Travelis";
+}
+
+
+<main class="pb-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- SUCCESS CARD -->
+            <div class="col-lg-8">
+                <div class="tv-card-panel p-4">
+                    <!-- Booking Code -->
+                    <div class="text-center mb-4">
+                        <span class="text-white-50 small d-block mb-1">Код на резервацията</span>
+                        <div class="fs-3 fw-bold text-info">TRV-48219-CAR</div>
+                    </div>
+                    <hr class="border-secondary opacity-25 mb-4" />
+                    <!-- CAR SUMMARY -->
+                    <div class="d-flex gap-3 mb-4">
+                        <div style="width: 120px;">
+                            <img alt="Toyota Camry" class="img-fluid rounded-3" src="https://di-uploads-pod7.dealerinspire.com/toyotachulavista/uploads/2023/09/2024-Toyota-Camry-Hybrid.png" />
+                        </div>
+                        <div class="flex-grow-1">
+                            <h5 class="text-white mb-1">Toyota Camry Hybrid</h5>
+                            <div class="d-flex flex-wrap gap-2 small text-white-50">
+                                <span><i class="fa-solid fa-user me-1"></i>5</span>
+                                <span><i class="fa-solid fa-suitcase me-1"></i>2+1</span>
+                                <span><i class="fa-solid fa-gear me-1"></i>Автоматик</span>
+                                <span><i class="fa-solid fa-gas-pump me-1"></i>Хибрид</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- RENTAL DETAILS -->
+                    <h6 class="text-white text-uppercase small fw-bold mb-3">Детайли за наема</h6>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="small text-white-50 mb-1">Вземане</div>
+                            <div class="text-white fw-semibold">Летище Варна (VAR)</div>
+                            <div class="text-secondary small">12 март 2025 · 10:00</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-white-50 mb-1">Връщане</div>
+                            <div class="text-white fw-semibold">Център Пловдив</div>
+                            <div class="text-secondary small">15 март 2025 · 14:00</div>
+                        </div>
+                    </div>
+                    <!-- EXTRAS -->
+                    <h6 class="text-white text-uppercase small fw-bold mb-2">Допълнителни услуги</h6>
+                    <ul class="tv-list-info small mb-4">
+                        <li><i class="fa-solid fa-check text-success me-1"></i>Детско столче</li>
+                        <li><i class="fa-solid fa-check text-success me-1"></i>Втори шофьор</li>
+                        <li><i class="fa-solid fa-check text-success me-1"></i>Wi-Fi рутер</li>
+                    </ul>
+                    <!-- INSURANCE -->
+                    <h6 class="text-white text-uppercase small fw-bold mb-2">Застраховка</h6>
+                    <p class="small text-white-50 mb-4">
+                        Пълна защита (Super CDW) – 0 франчайз · включва гуми, стъкла и джанти.
+                    </p>
+                    <!-- PRICE BREAKDOWN -->
+                    <h6 class="text-white text-uppercase small fw-bold mb-2">Ценова разбивка</h6>
+                    <div class="d-flex justify-content-between small text-white-50 mb-1">
+                        <span>Наем за 3 дни</span>
+                        <span class="text-white">€210.00</span>
+                    </div>
+                    <div class="d-flex justify-content-between small text-white-50 mb-1">
+                        <span>Пълна защита</span>
+                        <span class="text-white">€54.00</span>
+                    </div>
+                    <div class="d-flex justify-content-between small text-white-50 mb-1">
+                        <span>Допълнителни услуги</span>
+                        <span class="text-white">€26.00</span>
+                    </div>
+                    <hr class="border-secondary opacity-25 my-3" />
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <span class="fs-6 text-white fw-bold">ОБЩО</span>
+                        <span class="fs-3 text-info fw-bold">€290</span>
+                    </div>
+                    <!-- Buttons -->
+                    <div class="d-flex flex-column flex-md-row gap-3">
+                        <a class="btn btn-outline-light rounded-pill py-2 fw-semibold w-100" href="/account/bookings/my-bookings.html">
+                            Моите резервации
+                        </a>
+                        <a class="btn rounded-pill py-2 fw-bold w-100" href="/" style="background: linear-gradient(135deg, #0ea5e9, #2563eb); border: none;">
+                            Към началната страница
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

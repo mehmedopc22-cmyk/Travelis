@@ -1,6 +1,10 @@
 <Solution>
   <Project Path="API/API.csproj" />
-  <Project Path="DAL/DAL.csproj" />
-  <Project Path="Domain/Domain.csproj" />
+  <Project Path="DAL/DAL.csproj">
+    <Build Solution="Debug|*" Project="false" />
+  </Project>
+  <Project Path="Domain/Domain.csproj">
+    <Build Solution="Debug|*" Project="false" />
+  </Project>
   <Project Path="WEB/WEB.csproj" />
 </Solution>

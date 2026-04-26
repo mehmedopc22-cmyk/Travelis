@@ -29,3 +29,32 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+/* --- СТИЛ ЗА ИЗБРАНИ БУТОНИ (CHIPS) --- */
+.tv-chip-active {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+    color: white !important;
+    border-color: #00bfff !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
+    transition: all 0.2s ease;
+}
+
+/* Малък ефект при посочване, за да се усеща интерактивно */
+.location-chip:hover, .priority-chip:hover {
+    border-color: #007bff;
+    cursor: pointer;
+}
+
+
+.tv-input-range::-webkit-slider-thumb {
+    background: #007bff;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    border: 2px solid white;
+}
+
+.tv-input-range:active::-webkit-slider-thumb {
+    transform: scale(1.2); /* Кръгчето леко пораства, когато го стиснеш */
+    transition: transform 0.1s;
+}
+

@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Детайли за колата – Travelis";
+}
+<main class="pb-5">
+    <div class="container">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Cars" asp-action="Grid" class="text-info text-decoration-none small">← Обратно към всички коли</a></li>
+            </ol>
+        </nav>
+
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="tv-card-panel">
+                    <h5 class="text-white mb-3">Информация за автомобила</h5>
+                    <div class="img-fallback mb-4">
+                        <img alt="Toyota Camry" class="img-fluid w-100 rounded-4 object-fit-cover" src="https://i.ytimg.com/vi/l1GARy_djU8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&amp;rs=AOn4CLDINuEhPVyKE_9LH-BE7yrMCwq4lQ" style="max-height: 450px;" />
+                    </div>
+
+                    <h6 class="text-white small text-uppercase fw-bold mb-3 border-bottom border-secondary pb-2 border-opacity-25">Технически Характеристики</h6>
+                    <div class="tv-spec-grid mb-4">
+                        <div class="tv-spec-item">
+                            <div class="tv-spec-label"><i class="fa-solid fa-gas-pump me-1"></i>Двигател</div>
+                            <div class="tv-spec-value">2.5L Hybrid</div>
+                        </div>
+                        <div class="tv-spec-item">
+                            <div class="tv-spec-label"><i class="fa-solid fa-gauge-high me-1"></i>Мощност</div>
+                            <div class="tv-spec-value">208 к.с.</div>
+                        </div>
+                        <div class="tv-spec-item">
+                            <div class="tv-spec-label"><i class="fa-solid fa-droplet me-1"></i>Разход</div>
+                            <div class="tv-spec-value">4.5 л/100км</div>
+                        </div>
+                        <div class="tv-spec-item">
+                            <div class="tv-spec-label"><i class="fa-solid fa-flask me-1"></i>Резервоар</div>
+                            <div class="tv-spec-value">50 литра</div>
+                        </div>
+                    </div>
+
+                    <h6 class="text-white small text-uppercase fw-bold mb-3 border-bottom border-secondary pb-2 border-opacity-25">Условия на наема</h6>
+                    <ul class="list-unstyled mb-0 row">
+                        <li class="tv-list-item col-md-6">
+                            <i class="fa-solid fa-check text-success mt-1"></i>
+                            <span>Включени <strong>600 км</strong>.</span>
+                        </li>
+                        <li class="tv-list-item col-md-6">
+                            <i class="fa-solid fa-headset text-warning mt-1"></i>
+                            <span>24/7 Пътна помощ</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="tv-sidebar-card position-sticky" style="top: 100px;">
+                    <h5 class="text-white mb-3">Ценова разбивка</h5>
+                    <div class="d-flex justify-content-between mb-2 text-white-50">
+                        <span>Наем (3 дни)</span>
+                        <span class="text-white">€210.00</span>
+                    </div>
+                    <hr class="border-secondary opacity-50" />
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <span class="fs-5 text-white fw-bold">ОБЩО</span>
+                        <span class="fs-3 text-info fw-bold">€285</span>
+                    </div>
+
+                    <a asp-controller="Cars" asp-action="Booking" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow-lg" style="background: linear-gradient(135deg, #0ea5e9, #2563eb); border: none;">
+                        Продължи към резервация
+                    </a>
+                    
+                    <p class="text-center text-white-50 small mt-3">
+                        <i class="fa-solid fa-lock me-1"></i> Сигурна резервация
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

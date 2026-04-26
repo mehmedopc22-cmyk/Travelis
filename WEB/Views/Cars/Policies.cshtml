@@ -1,0 +1,175 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<main class="tv-main-hotels">
+    <div class="container">
+        <!-- HERO -->
+        <section class="tv-hero-section py-5">
+            <div class="tv-hotels-hero position-relative overflow-hidden">
+                <!-- ORBS -->
+                <div class="tv-orb tv-orb-sky"></div>
+                <div class="tv-orb tv-orb-indigo"></div>
+                <div class="tv-hotels-hero-inner">
+                    <span class="tv-hotels-hero-badge mb-3">
+                        <i class="fa-solid fa-file-contract me-1"></i> Важно за всички резервации
+                    </span>
+                    <h1 class="tv-hotels-hero-title mb-2">Политики за Коли под Наем</h1>
+                    <p class="tv-hotels-hero-sub">
+                        Общи условия, депозит, застраховки, щети, гориво, километри и правила за шофиране.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- CONTENT PANELS -->
+        <section class="pb-5">
+            <div class="row g-4">
+                <!-- LEFT: NAVIGATION CARD -->
+                <div class="col-lg-4 col-xl-3">
+                    <div class="tv-card-panel sticky-lg-top" style="top: 100px;">
+                        <h5 class="text-white mb-3">Съдържание</h5>
+                        <ul class="tv-list-nav">
+                            <li><a class="tv-list-link" href="#deposit">Депозит и обезпечение</a></li>
+                            <li><a class="tv-list-link" href="#insurance">Застраховки (CDW/LDW/SCDW)</a></li>
+                            <li><a class="tv-list-link" href="#fuel">Горивна политика</a></li>
+                            <li><a class="tv-list-link" href="#km">Километри и лимити</a></li>
+                            <li><a class="tv-list-link" href="#age">Възраст на шофьора</a></li>
+                            <li><a class="tv-list-link" href="#documents">Необходими документи</a></li>
+                            <li><a class="tv-list-link" href="#crossborder">Пътуване в чужбина</a></li>
+                            <li><a class="tv-list-link" href="#pickup">Вземане и връщане</a></li>
+                            <li><a class="tv-list-link" href="#damages">Щети, гуми, стъкла</a></li>
+                            <li><a class="tv-list-link" href="#fees">Такси и глоби</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- RIGHT: POLICY SECTIONS -->
+                <div class="col-lg-8 col-xl-9">
+                    <!-- DEPOSIT -->
+                    <article class="tv-card-panel mb-4" id="deposit">
+                        <h2 class="tv-section-title">1. Депозит и обезпечение</h2>
+                        <p class="text-white-50">
+                            При получаване на автомобила се блокира депозит по кредитна/дебитна карта.
+                            Сумата се определя според класа на автомобила и избраната застраховка.
+                        </p>
+                        <ul class="tv-list-info">
+                            <li><i class="fa-solid fa-shield-halved text-info me-2"></i> Икономичен клас: €200 – €400</li>
+                            <li><i class="fa-solid fa-shield-halved text-info me-2"></i> Среден клас: €300 – €700</li>
+                            <li><i class="fa-solid fa-shield-halved text-info me-2"></i> SUV/Лукс: €600 – €1500</li>
+                        </ul>
+                        <p class="small text-warning">
+                            *Депозитът се освобождава до 5 работни дни след връщане и липса на щети.*
+                        </p>
+                    </article>
+                    <!-- INSURANCE -->
+                    <article class="tv-card-panel mb-4" id="insurance">
+                        <h2 class="tv-section-title">2. Застраховки и покрития</h2>
+                        <p class="text-white-50 mb-3">
+                            Всички автомобили включват базова застраховка Гражданска отговорност.
+                            Допълнителните покрития намаляват или премахват вашата отговорност при щета.
+                        </p>
+                        <div class="tv-info-box mb-3">
+                            <h4 class="h6 text-white mb-1">CDW – Collision Damage Waiver</h4>
+                            <p class="small text-white-50 mb-0">Намалява отговорността до определена сума (франчайз).</p>
+                        </div>
+                        <div class="tv-info-box mb-3">
+                            <h4 class="h6 text-white mb-1">LDW – Loss Damage Waiver</h4>
+                            <p class="small text-white-50 mb-0">Покрива щети при инцидент и кражба.</p>
+                        </div>
+                        <div class="tv-info-box mb-3">
+                            <h4 class="h6 text-white mb-1">SCDW – Super CDW</h4>
+                            <p class="small text-white-50 mb-0">Премахва почти напълно отговорността на шофьора.</p>
+                        </div>
+                        <p class="small text-info">
+                            Важно: Застраховките не покриват интериор, изгубени ключове, неправилно зареждане на гориво и груба небрежност.
+                        </p>
+                    </article>
+                    <!-- FUEL POLICY -->
+                    <article class="tv-card-panel mb-4" id="fuel">
+                        <h2 class="tv-section-title">3. Горивна политика</h2>
+                        <ul class="tv-list-info">
+                            <li><i class="fa-solid fa-gas-pump text-info me-2"></i> Пълен – Пълен: Получавате с пълен резервоар, връщате с пълен.</li>
+                            <li><i class="fa-solid fa-gas-pump text-info me-2"></i> Пълен – Празен: Таксува се липсващото гориво + такса зареждане.</li>
+                        </ul>
+                        <p class="small text-white-50 mb-0">
+                            При връщане с по-малко гориво се удържа разликата от депозита.
+                        </p>
+                    </article>
+                    <!-- KM LIMIT -->
+                    <article class="tv-card-panel mb-4" id="km">
+                        <h2 class="tv-section-title">4. Километри и ограничения</h2>
+                        <p class="text-white-50">
+                            Някои автомобили включват неограничен пробег. За други има дневен лимит.
+                        </p>
+                        <ul class="tv-list-info">
+                            <li><i class="fa-solid fa-road text-info me-2"></i> Икономичен клас: 250–300 км/ден</li>
+                            <li><i class="fa-solid fa-road text-info me-2"></i> SUV/Ванове: 200–250 км/ден</li>
+                        </ul>
+                        <p class="small text-warning">Такса за надвишени километри: €0.10 – €0.40 на км.</p>
+                    </article>
+                    <!-- AGE -->
+                    <article class="tv-card-panel mb-4" id="age">
+                        <h2 class="tv-section-title">5. Възрастови изисквания</h2>
+                        <p class="text-white-50 mb-3">Стандартна възраст: 25–70 години.</p>
+                        <ul class="tv-list-info">
+                            <li><i class="fa-solid fa-user text-info me-2"></i> 21–24 г.: Такса “млад шофьор”.</li>
+                            <li><i class="fa-solid fa-user text-info me-2"></i> 71+ г.: Такса “опитен шофьор”.</li>
+                        </ul>
+                    </article>
+                    <!-- DOCUMENTS -->
+                    <article class="tv-card-panel mb-4" id="documents">
+                        <h2 class="tv-section-title">6. Необходими документи</h2>
+                        <ul class="tv-list-info">
+                            <li><i class="fa-solid fa-id-card text-info me-2"></i> Лична карта или паспорт</li>
+                            <li><i class="fa-solid fa-id-card text-info me-2"></i> Шофьорска книжка (валидна минимум 12 месеца)</li>
+                            <li><i class="fa-solid fa-credit-card text-info me-2"></i> Кредитна/дебитна карта на водача за депозит</li>
+                        </ul>
+                        <p class="small text-white-50 mb-0">Вторият шофьор също трябва да предостави документи.</p>
+                    </article>
+                    <!-- CROSS BORDER -->
+                    <article class="tv-card-panel mb-4" id="crossborder">
+                        <h2 class="tv-section-title">7. Пътуване извън България</h2>
+                        <p class="text-white-50 mb-2">
+                            Пътуването в чужбина е възможно само след предварително одобрение и допълнителна такса.
+                        </p>
+                        <ul class="tv-list-info">
+                            <li><i class="fa-solid fa-earth-europe text-info me-2"></i> Разрешени страни: Румъния, Гърция, Сърбия</li>
+                            <li><i class="fa-solid fa-ban text-danger me-2"></i> Забранено: Турция, Албания, Македония*</li>
+                        </ul>
+                        <p class="small text-warning mb-0">*Зависи от политиката на конкретния партньор.</p>
+                    </article>
+                    <!-- PICKUP / RETURN -->
+                    <article class="tv-card-panel mb-4" id="pickup">
+                        <h2 class="tv-section-title">8. Вземане и връщане</h2>
+                        <ul class="tv-list-info">
+                            <li><i class="fa-solid fa-key text-info me-2"></i> Вземане от офис или летище.</li>
+                            <li><i class="fa-solid fa-clock text-info me-2"></i> Закъснение над 1 час – възможна такса.</li>
+                            <li><i class="fa-solid fa-camera text-info me-2"></i> Извършва се оглед и снимки на автомобила.</li>
+                        </ul>
+                        <p class="small text-white-50 mb-0">
+                            При нужда от извънработно време – допълнителна такса.
+                        </p>
+                    </article>
+                    <!-- DAMAGES -->
+                    <article class="tv-card-panel mb-4" id="damages">
+                        <h2 class="tv-section-title">9. Щети и изключения</h2>
+                        <ul class="tv-list-info">
+                            <li><i class="fa-solid fa-car-burst text-danger me-2"></i> Гуми, джанти, стъкла – често не са покрити от CDW.</li>
+                            <li><i class="fa-solid fa-key text-danger me-2"></i> Загубен ключ – €150–€350.</li>
+                            <li><i class="fa-solid fa-droplet text-danger me-2"></i> Неправилно заредено гориво – реална цена на ремонта.</li>
+                        </ul>
+                    </article>
+                    <!-- FEES -->
+                    <article class="tv-card-panel mb-4" id="fees">
+                        <h2 class="tv-section-title">10. Такси и административни плащания</h2>
+                        <ul class="tv-list-info">
+                            <li><i class="fa-solid fa-circle-exclamation text-warning me-2"></i> Глоба за пушене в автомобила: €100</li>
+                            <li><i class="fa-solid fa-circle-exclamation text-warning me-2"></i> Такса за почистване при силно замърсяване: €20–€50</li>
+                            <li><i class="fa-solid fa-ticket text-warning me-2"></i> Глоби от КАТ – се удържат от клиента.</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
