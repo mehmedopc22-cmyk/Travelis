@@ -77,6 +77,116 @@
 
     <div class="col-12 col-xl-5">
         <div class="tv-card p-4 mb-4">
+            <h5 class="fw-bold text-white mb-3">Rental cars</h5>
+
+            <form asp-controller="HotelAdmin" asp-action="AddRentalCar" method="post" class="mb-4">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="hotelId" value="@Model.Hotel.Id" />
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="rentalCarBrand">Brand</label>
+                        <input id="rentalCarBrand" name="Brand" class="tv-input" maxlength="255" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="rentalCarModel">Model</label>
+                        <input id="rentalCarModel" name="Model" class="tv-input" maxlength="255" required />
+                    </div>
+                    <div class="col-12">
+                        <label for="rentalCarKilometers">Kilometers</label>
+                        <input id="rentalCarKilometers" name="Kilometers" type="number" min="0" step="1" class="tv-input" required />
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end mt-3">
+                    <button type="submit" class="btn tv-btn-primary">
+                        <i class="fa-solid fa-car me-1"></i> Add car
+                    </button>
+                </div>
+            </form>
+
+            @if (!Model.RentalCars.Any())
+            {
+                <div class="text-white-50 small">No rental cars have been added yet.</div>
+            }
+            else
+            {
+                <div class="d-grid gap-3">
+                    @foreach (var rentalCar in Model.RentalCars)
+                    {
+                        List<Domain.Entities.ImageEntity> carImages = Model.RentalCarImages.TryGetValue(rentalCar.Id, out var images)
+                            ? images
+                            : [];
+
+                        <div class="border border-secondary rounded-3 p-3">
+                            <form asp-controller="HotelAdmin" asp-action="UpdateRentalCar" method="post">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="hotelId" value="@Model.Hotel.Id" />
+                                <input type="hidden" name="rentalCarId" value="@rentalCar.Id" />
+
+                                <div class="row g-2 align-items-end">
+                                    <div class="col-md-4">
+                                        <label for="brand-@rentalCar.Id" class="small text-white-50">Brand</label>
+                                        <input id="brand-@rentalCar.Id" name="Brand" value="@rentalCar.Brand" class="tv-input" maxlength="255" required />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="model-@rentalCar.Id" class="small text-white-50">Model</label>
+                                        <input id="model-@rentalCar.Id" name="Model" value="@rentalCar.Model" class="tv-input" maxlength="255" required />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="kilometers-@rentalCar.Id" class="small text-white-50">Kilometers</label>
+                                        <input id="kilometers-@rentalCar.Id" name="Kilometers" value="@rentalCar.Kilometers" type="number" min="0" step="1" class="tv-input" required />
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button type="submit" class="btn tv-btn-glass">
+                                            <i class="fa-solid fa-floppy-disk me-1"></i> Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <form asp-controller="HotelAdmin" asp-action="UploadRentalCarImage" method="post" enctype="multipart/form-data" class="mt-3">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="hotelId" value="@Model.Hotel.Id" />
+                                <input type="hidden" name="rentalCarId" value="@rentalCar.Id" />
+
+                                <label for="rentalCarImages-@rentalCar.Id" class="small text-white-50">Images</label>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <input id="rentalCarImages-@rentalCar.Id" name="rentalCarImages" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="tv-input flex-grow-1" multiple />
+                                    <button type="submit" class="btn tv-btn-glass">
+                                        <i class="fa-solid fa-image me-1"></i> Upload
+                                    </button>
+                                </div>
+                            </form>
+
+                            @if (carImages.Any())
+                            {
+                                <div class="row g-2 mt-2">
+                                    @foreach (var image in carImages)
+                                    {
+                                        <div class="col-4">
+                                            <img src="@WEB.Controllers.HotelAdminController.BuildRentalCarImageUrl(image.Name)" alt="" class="w-100 rounded-3" style="aspect-ratio: 4 / 3; object-fit: cover;" />
+                                        </div>
+                                    }
+                                </div>
+                            }
+
+                            <form asp-controller="HotelAdmin" asp-action="RemoveRentalCar" method="post" class="mt-3 d-flex justify-content-end">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="hotelId" value="@Model.Hotel.Id" />
+                                <input type="hidden" name="rentalCarId" value="@rentalCar.Id" />
+
+                                <button type="submit" class="btn btn-outline-danger">
+                                    <i class="fa-solid fa-trash me-1"></i> Remove
+                                </button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="tv-card p-4 mb-4">
             <h5 class="fw-bold text-white mb-3">Добави снимка</h5>
 
             <form asp-controller="HotelAdmin" asp-action="UploadHotelImage" method="post" enctype="multipart/form-data">

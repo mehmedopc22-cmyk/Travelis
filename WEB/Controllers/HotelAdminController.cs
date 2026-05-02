@@ -1,4 +1,5 @@
 using Domain.DTOs;
+using Domain.DTOs.RentalCar;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +38,25 @@ namespace WEB.Controllers
                 HttpContext,
                 cancellationToken: cancellationToken);
 
+            List<RentalCarEntity>? rentalCars = await Utils.CallApiAsync<List<RentalCarEntity>>(
+                $"{(_configuration["DefaultApiUrl"] ?? string.Empty).TrimEnd('/')}/hotel-admin/hotels/{hotelId}/rental-cars",
+                HttpMethod.Get,
+                HttpContext,
+                cancellationToken: cancellationToken);
+
+            Dictionary<Guid, List<ImageEntity>> rentalCarImages = [];
+
+            foreach (RentalCarEntity rentalCar in rentalCars ?? [])
+            {
+                List<ImageEntity>? imagesForRentalCar = await Utils.CallApiAsync<List<ImageEntity>>(
+                    $"{(_configuration["DefaultApiUrl"] ?? string.Empty).TrimEnd('/')}/hotel-admin/hotels/{hotelId}/rental-cars/{rentalCar.Id}/images",
+                    HttpMethod.Get,
+                    HttpContext,
+                    cancellationToken: cancellationToken);
+
+                rentalCarImages[rentalCar.Id] = imagesForRentalCar ?? [];
+            }
+
             if (hotel == null)
             {
                 return RedirectToAction(nameof(Index));
@@ -45,7 +65,9 @@ namespace WEB.Controllers
             return View(new HotelAdminManageViewModel
             {
                 Hotel = hotel,
-                Images = images ?? []
+                Images = images ?? [],
+                RentalCars = rentalCars ?? [],
+                RentalCarImages = rentalCarImages
             });
         }
 
@@ -62,6 +84,153 @@ namespace WEB.Controllers
 
             TempData["HotelAdminMessage"] = "Информацията за хотела беше обновена.";
             return RedirectToAction(nameof(Manage), new { hotelId = hotel.Id });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddRentalCar(Guid hotelId, RentalCarCreationDTO rentalCar, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrWhiteSpace(rentalCar.Brand) || string.IsNullOrWhiteSpace(rentalCar.Model))
+            {
+                TempData["HotelAdminError"] = "Brand and model are required.";
+                return RedirectToAction(nameof(Manage), new { hotelId });
+            }
+
+            if (rentalCar.Kilometers < 0)
+            {
+                TempData["HotelAdminError"] = "Kilometers cannot be negative.";
+                return RedirectToAction(nameof(Manage), new { hotelId });
+            }
+
+            try
+            {
+                await Utils.CallApiAsync<RentalCarEntity>(
+                    $"{(_configuration["DefaultApiUrl"] ?? string.Empty).TrimEnd('/')}/hotel-admin/hotels/{hotelId}/rental-cars",
+                    HttpMethod.Post,
+                    HttpContext,
+                    new RentalCarCreationDTO
+                    {
+                        Brand = rentalCar.Brand.Trim(),
+                        Model = rentalCar.Model.Trim(),
+                        Kilometers = rentalCar.Kilometers
+                    },
+                    cancellationToken: cancellationToken);
+
+                TempData["HotelAdminMessage"] = "Rental car was added to the hotel.";
+            }
+            catch (Exception ex)
+            {
+                TempData["HotelAdminError"] = ex.Message;
+            }
+
+            return RedirectToAction(nameof(Manage), new { hotelId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateRentalCar(Guid hotelId, Guid rentalCarId, RentalCarCreationDTO rentalCar, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrWhiteSpace(rentalCar.Brand) || string.IsNullOrWhiteSpace(rentalCar.Model))
+            {
+                TempData["HotelAdminError"] = "Brand and model are required.";
+                return RedirectToAction(nameof(Manage), new { hotelId });
+            }
+
+            if (rentalCar.Kilometers < 0)
+            {
+                TempData["HotelAdminError"] = "Kilometers cannot be negative.";
+                return RedirectToAction(nameof(Manage), new { hotelId });
+            }
+
+            try
+            {
+                await Utils.CallApiAsync<RentalCarEntity>(
+                    $"{(_configuration["DefaultApiUrl"] ?? string.Empty).TrimEnd('/')}/hotel-admin/hotels/{hotelId}/rental-cars/{rentalCarId}",
+                    HttpMethod.Put,
+                    HttpContext,
+                    new RentalCarCreationDTO
+                    {
+                        Brand = rentalCar.Brand.Trim(),
+                        Model = rentalCar.Model.Trim(),
+                        Kilometers = rentalCar.Kilometers
+                    },
+                    cancellationToken: cancellationToken);
+
+                TempData["HotelAdminMessage"] = "Rental car was updated.";
+            }
+            catch (Exception ex)
+            {
+                TempData["HotelAdminError"] = ex.Message;
+            }
+
+            return RedirectToAction(nameof(Manage), new { hotelId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveRentalCar(Guid hotelId, Guid rentalCarId, CancellationToken cancellationToken)
+        {
+            try
+            {
+                await Utils.CallApiAsync<object>(
+                    $"{(_configuration["DefaultApiUrl"] ?? string.Empty).TrimEnd('/')}/hotel-admin/hotels/{hotelId}/rental-cars/{rentalCarId}",
+                    HttpMethod.Delete,
+                    HttpContext,
+                    cancellationToken: cancellationToken);
+
+                TempData["HotelAdminMessage"] = "Rental car was removed from the hotel.";
+            }
+            catch (Exception ex)
+            {
+                TempData["HotelAdminError"] = ex.Message;
+            }
+
+            return RedirectToAction(nameof(Manage), new { hotelId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UploadRentalCarImage(Guid hotelId, Guid rentalCarId, List<IFormFile>? rentalCarImages, CancellationToken cancellationToken)
+        {
+            List<IFormFile> selectedImages = (rentalCarImages ?? [])
+                .Where(image => image.Length > 0)
+                .ToList();
+
+            if (selectedImages.Count == 0)
+            {
+                TempData["HotelAdminError"] = "Choose a rental car image.";
+                return RedirectToAction(nameof(Manage), new { hotelId });
+            }
+
+            try
+            {
+                List<string> imageNames = [];
+
+                foreach (IFormFile rentalCarImage in selectedImages)
+                {
+                    imageNames.Add(await SaveUploadedImageAsync(rentalCarImage, "rental-cars", cancellationToken));
+                }
+
+                await Utils.CallApiAsync<List<ImageEntity>>(
+                    $"{(_configuration["DefaultApiUrl"] ?? string.Empty).TrimEnd('/')}/hotel-admin/hotels/{hotelId}/rental-cars/{rentalCarId}/images/batch",
+                    HttpMethod.Post,
+                    HttpContext,
+                    new ImageUploadBatchRequestDTO
+                    {
+                        ImageNames = imageNames
+                    },
+                    cancellationToken: cancellationToken);
+
+                TempData["HotelAdminMessage"] = selectedImages.Count == 1
+                    ? "Rental car image was added."
+                    : $"{selectedImages.Count} rental car images were added.";
+            }
+            catch (Exception ex)
+            {
+                TempData["HotelAdminError"] = ex.Message;
+            }
+
+            return RedirectToAction(nameof(Manage), new { hotelId });
         }
 
         [HttpPost]
@@ -147,6 +316,21 @@ namespace WEB.Controllers
             }
 
             return "/" + Path.Combine("uploads", "hotels", imageName).Replace("\\", "/");
+        }
+
+        public static string BuildRentalCarImageUrl(string? imageName)
+        {
+            if (string.IsNullOrWhiteSpace(imageName))
+            {
+                return string.Empty;
+            }
+
+            if (imageName.StartsWith("/", StringComparison.Ordinal) || imageName.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+            {
+                return imageName;
+            }
+
+            return "/" + Path.Combine("uploads", "rental-cars", imageName).Replace("\\", "/");
         }
     }
 }

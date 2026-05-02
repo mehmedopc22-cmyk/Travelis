@@ -78,6 +78,14 @@
                                 </a>
                             </div>
                         }
+                        @if (User.Identity?.IsAuthenticated == true && (User.IsInRole("HotelAdmin") || User.IsInRole("Administrator") || User.IsInRole("GlobalAdmin")))
+                        {
+                            <div class="d-flex align-items-center gap-2 mb-2 mb-lg-0 flex-nowrap">
+                                <a class="tv-btn-login" asp-action="Index" asp-controller="Admin">
+                                    <i class="fa-solid fa-users-gear"></i> Админ панел
+                                </a>
+                            </div>
+                        }
                         </div>
                 </div>
             </div>

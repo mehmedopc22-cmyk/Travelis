@@ -28,6 +28,7 @@ namespace API
             builder.Services.AddTransient<IImageDAO, ImageDAO>();
             builder.Services.AddTransient<IHotelReservationDAO, HotelReservationDAO>();
             builder.Services.AddScoped<IRoleDAO, RoleDAO>();
+            builder.Services.AddTransient<IRentalCarDAO, RentalCarDAO>();
             builder.Services.AddTransient<IRentalCarReservationDAO, RentalCarReservationDAO>();
             builder.Services.AddTransient<IHotelRoomDAO, HotelRoomDAO>();
             builder.Services.AddTransient<ITaxiReservationDAO, TaxiReservationDAO>();

@@ -74,6 +74,22 @@ namespace DAL.DAOs
             }
         }
 
+        public IEnumerable<ImageEntity> SelectByRentalCarId(Guid rentalCarId)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+                return sqlConnection.Query<ImageEntity>(
+                    SQLQueries.Images_SelectByRentalCarId,
+                    new { RentalCarId = rentalCarId });
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<ImageEntity>();
+            }
+        }
+
         public bool LinkUserImage(Guid userId, Guid imageId)
         {
             using SqlConnection sqlConnection = _databaseFactory.GetConnection();
@@ -109,6 +125,29 @@ namespace DAL.DAOs
                     {
                         Id = Guid.NewGuid(),
                         HotelId = hotelId,
+                        ImageId = imageId
+                    });
+
+                return rows > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool LinkRentalCarImage(Guid rentalCarId, Guid imageId)
+        {
+            using SqlConnection sqlConnection = _databaseFactory.GetConnection();
+
+            try
+            {
+                int rows = sqlConnection.Execute(
+                    SQLQueries.RentalCarImages_Link,
+                    new
+                    {
+                        Id = Guid.NewGuid(),
+                        RentalCarId = rentalCarId,
                         ImageId = imageId
                     });
 

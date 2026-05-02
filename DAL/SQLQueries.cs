@@ -105,6 +105,7 @@ namespace DAL
         public static string Images_Insert => QueryFile.Load(nameof(Images_Insert));
         public static string Images_SelectByHotelId => QueryFile.Load(nameof(Images_SelectByHotelId));
         public static string Images_SelectById => QueryFile.Load(nameof(Images_SelectById));
+        public static string Images_SelectByRentalCarId => QueryFile.Load(nameof(Images_SelectByRentalCarId));
         public static string Images_SelectByUserId => QueryFile.Load(nameof(Images_SelectByUserId));
         public static string Ratings_Delete => QueryFile.Load(nameof(Ratings_Delete));
         public static string Ratings_Insert => QueryFile.Load(nameof(Ratings_Insert));
@@ -118,9 +119,11 @@ namespace DAL
         public static string RentalCarReservations_SelectByUserId => QueryFile.Load(nameof(RentalCarReservations_SelectByUserId));
         public static string RentalCarReservations_Update => QueryFile.Load(nameof(RentalCarReservations_Update));
         public static string RentalCarReservations_UpdateDynamic => QueryFile.Load(nameof(RentalCarReservations_UpdateDynamic));
+        public static string RentalCarImages_Link => QueryFile.Load(nameof(RentalCarImages_Link));
         public static string RentalCars_Delete => QueryFile.Load(nameof(RentalCars_Delete));
         public static string RentalCars_Insert => QueryFile.Load(nameof(RentalCars_Insert));
         public static string RentalCars_SelectAll => QueryFile.Load(nameof(RentalCars_SelectAll));
+        public static string RentalCars_SelectByHotelId => QueryFile.Load(nameof(RentalCars_SelectByHotelId));
         public static string RentalCars_SelectById => QueryFile.Load(nameof(RentalCars_SelectById));
         public static string RentalCars_Update => QueryFile.Load(nameof(RentalCars_Update));
         public static string Roles_SelectAll => QueryFile.Load(nameof(Roles_SelectAll));

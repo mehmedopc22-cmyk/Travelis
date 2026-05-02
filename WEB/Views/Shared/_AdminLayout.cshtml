@@ -43,9 +43,12 @@
                     Роли & Групи
                 </a>
 
-                <a asp-controller="AdminHotel" asp-action="Pending" class="tv-nav-link">
-                    <i class="fa-solid fa-hotel"></i> Хотели
-                </a>
+                @if (User.IsInRole("GlobalAdmin") || User.IsInRole("Administrator"))
+                {
+                    <a asp-controller="AdminHotel" asp-action="Pending" class="tv-nav-link">
+                        <i class="fa-solid fa-hotel"></i> Хотели
+                    </a>
+                }
 
                 @if (User.IsInRole("GlobalAdmin"))
                 {
