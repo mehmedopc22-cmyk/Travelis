@@ -1,6 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Коли под наем – Travelis";
 }
+@{
+    string loc = ViewBag.SelectedLocation as string ?? "София";
+    string airport = "SOF";
+    if (loc.Contains("Варна")) airport = "VAR";
+    if (loc.Contains("Бургас")) airport = "BOJ";
+    if (loc.Contains("Банско")) airport = "4x4"; // Примерно
+}
 
 <main class="tv-main-hotels">
     <div class="container">
@@ -10,7 +17,8 @@
                 <div class="tv-hotels-hero-inner row align-items-center g-4">
                     <div class="col-lg-7">
                         <span class="tv-hotels-hero-badge mb-2">
-                            <i class="fa-solid fa-location-arrow"></i> София (SOF) · 12-15 Дек
+                            <i class="fa-solid fa-location-arrow me-1"></i>
+                            @ViewBag.SelectedLocation · @ViewBag.DateRange
                         </span>
                         <h1 class="tv-hotels-hero-title mb-2">Коли под наем</h1>
                         <p class="tv-hotels-hero-sub mb-0">19 автомобила налични за твоите дати.</p>
@@ -26,16 +34,12 @@
             </div>
         </section>
         <!-- MAIN LAYOUT -->
-        <div class="row g-4 g-xl-5 align-items-start">
+        <div class="row g-4">
             <!-- LEFT: FILTERS SIDEBAR -->
             <aside class="col-12 col-xl-4 col-xxl-3">
                 <!-- Mobile Trigger -->
-                <div class="d-flex d-xl-none justify-content-between align-items-center mb-3">
-                    <button class="tv-mobile-filter-btn" data-bs-target="#tvFiltersOffcanvas" data-bs-toggle="offcanvas" type="button">
-                        <i class="fa-solid fa-sliders"></i> Филтри
-                    </button>
-                    <span class="tv-results-count small">19 автомобила</span>
-                </div>
+           
+
                 <!-- Desktop Panel -->
                 <div class="d-none d-xl-block tv-filter-shell sticky-xl-top" style="top: 100px;">
                     <div class="tv-filter-panel">
@@ -44,40 +48,44 @@
                                 <div class="tv-filter-title-main">Филтри</div>
                                 <div class="tv-filter-sub">Клас, гориво и екстри.</div>
                             </div>
-                            <a asp-controller="Cars" asp-action="Grid" class="btn btn-link p-0 tv-filter-sub text-decoration-none small">
+                            <a href="javascript:void(0);" id="resetFilters" class="btn btn-link p-0 tv-filter-sub text-decoration-none small">
                                 Изчисти
                             </a>
                         </div>
                         <!-- Class -->
                         <div class="tv-filter-section">
                             <div class="tv-filter-label">Клас автомобил</div>
+   
                             <label class="tv-check-custom">
-                                <input checked="" class="tv-check-input" type="checkbox" />
-                                <div class="tv-check-label-inner d-flex align-items-center gap-2">
+                                <input class="tv-check-input" type="checkbox" value="hatchback" />
+                                <span class="tv-check-label-inner d-flex align-items-center gap-2">
                                     <span class="tv-check-box"><i class="fa-solid fa-check text-dark" style="font-size: 0.7rem;"></i></span>
-                                    <span class="tv-check-text">Икономичен (4)</span>
-                                </div>
+                                    <span class="tv-check-text">Хечбек</span>
+                                </span>
                             </label>
+
                             <label class="tv-check-custom">
-                                <input class="tv-check-input" type="checkbox" />
-                                <div class="tv-check-label-inner d-flex align-items-center gap-2">
+                                <input class="tv-check-input" type="checkbox" value="sedan" />
+                                <span class="tv-check-label-inner d-flex align-items-center gap-2">
                                     <span class="tv-check-box"><i class="fa-solid fa-check text-dark" style="font-size: 0.7rem;"></i></span>
-                                    <span class="tv-check-text">Седан / Среден (8)</span>
-                                </div>
+                                    <span class="tv-check-text">Седан</span>
+                                </span>
                             </label>
+
                             <label class="tv-check-custom">
-                                <input class="tv-check-input" type="checkbox" />
-                                <div class="tv-check-label-inner d-flex align-items-center gap-2">
+                                <input class="tv-check-input" type="checkbox" value="suv" />
+                                <span class="tv-check-label-inner d-flex align-items-center gap-2">
                                     <span class="tv-check-box"><i class="fa-solid fa-check text-dark" style="font-size: 0.7rem;"></i></span>
-                                    <span class="tv-check-text">SUV / Джип (5)</span>
-                                </div>
+                                    <span class="tv-check-text">SUV </span>
+                                </span>
                             </label>
+
                             <label class="tv-check-custom">
-                                <input class="tv-check-input" type="checkbox" />
-                                <div class="tv-check-label-inner d-flex align-items-center gap-2">
+                                <input class="tv-check-input" type="checkbox" value="van" />
+                                <span class="tv-check-label-inner d-flex align-items-center gap-2">
                                     <span class="tv-check-box"><i class="fa-solid fa-check text-dark" style="font-size: 0.7rem;"></i></span>
-                                    <span class="tv-check-text">Лукс / Премиум (2)</span>
-                                </div>
+                                    <span class="tv-check-text">Ван</span>
+                                </span>
                             </label>
                         </div>
                         <!-- Price -->
@@ -94,28 +102,30 @@
                                 <i class="fa-solid fa-gear me-1"></i> Автоматик
                             </button>
                             <button type="button" class="tv-chip-toggle spec-chip">
+                                <i class="fa-solid fa-hand-pointer me-1"></i> Ръчна
+                            </button>
+
+                            <button type="button" class="tv-chip-toggle spec-chip">
                                 <i class="fa-solid fa-snowflake me-1"></i> Климатик
                             </button>
+
                             <button type="button" class="tv-chip-toggle spec-chip">
                                 <i class="fa-solid fa-gas-pump me-1"></i> Дизел
                             </button>
                             <button type="button" class="tv-chip-toggle spec-chip">
-                                <i class="fa-solid fa-leaf me-1"></i> Хибрид
+                                <i class="fa-solid fa-leaf me-1"></i> Хибрид / Електрически
                             </button>
-                            <button type="button" class="tv-chip-toggle spec-chip">
-                                <i class="fa-solid fa-bolt me-1"></i> Електрически
-                            </button>
-                        </div>
+                            
                         </div>
                         <!-- Seats -->
-                        <div class="tv-filter-section">
-                            <div class="tv-filter-label">Брой места</div>
-                            <div class="d-flex gap-2">
-                                <button type="button" class="tv-filter-pill seat-chip">2+</button>
-                                <button type="button" class="tv-filter-pill seat-chip tv-chip-active">4-5</button>
-                                <button type="button" class="tv-filter-pill seat-chip">7+</button>
-                            </div>
+                    <div class="tv-filter-section mt-3">
+                        <div class="tv-filter-label mb-2">БРОЙ МЕСТА</div>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="tv-chip-toggle seat-chip">2+</button>
+                            <button type="button" class="tv-chip-toggle seat-chip">4-5</button>
+                            <button type="button" class="tv-chip-toggle seat-chip">7+</button>
                         </div>
+                    </div>
                         <!-- Actions -->
                         <div class="tv-filter-section pt-3">
                             <button class="tv-btn-primary w-100 py-2">Приложи филтри</button>
@@ -135,30 +145,45 @@
                         </div>
                     </div>
                 </div>
-            </aside>
+
+        </aside>
+    
             <!-- RIGHT: GRID -->
             <div class="col-12 col-xl-8 col-xxl-9">
-                <!-- Toolbar -->
-                <div class="tv-grid-toolbar">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="tv-view-switcher">
-                            <a class="tv-view-btn" asp-controller="Cars" asp-action="Grid"><i class="fa-solid fa-list"></i></a>
-                            <button class="tv-view-btn active"><i class="fa-solid fa-border-all"></i></button>
-                        </div>
-                        <span class="text-white-50 small">Показани 1-6 от 19</span>
+                <!--Tollbar-->
+            <div class="tv-grid-toolbar">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="tv-view-switcher">
+                        <button type="button" id="btnList" class="tv-view-btn">
+                            <i class="fa-solid fa-list"></i>
+                        </button>
+            
+                        <button type="button" id="btnGrid" class="tv-view-btn active">
+                            <i class="fa-solid fa-border-all"></i>
+                        </button>
                     </div>
-                    <div class="d-flex align-items-center gap-2">
-                        <label class="text-white-50 small me-1">Сортирай:</label>
-                        <select class="form-select form-select-sm bg-dark text-white border-secondary" style="width: auto; border-radius: 20px;">
-                            <option>Препоръчани</option>
-                            <option>Цена (Ниска)</option>
-                            <option>Рейтинг</option>
-                        </select>
-                    </div>
+                    <span class="text-white-50 small">Показани 1-6 от 19</span>
                 </div>
-                <div class="row g-4">
-                    <!-- Card 1: Economy -->
-                    <div class="col-md-6 col-xl-4">
+
+                <div class="d-flex align-items-center gap-2">
+                    <label class="text-white-50 small me-1">Сортирай:</label>
+                    <select id="sortOrder" class="form-select form-select-sm bg-dark text-white border-secondary" style="width: auto; border-radius: 20px;">
+                        <option value="default">Препоръчани</option>
+                        <option value="price-low">Цена (Ниска)</option>
+                        <option value="price-high">Цена (Висока)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="carsContainer" class="row g-4">
+                    <!-- Card 1: Hatchback -->
+                    
+                    <div class="col-md-6 col-xl-4 car-item"
+                         data-price="35"
+                         data-class="hatchback"
+                         data-fuel="gasoline"
+                         data-transmission="manual"
+                         data-seats="4">
                         <article class="tv-hotel-grid-card">
                             <div class="tv-hotel-grid-media">
                                 <img alt="Toyota Yaris" class="tv-hotel-grid-img" src="https://scene7.toyota.eu/is/image/toyotaeurope/YAR0003_24_WEB:Large-Landscape?ts=1722500144555&amp;resMode=sharp2&amp;op_usm=1.75,0.3,2,0&amp;fmt=png-alpha" />
@@ -181,33 +206,42 @@
                                     <span class="tv-spec-item"><i class="fa-solid fa-gas-pump"></i> Бензин</span>
                                 </div>
                                 <p class="small text-white-50 mb-0 flex-grow-1">
-                                    Компактен и икономичен, идеален за
-                                    града.
+                                    Хечбек - компактен и практичен, идеален за града.
                                 </p>
                                 <div class="tv-hotel-grid-footer">
                                     <div>
                                         <span class="tv-grid-price-label">Цена за ден</span>
                                         <span class="tv-grid-price-val">€35</span>
                                     </div>
-                                    <a class="tv-btn-grid-action" asp-controller="Cars" asp-action="Details">Виж <i class="fa-solid fa-arrow-right"></i></a>
+                                    <a class="tv-btn-grid-action"
+                                           asp-controller="Cars"
+                                           asp-action="Details"
+                                           asp-route-location="@Context.Request.Query["location"]"
+                                           asp-route-startDate="@Context.Request.Query["startDate"]"
+                                           asp-route-endDate="@Context.Request.Query["endDate"]"
+                                           asp-route-driverAge="@Context.Request.Query["driverAge"]"
+                                           asp-route-residence="@Context.Request.Query["residence"]">
+                                        Виж <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </article>
                     </div>
-                    <!-- Card 2: Sedan -->
-                    <div class="col-md-6 col-xl-4">
+                    <!-- Card 2: Toyota Camry -->
+                    
+                    <div class="col-md-6 col-xl-4 car-item"
+                         data-price="70"
+                         data-recommended="1"
+                         data-class="sedan"
+                         data-fuel="hybrid-electric"
+                         data-transmission="automatic"
+                         data-seats="5">
                         <article class="tv-hotel-grid-card">
                             <div class="tv-hotel-grid-media">
                                 <img alt="Toyota Camry" class="tv-hotel-grid-img" src="https://di-uploads-pod7.dealerinspire.com/toyotachulavista/uploads/2023/09/2024-Toyota-Camry-Hybrid.png" />
-                                <span class="tv-grid-badge-top" style="background: linear-gradient(135deg, #0ea5e9, #2563eb);">
-                                    Travelis
-                                    Choice
-                                </span>
+                                <span class="tv-grid-badge-top" style="background: linear-gradient(135deg, #0ea5e9, #2563eb);">Travelis Choice</span>
                                 <button class="tv-grid-fav-btn"><i class="fa-regular fa-heart"></i></button>
-                                <div class="tv-grid-location-badge">
-                                    <i class="fa-solid fa-bolt text-warning"></i>
-                                    Instant
-                                </div>
+                                <div class="tv-grid-location-badge"><i class="fa-solid fa-bolt text-warning"></i> Instant</div>
                             </div>
                             <div class="tv-hotel-grid-body">
                                 <div class="tv-hotel-grid-header">
@@ -217,25 +251,38 @@
                                 <div class="tv-grid-amenities">
                                     <span class="tv-spec-item"><i class="fa-solid fa-user"></i> 5</span>
                                     <span class="tv-spec-item"><i class="fa-solid fa-suitcase"></i> 2</span>
-                                    <span class="tv-spec-item"><i class="fa-solid fa-gear"></i> Авто</span>
+                 
+                                    <span class="tv-spec-item"><i class="fa-solid fa-gear"></i> Автоматик</span>
                                     <span class="tv-spec-item"><i class="fa-solid fa-leaf"></i> Хибрид</span>
                                 </div>
-                                <p class="small text-white-50 mb-0 flex-grow-1">
-                                    Комфортен бизнес седан с нисък
-                                    разход.
-                                </p>
+                                <p class="small text-white-50 mb-0 flex-grow-1">Бизнес седан - комфортен и икономичен.</p>
                                 <div class="tv-hotel-grid-footer">
                                     <div>
                                         <span class="tv-grid-price-label">Цена за ден</span>
                                         <span class="tv-grid-price-val text-info">€70</span>
                                     </div>
-                                    <a class="tv-btn-grid-action" asp-controller="Cars" asp-action="Details">Виж <i class="fa-solid fa-arrow-right"></i></a>
+                                    <a class="tv-btn-grid-action"
+                                           asp-controller="Cars"
+                                           asp-action="Details"
+                                           asp-route-location="@Context.Request.Query["location"]"
+                                           asp-route-startDate="@Context.Request.Query["startDate"]"
+                                           asp-route-endDate="@Context.Request.Query["endDate"]"
+                                           asp-route-driverAge="@Context.Request.Query["driverAge"]"
+                                           asp-route-residence="@Context.Request.Query["residence"]">
+                                        Виж <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </article>
                     </div>
-                    <!-- Card 3: SUV -->
-                    <div class="col-md-6 col-xl-4">
+                    <!-- Card 3: VW Tiguan -->
+                    
+                    <div class="col-md-6 col-xl-4 car-item"
+                         data-price="85"
+                         data-class="suv"
+                         data-fuel="diesel"
+                         data-transmission="automatic"
+                         data-seats="5">
                         <article class="tv-hotel-grid-card">
                             <div class="tv-hotel-grid-media">
                                 <img alt="VW Tiguan" class="tv-hotel-grid-img" src="https://7cars.bg/wp-content/uploads/2024/05/1-18.jpg" />
@@ -250,24 +297,37 @@
                                 <div class="tv-grid-amenities">
                                     <span class="tv-spec-item"><i class="fa-solid fa-user"></i> 5</span>
                                     <span class="tv-spec-item"><i class="fa-solid fa-suitcase"></i> 3</span>
-                                    <span class="tv-spec-item"><i class="fa-solid fa-gear"></i> Авто</span>
+                                    <span class="tv-spec-item"><i class="fa-solid fa-gear"></i> Автоматик</span>
                                     <span class="tv-spec-item"><i class="fa-solid fa-gas-pump"></i> Дизел</span>
                                 </div>
-                                <p class="small text-white-50 mb-0 flex-grow-1">
-                                    Просторен SUV, подходящ за планина.
-                                </p>
+                                <p class="small text-white-50 mb-0 flex-grow-1">SUV - просторен и сигурен, подходящ за планина.</p>
                                 <div class="tv-hotel-grid-footer">
                                     <div>
                                         <span class="tv-grid-price-label">Цена за ден</span>
                                         <span class="tv-grid-price-val">€85</span>
                                     </div>
-                                    <a class="tv-btn-grid-action" asp-controller="Cars" asp-action="Details">Виж <i class="fa-solid fa-arrow-right"></i></a>
+                                    <a class="tv-btn-grid-action"
+                                           asp-controller="Cars"
+                                           asp-action="Details"
+                                           asp-route-location="@Context.Request.Query["location"]"
+                                           asp-route-startDate="@Context.Request.Query["startDate"]"
+                                           asp-route-endDate="@Context.Request.Query["endDate"]"
+                                           asp-route-driverAge="@Context.Request.Query["driverAge"]"
+                                           asp-route-residence="@Context.Request.Query["residence"]">
+                                        Виж <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </article>
                     </div>
-                    <!-- Card 4: Van -->
-                    <div class="col-md-6 col-xl-4">
+                    <!-- Card 4: Mercedes V-Class-->
+                   
+                    <div class="col-md-6 col-xl-4 car-item"
+                         data-price="150"
+                         data-class="van"
+                         data-fuel="diesel"
+                         data-transmission="automatic"
+                         data-seats="7">
                         <article class="tv-hotel-grid-card">
                             <div class="tv-hotel-grid-media">
                                 <img alt="Mercedes V-Class" class="tv-hotel-grid-img" src="https://www.novakola.bg/wp-content/uploads/2024/05/1032931705584485dsc02773-1050x700-768x512.jpg" />
@@ -282,25 +342,37 @@
                                 <div class="tv-grid-amenities">
                                     <span class="tv-spec-item"><i class="fa-solid fa-user"></i> 7</span>
                                     <span class="tv-spec-item"><i class="fa-solid fa-suitcase"></i> 5</span>
-                                    <span class="tv-spec-item"><i class="fa-solid fa-gear"></i> Авто</span>
+                                    <span class="tv-spec-item"><i class="fa-solid fa-gear"></i> Автоматик</span>
                                     <span class="tv-spec-item"><i class="fa-solid fa-wifi"></i> WiFi</span>
                                 </div>
-                                <p class="small text-white-50 mb-0 flex-grow-1">
-                                    Луксозен ван за групи и VIP
-                                    трансфери.
-                                </p>
+                                <p class="small text-white-50 mb-0 flex-grow-1">Ван - луксозен избор за групи и VIP трансфери.</p>
                                 <div class="tv-hotel-grid-footer">
                                     <div>
                                         <span class="tv-grid-price-label">Цена за ден</span>
                                         <span class="tv-grid-price-val">€150</span>
                                     </div>
-                                    <a class="tv-btn-grid-action" asp-controller="Cars" asp-action="Details">Виж <i class="fa-solid fa-arrow-right"></i></a>
+                                    <a class="tv-btn-grid-action"
+                                           asp-controller="Cars"
+                                           asp-action="Details"
+                                           asp-route-location="@Context.Request.Query["location"]"
+                                           asp-route-startDate="@Context.Request.Query["startDate"]"
+                                           asp-route-endDate="@Context.Request.Query["endDate"]"
+                                           asp-route-driverAge="@Context.Request.Query["driverAge"]"
+                                           asp-route-residence="@Context.Request.Query["residence"]">
+                                        Виж <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </article>
                     </div>
-                    <!-- Card 5: Electric -->
-                    <div class="col-md-6 col-xl-4">
+                    <!-- Card 5: Tesla -->
+                    
+                    <div class="col-md-6 col-xl-4 car-item"
+                         data-price="110"
+                         data-class="sedan"
+                         data-fuel="hybrid-electric"
+                         data-transmission="automatic"
+                         data-seats="5">
                         <article class="tv-hotel-grid-card">
                             <div class="tv-hotel-grid-media">
                                 <img alt="Tesla Model 3" class="tv-hotel-grid-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/2019_Tesla_Model_3_Performance_AWD_Front.jpg/1200px-2019_Tesla_Model_3_Performance_AWD_Front.jpg" />
@@ -315,24 +387,36 @@
                                 <div class="tv-grid-amenities">
                                     <span class="tv-spec-item"><i class="fa-solid fa-user"></i> 5</span>
                                     <span class="tv-spec-item"><i class="fa-solid fa-suitcase"></i> 2</span>
-                                    <span class="tv-spec-item"><i class="fa-solid fa-gear"></i> Авто</span>
-                                    <span class="tv-spec-item"><i class="fa-solid fa-bolt"></i> Ел.</span>
+                                    <span class="tv-spec-item"><i class="fa-solid fa-gear"></i> Автоматик</span>
+                                    <span class="tv-spec-item"><i class="fa-solid fa-bolt"></i> Електрическа</span>
                                 </div>
-                                <p class="small text-white-50 mb-0 flex-grow-1">
-                                    Модерно, тихо и екологично пътуване.
-                                </p>
+                                <p class="small text-white-50 mb-0 flex-grow-1">Седан - модерно, тихо и екологично пътуване.</p>
                                 <div class="tv-hotel-grid-footer">
                                     <div>
                                         <span class="tv-grid-price-label">Цена за ден</span>
                                         <span class="tv-grid-price-val">€110</span>
                                     </div>
-                                    <a class="tv-btn-grid-action" asp-controller="Cars" asp-action="Details">Виж <i class="fa-solid fa-arrow-right"></i></a>
+                                    <a class="tv-btn-grid-action"
+                                           asp-controller="Cars"
+                                           asp-action="Details"
+                                           asp-route-location="@Context.Request.Query["location"]"
+                                           asp-route-startDate="@Context.Request.Query["startDate"]"
+                                           asp-route-endDate="@Context.Request.Query["endDate"]"
+                                           asp-route-driverAge="@Context.Request.Query["driverAge"]"
+                                           asp-route-residence="@Context.Request.Query["residence"]">
+                                        Виж <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </article>
                     </div>
                     <!-- Card 6: Convertible -->
-                    <div class="col-md-6 col-xl-4">
+                    <div class="col-md-6 col-xl-4 car-item"
+                         data-price="130"
+                         data-class="sedan"
+                         data-fuel="gasoline"
+                         data-transmission="automatic"
+                         data-seats="4">
                         <article class="tv-hotel-grid-card">
                             <div class="tv-hotel-grid-media">
                                 <img alt="Convertible" class="tv-hotel-grid-img" src="https://www.topgear.com/sites/default/files/images/news-article/2020/09/773a5387e619ab48f7b768bcbed99f32/p90400385_highres.jpg" />
@@ -347,63 +431,292 @@
                                 <div class="tv-grid-amenities">
                                     <span class="tv-spec-item"><i class="fa-solid fa-user"></i> 4</span>
                                     <span class="tv-spec-item"><i class="fa-solid fa-suitcase"></i> 1</span>
-                                    <span class="tv-spec-item"><i class="fa-solid fa-gear"></i> Авто</span>
+                                    <span class="tv-spec-item"><i class="fa-solid fa-gear"></i> Автоматик</span>
                                     <span class="tv-spec-item"><i class="fa-solid fa-wind"></i> Cabrio</span>
                                 </div>
-                                <p class="small text-white-50 mb-0 flex-grow-1">Наслади се на слънцето и пътя.</p>
+                                <p class="small text-white-50 mb-0 flex-grow-1">Седан / Кабрио - наслади се на слънцето и пътя.</p>
                                 <div class="tv-hotel-grid-footer">
                                     <div>
                                         <span class="tv-grid-price-label">Цена за ден</span>
                                         <span class="tv-grid-price-val">€130</span>
                                     </div>
-                                    <a class="tv-btn-grid-action" asp-controller="Cars" asp-action="Details">Виж <i class="fa-solid fa-arrow-right"></i></a>
+                                    <a class="tv-btn-grid-action"
+                                           asp-controller="Cars"
+                                           asp-action="Details"
+                                           asp-route-location="@Context.Request.Query["location"]"
+                                           asp-route-startDate="@Context.Request.Query["startDate"]"
+                                           asp-route-endDate="@Context.Request.Query["endDate"]"
+                                           asp-route-driverAge="@Context.Request.Query["driverAge"]"
+                                           asp-route-residence="@Context.Request.Query["residence"]">
+                                        Виж <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </article>
                     </div>
-                </div>
-                <!-- PAGINATION -->
-                <nav aria-label="Пагинация" class="tv-pagination">
-                    <a aria-label="Предишна" class="tv-page-link" asp-controller="Cars" asp-action="Grid">
-                        <i class="fa-solid fa-angle-left"></i>
-                    </a>
-                    <a class="tv-page-link active" asp-controller="Cars" asp-action="Grid">1</a>
-                    <a class="tv-page-link" asp-controller="Cars" asp-action="Grid">2</a>
-                    <a class="tv-page-link" asp-controller="Cars" asp-action="Grid">3</a>
-                    <span class="tv-page-link disabled">…</span>
-                    <a aria-label="Следваща" class="tv-page-link" asp-controller="Cars" asp-action="Grid">
-                        <i class="fa-solid fa-angle-right"></i>
-                    </a>
-                </nav>
-            </div>
+             
+
+            
         </div>
-    </div>
+                <!-- PAGINATION -->
+                <div class="tv-pagination-wrapper mt-auto pt-5" id="pagination-container">
+                    <nav aria-label="Пагинация" class="tv-pagination d-flex justify-content-center">
+        
+                        @{
+                            // Превръщаме текущата страница в число (int), за да можем да смятаме с него
+                            var pageQuery = Context.Request.Query["page"].ToString();
+                            int currentPage = string.IsNullOrEmpty(pageQuery) ? 1 : int.Parse(pageQuery);
+            
+                            // Определяме предишна и следваща страница
+                            int prevPage = currentPage > 1 ? currentPage - 1 : 1;
+                            int nextPage = currentPage < 3 ? currentPage + 1 : 3; // Тук 3 е максималният брой страници
+                        }
 
-    @section Scripts {
-        <script>
-                $(document).ready(function () {
-                    // 1. ЛОГИКА ЗА ЦЕНАТА
-                    $('#priceRangeInput').on('input', function() {
-                        var currentValue = $(this).val();
-                        $('#priceRangeText').text('€20 - €' + currentValue);
-                    });
+                        <a class="tv-page-link @(currentPage == 1 ? "disabled" : "")"
+                               asp-controller="Cars" asp-action="Grid"
+                               asp-route-page="@prevPage"
+                               asp-route-location="@Context.Request.Query["location"]"
+                               asp-route-startDate="@Context.Request.Query["startDate"]"
+                               asp-route-endDate="@Context.Request.Query["endDate"]">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </a>
 
-                    // 2. ЛОГИКА ЗА БРОЙ МЕСТА (2+, 4-5, 7+)
-                    // Тук използваме клас .seat-chip (добави го в HTML-а на бутоните за места)
-                    $('.seat-chip').click(function () {
+                        <a class="tv-page-link @(currentPage == 1 ? "active" : "")"
+                           asp-controller="Cars" asp-action="Grid"
+                           asp-route-page="1"
+                           asp-route-location="@Context.Request.Query["location"]"
+                           asp-route-startDate="@Context.Request.Query["startDate"]"
+                           asp-route-endDate="@Context.Request.Query["endDate"]">1</a>
+
+                        <a class="tv-page-link @(currentPage == 2 ? "active" : "")"
+                           asp-controller="Cars" asp-action="Grid"
+                           asp-route-page="2"
+                           asp-route-location="@Context.Request.Query["location"]"
+                           asp-route-startDate="@Context.Request.Query["startDate"]"
+                           asp-route-endDate="@Context.Request.Query["endDate"]">2</a>
+
+                        <a class="tv-page-link @(currentPage == 3 ? "active" : "")"
+                           asp-controller="Cars" asp-action="Grid"
+                           asp-route-page="3"
+                           asp-route-location="@Context.Request.Query["location"]"
+                           asp-route-startDate="@Context.Request.Query["startDate"]"
+                           asp-route-endDate="@Context.Request.Query["endDate"]">3</a>
+
+                        <span class="tv-page-link disabled">...</span>
+
+                        <a class="tv-page-link @(currentPage == 3 ? "disabled" : "")"
+                               asp-controller="Cars" asp-action="Grid"
+                               asp-route-page="@nextPage"
+                               asp-route-location="@Context.Request.Query["location"]"
+                               asp-route-startDate="@Context.Request.Query["startDate"]"
+                               asp-route-endDate="@Context.Request.Query["endDate"]">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </a>
+                    </nav>
+                </div>
+               </div> </div> </div> 
+               @section Scripts {
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                        $(document).ready(function () {
+                        console.log("Системата е готова и изгледите са фиксирани!");
+                        $(document).on('click', '.car-item .btn-view, .car-item a:contains("Виж")', function (e) {
+                        e.preventDefault();
+    
+                        var carItem = $(this).closest('.car-item');
+                        var originalHref = $(this).attr('href'); // Вече съдържа локация и дати
+
+                        // Взимаме данните от атрибутите на колата
+                        var isAuto = carItem.attr('data-transmission') === 'automatic';
+                        var carClass = carItem.attr('data-class');
+                        var fuel = carItem.attr('data-fuel');
+                        var isHybrid = (fuel === 'hybrid' || fuel === 'hybrid-electric');
+
+                        // Сглобяваме линка правилно
+                        // Ако в оригиналния линк вече има '?', добавяме с '&', ако няма - с '?'
+                        var separator = originalHref.indexOf('?') !== -1 ? "&" : "?";
+    
+                        var finalUrl = originalHref + separator +
+                        "p_auto=" + isAuto +
+                        "&p_class=" + carClass +
+                        "&p_hybrid=" + isHybrid;
+
+                        console.log("Отивам на: " + finalUrl);
+                        window.location.href = finalUrl;
+                        });
+
+                        // --- ИНИЦИАЛИЗАЦИЯ (ОТ URL ПАРАМЕТРИ) ---
+                        $('.tv-check-input').prop('checked', false);
+                        $('.spec-chip, .seat-chip').removeClass('tv-chip-active');
+
+                        const urlParams = new URLSearchParams(window.location.search);
+
+                        if (urlParams.get('priorityHybrid') === 'true') {
+                        $('.spec-chip:contains("Хибрид")').addClass('tv-chip-active');
+                        }
+                        if (urlParams.get('priorityAuto') === 'true') {
+                        $('.spec-chip:contains("Автоматик")').addClass('tv-chip-active');
+                        }
+                        if (urlParams.get('prioritySeats') === 'true') {
+                        $('.seat-chip:contains("7+")').addClass('tv-chip-active');
+                        }
+
+                        applyFilters();
+                        $('#sortOrder').trigger('change');
+
+                        // --- СЪБИТИЯ (EVENTS) ---
+
+                        $(document).on('input', '#priceRangeInput', function() {
+                        var val = $(this).val();
+                        $('#priceRangeText').text('€20 - €' + val);
+                        applyFilters();
+                        });
+
+                        $(document).on('click', '.seat-chip', function () {
+                        if ($(this).hasClass('tv-chip-active')) {
+                        $(this).removeClass('tv-chip-active');
+                        } else {
                         $('.seat-chip').removeClass('tv-chip-active');
                         $(this).addClass('tv-chip-active');
-                    });
+                        }
+                        applyFilters();
+                        });
 
-                    // 3. ЛОГИКА ЗА СПЕЦИФИКАЦИИ (Автоматик, Дизел и т.н.)
-                    // Тук използваме клас .spec-chip (добави го в HTML-а на филтрите)
-                    $('.spec-chip').click(function () {
+                        $(document).on('click', '.spec-chip', function () {
                         $(this).toggleClass('tv-chip-active');
-                    });
-                                $('.spec-chip').click(function () {
-                $(this).toggleClass('tv-chip-active');
-            });
-                });
-        </script>
+                        applyFilters();
+                        });
+
+                        $(document).on('click', '#btnList', function() {
+                        $('#btnGrid').removeClass('active');
+                        $(this).addClass('active');
+                        $('#carsContainer').addClass('list-view');
+                        $('.car-item').attr('class', 'col-12 list-view-item car-item');
+                        });
+
+                        $(document).on('click', '#btnGrid', function() {
+                        $('#btnList').removeClass('active');
+                        $(this).addClass('active');
+                        $('#carsContainer').removeClass('list-view');
+                        $('.car-item').attr('class', 'col-md-6 col-xl-4 car-item');
+                        });
+
+                        $(document).on('change', '#sortOrder', function() {
+                        var selection = $(this).val();
+                        var items = $('.car-item').get();
+
+                        items.sort(function(a, b) {
+                        var priceA = parseFloat($(a).attr('data-price')) || 0;
+                        var priceB = parseFloat($(b).attr('data-price')) || 0;
+                        var recA = parseInt($(a).attr('data-recommended')) || 0;
+                        var recB = parseInt($(b).attr('data-recommended')) || 0;
+
+                        if (selection === 'price-low') return priceA - priceB;
+                        if (selection === 'price-high') return priceB - priceA;
+                        return recB - recA;
+                        });
+
+                        var container = $('#carsContainer');
+                        $.each(items, function(i, li) {
+                        container.append(li);
+                        });
+
+                        applyFilters();
+                        });
+
+                        function applyFilters() {
+                        var selectedClasses = [];
+                        $('.tv-check-input:checked').each(function() {
+                        selectedClasses.push($(this).val());
+                        });
+
+                        var selectedFuels = [];
+                        var selectedTransmissions = [];
+                        $('.spec-chip.tv-chip-active').each(function() {
+                        var text = $(this).text().toLowerCase().trim();
+                        if (text.includes('дизел')) selectedFuels.push('diesel');
+                        if (text.includes('хибрид') || text.includes('електри')) selectedFuels.push('hybrid-electric');
+                        if (text.includes('автоматик')) selectedTransmissions.push('automatic');
+                        if (text.includes('ръчна')) selectedTransmissions.push('manual');
+                        });
+
+                        var maxPrice = parseFloat($('#priceRangeInput').val());
+                        var seatsText = $('.seat-chip.tv-chip-active').text().trim();
+                        var visibleCount = 0;
+
+                        $('.car-item').each(function () {
+                        var item = $(this);
+                        var show = true;
+
+                        if (parseFloat(item.attr('data-price')) > maxPrice) show = false;
+                        if (selectedClasses.length > 0 && !selectedClasses.includes(item.attr('data-class'))) show = false;
+                        if (selectedFuels.length > 0 && !selectedFuels.includes(item.attr('data-fuel'))) show = false;
+                        if (selectedTransmissions.length > 0 && !selectedTransmissions.includes(item.attr('data-transmission'))) show = false;
+
+                        if (seatsText !== "") {
+                        var carSeats = parseInt(item.attr('data-seats'));
+                        if (seatsText.includes('4-5') && (carSeats < 4 || carSeats > 5)) show = false;
+                        if (seatsText.includes('7+') && carSeats < 7) show = false;
+                        if (seatsText.includes('2+') && carSeats < 2) show = false;
+                        }
+
+                        if (show) {
+                        item.removeClass('d-none');
+                        visibleCount++;
+                        } else {
+                        item.addClass('d-none');
+                        }
+                        });
+
+                        if (visibleCount > 0) $('#pagination-container').show();
+                        else $('#pagination-container').hide();
+                        }
+
+                        $(document).on('click', '.tv-btn-primary:contains("Приложи"), #applyFiltersBtn', function (e) {
+                        e.preventDefault();
+                        applyFilters();
+                        });
+
+                        $(document).on('click', '#resetFilters', function (e) {
+                        e.preventDefault();
+                        $('.tv-check-input').prop('checked', false);
+                        $('.spec-chip, .seat-chip').removeClass('tv-chip-active');
+                        var maxVal = $('#priceRangeInput').attr('max') || 500;
+                        $('#priceRangeInput').val(maxVal);
+                        $('#priceRangeText').text('€20 - €' + maxVal);
+                        applyFilters();
+                        });
+
+                        $(document).on('click', '.car-item .btn-view, .car-item a:contains("Виж")', function (e) {
+                        e.preventDefault();
+    
+                        var carItem = $(this).closest('.car-item');
+                        var originalHref = $(this).attr('href');
+    
+                        // Взимаме заглавието на колата (напр. "VW Tiguan")
+                        var carTitle = carItem.find('.tv-hotel-grid-title').text().toLowerCase();
+                        var carDescription = carItem.text().toLowerCase();
+    
+                        // Логика за Tiguan (SUV, Automatic)
+                        var isAuto = carDescription.includes("автоматик") || carTitle.includes("tiguan");
+                        var isSUV = carDescription.includes("suv") || carDescription.includes("джип") || carTitle.includes("tiguan");
+                        var isHybrid = carDescription.includes("хибрид");
+
+                        // Сглобяваме URL
+                        var url = new URL(window.location.origin + originalHref);
+                        url.searchParams.set('p_auto', isAuto);
+                        url.searchParams.set('p_class', isSUV ? 'suv' : 'sedan');
+                        url.searchParams.set('p_hybrid', isHybrid);
+
+                        window.location.href = url.toString();
+                        });
+                        });
+                      
+                    </script>
+    
+           
+        
     }
+    
+
 </main>

@@ -1,5 +1,11 @@
-﻿@{
+﻿@model WEB.Models.BookingViewModel
+@{
     ViewData["Title"] = "Резервация на кола под наем - Travelis";
+    
+    var selectedLocation = Context.Request.Query["location"].ToString();
+    var pAuto = Context.Request.Query["p_auto"].ToString();
+    var pClass = Context.Request.Query["p_class"].ToString();
+    var pHybrid = Context.Request.Query["p_hybrid"].ToString();
 }
 
 <main class="tv-main-hotels">
@@ -78,7 +84,7 @@
                                 <i class="fa-solid fa-plane-arrival me-1"></i> Идеално за полети
                             </span>
                         </div>
-                        <form class="row g-3">
+                        <form method="post" action="/Cars/BookingStepOne" class="row g-3">
                             <!-- Pickup location -->
                             <div class="col-12">
                                 <label class="small text-secondary fw-bold ms-2 mb-1">
@@ -86,17 +92,23 @@
                                 </label>
                                 <div class="tv-input-wrapper">
                                     <i class="fa-solid fa-location-dot tv-input-icon"></i>
-                                    <input class="tv-input" type="text" value="София летище (SOF) – Терминал 2" />
+                                    <input asp-for="PickUpLocation"
+                                           id="pickupLoc"
+                                           class="tv-input"
+                                           type="text"
+                                           value="@selectedLocation"
+                                           placeholder="Летище София (SOF)..."
+                                           required />
                                 </div>
                                 <div class="d-flex flex-wrap gap-2 mt-2 small text-white-50">
-                                    <button class="tv-chip-toggle active" type="button">
+                                    <button class="tv-chip-toggle @(selectedLocation == "София Център" ? "active" : "")" type="button">
                                         София Център
                                     </button>
-                                    <button class="tv-chip-toggle" type="button">
+                                    <button class="tv-chip-toggle @(selectedLocation == "SOF Терминал 2" ? "active" : "")" type="button">
                                         SOF Терминал 2
                                     </button>
-                                    <button class="tv-chip-toggle" type="button">
-                                        София Бизнес Парк
+                                    <button class="tv-chip-toggle @(selectedLocation == "Пловдив летище" ? "active" : "")" type="button">
+                                        Пловдив летище
                                     </button>
                                 </div>
                             </div>
@@ -107,7 +119,11 @@
                                 </label>
                                 <div class="tv-input-wrapper">
                                     <i class="fa-solid fa-calendar-day tv-input-icon"></i>
-                                    <input class="tv-input" type="date" />
+                                    <input asp-for="PickUpDate"
+                                           class="tv-input"
+                                           type="date"
+                                           value="@Model.PickUpDate.ToString("yyyy-MM-dd")"
+                                           required />
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -116,13 +132,13 @@
                                 </label>
                                 <div class="tv-input-wrapper">
                                     <i class="fa-solid fa-clock tv-input-icon"></i>
-                                    <input class="tv-input" type="time" />
+                                    <input name="PickupTime" class="tv-input" type="time" value="10:00" />
                                 </div>
                             </div>
                             <!-- Return location toggle -->
                             <div class="col-12">
                                 <div class="form-check form-switch d-flex align-items-center gap-2 mt-1">
-                                    <input class="form-check-input" id="diffDropSwitch" type="checkbox" />
+                                    <input name="DifferentReturnLocation" class="form-check-input" id="diffDropSwitch" type="checkbox" />
                                     <label class="form-check-label small text-white-50" for="diffDropSwitch">
                                         Различна локация за връщане (напр. вземане София, връщане Варна)
                                     </label>
@@ -135,7 +151,7 @@
                                 </label>
                                 <div class="tv-input-wrapper">
                                     <i class="fa-solid fa-location-crosshairs tv-input-icon"></i>
-                                    <input class="tv-input" placeholder="Същата като вземане или друга локация" type="text" />
+                                    <input asp-for="DropOffLocation" class="tv-input" placeholder="Същата като вземане или друга локация" type="text" />
                                 </div>
                             </div>
                             <!-- Return date & time -->
@@ -145,7 +161,11 @@
                                 </label>
                                 <div class="tv-input-wrapper">
                                     <i class="fa-solid fa-calendar-check tv-input-icon"></i>
-                                    <input class="tv-input" type="date" />
+                                    <input asp-for="DropOffDate"
+                                           class="tv-input"
+                                           type="date"
+                                           value="@Model.DropOffDate.ToString("yyyy-MM-dd")"
+                                           required />
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -154,7 +174,7 @@
                                 </label>
                                 <div class="tv-input-wrapper">
                                     <i class="fa-solid fa-clock-rotate-left tv-input-icon"></i>
-                                    <input class="tv-input" type="time" />
+                                    <input name="ReturnTime" class="tv-input" type="time" value="10:00" />
                                 </div>
                             </div>
                             <!-- Driver age -->
@@ -164,10 +184,10 @@
                                 </label>
                                 <div class="tv-input-wrapper">
                                     <i class="fa-solid fa-user tv-input-icon"></i>
-                                    <select class="tv-input">
-                                        <option>25 – 70 години (стандартна)</option>
-                                        <option>21 – 24 години (млад шофьор)</option>
-                                        <option>71+ години</option>
+                                    <select asp-for="DriverAge" class="tv-input">
+                                        <option value="young">18 – 24 години</option>
+                                        <option value="standard">25 – 70 години</option>
+                                        <option value="senior">71+ години</option>
                                     </select>
                                 </div>
                                 <p class="small text-white-50 mt-1 mb-0">
@@ -181,18 +201,20 @@
                                 </label>
                                 <div class="tv-input-wrapper">
                                     <i class="fa-solid fa-flag tv-input-icon"></i>
-                                    <select class="tv-input">
-                                        <option>България</option>
-                                        <option>Държава от ЕС</option>
-                                        <option>Великобритания</option>
-                                        <option>САЩ / Канада</option>
-                                        <option>Друга държава</option>
+                                    <select asp-for="Residence" class="tv-input">
+                                        <option value="Bulgaria">България</option>
+                                        <option value="EU">Държава от ЕС</option>
+                                        <option value="UK">Великобритания</option>
+                                        <option value="USA">САЩ / Канада</option>
+                                        <option value="Other">Друга държава</option>
                                     </select>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <!-- 2. ПРЕДПОЧИТАНИЯ ЗА АВТОМОБИЛА -->
+                    <input type="hidden" name="CarCategory" id="selectedCategory" value="Sedan" />
+                    <input type="hidden" name="Transmission" id="selectedTransmission" value="Automatic" />
                     <div class="tv-card-panel mb-4">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div>
@@ -208,18 +230,10 @@
                                     Клас и тип
                                 </label>
                                 <div class="d-flex flex-wrap gap-2">
-                                    <button class="tv-chip-toggle active" type="button">
-                                        <i class="fa-solid fa-car-side me-1"></i> Седан
-                                    </button>
-                                    <button class="tv-chip-toggle" type="button">
-                                        <i class="fa-solid fa-car-side me-1"></i> Хечбек
-                                    </button>
-                                    <button class="tv-chip-toggle" type="button">
-                                        <i class="fa-solid fa-car-rear me-1"></i> SUV
-                                    </button>
-                                    <button class="tv-chip-toggle" type="button">
-                                        <i class="fa-solid fa-van-shuttle me-1"></i> Ван (7+ места)
-                                    </button>
+                                    <button class="tv-chip-toggle @(pClass == "sedan" ? "active" : "")" type="button">Седан</button>
+                                    <button class="tv-chip-toggle @(pClass == "hatchback" ? "active" : "")" type="button">Хечбек</button>
+                                    <button class="tv-chip-toggle @(pClass == "suv" ? "active" : "")" type="button">SUV</button>
+                                    <button class="tv-chip-toggle @(pClass == "van" ? "active" : "")" type="button">Ван</button>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -227,18 +241,10 @@
                                     Скоростна кутия и гориво
                                 </label>
                                 <div class="d-flex flex-wrap gap-2">
-                                    <button class="tv-chip-toggle active" type="button">
-                                        <i class="fa-solid fa-gear me-1"></i> Автоматик
-                                    </button>
-                                    <button class="tv-chip-toggle" type="button">
-                                        <i class="fa-solid fa-gear me-1"></i> Ръчна
-                                    </button>
-                                    <button class="tv-chip-toggle" type="button">
-                                        <i class="fa-solid fa-leaf me-1"></i> Хибрид / Електрическа
-                                    </button>
-                                    <button class="tv-chip-toggle" type="button">
-                                        <i class="fa-solid fa-gas-pump me-1"></i> Дизел
-                                    </button>
+                                    <button class="tv-chip-toggle @(pAuto == "True" ? "active" : "")" type="button">Автоматик</button>
+                                    <button class="tv-chip-toggle @(pAuto == "False" ? "active" : "")" type="button">Ръчна</button>
+                                    <button class="tv-chip-toggle @(pHybrid == "True" ? "active" : "")" type="button">Хибрид / Електрическа</button>
+                                    <button class="tv-chip-toggle @(pAuto == "True" ? "active" : "")" type="button">Дизел</button>
                                 </div>
                             </div>
                         </div>
@@ -258,7 +264,7 @@
                             <div class="col-md-6">
                                 <div class="tv-extra-item d-flex align-items-start gap-3">
                                     <div class="form-check mt-1">
-                                        <input class="form-check-input" id="extraChildSeat" type="checkbox" />
+                                        <input name="HasChildSeat" class="form-check-input" id="extraChildSeat" type="checkbox" />
                                     </div>
                                     <div>
                                         <label class="form-check-label text-white fw-semibold" for="extraChildSeat">
@@ -277,7 +283,7 @@
                             <div class="col-md-6">
                                 <div class="tv-extra-item d-flex align-items-start gap-3">
                                     <div class="form-check mt-1">
-                                        <input class="form-check-input" id="extraGPS" type="checkbox" />
+                                        <input name="HasGPS" class="form-check-input" id="extraGPS" type="checkbox" />
                                     </div>
                                     <div>
                                         <label class="form-check-label text-white fw-semibold" for="extraGPS">
@@ -296,7 +302,7 @@
                             <div class="col-md-6">
                                 <div class="tv-extra-item d-flex align-items-start gap-3">
                                     <div class="form-check mt-1">
-                                        <input class="form-check-input" id="extraDriver" type="checkbox" />
+                                        <input name="HasAdditionalDriver" class="form-check-input" id="extraDriver" type="checkbox" />
                                     </div>
                                     <div>
                                         <label class="form-check-label text-white fw-semibold" for="extraDriver">
@@ -315,7 +321,7 @@
                             <div class="col-md-6">
                                 <div class="tv-extra-item d-flex align-items-start gap-3">
                                     <div class="form-check mt-1">
-                                        <input class="form-check-input" id="extraWinter" type="checkbox" />
+                                        <input name="HasWinterPack" class="form-check-input" id="extraWinter" type="checkbox" />
                                     </div>
                                     <div>
                                         <label class="form-check-label text-white fw-semibold" for="extraWinter">
@@ -334,7 +340,7 @@
                             <div class="col-md-6">
                                 <div class="tv-extra-item d-flex align-items-start gap-3">
                                     <div class="form-check mt-1">
-                                        <input class="form-check-input" id="extraBorder" type="checkbox" />
+                                        <input name="HasCrossBorder" class="form-check-input" id="extraBorder" type="checkbox" />
                                     </div>
                                     <div>
                                         <label class="form-check-label text-white fw-semibold" for="extraBorder">
@@ -353,7 +359,7 @@
                             <div class="col-md-6">
                                 <div class="tv-extra-item d-flex align-items-start gap-3">
                                     <div class="form-check mt-1">
-                                        <input class="form-check-input" id="extraWifi" type="checkbox" />
+                                        <input name="HasWifi" class="form-check-input" id="extraWifi" type="checkbox" />
                                     </div>
                                     <div>
                                         <label class="form-check-label text-white fw-semibold" for="extraWifi">
@@ -479,4 +485,42 @@
             </div>
         </section>
     </div>
+    @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+            // 1. Функция за ръчно кликане (прави бутона оранжев/син и маха стария активен в същата група)
+            $('.tv-chip-toggle').on('click', function () {
+            var parentGroup = $(this).parent();
+            parentGroup.find('.tv-chip-toggle').removeClass('active tv-chip-active');
+            $(this).addClass('active tv-chip-active');
+
+            // Ако кликнеш на локация, попълни и input полето
+            if ($(this).closest('.col-12').find('#pickupLoc').length > 0) {
+            $('#pickupLoc').val($(this).text().trim());
+            }
+            });
+
+            // 2. Скриптът, който вече имаш за прехвърляне на данни от Grid към Booking
+            $(document).on('click', '.car-item .btn-view, .car-item a:contains("Виж")', function (e) {
+            e.preventDefault();
+            var carItem = $(this).closest('.car-item');
+            var originalHref = $(this).attr('href');
+            var carTitle = carItem.find('.tv-hotel-grid-title').text().toLowerCase();
+            var carDescription = carItem.text().toLowerCase();
+
+            var isAuto = carDescription.includes("автоматик") || carTitle.includes("tiguan");
+            var isSUV = carDescription.includes("suv") || carDescription.includes("джип") || carTitle.includes("tiguan");
+            var isHybrid = carDescription.includes("хибрид");
+
+            var url = new URL(window.location.origin + originalHref);
+            url.searchParams.set('p_auto', isAuto);
+            url.searchParams.set('p_class', isSUV ? 'suv' : 'sedan');
+            url.searchParams.set('p_hybrid', isHybrid);
+
+            window.location.href = url.toString();
+            });
+            });
+        </script>
+    }
 </main>

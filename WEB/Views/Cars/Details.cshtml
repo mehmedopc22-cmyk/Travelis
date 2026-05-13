@@ -64,7 +64,15 @@
                         <span class="fs-3 text-info fw-bold">€285</span>
                     </div>
 
-                    <a asp-controller="Cars" asp-action="Booking" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow-lg" style="background: linear-gradient(135deg, #0ea5e9, #2563eb); border: none;">
+                    <a asp-controller="Cars"
+                           asp-action="Booking"
+                           asp-route-location="@ViewBag.Location"
+                           asp-route-startDate="@ViewBag.StartDate"
+                           asp-route-endDate="@ViewBag.EndDate"
+                           asp-route-driverAge="@ViewBag.DriverAge"
+                           asp-route-residence="@ViewBag.Residence"
+                           class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow-lg"
+                           style="background: linear-gradient(135deg, #0ea5e9, #2563eb); border: none;">
                         Продължи към резервация
                     </a>
                     

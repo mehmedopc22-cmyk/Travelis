@@ -57,4 +57,420 @@ body {
     transform: scale(1.2); /* Кръгчето леко пораства, когато го стиснеш */
     transition: transform 0.1s;
 }
+/* Стил за бутоните за места в Grid страницата */
+.seat-chip {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 6px 15px;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
 
+    .seat-chip:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        color: white;
+    }
+/* Когато сме в режим списък, картинката да е отляво, а инфото отдясно */
+.list-view .card {
+    flex-direction: row;
+    align-items: center;
+}
+
+    .list-view .card img {
+        width: 300px; /* Фиксирана ширина за картинката в списък */
+        height: auto;
+    }
+/* Дизайн за Списък */
+.list-view-active .car-item .tv-hotel-grid-card {
+    display: flex;
+    flex-direction: row;
+    height: 220px;
+}
+
+.list-view-active .car-item .tv-hotel-grid-media {
+    width: 300px;
+    height: 100%;
+}
+
+.list-view-active .car-item .tv-hotel-grid-body {
+    flex: 1;
+    padding: 20px;
+}
+/* Когато сме в режим списък, снимката да е отляво, а текстът отдясно */
+.list-view-item .tv-hotel-grid-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.list-view-item .tv-hotel-grid-media {
+    width: 40%; /* Снимката заема 40% от широчината */
+    border-radius: 15px 0 0 15px;
+}
+
+.list-view-item .tv-hotel-grid-body {
+    width: 60%;
+    padding: 20px;
+}
+/* Контейнер за центриране */
+.tv-pagination-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+    margin-top: 20px;
+}
+
+.tv-pagination {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Разстояние между кръгчетата */
+}
+
+/* Общ стил за всяко кръгче */
+.tv-page-link {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05); /* Леко прозрачен фон */
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+    /* Ховър ефект (когато минеш с мишката) */
+    .tv-page-link:hover:not(.disabled):not(.active) {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+    }
+
+    /* АКТИВНОТО КРЪГЧЕ (Синьото) */
+    .tv-page-link.active {
+        background: linear-gradient(135deg, #0088ff 0%, #00c2ff 100%);
+        box-shadow: 0 0 20px rgba(0, 136, 255, 0.4); /* Сиянието */
+        border: none;
+        transform: scale(1.1); /* Малко по-голямо от останалите */
+    }
+
+    /* Трите точки и деактивирани стрелки */
+    .tv-page-link.disabled {
+        background: transparent;
+        border: none;
+        opacity: 0.4;
+        cursor: default;
+    }
+
+    /* Иконите вътре (стрелките) */
+    .tv-page-link i {
+        font-size: 12px;
+    }
+/* Тъмна тема за календара (Datepicker) */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    /* Правим иконата на календара бяла, за да се вижда на тъмно */
+    filter: invert(1);
+    cursor: pointer;
+}
+
+
+
+/* Стилизиране на самия изскачащ прозорец (за Chrome/Edge) */
+[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+/* Дизайн на полето за дата в твоята търсачка */
+.tv-search-input {
+    background-color: #1a1d21 !important; /* Тъмен фон */
+    border: 1px solid #2d3436 !important; /* Тъмна рамка */
+    color: white !important;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+
+/* Допълнително стилизиране за твоя дизайн */
+input[type="datetime-local"],
+input[type="date"] {
+    background-color: #1a1d21 !important;
+    color: white !important;
+    border: 1px solid #2d3436 !important;
+}
+.tv-modern-wrapper {
+    background: rgba(13, 17, 23, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 50px !important;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.tv-modern-input {
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 0.9rem;
+    outline: none !important;
+    width: 100%;
+}
+
+.tv-icon-gray {
+    color: #888;
+    margin-right: 12px;
+}
+
+/* 1. ГОРНОТО ПОЛЕ (ЛОКАЦИЯ) */
+.tv-input-main-wrapper {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    min-height: 45px;
+}
+
+.tv-main-input {
+    background: transparent !important;
+    border: none !important;
+    color: #ffffff !important; /* Текстът да е винаги бял */
+    width: 100%;
+    outline: none !important;
+    font-size: 14px;
+}
+
+.tv-input-icon {
+    color: #636e72;
+    margin-right: 10px;
+}
+
+/* 2. ПОЛЕТАТА ЗА ДАТИ (КАЛЕНДАР) */
+.tv-date-wrapper {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    position: relative; /* Важно за невидимия календар */
+    min-height: 42px;
+}
+
+.tv-date-input {
+    background: transparent !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-size: 13px;
+    width: 100%;
+    outline: none !important;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+    /* Скриваме иконата на браузъра и правим целия овал кликаем */
+    .tv-date-input::-webkit-calendar-picker-indicator {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+        opacity: 0; /* Скриваме грозната иконка */
+        z-index: 3;
+    }
+
+.tv-date-icon {
+    color: #636e72;
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+/* 3. ЦВЕТОВЕ НА ТЕКСТА ПРИ ДАТИТЕ (Placeholder ефект) */
+.tv-date-input::-webkit-datetime-edit-text,
+.tv-date-input::-webkit-datetime-edit-month-field,
+.tv-date-input::-webkit-datetime-edit-day-field,
+.tv-date-input::-webkit-datetime-edit-year-field,
+.tv-date-input::-webkit-datetime-edit-hour-field,
+.tv-date-input::-webkit-datetime-edit-minute-field,
+.tv-date-input::-webkit-datetime-edit-ampm-field {
+    color: rgba(255, 255, 255, 0.4); /* Сивкаво, когато няма дата */
+}
+
+/* Когато се избере нещо или се кликне - става бяло */
+.tv-date-input:focus::-webkit-datetime-edit-text,
+.tv-date-input:valid::-webkit-datetime-edit-text,
+.tv-date-input:focus::-webkit-datetime-edit-month-field,
+.tv-date-input:valid::-webkit-datetime-edit-month-field,
+.tv-date-input:focus::-webkit-datetime-edit-day-field,
+.tv-date-input:valid::-webkit-datetime-edit-day-field {
+    color: #fff !important;
+}
+
+/* 4. ЧИПОВЕ (БУТОНИТЕ ЗА СОФИЯ/ПЛОВДИВ) */
+.location-chip {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: white;
+    border-radius: 20px;
+    padding: 4px 15px;
+    transition: all 0.3s;
+}
+
+.tv-chip-active {
+    background: #007bff !important; /* Синьо */
+    border-color: #007bff !important;
+}
+/* Правим полето прозрачно и с бял текст */
+.dark-calendar {
+    background: transparent !important;
+    color: white !important;
+    border: none !important;
+    outline: none !important;
+    width: 100%;
+}
+
+/* МАГИЯТА ЗА ЧЕРНИЯ КАЛЕНДАР: */
+/* Тези редове казват на браузъра, че страницата е тъмна, 
+   и той автоматично ще направи изскачащия календар черен */
+:root {
+    color-scheme: dark;
+}
+
+/* Оправяме иконата да е бяла и да се вижда */
+.dark-calendar::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+/* Стил за обвивката (връщаме го към оригиналния ти дизайн) */
+.tv-input-main-wrapper {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    min-height: 45px;
+}
+/* Основната кутийка */
+.tv-simple-date-box {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    min-height: 42px;
+}
+
+/* Самият вход за дата */
+.tv-final-input {
+    background: transparent !important;
+    border: none !important;
+    color: white !important;
+    font-size: 13px !important;
+    width: 100% !important;
+    outline: none !important;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+  
+
+    /* Оправяме вътрешния текст да не се свива */
+    .tv-final-input::-webkit-datetime-edit {
+        display: flex;
+        color: white;
+    }
+
+/* Тъмна тема за изскачащия календар (системния) */
+:root {
+    color-scheme: dark;
+}
+.clickable-date {
+    cursor: pointer !important;
+}
+
+    .clickable-date .tv-input {
+        cursor: pointer !important;
+    }
+
+    /* Малък ефект при посочване, за да знае потребителят, че може да цъкне */
+    .clickable-date:hover {
+        border-color: rgba(255, 255, 255, 0.4) !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+    }
+/* Прави падащото меню да изглежда като част от твоя дизайн */
+.tv-input {
+    background-color: transparent; /* или цвета на твоя фон */
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 10px 15px;
+    border-radius: 8px;
+    width: 100%;
+    appearance: none; /* Маха стандартната стрелка на браузъра */
+    -webkit-appearance: none;
+}
+
+/* Ако искаш да върнеш стрелката, но стилизирана */
+.tv-input-wrapper {
+    position: relative;
+}
+
+    .tv-input-wrapper::after {
+        content: '\f107'; /* FontAwesome стрелка надолу */
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: rgba(255,255,255,0.5);
+    }
+#carsContainer {
+    min-height: 800px; /* Сложи височина, която да събира поне 2 реда коли */
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start; /* Важно: държи колите в горната част на контейнера */
+}
+#pagination-container {
+    clear: both; /* Гарантира, че няма нищо около него */
+    width: 100%;
+    padding-top: 40px; /* Дава разстояние от колите */
+    padding-bottom: 40px;
+}
+<style >
+/* Правим бутоните в секция 2 само за гледане */
+.tv-card-panel .tv-chip-toggle {
+    
+    cursor: default; /* Мишката си остава стрелка, а не ръчичка */
+    user-select: none; /* Забранява маркиране на текста */
+}
+/* Обединяваме и двата класа, за да сме сигурни, че синьото ще работи */
+.tv-chip-toggle.active,
+.tv-chip-toggle.tv-chip-active {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+    color: white !important;
+    border-color: #00bfff !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
+    transition: all 0.2s ease;
+    opacity: 1 !important; /* Гарантира, че не е полупрозрачно */
+}
+
+</style >

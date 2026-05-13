@@ -74,7 +74,7 @@
                                 <i class="fa-solid fa-check me-1"></i> Без скрити такси
                             </span>
                         </div>
-                        <form class="row g-3">
+                        <form asp-controller="Cars" asp-action="Grid" method="get" class="row g-3">
                             <!-- Pickup location -->
                             <div class="col-12">
                                 <label class="small text-secondary fw-bold ms-2 mb-1">
@@ -82,7 +82,8 @@
                                 </label>
                                 <div class="tv-input-wrapper">
                                     <i class="fa-solid fa-location-dot tv-input-icon"></i>
-                                    <input class="tv-input" placeholder="София летище (SOF)" type="text" />
+                                    <!-- Добавено id="locationInput" за автоматичното попълване -->
+                                    <input id="locationInput" name="location" class="tv-input" placeholder="София летище (SOF)" type="text" />
                                 </div>
                                 <div class="d-flex flex-wrap gap-2 mt-2 small text-white-50">
                                     <button class="tv-chip-toggle location-chip tv-chip-active" type="button">
@@ -96,21 +97,23 @@
                                     </button>
                                 </div>
                             </div>
+
                             <!-- Pickup / Dropoff dates -->
                             <div class="col-md-6">
                                 <label class="small text-secondary fw-bold ms-2 mb-1">Вземане</label>
                                 <div class="tv-input-wrapper">
                                     <i class="fa-solid fa-calendar-day tv-input-icon"></i>
-                                    <input class="tv-input" type="datetime-local" />
+                                    <input name="startDate" class="tv-input" type="datetime-local" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label class="small text-secondary fw-bold ms-2 mb-1">Връщане</label>
                                 <div class="tv-input-wrapper">
                                     <i class="fa-solid fa-calendar-check tv-input-icon"></i>
-                                    <input class="tv-input" type="datetime-local" />
+                                    <input name="endDate" class="tv-input" type="datetime-local" />
                                 </div>
                             </div>
+
                             <!-- Different dropoff -->
                             <div class="col-12">
                                 <div class="form-check form-switch d-flex align-items-center gap-2">
@@ -120,15 +123,16 @@
                                     </label>
                                 </div>
                             </div>
+                           
                             <!-- Driver age + residency -->
                             <div class="col-md-6">
                                 <label class="small text-secondary fw-bold ms-2 mb-1">Възраст на шофьора</label>
                                 <div class="tv-input-wrapper">
                                     <i class="fa-solid fa-user tv-input-icon"></i>
-                                    <select class="tv-input">
-                                        <option>25 – 70 години</option>
-                                        <option>21 – 24 години (млад шофьор)</option>
-                                        <option>18 – 20 години</option>
+                                    <select name="driverAge" class="tv-input">
+                                        <option value="young">18 – 24 години</option>
+                                        <option value="standard" selected>25 – 70 години</option>
+                                        <option value="senior">71 + години</option>
                                     </select>
                                 </div>
                             </div>
@@ -136,11 +140,12 @@
                                 <label class="small text-secondary fw-bold ms-2 mb-1">Резидент</label>
                                 <div class="tv-input-wrapper">
                                     <i class="fa-solid fa-flag tv-input-icon"></i>
-                                    <select class="tv-input">
-                                        <option>България</option>
-                                        <option>ЕС</option>
-                                        <option>Великобритания</option>
-                                        <option>Друга държава</option>
+                                    <select name="residence" class="tv-input">
+                                        <option value="Bulgaria">България</option>
+                                        <option value="EU">Държава от ЕС</option>
+                                        <option value="UK">Великобритания</option>
+                                        <option value="Other">Друга държава</option>
+                                        <option value="USA">САЩ/Канада</option>
                                     </select>
                                 </div>
                             </div>
@@ -148,13 +153,17 @@
                             <div class="col-12">
                                 <label class="small text-secondary fw-bold ms-2 mb-1">Приоритети</label>
                                 <div class="d-flex flex-wrap gap-2 mt-2">
-                                    <button type="button" class="tv-chip-toggle priority-chip">
+                                    <input type="hidden" name="priorityHybrid" id="inputHybrid" value="false">
+                                    <input type="hidden" name="priorityAuto" id="inputAuto" value="false">
+                                    <input type="hidden" name="prioritySeats" id="inputSeats" value="false">
+
+                                    <button type="button" class="tv-chip-toggle priority-chip" onclick="togglePriority('Hybrid', this)">
                                         <i class="fa-solid fa-leaf me-1"></i> Хибрид / Ел.
                                     </button>
-                                    <button type="button" class="tv-chip-toggle priority-chip">
+                                    <button type="button" class="tv-chip-toggle priority-chip" onclick="togglePriority('Auto', this)">
                                         <i class="fa-solid fa-gear me-1"></i> Автоматик
                                     </button>
-                                    <button type="button" class="tv-chip-toggle priority-chip">
+                                    <button type="button" class="tv-chip-toggle priority-chip" onclick="togglePriority('Seats', this)">
                                         <i class="fa-solid fa-users me-1"></i> 7+ места
                                     </button>
                                     <button type="button" class="tv-chip-toggle priority-chip">
@@ -163,9 +172,9 @@
                                 </div>
                             </div>
                             <div class="col-12 pt-2">
-                                <a asp-controller="Cars" asp-action="Grid" class="tv-btn-primary w-100 py-2 d-inline-block text-center text-decoration-none">
+                                <button type="submit" class="tv-btn-primary w-100 py-2 d-inline-block text-center text-decoration-none" style="border: none;">
                                     <i class="fa-solid fa-magnifying-glass me-2"></i> Виж налични коли
-                                </a>
+                                </button>
                                 <div class="d-flex justify-content-between mt-2 small text-white-50">
                                     <span><i class="fa-solid fa-circle-check text-success me-1"></i> Безплатна отмяна по повечето оферти</span>
                                     <span><i class="fa-solid fa-clock text-info me-1"></i> Търсене за под 5 сек.</span>
@@ -233,8 +242,8 @@
                             <span class="text-white-50">
                                 <i class="fa-solid fa-tags me-1 text-success"></i> от €30/ден
                             </span>
-                            <a class="tv-link-inline" href="car-grid.html">
-                                Виж оферти <i class="fa-solid fa-arrow-right ms-1"></i>
+                            <a class="tv-location-link" asp-controller="Cars" asp-action="Grid" asp-route-location="Varna">
+                                Виж оферти <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
                     </article>
@@ -260,8 +269,8 @@
                             <span class="text-white-50">
                                 <i class="fa-solid fa-tags me-1 text-success"></i> от €28/ден
                             </span>
-                            <a class="tv-link-inline" href="car-grid.html">
-                                Виж оферти <i class="fa-solid fa-arrow-right ms-1"></i>
+                            <a class="tv-location-link" asp-controller="Cars" asp-action="Grid" asp-route-location="Burgas">
+                                Виж оферти <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
                     </article>
@@ -287,8 +296,8 @@
                             <span class="text-white-50">
                                 <i class="fa-solid fa-tags me-1 text-success"></i> от €40/ден
                             </span>
-                            <a class="tv-link-inline" href="car-grid.html">
-                                Виж оферти <i class="fa-solid fa-arrow-right ms-1"></i>
+                            <a class="tv-location-link" asp-controller="Cars" asp-action="Grid" asp-route-location="Bansko">
+                                Виж оферти <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
                     </article>
@@ -382,7 +391,7 @@
                                     <span class="tv-grid-price-val text-info">€70</span>
                                     <span class="d-block small text-white-50">Вкл. 600 км · Пълно каско (доп.)</span>
                                 </div>
-                                <a class="tv-btn-grid-action" href="car-detail.html">
+                                <a class="tv-btn-grid-action" asp-controller="Cars" asp-action="Details">
                                     Детайли <i class="fa-solid fa-arrow-right"></i>
                                 </a>
                             </div>
@@ -541,22 +550,64 @@
        
     </div>
     @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-                $(document).ready(function () {
-                    // ЛОГИКА ЗА ЛОКАЦИИ (Избира се само ЕДНО)
-                    $('.location-chip').click(function () {
-                        $('.location-chip').removeClass('tv-chip-active');
-                        $(this).addClass('tv-chip-active');
-                    });
+            // 1. ТАЗИ ФУНКЦИЯ ТРЯБВА ДА Е ИЗВЪН DOCUMENT.READY
+            function togglePriority(type, btn) {
+            // Визуална промяна
+            $(btn).toggleClass('tv-chip-active');
 
-                    // ЛОГИКА ЗА ПРИОРИТЕТИ (Може да избереш МНОГО)
-                    $('.priority-chip').click(function () {
-                        // toggleClass добавя класа ако го няма, и го маха ако го има
-                        $(this).toggleClass('tv-chip-active');
-                    });
-                });
+            // Промяна на скрития input за изпращане към Grid
+            var input = $('#input' + type);
+            var isSelected = $(btn).hasClass('tv-chip-active');
+            input.val(isSelected ? "true" : "false");
+            }
+
+            $(document).ready(function () {
+            console.log("Index страницата е заредена!");
+
+            // 2. ЛОКАЦИИ (CHIPS)
+            $('.location-chip').click(function () {
+            $('.location-chip').removeClass('tv-chip-active');
+            $(this).addClass('tv-chip-active');
+
+            var val = $(this).text().trim();
+            $('#locationInput').val(val);
+            $('#selected-location').val(val);
+            });
+
+            // 3. РЪЧНО ПИСАНЕ В ЛОКАЦИЯТА
+            $('#locationInput').on('input', function() {
+            var currentVal = $(this).val();
+            $('#selected-location').val(currentVal);
+            $('.location-chip').removeClass('tv-chip-active');
+            });
+
+            // 4. КАЛЕНДАРИ (Клик върху рамката)
+            $('.tv-input-wrapper').click(function (e) {
+            const dateInput = $(this).find('input[type="datetime-local"]')[0] || $(this).find('input[type="date"]')[0];
+                
+            if (dateInput) {
+            try {
+            if (dateInput.showPicker) {
+            dateInput.showPicker();
+            } else {
+            dateInput.focus();
+            }
+            } catch (err) {
+            dateInput.focus();
+            }
+            }
+            });
+            
+            // 5. ПРИОРИТЕТИ (Допълнителен клик хендлър, ако не ползваш onclick в HTML)
+            // Ако си добавил onclick="togglePriority(...)" в HTML, това тук не е задължително
+            $('.priority-chip').on('click', function() {
+            // Вече се обслужва от togglePriority функцията горе
+            });
+
+            }); // Край на document.ready
         </script>
     }
-
-
+    
 </main>
